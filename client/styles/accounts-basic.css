@@ -1,0 +1,66 @@
+/*
+ * Styles adapted from https://github.com/studiointeract/accounts-basic
+ */
+
+.accounts-ui .field-group {
+  padding-bottom: 16px;
+}
+.accounts-ui .field-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0 0 8px;
+}
+.accounts-ui .field-group:last-child {
+  padding-bottom: 0;
+}
+.accounts-ui .field input {
+  width: 100%;
+  font-size: 16px;
+  height: 46px;
+  box-sizing: border-box;
+  line-height: 46px;
+  padding: 8px 16px;
+  background: white;
+  border: solid 1px #ccc;
+  margin: 5px 0;
+}
+.accounts-ui a {
+  display: inline-block;
+  font-weight: bold;
+  padding: 0 16px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+  text-decoration: none;
+  font-weight: normal;
+}
+.accounts-ui .fields,
+.accounts-ui .forgot-password {
+  display: block;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.accounts-ui button[type="submit"] {
+  background: #de4f4f;
+}
+.accounts-ui button[type="submit"]:focus, .accounts-ui button[type="submit"]:hover {
+  background-color: #e26464;
+}
+.accounts-ui button[type="submit"]:active {
+  background-color: #da3a3a;
+}
+.accounts-ui button[disabled] {
+  opacity: 0.5;
+}
+
+.accounts-ui .message {
+  padding: 16px;
+  background: #eee;
+  margin-top: 16px;
+}

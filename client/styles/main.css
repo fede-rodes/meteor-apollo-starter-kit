@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  background-image: linear-gradient(140deg, rgb(12,6,50) 20%, rgb(66,59,90) 60%, rgb(219,159,159) 100%);
+  min-height: 100vh;
+}
+
+button {
+  background: #999;
+  outline: none;
+  color: #FFF;
+  margin-right: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  padding: 16px 24px;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+button:focus, button:hover {
+  background-color: #a6a6a6;
+}
+button:active {
+  background-color: #8c8c8c;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.App-header {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-logo {
+  margin: 0 50px;
+}
+
+.App-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 420px;
+  min-height: 420px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 6px 15px rgba(36,37,38,0.08);
+  border-radius: 16px;
+  transition: box-shadow 0.25s ease 0s;
+}
+
+.App-block:hover {
+  box-shadow: 5px 12px 20px rgba(36,37,38,0.13);
+}
+
+.App-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  width: 100%;
+}
+
+.Loading {
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Loading-bounce {
+  width: 15px;
+  height: 15px;
+  background-image: linear-gradient(140deg, rgb(12,6,50) 20%, rgb(66,59,90) 60%, rgb(219,159,159) 100%);
+
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  margin-right: 5px;
+}
+
+.Loading-bounce--1 {
+  animation-delay: -0.32s;
+}
+
+.Loading-bounce--2 {
+  animation-delay: -0.16s;
+}
+
+.Loading-bounce--3 {
+  margin-right: 0;
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0);
+  } 40% { 
+    transform: scale(1.0);
+  }
+}
