@@ -9,7 +9,7 @@ const resolvers = {
     },
   },
   User: {
-    emails: ({ emails }) => emails,
+    // emails: ({ emails }) => emails,
     randomString: () => Random.id(),
   },
 };

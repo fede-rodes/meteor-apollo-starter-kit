@@ -1,5 +1,6 @@
 // Import your server-side configs
 import './email-config.js';
+import './service-config.js';
 import './startup.js';
 import './accounts.js';
 import './apollo-server.js';
