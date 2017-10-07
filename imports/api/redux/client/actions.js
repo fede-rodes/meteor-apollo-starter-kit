@@ -1,16 +1,15 @@
 /**
-* @summary Client side actions (redux).
+* @summary Client side reusable actions (redux).
 * @namespace Actions.
 */
 
-const setInitialState = (namespace) => (
+const setInitialState = namespace => (
   {
     type: 'SET_INITIAL_STATE',
     namespace,
   }
 );
 
-// TODO: change 'namespace' to 'namespace'
 const changeView = (namespace, view) => (
   {
     type: 'CHANGE_VIEW',
@@ -41,7 +40,7 @@ const updatePlace = (namespace, changedFields) => (
   }
 );
 
-const clearPlace = (namespace) => (
+const clearPlace = namespace => (
   {
     type: 'CLEAR_PLACE',
     namespace,
@@ -67,7 +66,7 @@ const updateLocation = (namespace, location) => (
   }
 );
 
-const clearSelectedLocation = (namespace) => (
+const clearSelectedLocation = namespace => (
   {
     type: 'CLEAR_SELECTED_LOCATION',
     namespace,
@@ -86,7 +85,7 @@ const updateMapBounds = (namespace, southWest, northEast, center) => (
   }
 );
 
-const clearMapBounds = (namespace) => (
+const clearMapBounds = namespace => (
   {
     type: 'CLEAR_MAP_BOUNDS',
     namespace,
@@ -157,7 +156,7 @@ const checkRecalculateMarkersButtonDisplayState = (namespace, center, zoom) => (
   }
 );
 
-const hideRecalculateMarkersButton = (namespace) => (
+const hideRecalculateMarkersButton = namespace => (
   {
     type: 'HIDE_RECALCULATE_MARKERS_BUTTON',
     namespace,

@@ -1,8 +1,8 @@
 const typeDefs = [
   `
     type User {
-      randomString: String
       _id: String
+      randomString: String
     }
 
     type Query {

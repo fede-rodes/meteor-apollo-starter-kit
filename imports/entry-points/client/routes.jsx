@@ -1,14 +1,13 @@
-// import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
-// import { graphql } from 'react-apollo';
-// import gql from 'graphql-tag';
-
-import LoginPage from '../../ui/pages/login/login-page.jsx';
+import LoginPage from '../../ui/pages/login/index.jsx';
+import HomePage from '../../ui/pages/home/index.jsx';
 import NotFoundPage from '../../ui/pages/not-found-page.jsx';
-import App from '../../ui/App';
 
+//------------------------------------------------------------------------------
+// COMPONENT:
+//------------------------------------------------------------------------------
 const Routes = (props) => {
   const { currentUser, ...rest } = props;
   console.log('Routes props', props);
@@ -17,11 +16,11 @@ const Routes = (props) => {
     <Switch>
       <Route
         exact
-        name="index"
+        name="home"
         path="/"
         render={() => (
           currentUser ? (
-            <App {...rest} currentUser={currentUser} />
+            <HomePage {...rest} currentUser={currentUser} />
           ) : (
             <Redirect to="/login" />
           )
@@ -57,6 +56,5 @@ Routes.propTypes = {
 Routes.defaultProps = {
   currentUser: null,
 };
-//------------------------------------------------------------------------------
 
 export default Routes;
