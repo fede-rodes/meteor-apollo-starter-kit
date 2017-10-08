@@ -49,19 +49,6 @@ GlobalDataProvider.defaultProps = {
 // APOLLO INTEGRATION:
 //------------------------------------------------------------------------------
 /*
- * We use `gql` from graphql-tag to parse GraphQL query strings into the standard GraphQL AST
- * See for more information: https://github.com/apollographql/graphql-tag
- */
-/* const GET_USER_DATA = gql`
-  query getCurrentUser {
-    user {
-      _id
-      randomString
-    }
-  }
-`; */
-
-/*
  * We use the `graphql` higher order component to send the graphql query to our
  * server. See for more information: http://dev.apollodata.com/react/
  */
