@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
-import Actions from '../../../api/redux/client/actions.js';
+import Actions from '../../../api/client/redux/actions.js';
 import DefaultLayout from '../../layouts/default/index.jsx';
 import FBLoginButton from '../../components/fb-login-button.jsx';
 
