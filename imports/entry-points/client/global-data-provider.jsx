@@ -7,17 +7,10 @@ import gql from 'graphql-tag';
 // COMPONENT DEFINITION:
 //------------------------------------------------------------------------------
 /**
-* @summary Injects global data (current user, for instace) to child component.
+* @summary Injects global data (current user, for instace) into child component
 */
 const GlobalDataProvider = (props) => {
-  const {
-    refetch,
-    hasErrors,
-    userLoading,
-    currentUser,
-    children,
-    ...rest,
-  } = props;
+  const { refetch, hasErrors, userLoading, currentUser, children, ...rest } = props;
   console.log('GlobalDataProvider props', props);
 
   if (hasErrors) {

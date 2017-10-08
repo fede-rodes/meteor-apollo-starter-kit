@@ -22,3 +22,4 @@ dynamic-import@0.1.3
 accounts-facebook@1.2.1
 service-configuration
 apollo
+swydo:graphql
