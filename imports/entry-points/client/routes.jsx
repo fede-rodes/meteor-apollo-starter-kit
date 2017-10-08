@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { AuthenticatedRoute, PublicRoute } from '../../ui/components/route-wrappers/index.js';
 import LoginPage from '../../ui/pages/login/index.jsx';
 import HomePage from '../../ui/pages/home/index.jsx';
 import NotFoundPage from '../../ui/pages/not-found-page.jsx';
@@ -9,33 +10,27 @@ import NotFoundPage from '../../ui/pages/not-found-page.jsx';
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Routes = (props) => {
-  const { currentUser, ...rest } = props;
-  console.log('Routes props', props);
+  const { currentUser } = props;
 
   return (
     <Switch>
-      <Route
+      <AuthenticatedRoute
         exact
         name="home"
         path="/"
-        render={() => (
-          currentUser ? (
-            <HomePage {...rest} currentUser={currentUser} />
-          ) : (
-            <Redirect to="/login" />
-          )
-        )}
+        authenticated={!!currentUser}
+        component={HomePage}
+        redirectTo="/login"
+        // overlayComponent={LoginPage}
+        {...props}
       />
-      <Route
+      <PublicRoute
         name="login"
         path="/login"
-        render={() => (
-          currentUser ? (
-            <Redirect to="/" />
-          ) : (
-            <LoginPage {...rest} currentUser={currentUser} />
-          )
-        )}
+        authenticated={!!currentUser}
+        component={LoginPage}
+        redirectTo="/"
+        {...props}
       />
       {/* <Route name="search" path="/:query" component={SearchPageContainer} /> */}
       <Route name="notFound" component={NotFoundPage} />
@@ -48,9 +43,6 @@ Routes.propTypes = {
     _id: PropTypes.string,
     randomString: PropTypes.string,
   }),
-  // hasErrors: PropTypes.bool,
-  // refetch: PropTypes.func,
-  // userLoading: PropTypes.bool,
 };
 
 Routes.defaultProps = {

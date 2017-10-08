@@ -47,18 +47,19 @@ GraphiQL is enabled at [/graphiql](http://localhost:3000/graphiql).
 Source: https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
 
 TODO:
-- Collection2 schema
-- graphql file extension
+- Collection2 schema / mongoose
 - login with email
 - smtp config
-- wrapper component for routes (AuthRoute, PublicRoute, ...), see TheMeteorChef
+- wrapper component for routes (AuthRoute, PublicRoute, ...), see TheMeteorChef: https://themeteorchef.com/tutorials/getting-started-with-react-router-v4#tmc-moving-our-routes-into-our-app-layout
 - fix FB login for style equals to 'redirect'
 - Deployment / setup automatic deploys
 - use compose for withRouter, withApollo, ...
 - Accounts.config from Meteor.docs
+- error-handling
 
 CUSTOM TODO:
 - integrate with antd
 - integrate with basscss
 - postcss
 - less / sass
+- styledComponents
