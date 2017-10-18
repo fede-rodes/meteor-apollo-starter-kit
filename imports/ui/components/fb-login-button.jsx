@@ -13,8 +13,10 @@ class FBLoginButton extends Component {
   }
 
   handleClick() {
-    const { onErrorHook, onLoginHook } = this.props;
-    console.log('handleClick');
+    const { onBeforeHook, onErrorHook, onLoginHook } = this.props;
+
+    // Run before logic if provided
+    onBeforeHook();
 
     // Set FB permissions
     const requestPermissions = {
@@ -54,14 +56,16 @@ class FBLoginButton extends Component {
 
 FBLoginButton.propTypes = {
   disabled: PropTypes.bool,
-  onLoginHook: PropTypes.func,
+  onBeforeHook: PropTypes.func,
   onErrorHook: PropTypes.func,
+  onLoginHook: PropTypes.func,
 };
 
 FBLoginButton.defaultProps = {
   disabled: false,
-  onLoginHook: () => {},
+  onBeforeHook: () => {},
   onErrorHook: () => {},
+  onLoginHook: () => {},
 };
 
 export default FBLoginButton;
