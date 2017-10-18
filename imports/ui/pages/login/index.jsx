@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../../layouts/default/index.jsx';
@@ -79,6 +80,10 @@ LoginPage.propTypes = {
 LoginPage.defaultProps = {
   currentUser: null,
 };
-//------------------------------------------------------------------------------
 
-export default withRouter(withApollo(LoginPage));
+const enhance = compose(
+  withRouter,
+  withApollo,
+);
+
+export default enhance(LoginPage);
