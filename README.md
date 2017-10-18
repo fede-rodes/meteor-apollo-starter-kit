@@ -53,7 +53,6 @@ TODO:
 - wrapper component for routes (AuthRoute, PublicRoute, ...), see TheMeteorChef: https://themeteorchef.com/tutorials/getting-started-with-react-router-v4#tmc-moving-our-routes-into-our-app-layout
 - fix FB login for style equals to 'redirect'
 - Deployment / setup automatic deploys
-- use compose for withRouter, withApollo, ...
 - Accounts.config from Meteor.docs
 - error-handling
 
