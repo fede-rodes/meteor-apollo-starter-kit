@@ -23,7 +23,6 @@ class FBLoginButton extends Component {
       requestPermissions: [
         'public_profile',
         'email',
-        'read_friendlists',
       ],
     };
 
