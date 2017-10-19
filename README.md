@@ -46,13 +46,30 @@ GraphiQL is enabled at [/graphiql](http://localhost:3000/graphiql).
 
 Source: https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
 
+### Configure facebook account
+https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e
+
+### Deploy to heroku
+```
+1. git clone https://github.com/fede-rodes/meteor-apollo-starter-kit.git
+2. cd meteor-apollo-starter-kit
+3. heroku login (enter your credentials)
+4. heroku create <YOUR_APP_NAME>
+5. heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse.git
+6. heroku addons:create mongolab
+OR
+6. heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>
+7. heroku config:set ROOT_URL=https://<YOUR_APP_NAME>.herokuapp.com
+8. heroku config:add METEOR_SETTINGS="$(cat settings.json)"
+9. git push heroku mongo:master
+10. heroku open
+```
+
 TODO:
 - Collection2 schema / mongoose
 - login with email
 - smtp config
-- wrapper component for routes (AuthRoute, PublicRoute, ...), see TheMeteorChef: https://themeteorchef.com/tutorials/getting-started-with-react-router-v4#tmc-moving-our-routes-into-our-app-layout
 - fix FB login for style equals to 'redirect'
-- Deployment / setup automatic deploys
 - Accounts.config from Meteor.docs
 - error-handling
 
@@ -61,4 +78,4 @@ CUSTOM TODO:
 - integrate with basscss
 - postcss
 - less / sass
-- styledComponents
+- styledComponents / css-modules
