@@ -15,8 +15,12 @@ class FBLoginButton extends Component {
   handleClick() {
     const { onBeforeHook, onErrorHook, onLoginHook } = this.props;
 
-    // Run before logic if provided
-    onBeforeHook();
+    // Run before logic if provided and return on error
+    try {
+      onBeforeHook();
+    } catch (exc) {
+      return; // return silently
+    }
 
     // Set FB permissions
     const requestPermissions = {

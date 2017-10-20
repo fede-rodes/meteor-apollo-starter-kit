@@ -39,7 +39,13 @@ class LoginPage extends Component {
             <div>
               <FBLoginButton
                 disabled={disabled}
-                onBeforeHook={() => this.disableBtn()}
+                onBeforeHook={() => {
+                  // OBSERVATION: in case you want to interrupt the login flow
+                  // in case some condition is not met, throw an error here;
+                  // the error will be catched by the FBLoginButton component
+                  // and return before calling Meteor.loginWithFacebook.
+                  this.disableBtn();
+                }}
                 onErrorHook={(err) => {
                   console.log(err);
                   this.enableBtn();
