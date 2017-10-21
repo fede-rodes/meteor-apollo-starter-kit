@@ -2,12 +2,16 @@
 
 A simple kit to start experimenting with Apollo, Meteor and React.
 
+Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
+
 ### Includes
 - GraphQL server running with Express bound to the Meteor app
 - Apollo client
 - React
-- Accounts UI, Basic & password
+- Accounts password & facebook
 - ES6 syntax
+- ant design
+- basscss
 
 Check `package.json` for specific versions
 
@@ -15,7 +19,7 @@ Check `package.json` for specific versions
 
 ```
 meteor npm install
-meteor
+meteor --settings settings-dev.json
 ```
 
 GraphiQL is enabled at [/graphiql](http://localhost:3000/graphiql).
@@ -64,7 +68,6 @@ OR
 9. git push heroku mongo:master
 10. heroku open
 ```
-Here is the app deployed to heroku: https://meteor-apollo-starter.herokuapp.com/
 
 TODO:
 - Collection2 schema / mongoose
@@ -73,10 +76,6 @@ TODO:
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
 - error-handling
-
-CUSTOM TODO:
-- integrate with antd
-- integrate with basscss
 - postcss
 - less / sass
 - styledComponents / css-modules
