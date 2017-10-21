@@ -15,7 +15,7 @@ class FBAuthBtn extends Component {
   }
 
   handleClick() {
-    const { onBeforeHook, onErrorHook, onLoginHook } = this.props;
+    const { onBeforeHook, onErrorHook, onSucessHook } = this.props;
 
     // Run before logic if provided and return on error
     try {
@@ -40,7 +40,7 @@ class FBAuthBtn extends Component {
         // equals 'popup' at serviceConfiguration. In case loginStyle equals
         // 'redirect' we'll need to get the user tokens from the cookie since
         // we wont be able to call resetStore.
-        onLoginHook();
+        onSucessHook();
       }
     });
   }
@@ -69,14 +69,14 @@ FBAuthBtn.propTypes = {
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onErrorHook: PropTypes.func,
-  onLoginHook: PropTypes.func,
+  onSucessHook: PropTypes.func,
 };
 
 FBAuthBtn.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
   onErrorHook: () => {},
-  onLoginHook: () => {},
+  onSucessHook: () => {},
 };
 
 export default FBAuthBtn;
