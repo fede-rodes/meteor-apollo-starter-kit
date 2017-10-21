@@ -7,9 +7,11 @@ import createReduxStore from '../../api/client/redux/store.js';
 import GlobalDataProvider from './global-data-provider.jsx';
 import Routes from './routes.jsx';
 
-// To get started, create an ApolloClient instance and point it at your GraphQL
-// server (handled in our case by meteor-apollo). By default, this client will
-// send queries to the '/graphql' endpoint on the same host.
+/**
+ * To get started, create an ApolloClient instance and point it at your GraphQL
+ * server (handled in our case by meteor-apollo). By default, this client will
+ * send queries to the '/graphql' endpoint on the same host.
+ */
 const client = new ApolloClient(meteorClientConfig());
 
 // For redux integration see http://dev.apollodata.com/react/redux.html

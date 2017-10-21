@@ -2,9 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-//------------------------------------------------------------------------------
-// COMPONENT:
-//------------------------------------------------------------------------------
 const LogoutButton = ({ disabled, onLogoutHook }) => (
   <button
     disabled={disabled}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Divider = ({ text }) => (
-  <div className="full-width center p2">
+  <div className="full-width center p3">
     -------- {text} --------
   </div>
 );

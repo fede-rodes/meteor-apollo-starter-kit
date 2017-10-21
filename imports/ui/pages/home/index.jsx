@@ -17,7 +17,7 @@ const HomePage = ({ history, client, refetch, currentUser }) => (
           <LogoutButton
             onLogoutHook={() => {
               client.resetStore();
-              history.push('/login');
+              history.push('/auth');
             }}
           />
           <pre>{JSON.stringify(currentUser, null, 2)}</pre>

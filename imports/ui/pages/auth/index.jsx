@@ -4,25 +4,31 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../../layouts/default/index.jsx';
-import { SignupForm } from '../../components/password-auth-form/index.jsx';
+import PasswordAuthForm from '../../components/password-auth-form.jsx';
 import FBAuthBtn from '../../components/fb-auth-btn.jsx';
 import Divider from '../../components/divider/index.jsx';
 
 //------------------------------------------------------------------------------
-// PAGE COMPONENT DEFINITION:
+// COMPONENT:
 //------------------------------------------------------------------------------
-class SignupPage extends Component {
+class AuthPage extends Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
+    this.handleStateLinkClick = this.handleStateLinkClick.bind(this);
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
     this.handleOnBeforeHook = this.handleOnBeforeHook.bind(this);
     this.handleOnErrorHook = this.handleOnErrorHook.bind(this);
     this.handleSucessHook = this.handleSucessHook.bind(this);
     this.state = {
+      view: 'login',
       disabled: false,
     };
+  }
+
+  handleStateLinkClick(view) {
+    this.setState({ view });
   }
 
   enableBtn() {
@@ -58,30 +64,36 @@ class SignupPage extends Component {
   }
 
   render() {
-    const { disabled } = this.state;
+    const { view, disabled } = this.state;
 
     return (
       <DefaultLayout>
-        <SignupForm
+        <PasswordAuthForm
+          view={view}
           disabled={disabled}
+          onStateLinkClick={this.handleStateLinkClick}
           onBeforeHook={this.handleOnBeforeHook}
           onErrorHook={this.handleOnErrorHook}
-          onSignupHook={this.handleSucessHook}
+          onSucessHook={this.handleSucessHook}
         />
-        <Divider text="or" />
-        <FBAuthBtn
-          btnText="Continue with facebook"
-          disabled={disabled}
-          onBeforeHook={this.handleOnBeforeHook}
-          onErrorHook={this.handleOnErrorHook}
-          onLoginHook={this.handleSucessHook}
-        />
+        {['login', 'signup'].indexOf(view) !== -1 && (
+          <div className="full-width">
+            <Divider text="or" />
+            <FBAuthBtn
+              btnText="Continue with facebook"
+              disabled={disabled}
+              onBeforeHook={this.handleOnBeforeHook}
+              onErrorHook={this.handleOnErrorHook}
+              onSucessHook={this.handleSucessHook}
+            />
+          </div>
+        )}
       </DefaultLayout>
     );
   }
 }
 
-SignupPage.propTypes = {
+AuthPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -95,4 +107,4 @@ const enhance = compose(
   withApollo,
 );
 
-export default enhance(SignupPage);
+export default enhance(AuthPage);
