@@ -4,12 +4,12 @@ import { graphql } from 'react-apollo';
 import userQuery from '../../api/client/graphql-queries/user.graphql';
 
 //------------------------------------------------------------------------------
-// COMPONENT DEFINITION:
+// COMPONENT:
 //------------------------------------------------------------------------------
 /**
-* @summary Injects global data (current user and/or global settings for instace)
-* into child component.
-*/
+ * @summary Injects global data (current user and/or global settings for instace)
+ * into child component.
+ */
 const GlobalDataProvider = (props) => {
   const { refetch, hasErrors, userLoading, currentUser, children, ...rest } = props;
 

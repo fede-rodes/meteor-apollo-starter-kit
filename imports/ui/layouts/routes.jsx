@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import { AuthenticatedRoute, PublicRoute } from '../../ui/components/route-wrappers/index.js';
-import LoginPage from '../../ui/pages/login/index.jsx';
+import {
+  AuthenticatedRoute,
+  PublicRoute,
+} from '../../ui/components/route-wrappers/index.js';
+import AuthPage from '../../ui/pages/auth/index.jsx';
 import HomePage from '../../ui/pages/home/index.jsx';
 import NotFoundPage from '../../ui/pages/not-found-page.jsx';
 
@@ -20,15 +23,15 @@ const Routes = (props) => {
         path="/"
         authenticated={!!currentUser}
         component={HomePage}
-        redirectTo="/login"
-        // overlayComponent={LoginPage}
+        redirectTo="/auth"
+        // overlayComponent={AuthPage}
         {...props}
       />
       <PublicRoute
-        name="login"
-        path="/login"
+        name="auth"
+        path="/auth"
         authenticated={!!currentUser}
-        component={LoginPage}
+        component={AuthPage}
         redirectTo="/"
         {...props}
       />

@@ -1,11 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Button from 'antd/lib/button'; // for js
+import 'antd/lib/button/style/css'; // for css
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class FBLoginButton extends Component {
+class FBAuthBtn extends Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
@@ -15,8 +17,12 @@ class FBLoginButton extends Component {
   handleClick() {
     const { onBeforeHook, onErrorHook, onLoginHook } = this.props;
 
-    // Run before logic if provided
-    onBeforeHook();
+    // Run before logic if provided and return on error
+    try {
+      onBeforeHook();
+    } catch (exc) {
+      return; // return silently
+    }
 
     // Set FB permissions
     const requestPermissions = {
@@ -40,31 +46,37 @@ class FBLoginButton extends Component {
   }
 
   render() {
-    const { disabled } = this.props;
+    const { btnText, disabled } = this.props;
 
     return (
-      <button
+      <Button
+        type="primary"
+        htmlType="submit"
         disabled={disabled}
+        size="large"
+        // loading={disabled}
+        className="full-width"
         onClick={this.handleClick}
       >
-        Log in with facebook
-      </button>
+        {btnText}
+      </Button>
     );
   }
 }
 
-FBLoginButton.propTypes = {
+FBAuthBtn.propTypes = {
+  btnText: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onErrorHook: PropTypes.func,
   onLoginHook: PropTypes.func,
 };
 
-FBLoginButton.defaultProps = {
+FBAuthBtn.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
   onErrorHook: () => {},
   onLoginHook: () => {},
 };
 
-export default FBLoginButton;
+export default FBAuthBtn;
