@@ -1,21 +1,36 @@
 import { Accounts } from 'meteor/accounts-base';
 
 Accounts.onCreateUser((options, user) => {
-  console.log(`sign up attempt: ${new Date()}`);
+  console.log(`\nsign up attempt: ${new Date()}`);
 
-  // Only allow facebook signup
-  if (!user.services.facebook) {
-    throw new Error('Sign up attempt with service different that facebook');
+  // Handle password signup
+  if (user.services.password) {
+    console.log('\nservice --> password');
+
+    // Do something
+    return user;
   }
 
-  const { id, name, gender, email } = user.services.facebook;
-  console.log(`facebook sign up. name: ${name}, id: ${id}, gender: ${gender}, email: ${email}`);
+  // Handle facebook signup
+  if (user.services.facebook) {
+    const { id, name, gender, email } = user.services.facebook;
+    console.log(
+      '\nservice --> facebook',
+      '\nname:', name,
+      '\nid:', id,
+      '\ngender:', gender,
+      '\nemail:', email,
+    );
 
-  // Extend user profile by adding facebook data
-  const userFB = user;
-  userFB.profile = { name, gender };
-  userFB.avatar = `http://graph.facebook.com/${id}/picture/`;
-  return userFB;
+    // Extend user profile by adding facebook data
+    const userFB = user;
+    userFB.profile = { name, gender };
+    userFB.avatar = `http://graph.facebook.com/${id}/picture/`;
+    return userFB;
+  }
+
+  // Throw in case of a different service
+  throw new Error('Sign up attempt with service different than facebook, password');
 });
 
 // avatar: `http://graph.facebook.com/${id}/picture/?type=large`,

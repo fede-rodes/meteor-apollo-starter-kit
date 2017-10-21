@@ -64,6 +64,7 @@ OR
 9. git push heroku mongo:master
 10. heroku open
 ```
+Here is the app deployed to heroku: https://meteor-apollo-starter.herokuapp.com/
 
 TODO:
 - Collection2 schema / mongoose

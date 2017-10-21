@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { AuthenticatedRoute, PublicRoute } from '../../ui/components/route-wrappers/index.js';
 import LoginPage from '../../ui/pages/login/index.jsx';
+import SignupPage from '../../ui/pages/signup/index.jsx';
 import HomePage from '../../ui/pages/home/index.jsx';
 import NotFoundPage from '../../ui/pages/not-found-page.jsx';
 
@@ -29,6 +30,14 @@ const Routes = (props) => {
         path="/login"
         authenticated={!!currentUser}
         component={LoginPage}
+        redirectTo="/"
+        {...props}
+      />
+      <PublicRoute
+        name="signup"
+        path="/signup"
+        authenticated={!!currentUser}
+        component={SignupPage}
         redirectTo="/"
         {...props}
       />

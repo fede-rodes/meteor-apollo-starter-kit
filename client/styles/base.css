@@ -1,0 +1,14 @@
+.full-width { width: 100%; }
+.full-height { height: 100%; }
+.full-vh { height: 100vh; }
+.full-vw { width: 100vw; }
+.black { color: black; }
+.green { color: green; }
+.red { color: tomato; }
+.dark-grey { color: #C0BFBF; }
+.line-through { text-decoration: line-through; }
+.pointer { cursor: pointer };
+.link {
+  color: blue;
+  text-decoration: underline;
+}

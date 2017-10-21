@@ -4,14 +4,14 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../../layouts/default/index.jsx';
-import { LoginForm } from '../../components/password-auth-form/index.jsx';
+import { SignupForm } from '../../components/password-auth-form/index.jsx';
 import FBAuthBtn from '../../components/fb-auth-btn.jsx';
 import Divider from '../../components/divider/index.jsx';
 
 //------------------------------------------------------------------------------
 // PAGE COMPONENT DEFINITION:
 //------------------------------------------------------------------------------
-class LoginPage extends Component {
+class SignupPage extends Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
@@ -62,11 +62,11 @@ class LoginPage extends Component {
 
     return (
       <DefaultLayout>
-        <LoginForm
+        <SignupForm
           disabled={disabled}
           onBeforeHook={this.handleOnBeforeHook}
           onErrorHook={this.handleOnErrorHook}
-          onLoginHook={this.handleSucessHook}
+          onSignupHook={this.handleSucessHook}
         />
         <Divider text="or" />
         <FBAuthBtn
@@ -81,7 +81,7 @@ class LoginPage extends Component {
   }
 }
 
-LoginPage.propTypes = {
+SignupPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -95,4 +95,4 @@ const enhance = compose(
   withApollo,
 );
 
-export default enhance(LoginPage);
+export default enhance(SignupPage);
