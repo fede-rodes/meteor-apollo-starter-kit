@@ -8,7 +8,7 @@ Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 - GraphQL server running with Express bound to the Meteor app
 - Apollo client
 - React
-- Accounts password & facebook
+- Accounts password & facebook auth
 - ES6 syntax
 - ant design
 - basscss
@@ -72,11 +72,10 @@ OR
 TODO:
 - Collection2 schema / mongoose
 - auth route --> handle logging in state
-- login with email
 - smtp config
+- forgot password functionality
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
-- error-handling
 - postcss
 - less / sass
 - styledComponents / css-modules
