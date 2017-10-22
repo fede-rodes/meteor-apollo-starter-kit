@@ -15,19 +15,20 @@ class AuthPage extends Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
-    this.handleStateLinkClick = this.handleStateLinkClick.bind(this);
+    this.handlePasswordFormViewChange = this.handlePasswordFormViewChange.bind(this);
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
-    this.handleOnBeforeHook = this.handleOnBeforeHook.bind(this);
-    this.handleOnErrorHook = this.handleOnErrorHook.bind(this);
-    this.handleSucessHook = this.handleSucessHook.bind(this);
+    this.handleBefore = this.handleBefore.bind(this);
+    this.handleClientError = this.handleClientError.bind(this);
+    this.handleServerError = this.handleServerError.bind(this);
+    this.handleSucess = this.handleSucess.bind(this);
     this.state = {
       view: 'login',
       disabled: false,
     };
   }
 
-  handleStateLinkClick(view) {
+  handlePasswordFormViewChange(view) {
     this.setState({ view });
   }
 
@@ -39,19 +40,24 @@ class AuthPage extends Component {
     this.setState({ disabled: true });
   }
 
-  handleOnBeforeHook() {
+  handleBefore() {
     // OBSERVATION: this hook allows you to trigger some action
     // before the login request is send or simply interrupt the
     // login flow by throwing an error.
     this.disableBtn();
   }
 
-  handleOnErrorHook(err) {
+  handleClientError(err) {
     console.log(err);
     this.enableBtn();
   }
 
-  handleSucessHook() {
+  handleServerError(err) {
+    console.log(err);
+    this.enableBtn();
+  }
+
+  handleSucess() {
     // OBSERVATION: this code is only reachable when using FB
     // loginStyle equals 'popup' at serviceConfiguration. In case
     // loginStyle equals 'redirect' we'll need to get the user
@@ -71,10 +77,11 @@ class AuthPage extends Component {
         <PasswordAuthForm
           view={view}
           disabled={disabled}
-          onStateLinkClick={this.handleStateLinkClick}
-          onBeforeHook={this.handleOnBeforeHook}
-          onErrorHook={this.handleOnErrorHook}
-          onSucessHook={this.handleSucessHook}
+          onViewChange={this.handlePasswordFormViewChange}
+          onBeforeHook={this.handleBefore}
+          onClientErrorHook={this.handleClientError}
+          onServerErrorHook={this.handleServerError}
+          onSucessHook={this.handleSucess}
         />
         {['login', 'signup'].indexOf(view) !== -1 && (
           <div className="full-width">
@@ -82,9 +89,9 @@ class AuthPage extends Component {
             <FBAuthBtn
               btnText="Continue with facebook"
               disabled={disabled}
-              onBeforeHook={this.handleOnBeforeHook}
-              onErrorHook={this.handleOnErrorHook}
-              onSucessHook={this.handleSucessHook}
+              onBeforeHook={this.handleBefore}
+              onServerErrorHook={this.handleServerError}
+              onSucessHook={this.handleSucess}
             />
           </div>
         )}

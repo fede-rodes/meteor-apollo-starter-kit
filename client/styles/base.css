@@ -3,8 +3,8 @@
 .full-vh { height: 100vh; }
 .full-vw { width: 100vw; }
 .black { color: black; }
-.green { color: green; }
-.red { color: tomato; }
+.success { color: green; }
+.danger { color: #f04134; }
 .dark-grey { color: #C0BFBF; }
 .line-through { text-decoration: line-through; }
 .pointer { cursor: pointer };

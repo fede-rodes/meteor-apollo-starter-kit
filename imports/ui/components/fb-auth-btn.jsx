@@ -15,7 +15,12 @@ class FBAuthBtn extends Component {
   }
 
   handleClick() {
-    const { requestPermissions, onBeforeHook, onErrorHook, onSucessHook } = this.props;
+    const {
+      requestPermissions,
+      onBeforeHook,
+      onServerErrorHook,
+      onSucessHook,
+    } = this.props;
 
     // Run before logic if provided and return on error
     try {
@@ -26,7 +31,7 @@ class FBAuthBtn extends Component {
 
     Meteor.loginWithFacebook({ requestPermissions }, (err) => {
       if (err) {
-        onErrorHook(err);
+        onServerErrorHook(err);
       } else {
         // OBSERVATION: this code is only reachable when using FB loginStyle
         // equals 'popup' at serviceConfiguration. In case loginStyle equals
@@ -61,7 +66,7 @@ FBAuthBtn.propTypes = {
   btnText: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
-  onErrorHook: PropTypes.func,
+  onServerErrorHook: PropTypes.func,
   onSucessHook: PropTypes.func,
 };
 
@@ -72,7 +77,7 @@ FBAuthBtn.defaultProps = {
   ],
   disabled: false,
   onBeforeHook: () => {},
-  onErrorHook: () => {},
+  onServerErrorHook: () => {},
   onSucessHook: () => {},
 };
 

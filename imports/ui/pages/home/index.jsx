@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../../layouts/default/index.jsx';
-import LogoutButton from '../../components/logout-button.jsx';
+import LogoutBtn from '../../components/logout-btn.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -14,7 +14,7 @@ const HomePage = ({ history, client, refetch, curUser }) => (
     {curUser
       ? (
         <div>
-          <LogoutButton
+          <LogoutBtn
             onLogoutHook={() => {
               client.resetStore();
               history.push('/auth');
