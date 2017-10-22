@@ -1,5 +1,8 @@
 import { Accounts } from 'meteor/accounts-base';
 
+//------------------------------------------------------------------------------
+// avatar: `http://graph.facebook.com/${id}/picture/?type=large`,
+// Should we add avatar to profile? email to emails?
 Accounts.onCreateUser((options, user) => {
   console.log(`\nsign up attempt: ${new Date()}`);
 
@@ -32,6 +35,3 @@ Accounts.onCreateUser((options, user) => {
   // Throw in case of a different service
   throw new Error('Sign up attempt with service different than facebook, password');
 });
-
-// avatar: `http://graph.facebook.com/${id}/picture/?type=large`,
-// Should we add avatar to profile? email to emails?

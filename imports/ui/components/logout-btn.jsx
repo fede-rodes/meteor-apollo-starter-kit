@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LogoutButton = ({ disabled, onLogoutHook }) => (
+const LogoutBtn = ({ disabled, onLogoutHook }) => (
   <button
     disabled={disabled}
     onClick={() => Meteor.logout(onLogoutHook)}
@@ -11,14 +11,14 @@ const LogoutButton = ({ disabled, onLogoutHook }) => (
   </button>
 );
 
-LogoutButton.propTypes = {
+LogoutBtn.propTypes = {
   disabled: PropTypes.bool,
   onLogoutHook: PropTypes.func,
 };
 
-LogoutButton.defaultProps = {
+LogoutBtn.defaultProps = {
   disabled: false,
   onLogoutHook: () => {},
 };
 
-export default LogoutButton;
+export default LogoutBtn;

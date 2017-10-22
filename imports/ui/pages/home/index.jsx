@@ -4,23 +4,23 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../../layouts/default/index.jsx';
-import LogoutButton from '../../components/logout-button.jsx';
+import LogoutBtn from '../../components/logout-btn.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const HomePage = ({ history, client, refetch, currentUser }) => (
+const HomePage = ({ history, client, refetch, curUser }) => (
   <DefaultLayout>
-    {currentUser
+    {curUser
       ? (
         <div>
-          <LogoutButton
+          <LogoutBtn
             onLogoutHook={() => {
               client.resetStore();
               history.push('/auth');
             }}
           />
-          <pre>{JSON.stringify(currentUser, null, 2)}</pre>
+          <pre>{JSON.stringify(curUser, null, 2)}</pre>
           <button onClick={() => refetch()}>Refetch the query!</button>
         </div>
       )
@@ -37,7 +37,7 @@ HomePage.propTypes = {
     resetStore: PropTypes.func.isRequired,
   }).isRequired,
   refetch: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape({
+  curUser: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     randomString: PropTypes.string.isRequired,
   }).isRequired,
