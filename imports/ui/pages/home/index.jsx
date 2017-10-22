@@ -9,9 +9,9 @@ import LogoutButton from '../../components/logout-button.jsx';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const HomePage = ({ history, client, refetch, currentUser }) => (
+const HomePage = ({ history, client, refetch, curUser }) => (
   <DefaultLayout>
-    {currentUser
+    {curUser
       ? (
         <div>
           <LogoutButton
@@ -20,7 +20,7 @@ const HomePage = ({ history, client, refetch, currentUser }) => (
               history.push('/auth');
             }}
           />
-          <pre>{JSON.stringify(currentUser, null, 2)}</pre>
+          <pre>{JSON.stringify(curUser, null, 2)}</pre>
           <button onClick={() => refetch()}>Refetch the query!</button>
         </div>
       )
@@ -37,7 +37,7 @@ HomePage.propTypes = {
     resetStore: PropTypes.func.isRequired,
   }).isRequired,
   refetch: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape({
+  curUser: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     randomString: PropTypes.string.isRequired,
   }).isRequired,

@@ -71,6 +71,7 @@ OR
 
 TODO:
 - Collection2 schema / mongoose
+- auth route --> handle logging in state
 - login with email
 - smtp config
 - fix FB login for style equals to 'redirect'

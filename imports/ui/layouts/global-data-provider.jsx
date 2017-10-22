@@ -11,7 +11,7 @@ import userQuery from '../../api/client/graphql-queries/user.graphql';
  * into child component.
  */
 const GlobalDataProvider = (props) => {
-  const { refetch, hasErrors, userLoading, currentUser, children, ...rest } = props;
+  const { refetch, hasErrors, userLoading, curUser, children, ...rest } = props;
 
   if (hasErrors) {
     return <div>something bad happend!</div>;
@@ -21,14 +21,14 @@ const GlobalDataProvider = (props) => {
     return <div>loading...</div>;
   }
 
-  return React.cloneElement(children, { refetch, currentUser, ...rest });
+  return React.cloneElement(children, { refetch, curUser, ...rest });
 };
 
 GlobalDataProvider.propTypes = {
   hasErrors: PropTypes.bool,
   refetch: PropTypes.func,
   userLoading: PropTypes.bool,
-  currentUser: PropTypes.shape({
+  curUser: PropTypes.shape({
     _id: PropTypes.string,
     randomString: PropTypes.string,
   }),
@@ -42,7 +42,7 @@ GlobalDataProvider.defaultProps = {
   hasErrors: false,
   refetch: () => {},
   userLoading: false,
-  currentUser: null,
+  curUser: null,
 };
 
 //------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ const withData = graphql(userQuery, {
     if (error) return { hasErrors: true };
 
     return {
-      currentUser: user,
+      curUser: user,
       refetch,
     };
   },

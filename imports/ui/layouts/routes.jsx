@@ -13,7 +13,7 @@ import NotFoundPage from '../../ui/pages/not-found-page.jsx';
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Routes = (props) => {
-  const { currentUser } = props;
+  const { curUser } = props;
 
   return (
     <Switch>
@@ -21,16 +21,16 @@ const Routes = (props) => {
         exact
         name="home"
         path="/"
-        authenticated={!!currentUser}
+        authenticated={!!curUser}
         component={HomePage}
-        redirectTo="/auth"
-        // overlayComponent={AuthPage}
+        // redirectTo="/auth"
+        overlayComponent={AuthPage}
         {...props}
       />
       <PublicRoute
         name="auth"
         path="/auth"
-        authenticated={!!currentUser}
+        authenticated={!!curUser}
         component={AuthPage}
         redirectTo="/"
         {...props}
@@ -42,14 +42,14 @@ const Routes = (props) => {
 };
 
 Routes.propTypes = {
-  currentUser: PropTypes.shape({
+  curUser: PropTypes.shape({
     _id: PropTypes.string,
     randomString: PropTypes.string,
   }),
 };
 
 Routes.defaultProps = {
-  currentUser: null,
+  curUser: null,
 };
 
 export default Routes;

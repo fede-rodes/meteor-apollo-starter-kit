@@ -15,7 +15,7 @@ class FBAuthBtn extends Component {
   }
 
   handleClick() {
-    const { onBeforeHook, onErrorHook, onSucessHook } = this.props;
+    const { requestPermissions, onBeforeHook, onErrorHook, onSucessHook } = this.props;
 
     // Run before logic if provided and return on error
     try {
@@ -24,15 +24,7 @@ class FBAuthBtn extends Component {
       return; // return silently
     }
 
-    // Set FB permissions
-    const requestPermissions = {
-      requestPermissions: [
-        'public_profile',
-        'email',
-      ],
-    };
-
-    Meteor.loginWithFacebook(requestPermissions, (err) => {
+    Meteor.loginWithFacebook({ requestPermissions }, (err) => {
       if (err) {
         onErrorHook(err);
       } else {
@@ -65,6 +57,7 @@ class FBAuthBtn extends Component {
 }
 
 FBAuthBtn.propTypes = {
+  requestPermissions: PropTypes.arrayOf(PropTypes.string),
   btnText: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
@@ -73,6 +66,10 @@ FBAuthBtn.propTypes = {
 };
 
 FBAuthBtn.defaultProps = {
+  requestPermissions: [
+    'public_profile',
+    'email',
+  ],
   disabled: false,
   onBeforeHook: () => {},
   onErrorHook: () => {},
