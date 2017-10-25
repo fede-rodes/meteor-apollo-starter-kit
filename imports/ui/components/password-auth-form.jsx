@@ -10,6 +10,8 @@ import Button from 'antd/lib/button'; // for js
 import 'antd/lib/button/style/css'; // for css
 import Icon from 'antd/lib/icon'; // for js
 import 'antd/lib/icon/style/css'; // for css
+import Alert from 'antd/lib/alert'; // for js
+import 'antd/lib/alert/style/css'; // for css
 
 const FormItem = Form.Item;
 
@@ -155,8 +157,11 @@ class PasswordAuthForm extends React.Component {
             <FormItem label="Email">
               {getFieldDecorator('email', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: 'Email is required' }],
-                // TODO: validate email
+                rules: [
+                  { required: true, message: 'Email is required' },
+                  { type: 'email', message: 'Please, provide a valid email address' },
+                  { max: 100, message: 'Must be no more than 100 characters!' },
+                ],
               })(
                 <Input type="text" prefix={<Icon type="mail" />} placeholder="Email" />,
               )}
@@ -166,7 +171,10 @@ class PasswordAuthForm extends React.Component {
             <FormItem label="Password">
               {getFieldDecorator('password', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: 'Password is required' }],
+                rules: [
+                  { required: true, message: 'Password is required' },
+                  { min: 6, message: 'Please, at least 6 characters long' },
+                ],
               })(
                 <Input type="password" prefix={<Icon type="lock" />} placeholder="Password" />,
               )}
@@ -182,9 +190,9 @@ class PasswordAuthForm extends React.Component {
           >
             {btnText}
           </Button>
-          <div className="danger">
-            {serverError}
-          </div>
+          {serverError && serverError.length > 0 && (
+            <Alert type="error" message={serverError} className="mt1" banner />
+          )}
         </Form>
         {view === 'login' && (
           <p className="center mt2">
