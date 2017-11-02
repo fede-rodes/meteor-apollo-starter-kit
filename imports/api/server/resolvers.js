@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Random } from 'meteor/random';
+import { GraphQLError } from 'graphql';
 
 const resolvers = {
   Query: {
@@ -23,43 +24,26 @@ const resolvers = {
     sendVerificationEmail(root, args, context) {
       const { user: curUser } = context;
 
-      // User should be logged in at this stage!
       if (!curUser) {
-        // throw new Error(403, 'user should be logged in at sendVerificationLink');
-        return {
-          status: 'failed',
-          error: 'User should be logged in at sendVerificationLink',
-        };
+        throw new GraphQLError('User should be logged in at sendVerificationLink');
       }
 
       const curUserId = curUser._id;
       const user = Meteor.users.findOne({ _id: curUserId });
 
       if (!user) {
-        // throw new Error('user-not-found', 'The user is not registered in our database');
-        return {
-          status: 'failed',
-          error: 'The user is not registered in our database',
-        };
+        throw new GraphQLError('The user is not registered in our database');
       }
 
       if (user.emails[0].verified === true) {
-        // throw new Error(400, 'Email already verified!');
-        return {
-          status: 'failed',
-          error: 'Email already verified!',
-        };
+        throw new GraphQLError('Email already verified!');
       }
 
       try {
         Accounts.sendVerificationEmail(curUserId);
       } catch (exc) {
         console.log(exc);
-        // throw new Error(500, `Verification email couldn't be delivered. Reason: ${exc.response}`);
-        return {
-          status: 'failed',
-          error: `Verification email couldn't be delivered. Reason: ${exc.response}`,
-        };
+        throw new GraphQLError(`Verification email couldn't be delivered. Reason: ${exc.response}`);
       }
 
       return { status: 'success' };
@@ -68,23 +52,3 @@ const resolvers = {
 };
 
 export default resolvers;
-
-/*
-const resolvers = {
-  Query: {
-    user(root, args, context) {
-      // We access to the current user here thanks to the context. The current
-      // user is added to the context thanks to the `meteor/apollo` package.
-      return context.user;
-    },
-  },
-  Mutation: {
-    sendVerificationEmail(root, args, context) {
-      console.log('hola');
-      return { _id: '5666' };
-    },
-  },
-};
-
-export default resolvers;
-*/

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { compose } from 'recompose';
+import { graphql } from 'react-apollo';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'antd/lib/form'; // for js
@@ -13,6 +14,7 @@ import Icon from 'antd/lib/icon'; // for js
 import 'antd/lib/icon/style/css'; // for css
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
+import sendVerificationEmailMutation from './send-verification-email.graphql';
 
 const FormItem = Form.Item;
 
@@ -69,20 +71,22 @@ class PasswordAuthForm extends React.Component {
     };
   }
 
-  displayServerError({ reason }) {
-    this.setState({ serverError: reason || 'Unexpected error' });
+  displayServerError({ message }) {
+    this.setState({ serverError: message || 'Unexpected error' });
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
     const {
+      mutate,
       view,
       onBeforeHook,
       onClientErrorHook,
       onServerErrorHook,
-      onSignupSucessHook,
-      onLoginSucessHook,
+      onSucessHook,
+      // onSignupSucessHook,
+      // onLoginSucessHook,
       form,
     } = this.props;
 
@@ -108,7 +112,8 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                onLoginSucessHook();
+                onSucessHook();
+                // onLoginSucessHook();
               }
             });
             break;
@@ -120,7 +125,13 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                onSignupSucessHook();
+                mutate({})
+                .then(() => onSucessHook())
+                .catch((exc) => {
+                  this.displayServerError(exc);
+                  onServerErrorHook(exc);
+                });
+                // onSignupSucessHook();
               }
             });
             break;
@@ -219,15 +230,16 @@ class PasswordAuthForm extends React.Component {
 }
 
 PasswordAuthForm.propTypes = {
-  // mutate: PropTypes.func.isRequired,
+  mutate: PropTypes.func.isRequired,
   view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
   disabled: PropTypes.bool,
   onViewChange: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onSignupSucessHook: PropTypes.func,
-  onLoginSucessHook: PropTypes.func,
+  onSucessHook: PropTypes.func,
+  // onSignupSucessHook: PropTypes.func,
+  // onLoginSucessHook: PropTypes.func,
 };
 
 PasswordAuthForm.defaultProps = {
@@ -235,32 +247,13 @@ PasswordAuthForm.defaultProps = {
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
-  onSignupSucessHook: () => {},
-  onLoginSucessHook: () => {},
+  onSucessHook: () => {},
+  // onSignupSucessHook: () => {},
+  // onLoginSucessHook: () => {},
 };
-//------------------------------------------------------------------------------
-// APOLLO INTEGRATION:
-//------------------------------------------------------------------------------
-/*
- * We use the 'graphql' higher order component to send the graphql query to our
- * server. See for more information: http://dev.apollodata.com/react/
- */
-/* const withData = graphql(sendVerificationEmailMutation, {
-  // Destructure the default props to more explicit ones
-  props: ({ data: { error, loading, user, refetch } }) => {
-    if (loading) return { userLoading: true };
-    if (error) return { hasErrors: true };
-
-    return {
-      curUser: user,
-      refetch,
-    };
-  },
-}); */
-//------------------------------------------------------------------------------
 
 const enhance = compose(
-  // graphql(sendVerificationEmailMutation), // Apollo integration
+  graphql(sendVerificationEmailMutation), // Apollo integration
   Form.create(), // Antd HOC for error handling
 );
 
