@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { compose } from 'recompose';
+import { graphql } from 'react-apollo';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'antd/lib/form'; // for js
@@ -10,6 +12,10 @@ import Button from 'antd/lib/button'; // for js
 import 'antd/lib/button/style/css'; // for css
 import Icon from 'antd/lib/icon'; // for js
 import 'antd/lib/icon/style/css'; // for css
+import Alert from 'antd/lib/alert'; // for js
+import 'antd/lib/alert/style/css'; // for css
+import sendVerificationEmailMutation from './send-verification-email.graphql';
+import sendResetPasswordEmailMutation from './send-reset-password-email.graphql';
 
 const FormItem = Form.Item;
 
@@ -66,19 +72,23 @@ class PasswordAuthForm extends React.Component {
     };
   }
 
-  displayServerError({ reason }) {
-    this.setState({ serverError: reason || 'Unexpected error' });
+  displayServerError({ message }) {
+    this.setState({ serverError: message || 'Unexpected error' });
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
     const {
+      sendVerificationEmail,
+      sendResetPasswordEmail,
       view,
       onBeforeHook,
       onClientErrorHook,
       onServerErrorHook,
       onSucessHook,
+      // onSignupSucessHook,
+      // onLoginSucessHook,
       form,
     } = this.props;
 
@@ -105,6 +115,7 @@ class PasswordAuthForm extends React.Component {
                 onServerErrorHook(err2);
               } else {
                 onSucessHook();
+                // onLoginSucessHook();
               }
             });
             break;
@@ -116,18 +127,32 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                onSucessHook();
+                sendVerificationEmail({})
+                .then(() => onSucessHook())
+                .catch((exc) => {
+                  this.displayServerError(exc);
+                  onServerErrorHook(exc);
+                });
+                // onSignupSucessHook();
               }
             });
             break;
           }
           case 'forgotPassword': {
-            // TODO: send reset password link
-            onSucessHook();
+            sendResetPasswordEmail({
+              variables: {
+                email,
+              },
+            })
+            .then(() => onSucessHook())
+            .catch((exc) => {
+              this.displayServerError(exc);
+              onServerErrorHook(exc);
+            });
             break;
           }
           default:
-            onServerErrorHook(400, 'Option does not exist');
+            onServerErrorHook('View option does not exist');
             break;
         }
       }
@@ -152,21 +177,27 @@ class PasswordAuthForm extends React.Component {
         </p>
         <Form onSubmit={this.handleSubmit} className="mt2">
           {fields.indexOf('email') !== -1 && (
-            <FormItem label="Email">
+            <FormItem>
               {getFieldDecorator('email', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: 'Email is required' }],
-                // TODO: validate email
+                rules: [
+                  { required: true, message: 'Email is required' },
+                  { type: 'email', message: 'Please, provide a valid email address' },
+                  { max: 100, message: 'Must be no more than 100 characters!' },
+                ],
               })(
                 <Input type="text" prefix={<Icon type="mail" />} placeholder="Email" />,
               )}
             </FormItem>
           )}
           {fields.indexOf('password') !== -1 && (
-            <FormItem label="Password">
+            <FormItem>
               {getFieldDecorator('password', {
                 validateTrigger: 'onBlur',
-                rules: [{ required: true, message: 'Password is required' }],
+                rules: [
+                  { required: true, message: 'Password is required' },
+                  { min: 6, message: 'Please, at least 6 characters long' },
+                ],
               })(
                 <Input type="password" prefix={<Icon type="lock" />} placeholder="Password" />,
               )}
@@ -177,14 +208,13 @@ class PasswordAuthForm extends React.Component {
             htmlType="submit"
             disabled={disabled}
             size="large"
-            // loading={disabled}
             className="full-width"
           >
             {btnText}
           </Button>
-          <div className="danger">
-            {serverError}
-          </div>
+          {serverError && serverError.length > 0 && (
+            <Alert type="error" message={serverError} className="mt1" banner />
+          )}
         </Form>
         {view === 'login' && (
           <p className="center mt2">
@@ -210,6 +240,8 @@ class PasswordAuthForm extends React.Component {
 }
 
 PasswordAuthForm.propTypes = {
+  sendVerificationEmail: PropTypes.func.isRequired,
+  sendResetPasswordEmail: PropTypes.func.isRequired,
   view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
   disabled: PropTypes.bool,
   onViewChange: PropTypes.func.isRequired,
@@ -217,6 +249,8 @@ PasswordAuthForm.propTypes = {
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
   onSucessHook: PropTypes.func,
+  // onSignupSucessHook: PropTypes.func,
+  // onLoginSucessHook: PropTypes.func,
 };
 
 PasswordAuthForm.defaultProps = {
@@ -225,6 +259,14 @@ PasswordAuthForm.defaultProps = {
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
   onSucessHook: () => {},
+  // onSignupSucessHook: () => {},
+  // onLoginSucessHook: () => {},
 };
 
-export default Form.create()(PasswordAuthForm);
+const enhance = compose(
+  graphql(sendVerificationEmailMutation, { name: 'sendVerificationEmail' }), // Apollo integration
+  graphql(sendResetPasswordEmailMutation, { name: 'sendResetPasswordEmail' }), // Apollo integration
+  Form.create(), // Antd HOC for error handling
+);
+
+export default enhance(PasswordAuthForm);

@@ -1,0 +1,11 @@
+mutation {
+  sendVerificationEmail {
+    _id
+  }
+}
+
+query {
+  user {
+    _id
+  }
+}

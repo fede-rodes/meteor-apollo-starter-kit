@@ -1,11 +1,11 @@
-import Query from './query';
-import User from './user';
-// import Mutation from './mutation';
+import User from './user.js';
+import Query from './query.js';
+import Mutation from './mutation.js';
 
 const resolvers = {
-  Query,
   User,
-  // Mutation,
+  Query,
+  Mutation,
 };
 
 export default resolvers;

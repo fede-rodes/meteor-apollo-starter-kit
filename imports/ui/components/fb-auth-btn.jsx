@@ -51,7 +51,6 @@ class FBAuthBtn extends Component {
         htmlType="submit"
         disabled={disabled}
         size="large"
-        // loading={disabled}
         className="full-width"
         onClick={this.handleClick}
       >

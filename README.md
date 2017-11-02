@@ -71,11 +71,11 @@ OR
 
 TODO:
 - Collection2 schema / mongoose
-- auth route --> handle logging in state
-- smtp config
 - forgot password functionality
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
 - postcss
 - less / sass
 - styledComponents / css-modules
+- PWA
+- add verify account route
