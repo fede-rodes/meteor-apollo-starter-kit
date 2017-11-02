@@ -1,6 +1,5 @@
 mutation {
   sendVerificationEmail {
-    status
-    error
+    _id
   }
 }

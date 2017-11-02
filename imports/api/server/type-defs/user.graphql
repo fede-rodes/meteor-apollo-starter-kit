@@ -1,4 +1,0 @@
-type User {
-  _id: String
-  randomString: String
-}

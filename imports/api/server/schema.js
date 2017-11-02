@@ -4,17 +4,13 @@ type User {
   randomString: String
 }
 
-type ResponseStatus {
-  status: String!
-  error: String
-}
-
 type Query {
   user: User
 }
 
 type Mutation {
-  sendVerificationEmail: ResponseStatus
+  sendVerificationEmail: User
+  sendResetPasswordEmail(email: String!): User
 }
 `;
 

@@ -15,6 +15,7 @@ import 'antd/lib/icon/style/css'; // for css
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
 import sendVerificationEmailMutation from './send-verification-email.graphql';
+import sendResetPasswordEmailMutation from './send-reset-password-email.graphql';
 
 const FormItem = Form.Item;
 
@@ -79,7 +80,8 @@ class PasswordAuthForm extends React.Component {
     e.preventDefault();
 
     const {
-      mutate,
+      sendVerificationEmail,
+      sendResetPasswordEmail,
       view,
       onBeforeHook,
       onClientErrorHook,
@@ -125,7 +127,7 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                mutate({})
+                sendVerificationEmail({})
                 .then(() => onSucessHook())
                 .catch((exc) => {
                   this.displayServerError(exc);
@@ -137,12 +139,20 @@ class PasswordAuthForm extends React.Component {
             break;
           }
           case 'forgotPassword': {
-            // TODO: send reset password link
-            onSucessHook();
+            sendResetPasswordEmail({
+              variables: {
+                email,
+              },
+            })
+            .then(() => onSucessHook())
+            .catch((exc) => {
+              this.displayServerError(exc);
+              onServerErrorHook(exc);
+            });
             break;
           }
           default:
-            onServerErrorHook(400, 'Option does not exist');
+            onServerErrorHook('View option does not exist');
             break;
         }
       }
@@ -230,7 +240,8 @@ class PasswordAuthForm extends React.Component {
 }
 
 PasswordAuthForm.propTypes = {
-  mutate: PropTypes.func.isRequired,
+  sendVerificationEmail: PropTypes.func.isRequired,
+  sendResetPasswordEmail: PropTypes.func.isRequired,
   view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
   disabled: PropTypes.bool,
   onViewChange: PropTypes.func.isRequired,
@@ -253,7 +264,8 @@ PasswordAuthForm.defaultProps = {
 };
 
 const enhance = compose(
-  graphql(sendVerificationEmailMutation), // Apollo integration
+  graphql(sendVerificationEmailMutation, { name: 'sendVerificationEmail' }), // Apollo integration
+  graphql(sendResetPasswordEmailMutation, { name: 'sendResetPasswordEmail' }), // Apollo integration
   Form.create(), // Antd HOC for error handling
 );
 
