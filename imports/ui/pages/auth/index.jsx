@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import { withApollo } from 'react-apollo';
+import { withApollo, graphql } from 'react-apollo';
+import sendVerificationEmailMutation from '../../../api/client/graphql-mutations/send-verification-email.graphql';
 import DefaultLayout from '../../layouts/default/index.jsx';
 import PasswordAuthForm from '../../components/password-auth-form.jsx';
 import FBAuthBtn from '../../components/fb-auth-btn.jsx';
@@ -21,7 +22,9 @@ class AuthPage extends Component {
     this.handleBefore = this.handleBefore.bind(this);
     this.handleClientError = this.handleClientError.bind(this);
     this.handleServerError = this.handleServerError.bind(this);
-    this.handleSucess = this.handleSucess.bind(this);
+    this.handleSignupSucess = this.handleSignupSucess.bind(this);
+    this.handleLoginSucess = this.handleLoginSucess.bind(this);
+    this.handleAfterSuccessAuth = this.handleAfterSuccessAuth.bind(this);
     this.state = {
       view: 'login',
       disabled: false,
@@ -57,16 +60,24 @@ class AuthPage extends Component {
     this.enableBtn();
   }
 
-  handleSucess() {
-    // OBSERVATION: this code is only reachable when using FB
-    // loginStyle equals 'popup' at serviceConfiguration. In case
-    // loginStyle equals 'redirect' we'll need to get the user
-    // tokens from the cookie since we wont be able to call
-    // resetStore.
+  handleAfterSuccessAuth() {
     const { history, client } = this.props;
     client.resetStore();
     this.enableBtn();
     history.push('/');
+  }
+
+  handleSignupSucess() {
+    const { mutate } = this.props;
+    mutate({}).then(this.handleAfterSuccessAuth);
+  }
+
+  handleLoginSucess() {
+    // OBSERVATION: when useing FB service, this code is only reachable when
+    // using loginStyle equals 'popup' at serviceConfiguration. In case
+    // loginStyle equals 'redirect' we'll need to get (TODO) the user tokens
+    // from the cookie since we wont be able to call resetStore.
+    this.handleAfterSuccessAuth();
   }
 
   render() {
@@ -81,11 +92,12 @@ class AuthPage extends Component {
           onBeforeHook={this.handleBefore}
           onClientErrorHook={this.handleClientError}
           onServerErrorHook={this.handleServerError}
-          onSucessHook={this.handleSucess}
+          onSignupSucessHook={this.handleSignupSucess}
+          onLoginSucessHook={this.handleLoginSucess}
         />
         {['login', 'signup'].indexOf(view) !== -1 && (
           <div className="full-width">
-            <Divider text="or" />
+            <Divider text="OR" />
             <FBAuthBtn
               btnText="Continue with facebook"
               disabled={disabled}
@@ -101,6 +113,7 @@ class AuthPage extends Component {
 }
 
 AuthPage.propTypes = {
+  mutate: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -110,8 +123,9 @@ AuthPage.propTypes = {
 };
 
 const enhance = compose(
-  withRouter,
-  withApollo,
+  withRouter, // To have access to history.push
+  withApollo, // To have access to client.resetStore()
+  graphql(sendVerificationEmailMutation), // Apollo integration
 );
 
 export default enhance(AuthPage);

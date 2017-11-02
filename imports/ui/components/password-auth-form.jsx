@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { compose } from 'recompose';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'antd/lib/form'; // for js
@@ -80,7 +81,8 @@ class PasswordAuthForm extends React.Component {
       onBeforeHook,
       onClientErrorHook,
       onServerErrorHook,
-      onSucessHook,
+      onSignupSucessHook,
+      onLoginSucessHook,
       form,
     } = this.props;
 
@@ -106,7 +108,7 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                onSucessHook();
+                onLoginSucessHook();
               }
             });
             break;
@@ -118,7 +120,7 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                onSucessHook();
+                onSignupSucessHook();
               }
             });
             break;
@@ -154,7 +156,7 @@ class PasswordAuthForm extends React.Component {
         </p>
         <Form onSubmit={this.handleSubmit} className="mt2">
           {fields.indexOf('email') !== -1 && (
-            <FormItem label="Email">
+            <FormItem>
               {getFieldDecorator('email', {
                 validateTrigger: 'onBlur',
                 rules: [
@@ -168,7 +170,7 @@ class PasswordAuthForm extends React.Component {
             </FormItem>
           )}
           {fields.indexOf('password') !== -1 && (
-            <FormItem label="Password">
+            <FormItem>
               {getFieldDecorator('password', {
                 validateTrigger: 'onBlur',
                 rules: [
@@ -185,7 +187,6 @@ class PasswordAuthForm extends React.Component {
             htmlType="submit"
             disabled={disabled}
             size="large"
-            // loading={disabled}
             className="full-width"
           >
             {btnText}
@@ -218,13 +219,15 @@ class PasswordAuthForm extends React.Component {
 }
 
 PasswordAuthForm.propTypes = {
+  // mutate: PropTypes.func.isRequired,
   view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
   disabled: PropTypes.bool,
   onViewChange: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onSucessHook: PropTypes.func,
+  onSignupSucessHook: PropTypes.func,
+  onLoginSucessHook: PropTypes.func,
 };
 
 PasswordAuthForm.defaultProps = {
@@ -232,7 +235,33 @@ PasswordAuthForm.defaultProps = {
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
-  onSucessHook: () => {},
+  onSignupSucessHook: () => {},
+  onLoginSucessHook: () => {},
 };
+//------------------------------------------------------------------------------
+// APOLLO INTEGRATION:
+//------------------------------------------------------------------------------
+/*
+ * We use the 'graphql' higher order component to send the graphql query to our
+ * server. See for more information: http://dev.apollodata.com/react/
+ */
+/* const withData = graphql(sendVerificationEmailMutation, {
+  // Destructure the default props to more explicit ones
+  props: ({ data: { error, loading, user, refetch } }) => {
+    if (loading) return { userLoading: true };
+    if (error) return { hasErrors: true };
 
-export default Form.create()(PasswordAuthForm);
+    return {
+      curUser: user,
+      refetch,
+    };
+  },
+}); */
+//------------------------------------------------------------------------------
+
+const enhance = compose(
+  // graphql(sendVerificationEmailMutation), // Apollo integration
+  Form.create(), // Antd HOC for error handling
+);
+
+export default enhance(PasswordAuthForm);

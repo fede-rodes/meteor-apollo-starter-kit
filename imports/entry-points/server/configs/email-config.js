@@ -1,16 +1,16 @@
-/* import { Accounts } from 'meteor/accounts-base';
-import Constants from '../../api/constants.js'; */
+import { Accounts } from 'meteor/accounts-base';
+import Constants from '../../../api/constants.js';
 
 //------------------------------------------------------------------------------
 // EMAIL TEMPLATES
 //------------------------------------------------------------------------------
 /**
-* @see {@link https://themeteorchef.com/snippets/sign-up-with-email-verification/}
-* @see {@link http://docs.meteor.com/#/full/accounts_emailtemplates}
-* @see {@link http://docs.meteor.com/#/full/accounts_sendverificationemail}
-* @see {@link: https://meteorhacks.com/server-side-rendering}
-*/
-/* Accounts.emailTemplates.siteName = Constants.SITE_BRAND;
+ * @see {@link https://themeteorchef.com/snippets/sign-up-with-email-verification/}
+ * @see {@link http://docs.meteor.com/#/full/accounts_emailtemplates}
+ * @see {@link http://docs.meteor.com/#/full/accounts_sendverificationemail}
+ * @see {@link https://meteorhacks.com/server-side-rendering}
+ */
+Accounts.emailTemplates.siteName = Constants.SITE_BRAND;
 Accounts.emailTemplates.from = `${Constants.SITE_BRAND} <no-reply@${Constants.DOMAIN_NAME}>`;
 Accounts.emailTemplates.verifyEmail = {
   subject() {
@@ -40,4 +40,4 @@ Accounts.emailTemplates.resetPassword = {
     ` please contact our support team: ${supportEmail}.`;
     return emailBody;
   },
-}; */
+};

@@ -1,0 +1,6 @@
+mutation {
+  sendVerificationEmail {
+    status
+    error
+  }
+}
