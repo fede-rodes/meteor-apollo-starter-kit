@@ -6,12 +6,13 @@ import { Route, Redirect } from 'react-router-dom';
 // COMPONENT:
 //------------------------------------------------------------------------------
 /**
- * @summary Makes sure the user that is trying to access a public route is not
- * authenticated. In case the user is authenticated, the PublicRoute component
- * provides 2 options: redirect (redirectTo) the user to the given route; or
- * render on top of the current route the overlayComponent.
+ * @summary Makes sure the user that is trying to access a loggedIn route
+ * has the right priviledges. In case the user is not authorized, the
+ * LoggedInRoute component provides 2 options: redirect (redirectTo) the
+ * user to the given route; or render on top of the current route the
+ * overlayComponent.
  */
-const PublicRoute = ({ authenticated, component, redirectTo, overlayComponent, ...rest }) => (
+const LoggedInRoute = ({ loggedIn, component, redirectTo, overlayComponent, ...rest }) => (
   <Route
     {...rest}
     render={(props) => {
@@ -19,23 +20,23 @@ const PublicRoute = ({ authenticated, component, redirectTo, overlayComponent, .
         ? <Redirect to={redirectTo} />
         : React.createElement(overlayComponent, { ...rest, ...props });
 
-      return authenticated
-      ? resolver
-      : React.createElement(component, { ...rest, ...props });
+      return loggedIn
+        ? React.createElement(component, { ...rest, ...props })
+        : resolver;
     }}
   />
 );
 
-PublicRoute.propTypes = {
-  authenticated: PropTypes.bool.isRequired,
+LoggedInRoute.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
   component: PropTypes.func.isRequired,
   redirectTo: PropTypes.string,
   overlayComponent: PropTypes.func,
 };
 
-PublicRoute.defaultProps = {
+LoggedInRoute.defaultProps = {
   redirectTo: '',
   overlayComponent: () => {},
 };
 
-export default PublicRoute;
+export default LoggedInRoute;
