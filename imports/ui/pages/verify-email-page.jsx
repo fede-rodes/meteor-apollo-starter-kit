@@ -1,6 +1,8 @@
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
+import message from 'antd/lib/message'; // for js
+import 'antd/lib/message/style/css'; // for css
 import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
@@ -8,9 +10,8 @@ import Loading from '../components/loading.jsx';
 //------------------------------------------------------------------------------
 class VerifyEmailPage extends React.Component {
   componentWillMount() {
-    const { history, match, curUser } = this.props;
+    const { history, match } = this.props;
     const token = (match && match.params && match.params.token) || '';
-    console.log('props', this.props);
 
     // Verify email account using token
     Accounts.verifyEmail(token, (err) => {
@@ -18,8 +19,8 @@ class VerifyEmailPage extends React.Component {
         console.log(`[router] ${err.reason}`);
         history.push('/link-expired');
       } else {
+        message.success('Account verified successfully. Thanks!');
         history.push('/');
-        // Bert.alert('Account verified successfully. Thanks!', 'success', 'growl-top-right');
       }
     });
   }

@@ -2,8 +2,6 @@ import { compose } from 'recompose';
 import { graphql } from 'react-apollo';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Alert from 'antd/lib/alert'; // for js
-import 'antd/lib/alert/style/css'; // for css
 import sendVerificationEmailMutation from './send-verification-email.graphql';
 
 //------------------------------------------------------------------------------
@@ -14,13 +12,6 @@ class ResendConfirmationLink extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.state = {
-      serverError: '',
-    };
-  }
-
-  displayServerError({ message }) {
-    this.setState({ serverError: message || 'Unexpected error' });
   }
 
   handleClick(e) {
@@ -40,37 +31,25 @@ class ResendConfirmationLink extends React.Component {
       return; // return silently
     }
 
-    // Clear server errors if any
-    this.setState({ serverError: '' });
-
     sendVerificationEmail({})
     .then(() => onSucessHook())
     .catch((exc) => {
-      this.displayServerError(exc);
       onServerErrorHook(exc);
     });
   }
 
   render() {
-    const { serverError } = this.state;
-
+    const { text } = this.props;
     return (
-      <div className="full-width">
-        <p className="center">
-          Please, click here to&nbsp;
-          <a href="" onClick={this.handleClick}>
-            resend confirmation link
-          </a>.
-        </p>
-        {serverError && serverError.length > 0 && (
-          <Alert type="error" message={serverError} className="mt1" banner />
-        )}
-      </div>
+      <a href="" onClick={this.handleClick}>
+        {text}
+      </a>
     );
   }
 }
 
 ResendConfirmationLink.propTypes = {
+  text: PropTypes.string.isRequired,
   sendVerificationEmail: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
