@@ -1,2 +1,3 @@
-export { default as AuthenticatedRoute } from './authenticated-route.jsx';
-export { default as PublicRoute } from './public-route.jsx';
+export { default as LoggedInRoute } from './logged-in-route.jsx';
+export { default as LoggedOutRoute } from './logged-out-route.jsx';
+export { default as RouteWithProps } from './route-with-props.jsx';

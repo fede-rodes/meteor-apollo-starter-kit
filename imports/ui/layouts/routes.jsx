@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import {
-  AuthenticatedRoute,
-  PublicRoute,
+  LoggedInRoute,
+  LoggedOutRoute,
+  RouteWithProps,
 } from '../../ui/components/route-wrappers/index.js';
 import AuthPage from '../../ui/pages/auth/index.jsx';
+import VerifyEmailPage from '../../ui/pages/verify-email-page.jsx';
+import LinkExpiredPage from '../../ui/pages/link-expired-page.jsx';
 import HomePage from '../../ui/pages/home/index.jsx';
 import NotFoundPage from '../../ui/pages/not-found-page.jsx';
 
@@ -17,26 +20,40 @@ const Routes = (props) => {
 
   return (
     <Switch>
-      <AuthenticatedRoute
+      <LoggedInRoute
         exact
         name="home"
         path="/"
-        authenticated={!!curUser}
+        loggedIn={!!curUser}
         component={HomePage}
         // redirectTo="/auth"
         overlayComponent={AuthPage}
         {...props}
       />
-      <PublicRoute
+      <LoggedOutRoute
         name="auth"
         path="/auth"
-        authenticated={!!curUser}
+        loggedIn={!!curUser}
         component={AuthPage}
         redirectTo="/"
         {...props}
       />
-      {/* <Route name="search" path="/:query" component={SearchPageContainer} /> */}
-      <Route name="notFound" component={NotFoundPage} />
+      <RouteWithProps
+        name="verifyEmail"
+        path="/verify-email/:token"
+        component={VerifyEmailPage}
+        {...props}
+      />
+      <RouteWithProps
+        name="linkExpired"
+        path="/link-expired"
+        component={LinkExpiredPage}
+        {...props}
+      />
+      <Route
+        name="notFound"
+        component={NotFoundPage}
+      />
     </Switch>
   );
 };
