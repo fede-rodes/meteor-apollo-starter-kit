@@ -11,21 +11,16 @@ import LogoutBtn from '../../components/logout-btn.jsx';
 //------------------------------------------------------------------------------
 const HomePage = ({ history, client, refetch, curUser }) => (
   <DefaultLayout>
-    {curUser
-      ? (
-        <div>
-          <LogoutBtn
-            onLogoutHook={() => {
-              client.resetStore();
-              history.push('/auth');
-            }}
-          />
-          <pre>{JSON.stringify(curUser, null, 2)}</pre>
-          <button onClick={() => refetch()}>Refetch the query!</button>
-        </div>
-      )
-      : 'Please log in!'
-    }
+    <div className="full-width">
+      <LogoutBtn
+        onLogoutHook={() => {
+          client.resetStore();
+          history.push('/auth');
+        }}
+      />
+      <pre>{JSON.stringify(curUser, null, 2)}</pre>
+      <button onClick={() => refetch()}>Refetch the query!</button>
+    </div>
   </DefaultLayout>
 );
 
@@ -44,8 +39,8 @@ HomePage.propTypes = {
 };
 
 const enhance = compose(
-  withRouter,
-  withApollo,
+  withRouter, // To have access to history.push
+  withApollo, // To have access to client.resetStore()
 );
 
 export default enhance(HomePage);

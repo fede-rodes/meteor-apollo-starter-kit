@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import userQuery from '../../api/client/graphql-queries/user.graphql';
+import userQuery from '../apollo-client/queries/user.graphql';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

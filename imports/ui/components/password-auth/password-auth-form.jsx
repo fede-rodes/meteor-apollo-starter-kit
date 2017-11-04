@@ -87,8 +87,6 @@ class PasswordAuthForm extends React.Component {
       onClientErrorHook,
       onServerErrorHook,
       onSucessHook,
-      // onSignupSucessHook,
-      // onLoginSucessHook,
       form,
     } = this.props;
 
@@ -115,7 +113,6 @@ class PasswordAuthForm extends React.Component {
                 onServerErrorHook(err2);
               } else {
                 onSucessHook();
-                // onLoginSucessHook();
               }
             });
             break;
@@ -133,7 +130,6 @@ class PasswordAuthForm extends React.Component {
                   this.displayServerError(exc);
                   onServerErrorHook(exc);
                 });
-                // onSignupSucessHook();
               }
             });
             break;
@@ -249,8 +245,6 @@ PasswordAuthForm.propTypes = {
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
   onSucessHook: PropTypes.func,
-  // onSignupSucessHook: PropTypes.func,
-  // onLoginSucessHook: PropTypes.func,
 };
 
 PasswordAuthForm.defaultProps = {
@@ -259,8 +253,6 @@ PasswordAuthForm.defaultProps = {
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
   onSucessHook: () => {},
-  // onSignupSucessHook: () => {},
-  // onLoginSucessHook: () => {},
 };
 
 const enhance = compose(

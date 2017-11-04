@@ -22,9 +22,6 @@ class AuthPage extends Component {
     this.handleClientError = this.handleClientError.bind(this);
     this.handleServerError = this.handleServerError.bind(this);
     this.handleSucess = this.handleSucess.bind(this);
-    // this.handleSignupSucess = this.handleSignupSucess.bind(this);
-    // this.handleLoginSucess = this.handleLoginSucess.bind(this);
-    // this.handleAfterSuccessAuth = this.handleAfterSuccessAuth.bind(this);
     this.state = {
       view: 'login',
       disabled: false,
@@ -71,54 +68,34 @@ class AuthPage extends Component {
     history.push('/');
   }
 
-  /* handleAfterSuccessAuth() {
-    const { history, client } = this.props;
-    client.resetStore();
-    this.enableBtn();
-    history.push('/');
-  }
-
-  handleSignupSucess() {
-    const { mutate } = this.props;
-    mutate({}).then(this.handleAfterSuccessAuth);
-  }
-
-  handleLoginSucess() {
-    // OBSERVATION: when useing FB service, this code is only reachable when
-    // using loginStyle equals 'popup' at serviceConfiguration. In case
-    // loginStyle equals 'redirect' we'll need to get (TODO) the user tokens
-    // from the cookie since we wont be able to call resetStore.
-    this.handleAfterSuccessAuth();
-  } */
-
   render() {
     const { view, disabled } = this.state;
 
     return (
       <DefaultLayout>
-        <PasswordAuthForm
-          view={view}
-          disabled={disabled}
-          onViewChange={this.handlePasswordFormViewChange}
-          onBeforeHook={this.handleBefore}
-          onClientErrorHook={this.handleClientError}
-          onServerErrorHook={this.handleServerError}
-          onSucessHook={this.handleSucess}
-          // onSignupSucessHook={this.handleSignupSucess}
-          // onLoginSucessHook={this.handleLoginSucess}
-        />
-        {['login', 'signup'].indexOf(view) !== -1 && (
-          <div className="full-width">
-            <Divider text="OR" />
-            <FBAuthBtn
-              btnText="Continue with facebook"
-              disabled={disabled}
-              onBeforeHook={this.handleBefore}
-              onServerErrorHook={this.handleServerError}
-              onSucessHook={this.handleSucess}
-            />
-          </div>
-        )}
+        <div className="full-width">
+          <PasswordAuthForm
+            view={view}
+            disabled={disabled}
+            onViewChange={this.handlePasswordFormViewChange}
+            onBeforeHook={this.handleBefore}
+            onClientErrorHook={this.handleClientError}
+            onServerErrorHook={this.handleServerError}
+            onSucessHook={this.handleSucess}
+          />
+          {['login', 'signup'].indexOf(view) !== -1 && (
+            <div className="full-width">
+              <Divider text="OR" />
+              <FBAuthBtn
+                btnText="Continue with facebook"
+                disabled={disabled}
+                onBeforeHook={this.handleBefore}
+                onServerErrorHook={this.handleServerError}
+                onSucessHook={this.handleSucess}
+              />
+            </div>
+          )}
+        </div>
       </DefaultLayout>
     );
   }

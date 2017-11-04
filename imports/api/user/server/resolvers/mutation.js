@@ -1,10 +1,16 @@
-import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { GraphQLError } from 'graphql';
-import _ from 'lodash';
+import { isUndefined } from 'lodash';
+import collection from '../collection.js';
+
+// Attach namespace to collection for clarity
+const User = { collection };
+
+// User mutation resolvers
+const Mutation = {};
 
 //------------------------------------------------------------------------------
-const sendVerificationEmail = (root, args, context) => {
+Mutation.sendVerificationEmail = (root, args, context) => {
   console.log('About to send verification email...');
   const { user: curUser } = context;
 
@@ -15,7 +21,7 @@ const sendVerificationEmail = (root, args, context) => {
 
   // Make sure the user exists in our database
   const curUserId = curUser._id;
-  const user = Meteor.users.findOne({ _id: curUserId });
+  const user = User.collection.findOne({ _id: curUserId });
   if (!user) {
     throw new GraphQLError('The user is not registered in our database');
   }
@@ -35,7 +41,7 @@ const sendVerificationEmail = (root, args, context) => {
   return { _id: curUserId };
 };
 //------------------------------------------------------------------------------
-const sendResetPasswordEmail = (root, args, context) => {
+Mutation.sendResetPasswordEmail = (root, args, context) => {
   console.log('About to send reset password email...');
   const { email } = args;
   const { user: curUser } = context;
@@ -55,7 +61,7 @@ const sendResetPasswordEmail = (root, args, context) => {
   const { _id: targetUserId, accountDeactivated } = targetUser;
 
   // Prevent user from submitting if account has been deactivated
-  if (!_.isUndefined(accountDeactivated) && accountDeactivated === true) {
+  if (!isUndefined(accountDeactivated) && accountDeactivated === true) {
     throw new GraphQLError('Account has been Deactivated');
   }
 
@@ -70,9 +76,5 @@ const sendResetPasswordEmail = (root, args, context) => {
   return { _id: targetUserId };
 };
 //------------------------------------------------------------------------------
-const Mutation = {
-  sendVerificationEmail,
-  sendResetPasswordEmail,
-};
 
 export default Mutation;

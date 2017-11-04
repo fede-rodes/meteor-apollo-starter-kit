@@ -1,4 +1,5 @@
-const typeDefs = `
+// User namespace schema
+const schema = `
 type User {
   _id: String
   randomString: String
@@ -14,4 +15,4 @@ type Mutation {
 }
 `;
 
-export default typeDefs;
+export default schema;

@@ -70,12 +70,12 @@ OR
 ```
 
 TODO:
-- Collection2 schema / mongoose
-- forgot password functionality
+- if services === password, add check at loggedInRoute and display/redirect to
+ ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
 - postcss
 - less / sass
 - styledComponents / css-modules
 - PWA
-- add verify account route
+- tests

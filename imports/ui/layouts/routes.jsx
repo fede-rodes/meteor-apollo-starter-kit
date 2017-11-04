@@ -7,6 +7,7 @@ import {
   RouteWithProps,
 } from '../../ui/components/route-wrappers/index.js';
 import AuthPage from '../../ui/pages/auth/index.jsx';
+import ConfirmEmailPage from '../../ui/pages/confirm-email-page.jsx';
 import VerifyEmailPage from '../../ui/pages/verify-email-page.jsx';
 import LinkExpiredPage from '../../ui/pages/link-expired-page.jsx';
 import HomePage from '../../ui/pages/home/index.jsx';
@@ -26,6 +27,16 @@ const Routes = (props) => {
         path="/"
         loggedIn={!!curUser}
         component={HomePage}
+        // redirectTo="/auth"
+        overlayComponent={AuthPage}
+        {...props}
+      />
+      <LoggedInRoute
+        exact
+        name="confirmEmail"
+        path="/confirm-email"
+        loggedIn={!!curUser}
+        component={ConfirmEmailPage}
         // redirectTo="/auth"
         overlayComponent={AuthPage}
         {...props}

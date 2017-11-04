@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import ApolloClient from 'apollo-client';
 import { meteorClientConfig } from 'meteor/apollo';
 import { ApolloProvider } from 'react-apollo';
-import createReduxStore from '../../api/client/redux/store.js';
+import ApolloClient from 'apollo-client';
+import createReduxStore from '../redux/store.js';
 import GlobalDataProvider from './global-data-provider.jsx';
 import Routes from './routes.jsx';
 

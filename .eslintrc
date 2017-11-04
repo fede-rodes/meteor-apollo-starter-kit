@@ -49,7 +49,10 @@
           "_ensureIndex",
           "_verifyEmailToken",
           "_resetPasswordToken",
-          "_name"
+          "_name",
+          "__parseValue",
+          "__serialize",
+          "__parseLiteral"
         ]
       }
     ]
