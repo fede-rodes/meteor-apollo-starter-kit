@@ -72,6 +72,7 @@ OR
 TODO:
 - if services === password, add check at loggedInRoute and display/redirect to
  ConfirmEmailPage if email is not verified.
+- merge password-auth, fb-auth-btn and logout-btn into one folder called auth
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
 - postcss
