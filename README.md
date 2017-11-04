@@ -10,6 +10,7 @@ Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 - React
 - Accounts password & facebook auth
 - ES6 syntax
+- [styled components](https://youtu.be/qu4U7lwZTRI)
 - ant design
 - basscss
 
@@ -74,8 +75,7 @@ TODO:
  ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
-- postcss
-- less / sass
 - PWA
 - tests
-- react 16
+- add global style using styled-components + Sanitize CSS
+(https://github.com/marioblas/neptune/blob/master/client/main.js)
