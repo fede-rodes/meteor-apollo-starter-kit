@@ -70,7 +70,6 @@ OR
 ```
 
 TODO:
-- Collection2 schema / mongoose
 - if services === password, add check at loggedInRoute and display/redirect to
  ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'

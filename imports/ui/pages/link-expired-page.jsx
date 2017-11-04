@@ -27,20 +27,26 @@ class LinkExpiredPage extends React.Component {
     // OBSERVATION: this hook allows you to trigger some action
     // before the resend link request is sent or simply interrupt the
     // normal flow by throwing an error.
-    this.setState({ loading: true });
-    this.setState({ serverError: '' });
-    this.setState({ successMessage: '' });
+    this.setState({
+      loading: true,
+      serverError: '',
+      successMessage: '',
+    });
   }
 
   handleServerError(err) {
     console.log(err);
-    this.setState({ loading: false });
-    this.setState({ serverError: err.message || 'Unexpected error' });
+    this.setState({
+      loading: false,
+      serverError: err.message || 'Unexpected error',
+    });
   }
 
   handleSucess() {
-    this.setState({ loading: false });
-    this.setState({ successMessage: 'A new email has been sent to you inbox!' });
+    this.setState({
+      loading: false,
+      successMessage: 'A new email has been sent to you inbox!',
+    });
   }
 
   render() {
