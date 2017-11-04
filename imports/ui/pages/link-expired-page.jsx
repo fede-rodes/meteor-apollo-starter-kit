@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
-import ResendConfirmationLink from '../components/password-auth/resend-confirmation-link.jsx';
+import { ResendConfirmationLink } from '../components/auth/index.js';
 import DefaultLayout from '../layouts/default/index.jsx';
 
 //------------------------------------------------------------------------------

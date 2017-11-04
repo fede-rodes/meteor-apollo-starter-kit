@@ -6,11 +6,11 @@ import {
   LoggedOutRoute,
   RouteWithProps,
 } from '../../ui/components/route-wrappers/index.js';
-import AuthPage from '../../ui/pages/auth/index.jsx';
+import AuthPage from '../../ui/pages/auth-page.jsx';
 import ConfirmEmailPage from '../../ui/pages/confirm-email-page.jsx';
 import VerifyEmailPage from '../../ui/pages/verify-email-page.jsx';
 import LinkExpiredPage from '../../ui/pages/link-expired-page.jsx';
-import HomePage from '../../ui/pages/home/index.jsx';
+import HomePage from '../../ui/pages/home-page.jsx';
 import NotFoundPage from '../../ui/pages/not-found-page.jsx';
 
 //------------------------------------------------------------------------------

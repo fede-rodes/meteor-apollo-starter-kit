@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
-import DefaultLayout from '../../layouts/default/index.jsx';
-import PasswordAuthForm from '../../components/password-auth/password-auth-form.jsx';
-import FBAuthBtn from '../../components/fb-auth-btn.jsx';
-import Divider from '../../components/divider/index.jsx';
+import DefaultLayout from '../layouts/default/index.jsx';
+import { AuthUI } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -15,7 +13,6 @@ class AuthPage extends Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
-    this.handlePasswordFormViewChange = this.handlePasswordFormViewChange.bind(this);
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
@@ -23,13 +20,8 @@ class AuthPage extends Component {
     this.handleServerError = this.handleServerError.bind(this);
     this.handleSucess = this.handleSucess.bind(this);
     this.state = {
-      view: 'login',
       disabled: false,
     };
-  }
-
-  handlePasswordFormViewChange(view) {
-    this.setState({ view });
   }
 
   enableBtn() {
@@ -69,33 +61,17 @@ class AuthPage extends Component {
   }
 
   render() {
-    const { view, disabled } = this.state;
+    const { disabled } = this.state;
 
     return (
       <DefaultLayout>
-        <div className="full-width">
-          <PasswordAuthForm
-            view={view}
-            disabled={disabled}
-            onViewChange={this.handlePasswordFormViewChange}
-            onBeforeHook={this.handleBefore}
-            onClientErrorHook={this.handleClientError}
-            onServerErrorHook={this.handleServerError}
-            onSucessHook={this.handleSucess}
-          />
-          {['login', 'signup'].indexOf(view) !== -1 && (
-            <div className="full-width">
-              <Divider text="OR" />
-              <FBAuthBtn
-                btnText="Continue with facebook"
-                disabled={disabled}
-                onBeforeHook={this.handleBefore}
-                onServerErrorHook={this.handleServerError}
-                onSucessHook={this.handleSucess}
-              />
-            </div>
-          )}
-        </div>
+        <AuthUI
+          disabled={disabled}
+          onBeforeHook={this.handleBefore}
+          onClientErrorHook={this.handleClientError}
+          onServerErrorHook={this.handleServerError}
+          onSucessHook={this.handleSucess}
+        />
       </DefaultLayout>
     );
   }

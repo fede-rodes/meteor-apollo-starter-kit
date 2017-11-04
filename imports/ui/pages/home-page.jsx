@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
-import DefaultLayout from '../../layouts/default/index.jsx';
-import LogoutBtn from '../../components/logout-btn.jsx';
+import DefaultLayout from '../layouts/default/index.jsx';
+import { LogoutBtn } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
