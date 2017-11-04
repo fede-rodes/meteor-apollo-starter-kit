@@ -76,7 +76,6 @@ TODO:
 - Accounts.config from Meteor.docs
 - postcss
 - less / sass
-- styledComponents / css-modules
 - PWA
 - tests
 - react 16

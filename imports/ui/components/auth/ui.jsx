@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PasswordAuthForm from './password-auth-form.jsx';
 import FBAuthBtn from './fb-auth-btn.jsx';
-import Divider from './divider.jsx';
+// import Divider from './divider.jsx';
+import StyledDivider from './divider.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -33,7 +34,8 @@ class UI extends Component {
         />
         {['login', 'signup'].indexOf(view) !== -1 && (
           <div className="full-width">
-            <Divider text="OR" />
+            {/* <Divider text="OR" /> */}
+            <StyledDivider text="OR" />
             <FBAuthBtn
               btnText="Continue with facebook"
               {...this.props}
