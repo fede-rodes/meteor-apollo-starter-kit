@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
-import ResendConfirmationLink from '../components/password-auth/resend-confirmation-link.jsx';
 import DefaultLayout from '../layouts/default/index.jsx';
+import { ResendConfirmationLink } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

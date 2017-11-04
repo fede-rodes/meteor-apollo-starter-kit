@@ -203,6 +203,7 @@ class PasswordAuthForm extends React.Component {
             type="primary"
             htmlType="submit"
             disabled={disabled}
+            loading={disabled}
             size="large"
             className="full-width"
           >
@@ -239,8 +240,8 @@ PasswordAuthForm.propTypes = {
   sendVerificationEmail: PropTypes.func.isRequired,
   sendResetPasswordEmail: PropTypes.func.isRequired,
   view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
-  disabled: PropTypes.bool,
   onViewChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
