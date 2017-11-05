@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../layouts/default/index.jsx';
 import { AuthUI } from '../components/auth/index.js';
+import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -65,6 +66,7 @@ class AuthPage extends Component {
 
     return (
       <DefaultLayout>
+        <Loading />
         <AuthUI
           disabled={disabled}
           onBeforeHook={this.handleBefore}

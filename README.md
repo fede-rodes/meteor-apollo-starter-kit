@@ -7,17 +7,16 @@ Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 ### Includes
 - GraphQL server running with Express bound to the Meteor app
 - Apollo client
-- React
-- Accounts password & facebook auth
+- React 16
+- Redux
+- Meteor accounts (password & facebook)
 - ES6 syntax
 - [styled components](https://youtu.be/qu4U7lwZTRI)
 - ant design
+- sanitize.css
 - basscss
 
-Check `package.json` for specific versions
-
 ### Running it
-
 ```
 meteor npm install
 meteor --settings settings-dev.json
@@ -25,7 +24,7 @@ meteor --settings settings-dev.json
 
 GraphiQL is enabled at [/graphiql](http://localhost:3000/graphiql).
 
-### Folder structure
+### Folder structure (TODO)
     .
     ├── client                  # Client files
     │   ├── styles              # Styles
@@ -70,7 +69,7 @@ OR
 10. heroku open
 ```
 
-TODO:
+TODO LIST:
 - if services === password, add check at loggedInRoute and display/redirect to
  ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'

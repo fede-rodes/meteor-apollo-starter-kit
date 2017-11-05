@@ -41,6 +41,7 @@ const Routes = (props) => {
         overlayComponent={AuthPage}
         {...props}
       />
+      {/* Even when using overlayComponent we still need this route */}
       <LoggedOutRoute
         name="auth"
         path="/auth"
