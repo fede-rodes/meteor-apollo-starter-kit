@@ -74,7 +74,12 @@ TODO LIST:
  ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
-- PWA (https://github.com/NitroBAY/meteor-service-worker)
+- PWA, see:
+- https://github.com/NitroBAY/meteor-service-worker
+- https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
+- https://www.made-on-mars.com/blog/how-to-pwa-an-introduction-on-progressive-web-app-and-a-tutorial-to-create-one-with-full-features-push-notification-service-worker-offline-mode/
+- When user signs up, sendVerificationEmail shouldn't block user to access home.
+In case of error, should feedback on home screen
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
