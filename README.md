@@ -77,7 +77,5 @@ TODO:
 - Accounts.config from Meteor.docs
 - PWA (https://github.com/NitroBAY/meteor-service-worker)
 - tests
-- add global style using styled-components + Sanitize CSS
-(https://github.com/marioblas/neptune/blob/master/client/main.js)
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
