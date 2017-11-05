@@ -6,11 +6,10 @@ import { Route, Redirect } from 'react-router-dom';
 // COMPONENT:
 //------------------------------------------------------------------------------
 /**
- * @summary Makes sure the user that is trying to access a loggedIn route
- * has the right priviledges. In case the user is not authorized, the
- * LoggedInRoute component provides 2 options: redirect (redirectTo) the
- * user to the given route; or render on top of the current route the
- * overlayComponent.
+ * @summary Makes sure that the user that is trying to access the wrapped route
+ * is authenticated. If not, the LoggedInRoute component provides 2 options to
+ * handle this situation: redirect (redirectTo) the user to the given route; or
+ * render on top of the current route the overlayComponent.
  */
 const LoggedInRoute = ({ loggedIn, component, redirectTo, overlayComponent, ...rest }) => (
   <Route
