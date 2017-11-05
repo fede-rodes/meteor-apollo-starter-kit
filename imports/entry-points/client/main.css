@@ -1,4 +1,4 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -6,25 +6,19 @@ body {
   min-height: 100vh;
 }
 
-button {
-  background: #999;
-  outline: none;
-  color: #FFF;
-  margin-right: 8px;
-  text-transform: uppercase;
-  font-weight: bold;
-  border: none;
-  padding: 16px 24px;
-  font-size: 14px;
-  line-height: 16px;
-  cursor: pointer;
-}
-
-button:focus, button:hover {
-  background-color: #a6a6a6;
-}
-button:active {
-  background-color: #8c8c8c;
+.full-width { width: 100%; }
+.full-height { height: 100%; }
+.full-vh { height: 100vh; }
+.full-vw { width: 100vw; }
+.black { color: black; }
+.success { color: green; }
+.danger { color: #f04134; }
+.dark-grey { color: #C0BFBF; }
+.line-through { text-decoration: line-through; }
+.pointer { cursor: pointer };
+.link {
+  color: blue;
+  text-decoration: underline;
 }
 
 .DefaultLayout {
