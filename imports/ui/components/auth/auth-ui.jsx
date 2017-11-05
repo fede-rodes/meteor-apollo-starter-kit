@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PasswordAuthForm from './password-auth-form.jsx';
 import FBAuthBtn from './fb-auth-btn.jsx';
-// import Divider from './divider.jsx';
-import StyledDivider from './divider.jsx';
+
+//------------------------------------------------------------------------------
+// AUX COMPONENT:
+//------------------------------------------------------------------------------
+const Divider = () => (
+  <div className="full-width center p2">
+    - OR -
+  </div>
+);
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class UI extends Component {
+class AuthUI extends Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
@@ -34,8 +41,7 @@ class UI extends Component {
         />
         {['login', 'signup'].indexOf(view) !== -1 && (
           <div className="full-width">
-            {/* <Divider text="OR" /> */}
-            <StyledDivider text="OR" />
+            <Divider />
             <FBAuthBtn
               btnText="Continue with facebook"
               {...this.props}
@@ -47,15 +53,16 @@ class UI extends Component {
   }
 }
 
-UI.propTypes = {
-  disabled: PropTypes.bool,
-  onBeforeHook: PropTypes.func,
-  onClientErrorHook: PropTypes.func,
-  onServerErrorHook: PropTypes.func,
-  onSucessHook: PropTypes.func,
+// All props are passed down to child components
+AuthUI.propTypes = {
+  disabled: PropTypes.bool, // eslint-disable-line
+  onBeforeHook: PropTypes.func, // eslint-disable-line
+  onClientErrorHook: PropTypes.func, // eslint-disable-line
+  onServerErrorHook: PropTypes.func, // eslint-disable-line
+  onSucessHook: PropTypes.func, // eslint-disable-line
 };
 
-UI.defaultProps = {
+AuthUI.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
@@ -63,4 +70,4 @@ UI.defaultProps = {
   onSucessHook: () => {},
 };
 
-export default UI;
+export default AuthUI;
