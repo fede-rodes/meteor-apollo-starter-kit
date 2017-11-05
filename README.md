@@ -75,7 +75,9 @@ TODO:
  ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
-- PWA
+- PWA (https://github.com/NitroBAY/meteor-service-worker)
 - tests
 - add global style using styled-components + Sanitize CSS
 (https://github.com/marioblas/neptune/blob/master/client/main.js)
+- dynamic imports
+- bundle-visualizer to see what is taking up the most memory.
