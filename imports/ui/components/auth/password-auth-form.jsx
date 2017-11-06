@@ -175,7 +175,7 @@ class PasswordAuthForm extends React.Component {
           {fields.indexOf('email') !== -1 && (
             <FormItem label="Email">
               {getFieldDecorator('email', {
-                validateTrigger: 'onBlur',
+                validateTrigger: 'onSubmit',
                 rules: [
                   { required: true, message: 'Email is required' },
                   { type: 'email', message: 'Please, provide a valid email address' },
@@ -189,7 +189,7 @@ class PasswordAuthForm extends React.Component {
           {fields.indexOf('password') !== -1 && (
             <FormItem label="Password">
               {getFieldDecorator('password', {
-                validateTrigger: 'onBlur',
+                validateTrigger: 'onSubmit',
                 rules: [
                   { required: true, message: 'Password is required' },
                   { min: 6, message: 'Please, at least 6 characters long' },
