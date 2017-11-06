@@ -69,7 +69,17 @@ OR
 10. heroku open
 ```
 
-TODO LIST:
+### Lighthouse
+```
+npm install -g lighthouse
+lighthouse http://localhost:3000
+```
+Run Lighthouse on authenticated app:
+```
+lighthouse https://user:password@my.domain.com
+```
+
+### TODO LIST
 - if services === password, add check at loggedInRoute and display/redirect to
  ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'
@@ -83,3 +93,6 @@ In case of error, should feedback on home screen
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
+- ssr to speedup first load and SEO
+- css lazy loading better for performance?
+- react helmet
