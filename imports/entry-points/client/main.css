@@ -6,6 +6,10 @@ html, body {
   min-height: 100vh;
 }
 
+a {
+  color: blue !important;
+}
+
 .full-width { width: 100%; }
 .full-height { height: 100%; }
 .full-vh { height: 100vh; }

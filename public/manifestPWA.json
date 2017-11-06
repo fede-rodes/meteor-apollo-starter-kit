@@ -1,0 +1,49 @@
+{
+  "name": "Love, love, love",
+  "gcm_sender_id": "<REPLACE_WITH_YOUR_GCM_SENDER_ID>",
+  "short_name": "Love",
+  "icons": [{
+    "src": "images/icons/icon-android-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }, {
+      "src": "images/icons/icon-android-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }, {
+      "src": "images/icons/icon-android-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }, {
+      "src": "images/icons/icon-android-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }, {
+      "src": "images/icons/icon-android-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }, {
+      "src": "images/icons/icon-android-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2e2e49",
+  "theme_color": "#3b395e",
+  "orientation": "portrait",
+  "splash_screens": [{
+      "src": "images/splash/splash-android-240x320.png",
+      "sizes": "240x320",
+      "type": "image/png"
+    }, {
+      "src": "images/splash/splash-android-750x1334.png",
+      "sizes": "750x1334",
+      "type": "image/png"
+    }, {
+      "src": "images/splash/splash-android-1080x1920.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "density": 3
+    }]
+}

@@ -69,12 +69,30 @@ OR
 10. heroku open
 ```
 
-TODO LIST:
+### Lighthouse
+```
+npm install -g lighthouse
+lighthouse http://localhost:3000
+```
+Run Lighthouse on authenticated app:
+```
+lighthouse https://user:password@my.domain.com
+```
+
+### TODO LIST
 - if services === password, add check at loggedInRoute and display/redirect to
  ConfirmEmailPage if email is not verified.
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
-- PWA (https://github.com/NitroBAY/meteor-service-worker)
+- PWA, see:
+- https://github.com/NitroBAY/meteor-service-worker
+- https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
+- https://www.made-on-mars.com/blog/how-to-pwa-an-introduction-on-progressive-web-app-and-a-tutorial-to-create-one-with-full-features-push-notification-service-worker-offline-mode/
+- When user signs up, sendVerificationEmail shouldn't block user to access home.
+In case of error, should feedback on home screen
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
+- ssr to speedup first load and SEO
+- css lazy loading better for performance?
+- react helmet

@@ -5,17 +5,22 @@ import styled from 'styled-components';
 // STYLES:
 //------------------------------------------------------------------------------
 const Outer = styled.div`
-  height: 200px;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  max-height: 200px;
+  padding: 15px 10px;
 `;
 //------------------------------------------------------------------------------
 const Logo = styled.img`
-  margin: 0 50px;
+  max-height: 150px;
+  width: 50%;
 `;
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Header = () => (
-  <Outer className="flex justify-center items-center">
+  <Outer className="flex justify-between items-center">
     <Logo src="/meteor.svg" alt="meteor" />
     <Logo src="/apollo.svg" alt="apollo" />
   </Outer>

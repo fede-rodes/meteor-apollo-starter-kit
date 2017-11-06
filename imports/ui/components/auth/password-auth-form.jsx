@@ -173,7 +173,7 @@ class PasswordAuthForm extends React.Component {
         </p>
         <Form onSubmit={this.handleSubmit} className="mt2">
           {fields.indexOf('email') !== -1 && (
-            <FormItem>
+            <FormItem label="Email">
               {getFieldDecorator('email', {
                 validateTrigger: 'onBlur',
                 rules: [
@@ -187,7 +187,7 @@ class PasswordAuthForm extends React.Component {
             </FormItem>
           )}
           {fields.indexOf('password') !== -1 && (
-            <FormItem>
+            <FormItem label="Password">
               {getFieldDecorator('password', {
                 validateTrigger: 'onBlur',
                 rules: [

@@ -7,7 +7,9 @@ import Header from './header.jsx';
 // STYLES:
 //------------------------------------------------------------------------------
 const Block = styled.div`
-  min-width: 420px;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
   min-height: 420px;
   padding: 30px;
   background-color: white;

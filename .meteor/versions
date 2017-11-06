@@ -32,6 +32,8 @@ ejson@1.1.0
 email@1.2.3
 es5-shim@4.6.15
 facebook-oauth@1.4.0
+force-ssl@1.1.0
+force-ssl-common@1.1.0
 geojson-utils@1.0.10
 hot-code-push@1.0.4
 html-tools@1.0.11
