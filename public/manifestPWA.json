@@ -3,6 +3,10 @@
   "gcm_sender_id": "<REPLACE_WITH_YOUR_GCM_SENDER_ID>",
   "short_name": "Love",
   "icons": [{
+    "src": "images/icons/android-chrome-72x72.png",
+    "sizes": "72x72",
+    "type": "image/png"
+    }, {
     "src": "images/icons/icon-android-128x128.png",
       "sizes": "128x128",
       "type": "image/png"

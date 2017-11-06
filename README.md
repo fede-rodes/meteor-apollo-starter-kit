@@ -100,3 +100,5 @@ In case of error, should feedback on home screen
 - css outside imports folder (lazy load) is better for performance?
 - react helmet
 - PWA: push notifications + sync
+- clean Redux folder
+- check https://realfavicongenerator.net/
