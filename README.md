@@ -4,6 +4,9 @@ A simple kit to start experimenting with Apollo, Meteor and React.
 
 Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 
+Lighthouse audit:
+![meteor-apollo-starterkit-lighthouse](https://user-images.githubusercontent.com/16927407/32450606-f0650318-c314-11e7-9a75-3b3ec3d21c6d.png)
+
 ### Includes
 - GraphQL server running with Express bound to the Meteor app
 - Apollo client
