@@ -1,6 +1,6 @@
-# Meteor + Apollo boilerplate
+# Meteor, Apollo, React, PWA, Styled-Components boilerplate
 
-A simple kit to start experimenting with Apollo, Meteor and React.
+A simple kit to start experimenting with Apollo, Meteor, React, PWA and Styled Components.
 
 Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 
@@ -99,3 +99,4 @@ In case of error, should feedback on home screen
 - ssr to speed-up first load and SEO
 - css outside imports folder (lazy load) is better for performance?
 - react helmet
+- PWA: push notifications + sync
