@@ -9,6 +9,7 @@ const Outer = styled.div`
   max-width: 420px;
   height: 100%;
   max-height: 200px;
+  padding: 15px 10px;
 `;
 //------------------------------------------------------------------------------
 const Logo = styled.img`

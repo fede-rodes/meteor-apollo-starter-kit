@@ -24,3 +24,4 @@ service-configuration@1.0.11
 apollo
 swydo:graphql
 aldeed:collection2-core
+force-ssl
