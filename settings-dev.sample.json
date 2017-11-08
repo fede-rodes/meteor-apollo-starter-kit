@@ -1,0 +1,22 @@
+{
+  "smtp": {
+    "protocol": "smtp",
+    "username": "MGUSERNAME.mailgun.org",
+    "password": "MGPASSWORD",
+    "server": "smtp.mailgun.org",
+    "port": "587"
+  },
+  "facebook": {
+    "appId": "FACEBOOK_APPID",
+     "secret": "FACEBOOK_SECRET"
+  },
+  "googleMaps": {
+    "apiKey": "GOOGLEMAPS_APIKEY"
+  },
+  "public": {
+    "facebook": {
+      "appId": "FACEBOOK_APPID",
+      "commentsUrl": "http//facebook.com"
+    }
+  }
+}
