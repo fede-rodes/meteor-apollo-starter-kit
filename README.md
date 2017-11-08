@@ -7,7 +7,7 @@ Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 Lighthouse audit:
 ![meteor-apollo-starterkit-lighthouse](https://user-images.githubusercontent.com/16927407/32450606-f0650318-c314-11e7-9a75-3b3ec3d21c6d.png)
 
-### Includes
+### This project includes the following libraries/functionality
 - GraphQL server running with Express bound to the Meteor app
 - Apollo client
 - React 16
@@ -18,10 +18,7 @@ Lighthouse audit:
 - ant design
 - sanitize.css
 - basscss
-- PWA, see:
-- https://github.com/NitroBAY/meteor-service-worker
-- https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
-- https://www.made-on-mars.com/blog/how-to-pwa-an-introduction-on-progressive-web-app-and-a-tutorial-to-create-one-with-full-features-push-notification-service-worker-offline-mode/
+- Progressive Web App
 
 ### Running it
 ```
@@ -31,36 +28,20 @@ meteor --settings settings-dev.json
 
 GraphiQL is enabled at [/graphiql](http://localhost:3000/graphiql).
 
-### Folder structure (TODO)
-    .
-    ├── client                  # Client files
-    │   ├── styles              # Styles
-    │   ├── main.html           # First loaded view pulling from imports
-    │   └── main.js             # Imports all required files - React render
-    ├── imports                 # A client/server folder
-    │   ├── api                 #
-    │   |  └── schema.js        # Schema & query definitions
-    |   └── ui                  # UI React rendering
-    │      └── App.js           # Component using `graphql` HOC
-    │      └── Header.js        # Basic presentational component
-    │      └── Loading.js       # Reusable loading component
-    │      └── LoginForm.js     # Component using `withApollo` HOC
-    ├── server                  # Server files
-    │   └── server.js           # Main server file initiating Apollo server
-    └── package.json            # node dependencies
+### Resources
 
-
-### Learn more
-
+#### Meteor Apollo
 - [Meteor `apollo` package docs](http://dev.apollodata.com/core/meteor.html)
 - [Apollo docs](http://dev.apollodata.com/)
+- https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
 
-Source: https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
+#### Favicon / manifest generator
+https://realfavicongenerator.net/
 
-### Configure facebook account
+#### Configure facebook account
 https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e
 
-### Deploy to heroku
+#### Deploy to heroku
 ```
 1. git clone https://github.com/fede-rodes/meteor-apollo-starter-kit.git
 2. cd meteor-apollo-starter-kit
@@ -76,15 +57,12 @@ OR
 10. heroku open
 ```
 
-### Lighthouse
-```
-npm install -g lighthouse
-lighthouse http://localhost:3000
-```
-Run Lighthouse on authenticated app:
-```
-lighthouse https://user:password@my.domain.com
-```
+#### Progressive Web Apps
+- https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
+- https://www.made-on-mars.com/blog/how-to-pwa-an-introduction-on-progressive-web-app-and-a-tutorial-to-create-one-with-full-features-push-notification-service-worker-offline-mode/
+- https://github.com/NitroBAY/meteor-service-worker
+- https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
+- https://developers.google.com/web/tools/workbox/
 
 ### TODO LIST
 - if services === password, add check at loggedInRoute and display/redirect to
@@ -93,12 +71,16 @@ lighthouse https://user:password@my.domain.com
 - Accounts.config from Meteor.docs
 - When user signs up, sendVerificationEmail shouldn't block user to access home.
 In case of error, should feedback on home screen
+- Reset password form
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
 - ssr to speed-up first load and SEO
 - css outside imports folder (lazy load) is better for performance?
 - react helmet
-- PWA: push notifications + sync
+- PWA: push notifications + sync (take a look at workbox)
 - clean Redux folder
-- check https://realfavicongenerator.net/
+- Better to load from DNS?
+- https://www.webpagetest.org
+- https://stackify.com/what-is-real-user-monitoring/
+- home page: show avatar + set username based on email for password users

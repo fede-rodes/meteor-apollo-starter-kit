@@ -13,6 +13,8 @@ class VerifyEmailPage extends React.Component {
     const { history, match } = this.props;
     const token = (match && match.params && match.params.token) || '';
 
+    // QUESTION: what about Accounts._verifyEmailToken?
+
     // Verify email account using token
     Accounts.verifyEmail(token, (err) => {
       if (err) {

@@ -13,15 +13,13 @@ class AuthPage extends Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
+    this.state = { disabled: false };
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
     this.handleClientError = this.handleClientError.bind(this);
     this.handleServerError = this.handleServerError.bind(this);
     this.handleSucess = this.handleSucess.bind(this);
-    this.state = {
-      disabled: false,
-    };
   }
 
   enableBtn() {
