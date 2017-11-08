@@ -12,14 +12,14 @@ class ConfirmEmailPage extends React.Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
-    this.handleBefore = this.handleBefore.bind(this);
-    this.handleServerError = this.handleServerError.bind(this);
-    this.handleSucess = this.handleSucess.bind(this);
     this.state = {
       loading: false,
       serverError: '',
       successMessage: '',
     };
+    this.handleBefore = this.handleBefore.bind(this);
+    this.handleServerError = this.handleServerError.bind(this);
+    this.handleSucess = this.handleSucess.bind(this);
   }
 
   handleBefore() {
