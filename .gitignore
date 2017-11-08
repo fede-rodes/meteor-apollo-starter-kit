@@ -1,3 +1,5 @@
 node_modules/
 notes.txt
 settings.json
+settings-dev.json
+settings-prod.json
