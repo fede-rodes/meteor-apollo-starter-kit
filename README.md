@@ -71,6 +71,7 @@ OR
 - Accounts.config from Meteor.docs
 - When user signs up, sendVerificationEmail shouldn't block user to access home.
 In case of error, should feedback on home screen
+- Reset password form
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
