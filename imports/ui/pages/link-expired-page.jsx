@@ -102,6 +102,5 @@ LinkExpiredPage.propTypes = {
 LinkExpiredPage.defaultProps = {
   curUser: null,
 };
-//------------------------------------------------------------------------------
 
 export default LinkExpiredPage;

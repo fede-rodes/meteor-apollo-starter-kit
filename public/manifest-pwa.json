@@ -31,7 +31,7 @@
       "sizes": "512x512",
       "type": "image/png"
     }],
-  "start_url": "/",
+  "start_url": "/?homescreen=true",
   "display": "standalone",
   "background_color": "#2e2e49",
   "theme_color": "#3b395e",

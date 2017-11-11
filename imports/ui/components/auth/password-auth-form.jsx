@@ -14,7 +14,6 @@ import Icon from 'antd/lib/icon'; // for js
 import 'antd/lib/icon/style/css'; // for css
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
-import sendVerificationEmailMutation from './send-verification-email.graphql';
 import sendResetPasswordEmailMutation from './send-reset-password-email.graphql';
 
 const FormItem = Form.Item;
@@ -53,40 +52,43 @@ const STATES = {
 // COMPONENT:
 //------------------------------------------------------------------------------
 class PasswordAuthForm extends React.Component {
-  // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
-    this.changeViewTo = this.changeViewTo.bind(this);
+    this.state = { serverError: '', serverSuccess: '' };
     this.displayServerError = this.displayServerError.bind(this);
+    this.clearMessages = this.clearMessages.bind(this);
+    this.changeViewTo = this.changeViewTo.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      serverError: '',
-    };
-  }
-
-  changeViewTo(to) {
-    return (e) => {
-      e.preventDefault();
-      this.setState({ serverError: '' });
-      this.props.onViewChange(to);
-    };
   }
 
   displayServerError({ message }) {
     this.setState({ serverError: message || 'Unexpected error' });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  clearMessages() {
+    this.setState({ serverError: '', serverSuccess: '' });
+  }
+
+  changeViewTo(to) {
+    return (evt) => {
+      evt.preventDefault();
+      this.clearMessages();
+      this.props.onViewChange(to);
+    };
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
 
     const {
-      sendVerificationEmail,
       sendResetPasswordEmail,
       view,
       onBeforeHook,
       onClientErrorHook,
       onServerErrorHook,
-      onSucessHook,
+      onSignupSucessHook,
+      onLoginSucessHook,
+      onSendResetPasswordEmailSucessHook,
       form,
     } = this.props;
 
@@ -97,8 +99,7 @@ class PasswordAuthForm extends React.Component {
       return; // return silently
     }
 
-    // Clear server errors if any
-    this.setState({ serverError: '' });
+    this.clearMessages();
 
     form.validateFields((err1, { email, password }) => {
       if (err1) {
@@ -112,7 +113,7 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                onSucessHook();
+                onLoginSucessHook();
               }
             });
             break;
@@ -124,23 +125,19 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                sendVerificationEmail({})
-                .then(() => onSucessHook())
-                .catch((exc) => {
-                  this.displayServerError(exc);
-                  onServerErrorHook(exc);
-                });
+                // OBSERVATION: see /entry-points/server/configs/accounts-config.js
+                // for sendVerificationEmail logic
+                onSignupSucessHook();
               }
             });
             break;
           }
           case 'forgotPassword': {
-            sendResetPasswordEmail({
-              variables: {
-                email,
-              },
+            sendResetPasswordEmail({ variables: { email } })
+            .then(() => {
+              this.setState({ serverSuccess: 'A new email has been sent to your inbox!' });
+              onSendResetPasswordEmailSucessHook();
             })
-            .then(() => onSucessHook())
             .catch((exc) => {
               this.displayServerError(exc);
               onServerErrorHook(exc);
@@ -156,7 +153,7 @@ class PasswordAuthForm extends React.Component {
   }
 
   render() {
-    const { serverError } = this.state;
+    const { serverError, serverSuccess } = this.state;
     const { view, disabled, form: { getFieldDecorator } } = this.props;
     const { title, subtitle, linkTo, linkText, fields, btnText } = STATES[view];
 
@@ -212,6 +209,9 @@ class PasswordAuthForm extends React.Component {
           {serverError && serverError.length > 0 && (
             <Alert type="error" message={serverError} className="mt1" banner />
           )}
+          {serverSuccess && serverSuccess.length > 0 && (
+            <Alert type="success" message={serverSuccess} className="mt1" banner />
+          )}
         </Form>
         {view === 'login' && (
           <p className="center mt2">
@@ -237,7 +237,6 @@ class PasswordAuthForm extends React.Component {
 }
 
 PasswordAuthForm.propTypes = {
-  sendVerificationEmail: PropTypes.func.isRequired,
   sendResetPasswordEmail: PropTypes.func.isRequired,
   view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
   onViewChange: PropTypes.func.isRequired,
@@ -245,7 +244,9 @@ PasswordAuthForm.propTypes = {
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onSucessHook: PropTypes.func,
+  onSignupSucessHook: PropTypes.func,
+  onLoginSucessHook: PropTypes.func,
+  onSendResetPasswordEmailSucessHook: PropTypes.func,
 };
 
 PasswordAuthForm.defaultProps = {
@@ -253,11 +254,12 @@ PasswordAuthForm.defaultProps = {
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
-  onSucessHook: () => {},
+  onSignupSucessHook: () => {},
+  onLoginSucessHook: () => {},
+  onSendResetPasswordEmailSucessHook: () => {},
 };
 
 const enhance = compose(
-  graphql(sendVerificationEmailMutation, { name: 'sendVerificationEmail' }), // Apollo integration
   graphql(sendResetPasswordEmailMutation, { name: 'sendResetPasswordEmail' }), // Apollo integration
   Form.create(), // Antd HOC for error handling
 );
