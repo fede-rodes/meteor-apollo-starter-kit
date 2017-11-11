@@ -8,14 +8,13 @@ import sendVerificationEmailMutation from './send-verification-email.graphql';
 // COMPONENT:
 //------------------------------------------------------------------------------
 class ResendConfirmationLink extends React.Component {
-  // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
-    e.preventDefault();
+  handleClick(evt) {
+    evt.preventDefault();
 
     const {
       sendVerificationEmail,
@@ -33,9 +32,7 @@ class ResendConfirmationLink extends React.Component {
 
     sendVerificationEmail({})
     .then(() => onSucessHook())
-    .catch((exc) => {
-      onServerErrorHook(exc);
-    });
+    .catch(exc => onServerErrorHook(exc));
   }
 
   render() {

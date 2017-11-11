@@ -17,13 +17,10 @@ const Divider = () => (
 // COMPONENT:
 //------------------------------------------------------------------------------
 class AuthUI extends Component {
-  // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
+    this.state = { view: 'login' };
     this.handlePasswordFormViewChange = this.handlePasswordFormViewChange.bind(this);
-    this.state = {
-      view: 'login',
-    };
   }
 
   handlePasswordFormViewChange(view) {
@@ -65,7 +62,9 @@ AuthUI.propTypes = {
   onBeforeHook: PropTypes.func, // eslint-disable-line
   onClientErrorHook: PropTypes.func, // eslint-disable-line
   onServerErrorHook: PropTypes.func, // eslint-disable-line
-  onSucessHook: PropTypes.func, // eslint-disable-line
+  onSignupSucessHook: PropTypes.func, // eslint-disable-line
+  onLoginSucessHook: PropTypes.func, // eslint-disable-line
+  onSendResetPasswordEmailSucessHook: PropTypes.func, // eslint-disable-line
 };
 
 AuthUI.defaultProps = {
@@ -73,7 +72,9 @@ AuthUI.defaultProps = {
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
-  onSucessHook: () => {},
+  onSignupSucessHook: () => {},
+  onLoginSucessHook: () => {},
+  onSendResetPasswordEmailSucessHook: () => {},
 };
 
 export default AuthUI;

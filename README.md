@@ -63,15 +63,14 @@ OR
 - https://github.com/NitroBAY/meteor-service-worker
 - https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
 - https://developers.google.com/web/tools/workbox/
+- https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
+- Reset password form
 - if services === password, add check at loggedInRoute and display/redirect to
- ConfirmEmailPage if email is not verified.
+ WelcomePage if email is not verified.
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
-- When user signs up, sendVerificationEmail shouldn't block user to access home.
-In case of error, should feedback on home screen
-- Reset password form
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
@@ -84,3 +83,7 @@ In case of error, should feedback on home screen
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
 - home page: show avatar + set username based on email for password users
+- auth with password, after signup show welcome screen + open your email btn
+- do not re-ender layout with every route change
+- reset-password --> first make sure email is verified
+- auth page add route parameter: login, signup, forgot-password (see ResetPasswordForm, resend reset psw link)

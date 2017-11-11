@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
-import { ResendVerificationLink } from '../components/auth/index.js';
 import DefaultLayout from '../layouts/default/index.jsx';
+import { ResendVerificationLink } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class LinkExpiredPage extends React.Component {
+class WelcomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,33 +48,24 @@ class LinkExpiredPage extends React.Component {
   }
 
   render() {
-    const { curUser } = this.props;
     const { loading, serverError, successMessage } = this.state;
-
-    const text = curUser
-      ? (
-        <p className="center">
-          Please, click&nbsp;
-          <ResendVerificationLink
-            text="here"
-            onBeforeHook={this.handleBefore}
-            onServerErrorHook={this.handleServerError}
-            onSucessHook={this.handleSucess}
-          />
-          &nbsp;to resend confirmation link.
-        </p>
-      )
-      : (
-        <p className="center">
-          Please, <Link to="/auth">login</Link> to be able to <strong>resend confirmation link</strong>.
-        </p>
-      );
 
     return (
       <DefaultLayout>
         <div className="full-width">
-          <h1 className="center">The link has expired!</h1>
-          {text}
+          <h1 className="center">Thanks for joining!</h1>
+          <p className="center mt1">
+            <strong>Check your email</strong> and click on the link provided to confirm your account.
+            <br />
+            If you did not receive an email, click&nbsp;
+            <ResendVerificationLink
+              text="here"
+              onBeforeHook={this.handleBefore}
+              onServerErrorHook={this.handleServerError}
+              onSucessHook={this.handleSucess}
+            />
+            &nbsp;to resend the confirmation link.
+          </p>
           {loading && (
             <p className="center mt2">loading...</p>
           )}
@@ -91,15 +81,15 @@ class LinkExpiredPage extends React.Component {
   }
 }
 
-LinkExpiredPage.propTypes = {
+WelcomePage.propTypes = {
   curUser: PropTypes.shape({
     _id: PropTypes.string,
     randomString: PropTypes.string,
   }),
 };
 
-LinkExpiredPage.defaultProps = {
+WelcomePage.defaultProps = {
   curUser: null,
 };
 
-export default LinkExpiredPage;
+export default WelcomePage;
