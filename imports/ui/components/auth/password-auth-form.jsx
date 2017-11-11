@@ -179,7 +179,11 @@ class PasswordAuthForm extends React.Component {
                   { max: 100, message: 'Must be no more than 100 characters!' },
                 ],
               })(
-                <Input type="text" prefix={<Icon type="mail" />} placeholder="Email" />,
+                <Input
+                  type="text"
+                  prefix={<Icon type="mail" />}
+                  placeholder="Email"
+                />,
               )}
             </FormItem>
           )}
@@ -190,28 +194,35 @@ class PasswordAuthForm extends React.Component {
                 rules: [
                   { required: true, message: 'Password is required' },
                   { min: 6, message: 'Please, at least 6 characters long' },
+                  { max: 100, message: 'Must be no more than 100 characters!' },
                 ],
               })(
-                <Input type="password" prefix={<Icon type="lock" />} placeholder="Password" />,
+                <Input
+                  type="password"
+                  prefix={<Icon type="lock" />}
+                  placeholder="Password"
+                />,
               )}
             </FormItem>
           )}
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={disabled}
-            loading={disabled}
-            size="large"
-            className="full-width"
-          >
-            {btnText}
-          </Button>
-          {serverError && serverError.length > 0 && (
-            <Alert type="error" message={serverError} className="mt1" banner />
-          )}
-          {serverSuccess && serverSuccess.length > 0 && (
-            <Alert type="success" message={serverSuccess} className="mt1" banner />
-          )}
+          <FormItem>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={disabled}
+              loading={disabled}
+              size="large"
+              className="full-width"
+            >
+              {btnText}
+            </Button>
+            {serverError && serverError.length > 0 && (
+              <Alert type="error" message={serverError} className="mt1" banner />
+            )}
+            {serverSuccess && serverSuccess.length > 0 && (
+              <Alert type="success" message={serverSuccess} className="mt1" banner />
+            )}
+          </FormItem>
         </Form>
         {view === 'login' && (
           <p className="center mt2">

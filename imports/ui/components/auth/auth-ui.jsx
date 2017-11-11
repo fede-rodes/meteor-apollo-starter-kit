@@ -17,7 +17,6 @@ const Divider = () => (
 // COMPONENT:
 //------------------------------------------------------------------------------
 class AuthUI extends Component {
-  // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
     this.state = { view: 'login' };

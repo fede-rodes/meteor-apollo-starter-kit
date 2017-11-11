@@ -8,7 +8,6 @@ import 'antd/lib/button/style/css'; // for css
 // COMPONENT:
 //------------------------------------------------------------------------------
 class FBAuthBtn extends Component {
-  // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);

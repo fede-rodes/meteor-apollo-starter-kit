@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
+import message from 'antd/lib/message'; // for js
+import 'antd/lib/message/style/css'; // for css
 import DefaultLayout from '../layouts/default/index.jsx';
-import { AuthUI } from '../components/auth/index.js';
+import { ResetPasswordForm } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class AuthPage extends Component {
+class ResetPasswordPage extends Component {
   constructor(props) {
     super(props);
     this.state = { disabled: false };
@@ -17,8 +19,7 @@ class AuthPage extends Component {
     this.disableBtn = this.disableBtn.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
     this.handleError = this.handleError.bind(this);
-    this.handleSignupLoginSucess = this.handleSignupLoginSucess.bind(this);
-    this.handleSendResetPasswordEmailSucessHook = this.handleSendResetPasswordEmailSucessHook.bind(this);
+    this.handleSucess = this.handleSucess.bind(this);
   }
 
   enableBtn() {
@@ -41,46 +42,44 @@ class AuthPage extends Component {
     this.enableBtn();
   }
 
-  handleSignupLoginSucess() {
-    // OBSERVATION: when using FB service, this code is only reachable when
-    // using loginStyle equals 'popup' at serviceConfiguration. In case
-    // loginStyle equals 'redirect' we'll need to get (TODO) the user tokens
-    // from the cookie since we wont be able to call resetStore.
+  handleSucess() {
     const { history, client } = this.props;
     client.resetStore();
     this.enableBtn();
+    message.success('Password reset successfully!');
     history.push('/');
-  }
-
-  handleSendResetPasswordEmailSucessHook() {
-    this.enableBtn();
   }
 
   render() {
     const { disabled } = this.state;
+    const { match: { params: { token } } } = this.props;
 
     return (
       <DefaultLayout>
-        <AuthUI
+        <ResetPasswordForm
+          token={token}
           disabled={disabled}
           onBeforeHook={this.handleBefore}
           onClientErrorHook={this.handleError}
           onServerErrorHook={this.handleError}
-          onSignupSucessHook={this.handleSignupLoginSucess}
-          onLoginSucessHook={this.handleSignupLoginSucess}
-          onSendResetPasswordEmailSucessHook={this.handleSendResetPasswordEmailSucessHook}
+          onSucessHook={this.handleSucess}
         />
       </DefaultLayout>
     );
   }
 }
 
-AuthPage.propTypes = {
+ResetPasswordPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
   client: PropTypes.shape({
     resetStore: PropTypes.func.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      token: PropTypes.string,
+    }).isRequired,
   }).isRequired,
 };
 
@@ -89,4 +88,4 @@ const enhance = compose(
   withApollo, // To have access to client.resetStore()
 );
 
-export default enhance(AuthPage);
+export default enhance(ResetPasswordPage);

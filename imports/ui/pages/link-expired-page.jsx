@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
-import { ResendConfirmationLink } from '../components/auth/index.js';
+import { ResendVerificationLink } from '../components/auth/index.js';
 import DefaultLayout from '../layouts/default/index.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 class LinkExpiredPage extends React.Component {
-  // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
     this.state = {
@@ -57,7 +56,7 @@ class LinkExpiredPage extends React.Component {
       ? (
         <p className="center">
           Please, click&nbsp;
-          <ResendConfirmationLink
+          <ResendVerificationLink
             text="here"
             onBeforeHook={this.handleBefore}
             onServerErrorHook={this.handleServerError}

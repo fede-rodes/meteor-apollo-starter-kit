@@ -7,7 +7,8 @@ import {
   RouteWithProps,
 } from '../../ui/components/route-wrappers/index.js';
 import AuthPage from '../../ui/pages/auth-page.jsx';
-import ConfirmEmailPage from '../../ui/pages/confirm-email-page.jsx';
+import ResetPasswordPage from '../../ui/pages/reset-password-page.jsx';
+import WelcomePage from '../../ui/pages/welcome-page.jsx';
 import VerifyEmailPage from '../../ui/pages/verify-email-page.jsx';
 import LinkExpiredPage from '../../ui/pages/link-expired-page.jsx';
 import HomePage from '../../ui/pages/home-page.jsx';
@@ -33,10 +34,10 @@ const Routes = (props) => {
       />
       <LoggedInRoute
         exact
-        name="confirmEmail"
-        path="/confirm-email"
+        name="welcome"
+        path="/welcome"
         loggedIn={!!curUser}
-        component={ConfirmEmailPage}
+        component={WelcomePage}
         // redirectTo="/auth"
         overlayComponent={AuthPage}
         {...props}
@@ -47,6 +48,14 @@ const Routes = (props) => {
         path="/auth"
         loggedIn={!!curUser}
         component={AuthPage}
+        redirectTo="/"
+        {...props}
+      />
+      <LoggedOutRoute
+        name="resetPassword"
+        path="/reset-password/:token"
+        loggedIn={!!curUser}
+        component={ResetPasswordPage}
         redirectTo="/"
         {...props}
       />

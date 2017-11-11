@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
 import DefaultLayout from '../layouts/default/index.jsx';
-import { ResendConfirmationLink } from '../components/auth/index.js';
+import { ResendVerificationLink } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ConfirmEmailPage extends React.Component {
-  // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
+class WelcomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,7 +58,7 @@ class ConfirmEmailPage extends React.Component {
             <strong>Check your email</strong> and click on the link provided to confirm your account.
             <br />
             If you did not receive an email, click&nbsp;
-            <ResendConfirmationLink
+            <ResendVerificationLink
               text="here"
               onBeforeHook={this.handleBefore}
               onServerErrorHook={this.handleServerError}
@@ -82,16 +81,15 @@ class ConfirmEmailPage extends React.Component {
   }
 }
 
-ConfirmEmailPage.propTypes = {
+WelcomePage.propTypes = {
   curUser: PropTypes.shape({
     _id: PropTypes.string,
     randomString: PropTypes.string,
   }),
 };
 
-ConfirmEmailPage.defaultProps = {
+WelcomePage.defaultProps = {
   curUser: null,
 };
-//------------------------------------------------------------------------------
 
-export default ConfirmEmailPage;
+export default WelcomePage;
