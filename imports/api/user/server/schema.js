@@ -1,17 +1,17 @@
 // User namespace schema
 const schema = `
-type User {
-  _id: String
-  randomString: String
-}
+  type User {
+    _id: String
+    randomString: String
+  }
 
-type Query {
-  user: User
-}
+  type Query {
+    user: User
+  }
 
-type Mutation {
-  sendVerificationEmail: User
-}
+  type Mutation {
+    sendVerificationEmail: User
+  }
 `;
 
 export default schema;

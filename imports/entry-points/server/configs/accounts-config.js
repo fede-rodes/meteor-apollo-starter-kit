@@ -9,9 +9,12 @@ Accounts.onCreateUser((options, user) => {
 
   // Handle password signup
   if (user.services.password) {
+    const email = user.emails[0].address;
+    const name = email.split('@')[0];
     console.log(
       '\nservice --> password',
-      '\nemail:', user.emails[0].address,
+      '\nname:', name,
+      '\nemail:', email,
     );
 
     // Send verification email. Don't wait for this task to be done before
@@ -21,7 +24,12 @@ Accounts.onCreateUser((options, user) => {
       console.log('Verification email sent!');
     });
 
-    return user;
+    // Extend user's profile by adding default name and avatar
+    const profile = {
+      name,
+      avatar: 'http://pixeljoint.com/files/icons/magic_johnson.gif',
+    };
+    return Object.assign({}, user, { profile });
   }
 
   // Handle facebook signup
@@ -35,11 +43,13 @@ Accounts.onCreateUser((options, user) => {
       '\nemail:', email,
     );
 
-    // Extend user profile by adding facebook data
-    const userFB = Object.assign({}, user);
-    userFB.profile = { name, gender };
-    userFB.avatar = `http://graph.facebook.com/${id}/picture/`;
-    return userFB;
+    // Extend user's profile by adding facebook data
+    const profile = {
+      name,
+      gender,
+      avatar: `http://graph.facebook.com/${id}/picture/`,
+    };
+    return Object.assign({}, user, { profile });
   }
 
   // Throw in case of a different service
