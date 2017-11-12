@@ -70,7 +70,6 @@ OR
  WelcomePage if email is not verified.
 - auth with password, after signup show welcome screen + open your email btn
 - do not re-ender layout with every route change
-- home page: show avatar + set username based on email for password users
 
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs

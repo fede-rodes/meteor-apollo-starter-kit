@@ -14,7 +14,7 @@ const schema = `
   type User {
     _id: String!
     createdAt: Date!
-    # services: String! TODO define resolver
+    services: [String]!
     emails: [Email]
     profile: Profile!
   }
