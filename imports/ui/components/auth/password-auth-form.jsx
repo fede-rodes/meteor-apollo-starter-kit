@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { compose } from 'recompose';
-import { graphql } from 'react-apollo';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'antd/lib/form'; // for js

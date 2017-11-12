@@ -71,6 +71,8 @@ OR
   - auth with password, after signup show welcome screen + open your email btn
  - do not re-ender layout with every route change
  - auth page add route parameter: login, signup, forgot-password (see ResetPasswordForm, resend reset psw link)
+ - refactor auth-ui and password-auth-form, create indiviual components for:
+ login-with-password, signup-with-password, forgot-password
  - home page: show avatar + set username based on email for password users
 
 - fix FB login for style equals to 'redirect'

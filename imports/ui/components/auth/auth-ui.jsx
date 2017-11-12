@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ErrorBoundary from '../error-boundary.jsx';
 import PasswordAuthForm from './password-auth-form.jsx';
 import FBAuthBtn from './fb-auth-btn.jsx';
 
@@ -32,23 +31,19 @@ class AuthUI extends Component {
 
     return (
       <div className="full-width">
-        <ErrorBoundary>
-          <PasswordAuthForm
-            view={view}
-            onViewChange={this.handlePasswordFormViewChange}
-            {...this.props}
-          />
-        </ErrorBoundary>
+        <PasswordAuthForm
+          view={view}
+          onViewChange={this.handlePasswordFormViewChange}
+          {...this.props}
+        />
         {['login', 'signup'].indexOf(view) !== -1 && (
           <div className="full-width">
             <Divider key="divider" />
-            <ErrorBoundary>
-              <FBAuthBtn
-                key="fb-btn"
-                btnText="Continue with facebook"
-                {...this.props}
-              />
-            </ErrorBoundary>
+            <FBAuthBtn
+              key="fb-btn"
+              btnText="Continue with facebook"
+              {...this.props}
+            />
           </div>
         )}
       </div>
