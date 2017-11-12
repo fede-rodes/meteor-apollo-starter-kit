@@ -14,7 +14,6 @@ import Loading from '../components/loading.jsx';
  * few examples) into child components.
  */
 const GlobalDataProvider = (props) => {
-  console.log(props);
   const { refetch, hasErrors, userLoading, curUser, children, ...rest } = props;
 
   if (hasErrors) {
