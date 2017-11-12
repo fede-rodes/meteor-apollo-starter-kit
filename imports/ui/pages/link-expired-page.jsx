@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
+import { propType } from 'graphql-anywhere';
+import curUserFragment from '../apollo-client/fragments/cur-user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
 import DefaultLayout from '../layouts/default/index.jsx';
 import Loading from '../components/loading.jsx';
@@ -91,10 +93,7 @@ class LinkExpiredPage extends React.Component {
 }
 
 LinkExpiredPage.propTypes = {
-  curUser: PropTypes.shape({
-    _id: PropTypes.string,
-    randomString: PropTypes.string,
-  }),
+  curUser: propType(curUserFragment),
 };
 
 LinkExpiredPage.defaultProps = {

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withApollo } from 'react-apollo';
+import { propType } from 'graphql-anywhere';
+import curUserFragment from '../apollo-client/fragments/cur-user.graphql';
 import DefaultLayout from '../layouts/default/index.jsx';
 import { LogoutBtn } from '../components/auth/index.js';
 
@@ -23,10 +25,7 @@ HomePage.propTypes = {
     resetStore: PropTypes.func.isRequired,
   }).isRequired,
   refetch: PropTypes.func.isRequired,
-  curUser: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    randomString: PropTypes.string.isRequired,
-  }).isRequired,
+  curUser: propType(curUserFragment).isRequired,
 };
 
 const enhance = compose(

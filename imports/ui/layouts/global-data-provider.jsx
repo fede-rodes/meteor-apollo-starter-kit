@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import Loading from '../components/loading.jsx';
+import { propType } from 'graphql-anywhere';
+import curUserFragment from '../apollo-client/fragments/cur-user.graphql';
 import userQuery from '../apollo-client/queries/user.graphql';
+import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -12,6 +14,7 @@ import userQuery from '../apollo-client/queries/user.graphql';
  * few examples) into child components.
  */
 const GlobalDataProvider = (props) => {
+  console.log(props);
   const { refetch, hasErrors, userLoading, curUser, children, ...rest } = props;
 
   if (hasErrors) {
@@ -29,10 +32,7 @@ GlobalDataProvider.propTypes = {
   hasErrors: PropTypes.bool,
   refetch: PropTypes.func,
   userLoading: PropTypes.bool,
-  curUser: PropTypes.shape({
-    _id: PropTypes.string,
-    randomString: PropTypes.string,
-  }),
+  curUser: propType(curUserFragment),
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
@@ -56,8 +56,14 @@ GlobalDataProvider.defaultProps = {
 const withData = graphql(userQuery, {
   // Destructure the default props to more explicit ones
   props: ({ data: { error, loading, user, refetch } }) => {
-    if (loading) return { userLoading: true };
-    if (error) return { hasErrors: true };
+    if (loading) {
+      return { userLoading: true };
+    }
+
+    if (error) {
+      console.log(error);
+      return { hasErrors: true };
+    }
 
     return {
       curUser: user,

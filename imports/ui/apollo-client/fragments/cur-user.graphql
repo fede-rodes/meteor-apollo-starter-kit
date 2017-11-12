@@ -1,0 +1,14 @@
+fragment curUserFragment on User {
+  _id
+  createdAt
+  services
+  emails {
+    address
+    verified
+  }
+  profile {
+    name
+    gender
+    avatar
+  }
+}

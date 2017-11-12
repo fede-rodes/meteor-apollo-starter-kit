@@ -1,6 +1,7 @@
+#import '../fragments/cur-user.graphql'
+
 query {
   user {
-    _id
-    randomString
+    ...curUserFragment
   }
 }
