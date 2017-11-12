@@ -15,8 +15,8 @@ const LoggedOutRoute = ({ loggedIn, component, redirectTo, overlayComponent, ...
   <Route
     {...rest}
     render={(props) => {
-      const resolver = redirectTo.length > 0
-        ? <Redirect to={redirectTo} />
+      const resolver = redirectTo.trim().length > 0
+        ? <Redirect to={redirectTo.trim()} />
         : React.createElement(overlayComponent, { ...rest, ...props });
 
       return loggedIn
