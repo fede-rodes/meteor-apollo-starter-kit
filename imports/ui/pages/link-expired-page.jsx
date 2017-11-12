@@ -5,6 +5,7 @@ import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
 import { ResendVerificationLink } from '../components/auth/index.js';
 import DefaultLayout from '../layouts/default/index.jsx';
+import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -76,9 +77,7 @@ class LinkExpiredPage extends React.Component {
         <div className="full-width">
           <h1 className="center">The link has expired!</h1>
           {text}
-          {loading && (
-            <p className="center mt2">loading...</p>
-          )}
+          {loading && <Loading />}
           {serverError && serverError.length > 0 && (
             <Alert type="error" message={serverError} className="mt1" banner />
           )}

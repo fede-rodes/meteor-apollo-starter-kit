@@ -42,7 +42,9 @@ const Routes = (props) => {
         overlayComponent={AuthPage}
         {...props}
       />
-      {/* Even when using overlayComponent we still need this route */}
+      {/* The following route can be removed when using overlayComponent, just
+        fix the login link at link-expired-page.jsx (simply redirect user to
+        /home or any other loggedIn route) */}
       <LoggedOutRoute
         name="auth"
         path="/auth"
