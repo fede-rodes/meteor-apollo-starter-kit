@@ -1,6 +1,9 @@
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
+import { withApollo } from 'react-apollo';
 import message from 'antd/lib/message'; // for js
 import 'antd/lib/message/style/css'; // for css
 import Loading from '../components/loading.jsx';
@@ -10,7 +13,7 @@ import Loading from '../components/loading.jsx';
 //------------------------------------------------------------------------------
 class VerifyEmailPage extends React.Component {
   componentWillMount() {
-    const { history, match } = this.props;
+    const { history, client, match } = this.props;
     const token = (match && match.params && match.params.token) || '';
 
     // QUESTION: what about Accounts._verifyEmailToken?
@@ -22,6 +25,7 @@ class VerifyEmailPage extends React.Component {
         history.push('/link-expired');
       } else {
         message.success('Account verified successfully. Thanks!');
+        client.resetStore();
         history.push('/');
       }
     });
@@ -36,6 +40,9 @@ VerifyEmailPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  client: PropTypes.shape({
+    resetStore: PropTypes.func.isRequired,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string,
@@ -43,4 +50,9 @@ VerifyEmailPage.propTypes = {
   }).isRequired,
 };
 
-export default VerifyEmailPage;
+const enhance = compose(
+  withRouter, // To have access to history.push
+  withApollo, // To have access to client.resetStore()
+);
+
+export default enhance(VerifyEmailPage);
