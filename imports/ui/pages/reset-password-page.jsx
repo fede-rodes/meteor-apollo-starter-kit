@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
@@ -6,20 +6,25 @@ import { withApollo } from 'react-apollo';
 import message from 'antd/lib/message'; // for js
 import 'antd/lib/message/style/css'; // for css
 import DefaultLayout from '../layouts/default/index.jsx';
-import { ResetPasswordForm } from '../components/auth/index.js';
+import { PasswordAuthForm } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ResetPasswordPage extends Component {
+class ResetPasswordPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { disabled: false };
+    this.state = { view: 'resetPassword', disabled: false };
+    this.handleViewChange = this.handleViewChange.bind(this);
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
     this.handleError = this.handleError.bind(this);
     this.handleSucess = this.handleSucess.bind(this);
+  }
+
+  handleViewChange(view) {
+    this.setState({ view });
   }
 
   enableBtn() {
@@ -43,20 +48,33 @@ class ResetPasswordPage extends Component {
   }
 
   handleSucess() {
+    const { view } = this.state;
     const { history, client } = this.props;
-    client.resetStore();
-    this.enableBtn();
-    message.success('Password reset successfully!');
-    history.push('/');
+
+    switch (view) {
+      case 'resetPassword':
+        client.resetStore();
+        this.enableBtn();
+        message.success('Password reset successfully!');
+        history.push('/');
+        break;
+      case 'forgotPassword':
+        this.enableBtn();
+        break;
+      default:
+        throw new Error('Unknown view option!');
+    }
   }
 
   render() {
-    const { disabled } = this.state;
+    const { view, disabled } = this.state;
     const { match: { params: { token } } } = this.props;
 
     return (
       <DefaultLayout>
-        <ResetPasswordForm
+        <PasswordAuthForm
+          view={view}
+          onViewChange={this.handleViewChange}
           token={token}
           disabled={disabled}
           onBeforeHook={this.handleBefore}

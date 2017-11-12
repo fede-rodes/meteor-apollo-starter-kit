@@ -1,24 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../layouts/default/index.jsx';
-import { AuthUI } from '../components/auth/index.js';
+import { PasswordAuthForm, FBAuthBtn } from '../components/auth/index.js';
 
+//------------------------------------------------------------------------------
+// AUX COMPONENT:
+//------------------------------------------------------------------------------
+const Divider = () => (
+  <div className="full-width center p2">
+    - OR -
+  </div>
+);
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class AuthPage extends Component {
+class AuthPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { disabled: false };
+    this.state = { view: 'login', disabled: false };
+    this.handleViewChange = this.handleViewChange.bind(this);
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
     this.handleError = this.handleError.bind(this);
-    this.handleSignupLoginSucess = this.handleSignupLoginSucess.bind(this);
-    this.handleSendResetPasswordEmailSucessHook = this.handleSendResetPasswordEmailSucessHook.bind(this);
+    this.handleSucess = this.handleSucess.bind(this);
+  }
+
+  handleViewChange(view) {
+    this.setState({ view });
   }
 
   enableBtn() {
@@ -41,35 +53,58 @@ class AuthPage extends Component {
     this.enableBtn();
   }
 
-  handleSignupLoginSucess() {
-    // OBSERVATION: when using FB service, this code is only reachable when
-    // using loginStyle equals 'popup' at serviceConfiguration. In case
-    // loginStyle equals 'redirect' we'll need to get (TODO) the user tokens
-    // from the cookie since we wont be able to call resetStore.
+  handleSucess() {
+    const { view } = this.state;
     const { history, client } = this.props;
-    client.resetStore();
-    this.enableBtn();
-    history.push('/');
-  }
 
-  handleSendResetPasswordEmailSucessHook() {
-    this.enableBtn();
+    switch (view) {
+      case 'login':
+      case 'signup':
+        // OBSERVATION: when using FB service, this code is only reachable when
+        // using loginStyle equals 'popup' at serviceConfiguration. In case
+        // loginStyle equals 'redirect' we'll need to get (TODO) the user tokens
+        // from the cookie since we wont be able to call resetStore.
+        client.resetStore();
+        this.enableBtn();
+        history.push('/');
+        break;
+      case 'forgotPassword':
+        this.enableBtn();
+        break;
+      default:
+        throw new Error('Unknown view option!');
+    }
   }
 
   render() {
-    const { disabled } = this.state;
+    const { view, disabled } = this.state;
 
     return (
       <DefaultLayout>
-        <AuthUI
-          disabled={disabled}
-          onBeforeHook={this.handleBefore}
-          onClientErrorHook={this.handleError}
-          onServerErrorHook={this.handleError}
-          onSignupSucessHook={this.handleSignupLoginSucess}
-          onLoginSucessHook={this.handleSignupLoginSucess}
-          onSendResetPasswordEmailSucessHook={this.handleSendResetPasswordEmailSucessHook}
-        />
+        <div className="full-width">
+          <PasswordAuthForm
+            view={view}
+            onViewChange={this.handleViewChange}
+            disabled={disabled}
+            onBeforeHook={this.handleBefore}
+            onClientErrorHook={this.handleError}
+            onServerErrorHook={this.handleError}
+            onSucessHook={this.handleSucess}
+          />
+          {['login', 'signup'].indexOf(view) !== -1 && (
+            <div className="full-width">
+              <Divider key="divider" />
+              <FBAuthBtn
+                key="fb-btn"
+                btnText="Continue with facebook"
+                disabled={disabled}
+                onBeforeHook={this.handleBefore}
+                onServerErrorHook={this.handleError}
+                onSucessHook={this.handleSucess}
+              />
+            </div>
+          )}
+        </div>
       </DefaultLayout>
     );
   }

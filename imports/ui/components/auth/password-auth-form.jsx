@@ -45,6 +45,14 @@ const STATES = {
     fields: ['email'],
     btnText: 'Send Link',
   },
+  resetPassword: {
+    title: 'Reset your Password',
+    // subtitle: '',
+    // linkTo: '',
+    // linkText: '',
+    fields: ['password'],
+    btnText: 'Set New Password',
+  },
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -80,12 +88,11 @@ class PasswordAuthForm extends React.Component {
 
     const {
       view,
+      token,
       onBeforeHook,
       onClientErrorHook,
       onServerErrorHook,
-      onSignupSucessHook,
-      onLoginSucessHook,
-      onSendResetPasswordEmailSucessHook,
+      onSucessHook,
       form,
     } = this.props;
 
@@ -110,7 +117,7 @@ class PasswordAuthForm extends React.Component {
                 this.displayServerError(err2);
                 onServerErrorHook(err2);
               } else {
-                onLoginSucessHook();
+                onSucessHook();
               }
             });
             break;
@@ -124,7 +131,7 @@ class PasswordAuthForm extends React.Component {
               } else {
                 // OBSERVATION: see /entry-points/server/configs/accounts-config.js
                 // for sendVerificationEmail logic
-                onSignupSucessHook();
+                onSucessHook();
               }
             });
             break;
@@ -137,13 +144,24 @@ class PasswordAuthForm extends React.Component {
                 onServerErrorHook(err2);
               } else {
                 this.setState({ serverSuccess: 'A new email has been sent to your inbox!' });
-                onSendResetPasswordEmailSucessHook();
+                onSucessHook();
+              }
+            });
+            break;
+          }
+          case 'resetPassword': {
+            Accounts.resetPassword(token, password, (err2) => {
+              if (err2) {
+                this.displayServerError(err2);
+                onServerErrorHook(err2);
+              } else {
+                onSucessHook();
               }
             });
             break;
           }
           default:
-            onServerErrorHook('View option does not exist');
+            onServerErrorHook('Unknown view option!');
             break;
         }
       }
@@ -240,31 +258,41 @@ class PasswordAuthForm extends React.Component {
             </a>
           </p>
         )}
+        {view === 'resetPassword' && (
+          <p className="center mt2">
+            <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
+              Resend reset password link
+            </a>
+          </p>
+        )}
       </div>
     );
   }
 }
 
 PasswordAuthForm.propTypes = {
-  view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
+  view: PropTypes.oneOf([
+    'login',
+    'signup',
+    'forgotPassword',
+    'resetPassword',
+  ]).isRequired,
   onViewChange: PropTypes.func.isRequired,
+  token: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onSignupSucessHook: PropTypes.func,
-  onLoginSucessHook: PropTypes.func,
-  onSendResetPasswordEmailSucessHook: PropTypes.func,
+  onSucessHook: PropTypes.func,
 };
 
 PasswordAuthForm.defaultProps = {
+  token: '',
   disabled: false,
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
-  onSignupSucessHook: () => {},
-  onLoginSucessHook: () => {},
-  onSendResetPasswordEmailSucessHook: () => {},
+  onSucessHook: () => {},
 };
 
 const enhance = compose(

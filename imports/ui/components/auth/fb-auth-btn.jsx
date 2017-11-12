@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'antd/lib/button'; // for js
 import 'antd/lib/button/style/css'; // for css
@@ -7,7 +7,7 @@ import 'antd/lib/button/style/css'; // for css
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class FBAuthBtn extends Component {
+class FBAuthBtn extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -18,7 +18,7 @@ class FBAuthBtn extends Component {
       requestPermissions,
       onBeforeHook,
       onServerErrorHook,
-      onLoginSucessHook,
+      onSucessHook,
     } = this.props;
 
     // Run before logic if provided and return on error
@@ -36,7 +36,7 @@ class FBAuthBtn extends Component {
         // equals 'popup' at serviceConfiguration. In case loginStyle equals
         // 'redirect' we'll need to get the user tokens from the cookie since
         // we wont be able to call resetStore.
-        onLoginSucessHook();
+        onSucessHook();
       }
     });
   }
@@ -66,7 +66,7 @@ FBAuthBtn.propTypes = {
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onLoginSucessHook: PropTypes.func,
+  onSucessHook: PropTypes.func,
 };
 
 FBAuthBtn.defaultProps = {
@@ -77,7 +77,7 @@ FBAuthBtn.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
   onServerErrorHook: () => {},
-  onLoginSucessHook: () => {},
+  onSucessHook: () => {},
 };
 
 export default FBAuthBtn;
