@@ -11,7 +11,6 @@ type Query {
 
 type Mutation {
   sendVerificationEmail: User
-  sendResetPasswordEmail(email: String!): User
 }
 `;
 

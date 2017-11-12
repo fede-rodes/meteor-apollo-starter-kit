@@ -7,7 +7,7 @@ import sendVerificationEmailMutation from './send-verification-email.graphql';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ResendConfirmationLink extends React.Component {
+class ResendVerificationLink extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -45,7 +45,7 @@ class ResendConfirmationLink extends React.Component {
   }
 }
 
-ResendConfirmationLink.propTypes = {
+ResendVerificationLink.propTypes = {
   text: PropTypes.string.isRequired,
   sendVerificationEmail: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
@@ -53,7 +53,7 @@ ResendConfirmationLink.propTypes = {
   onSucessHook: PropTypes.func,
 };
 
-ResendConfirmationLink.defaultProps = {
+ResendVerificationLink.defaultProps = {
   onBeforeHook: () => {},
   onServerErrorHook: () => {},
   onSucessHook: () => {},
@@ -63,4 +63,4 @@ const enhance = compose(
   graphql(sendVerificationEmailMutation, { name: 'sendVerificationEmail' }), // Apollo integration
 );
 
-export default enhance(ResendConfirmationLink);
+export default enhance(ResendVerificationLink);

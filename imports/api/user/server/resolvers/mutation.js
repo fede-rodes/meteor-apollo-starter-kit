@@ -1,6 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
 import { GraphQLError } from 'graphql';
-import { isUndefined } from 'lodash';
 import collection from '../collection.js';
 
 // Attach namespace to collection for clarity
@@ -39,41 +38,6 @@ Mutation.sendVerificationEmail = (root, args, context) => {
 
   console.log('Verification email sent!');
   return { _id: curUserId };
-};
-//------------------------------------------------------------------------------
-Mutation.sendResetPasswordEmail = (root, args, context) => {
-  console.log('About to send reset password email...');
-  const { email } = args;
-  const { user: curUser } = context;
-
-  // User shouldn't be logged in at this stage
-  if (curUser) {
-    throw new GraphQLError('User shouldn\'t be logged in at sendResetPasswordEmail');
-  }
-
-  // Make sure the user exists in our database
-  const targetUser = Accounts.findUserByEmail(email);
-  if (!targetUser) {
-    throw new GraphQLError('User not found');
-  }
-
-  // Destructure
-  const { _id: targetUserId, accountDeactivated } = targetUser;
-
-  // Prevent user from submitting if account has been deactivated
-  if (!isUndefined(accountDeactivated) && accountDeactivated === true) {
-    throw new GraphQLError('Account has been Deactivated');
-  }
-
-  try {
-    Accounts.sendResetPasswordEmail(targetUserId, email);
-  } catch (exc) {
-    console.log(exc);
-    throw new GraphQLError(`Reset password email couldn't be delivered. Reason: ${exc.response}`);
-  }
-
-  console.log('Reset password email sent!');
-  return { _id: targetUserId };
 };
 //------------------------------------------------------------------------------
 
