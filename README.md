@@ -66,8 +66,6 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- if services === password, add check at loggedInRoute and display/redirect to
- WelcomePage if email is not verified.
 - auth with password, after signup show welcome screen + open your email btn
 - do not re-ender layout with every route change
 
