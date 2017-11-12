@@ -54,6 +54,19 @@ const schema = new SimpleSchema({
   'profile.name': {
     type: String,
     max: 150,
+    optional: true,
+  },
+
+  'profile.gender': {
+    type: String,
+    max: 50,
+    optional: true,
+  },
+
+  'profile.avatar': {
+    type: String,
+    max: 150,
+    optional: true,
   },
 
   // this must be optional if you also use other login services like facebook,

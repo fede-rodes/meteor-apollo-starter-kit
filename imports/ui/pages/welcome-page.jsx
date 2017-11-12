@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
-import DefaultLayout from '../layouts/default/index.jsx';
 import { ResendVerificationLink } from '../components/auth/index.js';
+import DefaultLayout from '../layouts/default/index.jsx';
+import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -66,9 +67,7 @@ class WelcomePage extends React.Component {
             />
             &nbsp;to resend the confirmation link.
           </p>
-          {loading && (
-            <p className="center mt2">loading...</p>
-          )}
+          {loading && <Loading />}
           {serverError && serverError.length > 0 && (
             <Alert type="error" message={serverError} className="mt1" banner />
           )}

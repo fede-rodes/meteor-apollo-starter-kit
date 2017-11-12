@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import Loading from '../components/loading.jsx';
 import userQuery from '../apollo-client/queries/user.graphql';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 /**
- * @summary Injects global data (current user and/or global settings for instace)
- * into child component.
+ * @summary Injects global data (current user and/or global settings to name a
+ * few examples) into child components.
  */
 const GlobalDataProvider = (props) => {
   const { refetch, hasErrors, userLoading, curUser, children, ...rest } = props;
 
   if (hasErrors) {
-    return <div>something bad happend!</div>;
+    return <div>Something bad happend!</div>;
   }
 
   if (userLoading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   return React.cloneElement(children, { refetch, curUser, ...rest });

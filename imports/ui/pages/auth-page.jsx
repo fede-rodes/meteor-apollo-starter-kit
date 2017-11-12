@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import DefaultLayout from '../layouts/default/index.jsx';
-import { PasswordAuthForm, FBAuthBtn } from '../components/auth/index.js';
+import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // AUX COMPONENT:
@@ -82,7 +82,7 @@ class AuthPage extends React.Component {
     return (
       <DefaultLayout>
         <div className="full-width">
-          <PasswordAuthForm
+          <PasswordAuthViews
             view={view}
             onViewChange={this.handleViewChange}
             disabled={disabled}

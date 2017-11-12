@@ -6,7 +6,7 @@ import { withApollo } from 'react-apollo';
 import message from 'antd/lib/message'; // for js
 import 'antd/lib/message/style/css'; // for css
 import DefaultLayout from '../layouts/default/index.jsx';
-import { PasswordAuthForm } from '../components/auth/index.js';
+import { PasswordAuthViews } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -72,7 +72,7 @@ class ResetPasswordPage extends React.Component {
 
     return (
       <DefaultLayout>
-        <PasswordAuthForm
+        <PasswordAuthViews
           view={view}
           onViewChange={this.handleViewChange}
           token={token}

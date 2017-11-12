@@ -57,7 +57,7 @@ const STATES = {
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class PasswordAuthForm extends React.Component {
+class PasswordAuthViews extends React.Component {
   constructor(props) {
     super(props);
     this.state = { serverError: '', serverSuccess: '' };
@@ -270,7 +270,7 @@ class PasswordAuthForm extends React.Component {
   }
 }
 
-PasswordAuthForm.propTypes = {
+PasswordAuthViews.propTypes = {
   view: PropTypes.oneOf([
     'login',
     'signup',
@@ -286,7 +286,7 @@ PasswordAuthForm.propTypes = {
   onSucessHook: PropTypes.func,
 };
 
-PasswordAuthForm.defaultProps = {
+PasswordAuthViews.defaultProps = {
   token: '',
   disabled: false,
   onBeforeHook: () => {},
@@ -299,4 +299,4 @@ const enhance = compose(
   Form.create(), // Antd HOC for error handling
 );
 
-export default enhance(PasswordAuthForm);
+export default enhance(PasswordAuthViews);
