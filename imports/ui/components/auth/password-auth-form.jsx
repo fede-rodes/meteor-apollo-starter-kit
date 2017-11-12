@@ -14,7 +14,6 @@ import Icon from 'antd/lib/icon'; // for js
 import 'antd/lib/icon/style/css'; // for css
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
-import sendResetPasswordEmailMutation from './send-reset-password-email.graphql';
 
 const FormItem = Form.Item;
 
@@ -81,7 +80,6 @@ class PasswordAuthForm extends React.Component {
     evt.preventDefault();
 
     const {
-      sendResetPasswordEmail,
       view,
       onBeforeHook,
       onClientErrorHook,
@@ -133,14 +131,15 @@ class PasswordAuthForm extends React.Component {
             break;
           }
           case 'forgotPassword': {
-            sendResetPasswordEmail({ variables: { email } })
-            .then(() => {
-              this.setState({ serverSuccess: 'A new email has been sent to your inbox!' });
-              onSendResetPasswordEmailSucessHook();
-            })
-            .catch((exc) => {
-              this.displayServerError(exc);
-              onServerErrorHook(exc);
+            Accounts.forgotPassword({ email }, (err2) => {
+              if (err2) {
+                // Display server error on UI
+                this.displayServerError(err2);
+                onServerErrorHook(err2);
+              } else {
+                this.setState({ serverSuccess: 'A new email has been sent to your inbox!' });
+                onSendResetPasswordEmailSucessHook();
+              }
             });
             break;
           }
@@ -248,7 +247,6 @@ class PasswordAuthForm extends React.Component {
 }
 
 PasswordAuthForm.propTypes = {
-  sendResetPasswordEmail: PropTypes.func.isRequired,
   view: PropTypes.oneOf(['login', 'signup', 'forgotPassword']).isRequired,
   onViewChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
@@ -271,7 +269,6 @@ PasswordAuthForm.defaultProps = {
 };
 
 const enhance = compose(
-  graphql(sendResetPasswordEmailMutation, { name: 'sendResetPasswordEmail' }), // Apollo integration
   Form.create(), // Antd HOC for error handling
 );
 

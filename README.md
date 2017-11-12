@@ -66,11 +66,16 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- Reset password form
 - if services === password, add check at loggedInRoute and display/redirect to
  WelcomePage if email is not verified.
+  - auth with password, after signup show welcome screen + open your email btn
+ - do not re-ender layout with every route change
+ - auth page add route parameter: login, signup, forgot-password (see ResetPasswordForm, resend reset psw link)
+ - home page: show avatar + set username based on email for password users
+
 - fix FB login for style equals to 'redirect'
 - Accounts.config from Meteor.docs
+
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
@@ -82,8 +87,6 @@ OR
 - Better to load from DNS?
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
-- home page: show avatar + set username based on email for password users
-- auth with password, after signup show welcome screen + open your email btn
-- do not re-ender layout with every route change
-- reset-password --> first make sure email is verified
-- auth page add route parameter: login, signup, forgot-password (see ResetPasswordForm, resend reset psw link)
+
+### UI components library with styled components:
+- https://ak-mk-2-prod.netlify.com/packages/elements/datetime-picker
