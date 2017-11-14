@@ -5,7 +5,6 @@ import 'antd/lib/alert/style/css'; // for css
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
-import DefaultLayout from '../layouts/default/index.jsx';
 import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
@@ -54,30 +53,28 @@ class WelcomePage extends React.Component {
     const { loading, serverError, successMessage } = this.state;
 
     return (
-      <DefaultLayout>
-        <div className="full-width">
-          <h1 className="center">Thanks for joining!</h1>
-          <p className="center mt1">
-            <strong>Check your email</strong> and click on the link provided to confirm your account.
-            <br />
-            If you did not receive an email, click&nbsp;
-            <ResendVerificationLink
-              text="here"
-              onBeforeHook={this.handleBefore}
-              onServerErrorHook={this.handleServerError}
-              onSucessHook={this.handleSucess}
-            />
-            &nbsp;to resend the confirmation link.
-          </p>
-          {loading && <Loading />}
-          {serverError && serverError.length > 0 && (
-            <Alert type="error" message={serverError} className="mt1" banner />
-          )}
-          {successMessage && successMessage.length > 0 && (
-            <Alert type="success" message={successMessage} className="mt1" banner />
-          )}
-        </div>
-      </DefaultLayout>
+      <div className="full-width">
+        <h1 className="center">Thanks for joining!</h1>
+        <p className="center mt1">
+          <strong>Check your email</strong> and click on the link provided to confirm your account.
+          <br />
+          If you did not receive an email, click&nbsp;
+          <ResendVerificationLink
+            text="here"
+            onBeforeHook={this.handleBefore}
+            onServerErrorHook={this.handleServerError}
+            onSucessHook={this.handleSucess}
+          />
+          &nbsp;to resend the confirmation link.
+        </p>
+        {loading && <Loading />}
+        {serverError && serverError.length > 0 && (
+          <Alert type="error" message={serverError} className="mt1" banner />
+        )}
+        {successMessage && successMessage.length > 0 && (
+          <Alert type="success" message={successMessage} className="mt1" banner />
+        )}
+      </div>
     );
   }
 }

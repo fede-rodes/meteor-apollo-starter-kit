@@ -4,20 +4,17 @@ import { compose } from 'recompose';
 import { withApollo } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
-import DefaultLayout from '../layouts/default/index.jsx';
 import { LogoutBtn } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const HomePage = ({ client, refetch, curUser }) => (
-  <DefaultLayout>
-    <div className="full-width">
-      <LogoutBtn onLogoutHook={() => client.resetStore()} />
-      <pre>{JSON.stringify(curUser, null, 2)}</pre>
-      <button onClick={() => refetch()}>Refetch the query!</button>
-    </div>
-  </DefaultLayout>
+  <div className="full-width">
+    <LogoutBtn onLogoutHook={() => client.resetStore()} />
+    <pre>{JSON.stringify(curUser, null, 2)}</pre>
+    <button onClick={() => refetch()}>Refetch the query!</button>
+  </div>
 );
 
 HomePage.propTypes = {

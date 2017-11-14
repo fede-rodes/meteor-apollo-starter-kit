@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
-import DefaultLayout from '../layouts/default/index.jsx';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
@@ -80,32 +79,30 @@ class AuthPage extends React.Component {
     const { view, disabled } = this.state;
 
     return (
-      <DefaultLayout>
-        <div className="full-width">
-          <PasswordAuthViews
-            view={view}
-            onViewChange={this.handleViewChange}
-            disabled={disabled}
-            onBeforeHook={this.handleBefore}
-            onClientErrorHook={this.handleError}
-            onServerErrorHook={this.handleError}
-            onSucessHook={this.handleSucess}
-          />
-          {['login', 'signup'].indexOf(view) !== -1 && (
-            <div className="full-width">
-              <Divider key="divider" />
-              <FBAuthBtn
-                key="fb-btn"
-                btnText="Continue with facebook"
-                disabled={disabled}
-                onBeforeHook={this.handleBefore}
-                onServerErrorHook={this.handleError}
-                onSucessHook={this.handleSucess}
-              />
-            </div>
-          )}
-        </div>
-      </DefaultLayout>
+      <div className="full-width">
+        <PasswordAuthViews
+          view={view}
+          onViewChange={this.handleViewChange}
+          disabled={disabled}
+          onBeforeHook={this.handleBefore}
+          onClientErrorHook={this.handleError}
+          onServerErrorHook={this.handleError}
+          onSucessHook={this.handleSucess}
+        />
+        {['login', 'signup'].indexOf(view) !== -1 && (
+          <div className="full-width">
+            <Divider key="divider" />
+            <FBAuthBtn
+              key="fb-btn"
+              btnText="Continue with facebook"
+              disabled={disabled}
+              onBeforeHook={this.handleBefore}
+              onServerErrorHook={this.handleError}
+              onSucessHook={this.handleSucess}
+            />
+          </div>
+        )}
+      </div>
     );
   }
 }

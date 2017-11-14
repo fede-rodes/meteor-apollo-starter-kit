@@ -6,7 +6,6 @@ import 'antd/lib/alert/style/css'; // for css
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
-import DefaultLayout from '../layouts/default/index.jsx';
 import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
@@ -75,19 +74,17 @@ class LinkExpiredPage extends React.Component {
       );
 
     return (
-      <DefaultLayout>
-        <div className="full-width">
-          <h1 className="center">The link has expired!</h1>
-          {text}
-          {loading && <Loading />}
-          {serverError && serverError.length > 0 && (
-            <Alert type="error" message={serverError} className="mt1" banner />
-          )}
-          {successMessage && successMessage.length > 0 && (
-            <Alert type="success" message={successMessage} className="mt1" banner />
-          )}
-        </div>
-      </DefaultLayout>
+      <div className="full-width">
+        <h1 className="center">The link has expired!</h1>
+        {text}
+        {loading && <Loading />}
+        {serverError && serverError.length > 0 && (
+          <Alert type="error" message={serverError} className="mt1" banner />
+        )}
+        {successMessage && successMessage.length > 0 && (
+          <Alert type="success" message={successMessage} className="mt1" banner />
+        )}
+      </div>
     );
   }
 }

@@ -72,11 +72,10 @@ OR
 
 ### TODO LIST
 - auth with password, after signup show welcome screen + open your email btn
-- do not re-ender layout with every route change
 - welcome page/loggedInRoute check for current loggedIn service instead
 
-- fix FB login for style equals to 'redirect'
-- Accounts.config from Meteor.docs
+- fix FB login for style equals to 'redirect' (we have a patch right now)
+- Accounts.config from Meteor.docs (do we need to set something in here?)
 
 - tests
 - dynamic imports

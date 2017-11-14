@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-client';
 import createReduxStore from './redux/store.js';
 import GlobalDataProvider from './global-data-provider.jsx';
+import DefaultLayout from './layouts/default/index.jsx';
 import Routes from './routes.jsx';
 
 /**
@@ -21,7 +22,9 @@ const App = () => (
   <Router>
     <ApolloProvider client={client} store={store}>
       <GlobalDataProvider>
-        <Routes />
+        <DefaultLayout>
+          <Routes />
+        </DefaultLayout>
       </GlobalDataProvider>
     </ApolloProvider>
   </Router>
