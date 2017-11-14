@@ -7,7 +7,8 @@ const User = {};
 // fields, but if we don't do that graphql will default to the field values,
 // which is exactly what we want.
 User.services = (root, args, context) => (
-  (context.user.services && Object.keys(context.user.services)) || []
+  (context.user && context.user.services && Object.keys(context.user.services))
+  || []
 );
 //------------------------------------------------------------------------------
 

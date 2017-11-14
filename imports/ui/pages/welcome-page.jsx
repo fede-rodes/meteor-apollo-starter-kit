@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Alert from 'antd/lib/alert'; // for js
 import 'antd/lib/alert/style/css'; // for css
 import { propType } from 'graphql-anywhere';
-import curUserFragment from '../apollo-client/fragments/cur-user.graphql';
+import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
 import DefaultLayout from '../layouts/default/index.jsx';
 import Loading from '../components/loading.jsx';
@@ -83,7 +83,7 @@ class WelcomePage extends React.Component {
 }
 
 WelcomePage.propTypes = {
-  curUser: propType(curUserFragment),
+  curUser: propType(userFragment),
 };
 
 WelcomePage.defaultProps = {

@@ -2,19 +2,19 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
-import curUserFragment from '../apollo-client/fragments/cur-user.graphql';
+import userFragment from './apollo-client/fragments/user.graphql';
 import {
   LoggedInRoute,
   LoggedOutRoute,
   RouteWithProps,
-} from '../../ui/components/route-wrappers/index.js';
-import AuthPage from '../../ui/pages/auth-page.jsx';
-import ResetPasswordPage from '../../ui/pages/reset-password-page.jsx';
-import WelcomePage from '../../ui/pages/welcome-page.jsx';
-import VerifyEmailPage from '../../ui/pages/verify-email-page.jsx';
-import LinkExpiredPage from '../../ui/pages/link-expired-page.jsx';
-import HomePage from '../../ui/pages/home-page.jsx';
-import NotFoundPage from '../../ui/pages/not-found-page.jsx';
+} from './components/route-wrappers/index.js';
+import AuthPage from './pages/auth-page.jsx';
+import ResetPasswordPage from './pages/reset-password-page.jsx';
+import WelcomePage from './pages/welcome-page.jsx';
+import VerifyEmailPage from './pages/verify-email-page.jsx';
+import LinkExpiredPage from './pages/link-expired-page.jsx';
+import HomePage from './pages/home-page.jsx';
+import NotFoundPage from './pages/not-found-page.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -68,7 +68,7 @@ const Routes = props => (
 );
 
 Routes.propTypes = {
-  curUser: propType(curUserFragment),
+  curUser: propType(userFragment),
 };
 
 Routes.defaultProps = {

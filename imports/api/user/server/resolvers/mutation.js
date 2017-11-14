@@ -11,17 +11,16 @@ const Mutation = {};
 //------------------------------------------------------------------------------
 Mutation.sendVerificationEmail = (root, args, context) => {
   console.log('About to send verification email...');
-  const { user: curUser } = context;
+  const { userId } = context;
 
   // User should be logged in at this stage
-  if (!curUser) {
+  if (!userId) {
     throw new GraphQLError('User should be logged in at sendVerificationLink');
   }
 
   // Make sure the user exists in our database
-  const curUserId = curUser._id;
-  const user = User.collection.findOne({ _id: curUserId });
-  if (!user) {
+  const user = User.collection.findOne({ _id: userId });
+  if (!user || !user.emails || !user.emails[0]) {
     throw new GraphQLError('The user is not registered in our database');
   }
 
@@ -30,14 +29,14 @@ Mutation.sendVerificationEmail = (root, args, context) => {
   }
 
   try {
-    Accounts.sendVerificationEmail(curUserId);
+    Accounts.sendVerificationEmail(userId);
   } catch (exc) {
     console.log(exc);
     throw new GraphQLError(`Verification email couldn't be delivered. Reason: ${exc.response}`);
   }
 
   console.log('Verification email sent!');
-  return { _id: curUserId };
+  return { _id: userId };
 };
 //------------------------------------------------------------------------------
 
