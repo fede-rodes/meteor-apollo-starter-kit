@@ -12,7 +12,6 @@ import Routes from './routes.jsx';
  * server (handled in our case by meteor-apollo). By default, this client will
  * send queries to the '/graphql' endpoint on the same host.
  */
-// const client = new ApolloClient(meteorClientConfig({ networkInterface }));
 const client = new ApolloClient(meteorClientConfig());
 
 // For redux integration see http://dev.apollodata.com/react/redux.html
