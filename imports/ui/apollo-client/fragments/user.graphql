@@ -1,4 +1,4 @@
-fragment curUserFragment on User {
+fragment userFragment on User {
   _id
   createdAt
   services

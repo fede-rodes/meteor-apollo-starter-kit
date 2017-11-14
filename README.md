@@ -20,6 +20,11 @@ Lighthouse audit:
 - basscss
 - Progressive Web App
 
+### This project does NOT include the following packages:
+- reactive-var@1.0.11 // Reactive variable for tracker
+- tracker@1.1.3 // Meteor's client-side reactive programming library
+
+
 ### Running it
 ```
 meteor npm install
@@ -67,10 +72,10 @@ OR
 
 ### TODO LIST
 - auth with password, after signup show welcome screen + open your email btn
-- do not re-ender layout with every route change
+- welcome page/loggedInRoute check for current loggedIn service instead
 
-- fix FB login for style equals to 'redirect'
-- Accounts.config from Meteor.docs
+- fix FB login for style equals to 'redirect' (we have a patch right now)
+- Accounts.config from Meteor.docs (do we need to set something in here?)
 
 - tests
 - dynamic imports

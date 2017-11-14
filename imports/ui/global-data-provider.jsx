@@ -1,10 +1,11 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
-import curUserFragment from '../apollo-client/fragments/cur-user.graphql';
-import userQuery from '../apollo-client/queries/user.graphql';
-import Loading from '../components/loading.jsx';
+import userFragment from './apollo-client/fragments/user.graphql';
+import userQuery from './apollo-client/queries/user.graphql';
+import Loading from './components/loading.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -13,25 +14,44 @@ import Loading from '../components/loading.jsx';
  * @summary Injects global data (current user and/or global settings to name a
  * few examples) into child components.
  */
-const GlobalDataProvider = (props) => {
-  const { refetch, hasErrors, userLoading, curUser, children, ...rest } = props;
-
-  if (hasErrors) {
-    return <div>Something bad happend!</div>;
+class GlobalDataProvider extends React.Component {
+  componentWillMount() {
+    // Patch to handle FB auth request when using redirect option
+    const handler = Meteor.setTimeout(() => {
+      this.props.refetch();
+      console.log('refetch');
+      Meteor.clearTimeout(handler);
+    }, 500);
+    // getMeteorLoginToken() see 'meteor/apollo'
   }
 
-  if (userLoading) {
-    return <Loading />;
-  }
+  render() {
+    const {
+      refetch,
+      hasErrors,
+      userLoading,
+      curUser,
+      children,
+      ...rest
+    } = this.props;
 
-  return React.cloneElement(children, { refetch, curUser, ...rest });
-};
+    if (hasErrors) {
+      return <div>Something bad happend!</div>;
+    }
+
+    if (userLoading) {
+      return <Loading />;
+    }
+
+    return React.cloneElement(children, { refetch, curUser, ...rest });
+  }
+}
 
 GlobalDataProvider.propTypes = {
   hasErrors: PropTypes.bool,
   refetch: PropTypes.func,
   userLoading: PropTypes.bool,
-  curUser: propType(curUserFragment),
+  curUser: propType(userFragment),
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
-import curUserFragment from '../../apollo-client/fragments/cur-user.graphql';
+import userFragment from '../../apollo-client/fragments/user.graphql';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -28,6 +28,8 @@ const LoggedInRoute = (props) => {
       {...rest}
       render={(ownProps) => {
         if (curUser) {
+          // TODO: we should use currentlyLoogedInService instead of all
+          // available services
           const isPasswordService = curUser.services.indexOf('password') !== -1;
           const isEmailVerified = isPasswordService && curUser.emails[0].verified === true;
 
@@ -49,7 +51,7 @@ const LoggedInRoute = (props) => {
 };
 
 LoggedInRoute.propTypes = {
-  curUser: propType(curUserFragment),
+  curUser: propType(userFragment),
   component: PropTypes.func.isRequired,
   loggedOutRedirectTo: PropTypes.string,
   loggedOutOverlayComponent: PropTypes.func,

@@ -19,12 +19,12 @@ const Block = styled.div`
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const DefaultLayout = ({ children }) => (
+const DefaultLayout = ({ children, ...rest }) => (
   <div className="flex flex-column justify-around items-center">
     <Header />
     <Block className="flex justify-center items-center">
       <div className="flex flex-column justify-between full-width">
-        {children}
+        {React.cloneElement(children, { ...rest })}
       </div>
     </Block>
   </div>

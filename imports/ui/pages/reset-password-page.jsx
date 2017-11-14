@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import message from 'antd/lib/message'; // for js
 import 'antd/lib/message/style/css'; // for css
-import DefaultLayout from '../layouts/default/index.jsx';
 import { PasswordAuthViews } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
@@ -71,18 +70,16 @@ class ResetPasswordPage extends React.Component {
     const { match: { params: { token } } } = this.props;
 
     return (
-      <DefaultLayout>
-        <PasswordAuthViews
-          view={view}
-          onViewChange={this.handleViewChange}
-          token={token}
-          disabled={disabled}
-          onBeforeHook={this.handleBefore}
-          onClientErrorHook={this.handleError}
-          onServerErrorHook={this.handleError}
-          onSucessHook={this.handleSucess}
-        />
-      </DefaultLayout>
+      <PasswordAuthViews
+        view={view}
+        onViewChange={this.handleViewChange}
+        token={token}
+        disabled={disabled}
+        onBeforeHook={this.handleBefore}
+        onClientErrorHook={this.handleError}
+        onServerErrorHook={this.handleError}
+        onSucessHook={this.handleSucess}
+      />
     );
   }
 }

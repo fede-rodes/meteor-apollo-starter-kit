@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
-import curUserFragment from '../../apollo-client/fragments/cur-user.graphql';
+import userFragment from '../../apollo-client/fragments/user.graphql';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -29,7 +29,7 @@ const LoggedOutRoute = ({ curUser, component, redirectTo, overlayComponent, ...r
 );
 
 LoggedOutRoute.propTypes = {
-  curUser: propType(curUserFragment),
+  curUser: propType(userFragment),
   component: PropTypes.func.isRequired,
   redirectTo: PropTypes.string,
   overlayComponent: PropTypes.func,

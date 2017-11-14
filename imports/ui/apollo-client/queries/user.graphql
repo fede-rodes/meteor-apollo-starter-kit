@@ -1,7 +1,7 @@
-#import '../fragments/cur-user.graphql'
+#import '../fragments/user.graphql'
 
 query {
   user {
-    ...curUserFragment
+    ...userFragment
   }
 }
