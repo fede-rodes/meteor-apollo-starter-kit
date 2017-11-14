@@ -28,6 +28,8 @@ const LoggedInRoute = (props) => {
       {...rest}
       render={(ownProps) => {
         if (curUser) {
+          // TODO: we should use currentlyLoogedInService instead of all
+          // available services
           const isPasswordService = curUser.services.indexOf('password') !== -1;
           const isEmailVerified = isPasswordService && curUser.emails[0].verified === true;
 

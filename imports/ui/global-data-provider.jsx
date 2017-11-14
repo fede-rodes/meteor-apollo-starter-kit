@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-// import { Tracker } from 'meteor/tracker';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
@@ -17,20 +16,13 @@ import Loading from './components/loading.jsx';
  */
 class GlobalDataProvider extends React.Component {
   componentWillMount() {
+    // Patch to handle FB auth request when using redirect option
     const handler = Meteor.setTimeout(() => {
       this.props.refetch();
       console.log('refetch');
       Meteor.clearTimeout(handler);
     }, 500);
     // getMeteorLoginToken() see 'meteor/apollo'
-    /* console.log('We are using Tracker.autorun to track user login state!');
-    Tracker.autorun(() => {
-      const curUser = Meteor.userId();
-      console.log('curUser', curUser);
-      if (curUser) {
-        this.props.refetch();
-      }
-    }); */
   }
 
   render() {

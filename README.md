@@ -20,6 +20,11 @@ Lighthouse audit:
 - basscss
 - Progressive Web App
 
+### This project does NOT include the following packages:
+- reactive-var@1.0.11 // Reactive variable for tracker
+- tracker@1.1.3 // Meteor's client-side reactive programming library
+
+
 ### Running it
 ```
 meteor npm install
