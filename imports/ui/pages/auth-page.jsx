@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withApollo, compose } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
@@ -53,7 +52,7 @@ class AuthPage extends React.Component {
 
   handleSucess() {
     const { view } = this.state;
-    const { history, client } = this.props;
+    const { client } = this.props;
 
     switch (view) {
       case 'login':
@@ -64,7 +63,10 @@ class AuthPage extends React.Component {
         // from the cookie since we wont be able to call resetStore.
         client.resetStore();
         this.enableBtn();
-        history.push('/');
+        // At this point either the requested url-page will be rendered (if
+        // overlayComponent is being used in LoggedInRoute) or the user will be
+        // redirected to home '/' (in case redirectTo option is used at
+        // LoggedInRoute)
         break;
       case 'forgotPassword':
         this.enableBtn();
@@ -107,17 +109,9 @@ class AuthPage extends React.Component {
 }
 
 AuthPage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
   client: PropTypes.shape({
     resetStore: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-const enhance = compose(
-  withRouter, // To have access to history.push
-  withApollo, // To have access to client.resetStore()
-);
-
-export default enhance(AuthPage);
+export default withApollo(AuthPage);
