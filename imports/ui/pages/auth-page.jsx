@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
+import DisplayMsg from '../components/display-msg.jsx';
 
 //------------------------------------------------------------------------------
 // AUX COMPONENT:
@@ -12,22 +13,60 @@ const Divider = () => (
   </div>
 );
 //------------------------------------------------------------------------------
+// COMPONENT STATES:
+//------------------------------------------------------------------------------
+const STATES = {
+  login: {
+    title: 'Log In',
+    subtitle: 'Don&apos;t have an account?&nbsp;',
+    linkTo: 'signup',
+    linkText: 'Sign Up',
+    btnText: 'Log In',
+  },
+  signup: {
+    title: 'Sign Up',
+    subtitle: 'Already have an account?&nbsp;',
+    linkTo: 'login',
+    linkText: 'Log In',
+    btnText: 'Sign Up',
+  },
+  forgotPassword: {
+    title: 'Forgot your Password?',
+    subtitle: `We&apos;ll send a link to your email to reset<br />
+    your password and get you back on track.`,
+    // linkTo: '',
+    // linkText: '',
+    btnText: 'Send Link',
+  },
+  resetPassword: {
+    title: 'Reset your Password',
+    // subtitle: '',
+    // linkTo: '',
+    // linkText: '',
+    btnText: 'Set New Password',
+  },
+};
+//------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 class AuthPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { view: 'login', disabled: false };
-    this.handleViewChange = this.handleViewChange.bind(this);
+    this.state = {
+      view: 'login',
+      service: '', // ['password', 'facebook']
+      disabled: false,
+      errorMsg: '',
+      successMsg: '',
+    };
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
+    this.clearMessages = this.clearMessages.bind(this);
+    this.changeViewTo = this.changeViewTo.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
-    this.handleError = this.handleError.bind(this);
+    this.handleClientError = this.handleClientError.bind(this);
+    this.handleServerError = this.handleServerError.bind(this);
     this.handleSucess = this.handleSucess.bind(this);
-  }
-
-  handleViewChange(view) {
-    this.setState({ view });
   }
 
   enableBtn() {
@@ -38,15 +77,39 @@ class AuthPage extends React.Component {
     this.setState({ disabled: true });
   }
 
-  handleBefore() {
+  clearMessages() {
+    this.setState({ errorMsg: '', successMsg: '' });
+  }
+
+  changeViewTo(to) {
+    return (evt) => {
+      evt.preventDefault();
+      this.clearMessages();
+      this.setState({ view: to });
+    };
+  }
+
+  handleBefore({ service }) {
     // OBSERVATION: this hook allows you to trigger some action
     // before the login request is sent or simply interrupt the
     // login flow by throwing an error.
+
+    // Keep track of the service that has been fired so that we can display
+    // messages (error/success) accordingly
+    this.setState({ service });
     this.disableBtn();
+    this.clearMessages();
   }
 
-  handleError(err) {
+  handleClientError(err) {
     console.log(err);
+    this.setState({ errorMsg: err });
+    this.enableBtn();
+  }
+
+  handleServerError(err) {
+    console.log(err);
+    this.setState({ errorMsg: err.reason || err.message || 'Unexpected error' });
     this.enableBtn();
   }
 
@@ -70,6 +133,7 @@ class AuthPage extends React.Component {
         break;
       case 'forgotPassword':
         this.enableBtn();
+        this.setState({ successMsg: 'A new email has been sent to your inbox!' });
         break;
       default:
         throw new Error('Unknown view option!');
@@ -77,19 +141,60 @@ class AuthPage extends React.Component {
   }
 
   render() {
-    const { view, disabled } = this.state;
+    const { view, disabled, service, errorMsg, successMsg } = this.state;
+    const { title, subtitle, linkTo, linkText, btnText } = STATES[view];
 
     return (
       <div className="full-width">
+        <h1 className="center">{title}</h1>
+        <p className="center">
+          <span dangerouslySetInnerHTML={{ __html: subtitle }} />
+          {linkTo && linkText && (
+            <a href={`/${linkTo}`} onClick={this.changeViewTo(linkTo)}>
+              {linkText}
+            </a>
+          )}
+        </p>
         <PasswordAuthViews
           view={view}
-          onViewChange={this.handleViewChange}
+          btnText={btnText}
           disabled={disabled}
-          onBeforeHook={this.handleBefore}
-          onClientErrorHook={this.handleError}
-          onServerErrorHook={this.handleError}
+          onBeforeHook={() => this.handleBefore({ service: 'password' })}
+          onClientErrorHook={this.handleClientError}
+          onServerErrorHook={this.handleServerError}
           onSucessHook={this.handleSucess}
         />
+        {service === 'password' && (
+          <div>
+            <DisplayMsg type="error" msg={errorMsg} />
+            <DisplayMsg type="success" msg={successMsg} />
+          </div>
+        )}
+        {view === 'login' && (
+          <p className="center mt2">
+            <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
+              Forgot Password?
+            </a>
+          </p>
+        )}
+        {view === 'forgotPassword' && (
+          <p className="center mt2">
+            <a href="/login" onClick={this.changeViewTo('login')}>
+              Log In
+            </a>
+            &nbsp;|&nbsp;
+            <a href="/signup" onClick={this.changeViewTo('signup')}>
+              Sign Up
+            </a>
+          </p>
+        )}
+        {view === 'resetPassword' && (
+          <p className="center mt2">
+            <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
+              Resend reset password link
+            </a>
+          </p>
+        )}
         {['login', 'signup'].indexOf(view) !== -1 && (
           <div className="full-width">
             <Divider key="divider" />
@@ -97,10 +202,16 @@ class AuthPage extends React.Component {
               key="fb-btn"
               btnText="Continue with facebook"
               disabled={disabled}
-              onBeforeHook={this.handleBefore}
-              onServerErrorHook={this.handleError}
+              onBeforeHook={() => this.handleBefore({ service: 'facebook' })}
+              onServerErrorHook={this.handleServerError}
               onSucessHook={this.handleSucess}
             />
+          </div>
+        )}
+        {service === 'facebook' && (
+          <div>
+            <DisplayMsg type="error" msg={errorMsg} />
+            <DisplayMsg type="success" msg={successMsg} />
           </div>
         )}
       </div>

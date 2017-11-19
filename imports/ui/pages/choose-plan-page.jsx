@@ -9,7 +9,7 @@ import userFragment from '../apollo-client/fragments/user.graphql';
 import StripePlanPicker from '../components/stripe-plan-picker/index.jsx';
 
 //------------------------------------------------------------------------------
-// PAGE STATES:
+// COMPONENT STATES:
 //------------------------------------------------------------------------------
 const STATES = {
   oneTimeCharge: {
