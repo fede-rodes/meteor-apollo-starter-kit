@@ -1,6 +1,6 @@
-# Meteor, Apollo, React, PWA, Styled-Components boilerplate
+# Meteor, Apollo, React, PWA, Styled-Components, Stripe boilerplate
 
-A simple kit to start experimenting with Apollo, Meteor, React, PWA and Styled Components.
+A simple kit to start experimenting with Apollo, Meteor, React, PWA, Styled Components ans Stripe.
 
 Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 
@@ -19,6 +19,7 @@ Lighthouse audit:
 - sanitize.css
 - basscss
 - Progressive Web App
+- Basic Stripe setup
 
 ### This project does NOT include the following packages:
 - reactive-var@1.0.11 // Reactive variable for tracker
@@ -71,7 +72,6 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- use compose from react-apollo rather then recompse, it can be removed from project
 - apis: change base name to root and schema to types
 - welcome screen + open your email btn
 - css outside imports folder (lazy load) is better for performance?

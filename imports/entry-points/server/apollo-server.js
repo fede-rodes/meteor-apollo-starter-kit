@@ -8,10 +8,10 @@ import Plan from '../../api/plan/index.js';
 import Customer from '../../api/customer/index.js';
 
 const typeDefs = mergeTypes([
-  Base.schema,
-  User.schema,
-  Plan.schema,
-  Customer.schema,
+  Base.types,
+  User.types,
+  Plan.types,
+  Customer.types,
 ]);
 
 const resolvers = merge(

@@ -12,15 +12,15 @@ const User = {};
 // Load server-only utilities
 if (Meteor.isServer) {
   import collection from './server/collection.js';
-  import utilities from './server/utilities.js';
+  import types from './server/types.graphql';
   import resolvers from './server/resolvers/index.js';
-  import schema from './server/schema.js';
+  import utilities from './server/utilities.js';
 
   extend(User, {
     collection,
-    utilities,
+    types,
     resolvers,
-    schema,
+    utilities,
   });
 }
 

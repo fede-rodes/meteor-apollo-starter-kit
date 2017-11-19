@@ -13,14 +13,15 @@ const Plan = {};
 if (Meteor.isServer) {
   import collection from './server/collection.js';
   import fixtures from './server/fixtures.js';
+  import types from './server/types.graphql';
   import resolvers from './server/resolvers/index.js';
-  import schema from './server/schema.js';
+
 
   extend(Plan, {
     collection,
     fixtures,
+    types,
     resolvers,
-    schema,
   });
 }
 

@@ -1,0 +1,12 @@
+# Plan namespace types
+
+type Plan {
+  _id: String!
+  planId: String!
+  label: String!
+  price: String!
+}
+
+type Query {
+  plans: [Plan]
+}
