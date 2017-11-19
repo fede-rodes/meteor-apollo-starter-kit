@@ -17,11 +17,17 @@ Accounts.onCreateUser((options, user) => {
       '\nemail:', email,
     );
 
-    // Send verification email. Don't wait for this task to be done before
-    // giving the client the green light to move ahead
+    // Don't wait for this task to be done before giving the client the green
+    // light to move ahead
     Meteor.defer(() => {
-      Accounts.sendVerificationEmail(user._id);
-      console.log('Verification email sent!');
+      // At this point the user record hasn't been created yet in the DB. For
+      // this reason, we need to delay calling Accounts.sendVerificationEmail
+      // until the record is created
+      const handler = Meteor.setTimeout(() => {
+        Accounts.sendVerificationEmail(user._id);
+        Meteor.clearTimeout(handler);
+        console.log('Verification email sent!');
+      }, 3000);
     });
 
     // Extend user's profile by adding default name and avatar

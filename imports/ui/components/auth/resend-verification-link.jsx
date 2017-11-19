@@ -1,8 +1,7 @@
-import { compose } from 'recompose';
-import { graphql } from 'react-apollo';
 import React from 'react';
 import PropTypes from 'prop-types';
-import sendVerificationEmailMutation from './send-verification-email.graphql';
+import { graphql, compose } from 'react-apollo';
+import sendVerificationEmailMutation from './graphql/mutation-send-verification-email.graphql';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -13,7 +12,7 @@ class ResendVerificationLink extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(evt) {
+  async handleClick(evt) {
     evt.preventDefault();
 
     const {
@@ -30,9 +29,12 @@ class ResendVerificationLink extends React.Component {
       return; // return silently
     }
 
-    sendVerificationEmail({})
-    .then(() => onSucessHook())
-    .catch(exc => onServerErrorHook(exc));
+    try {
+      await sendVerificationEmail();
+      onSucessHook();
+    } catch (exc) {
+      onServerErrorHook(exc);
+    }
   }
 
   render() {

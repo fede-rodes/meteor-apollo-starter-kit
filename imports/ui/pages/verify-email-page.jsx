@@ -1,9 +1,8 @@
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import { withApollo } from 'react-apollo';
+import { withApollo, compose } from 'react-apollo';
 import message from 'antd/lib/message'; // for js
 import 'antd/lib/message/style/css'; // for css
 import Loading from '../components/loading.jsx';

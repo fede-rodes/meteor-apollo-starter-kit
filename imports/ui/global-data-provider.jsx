@@ -16,24 +16,15 @@ import Loading from './components/loading.jsx';
  */
 class GlobalDataProvider extends React.Component {
   componentWillMount() {
-    // Patch to handle FB auth request when using redirect option
+    // Patch to handle FB auth request when using redirect login style
     const handler = Meteor.setTimeout(() => {
       this.props.refetch();
-      console.log('refetch');
       Meteor.clearTimeout(handler);
     }, 500);
-    // getMeteorLoginToken() see 'meteor/apollo'
   }
 
   render() {
-    const {
-      refetch,
-      hasErrors,
-      userLoading,
-      curUser,
-      children,
-      ...rest
-    } = this.props;
+    const { refetch, hasErrors, userLoading, curUser, children, ...rest } = this.props;
 
     if (hasErrors) {
       return <div>Something bad happend!</div>;

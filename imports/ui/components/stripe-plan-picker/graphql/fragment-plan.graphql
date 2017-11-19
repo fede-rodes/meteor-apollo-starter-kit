@@ -1,0 +1,6 @@
+fragment planFragment on Plan {
+  _id
+  planId
+  label
+  price
+}
