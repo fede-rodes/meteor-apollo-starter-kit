@@ -72,7 +72,6 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- apis: change base name to root and schema to types
 - welcome screen + open your email btn
 - css outside imports folder (lazy load) is better for performance?
 - Better to load from DNS?
