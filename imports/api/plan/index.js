@@ -2,26 +2,26 @@ import { Meteor } from 'meteor/meteor';
 import { extend } from 'lodash';
 
 /**
- * @namespace User
- * @summary In here we define utilities related to User entities.
+ * @namespace Plan
+ * @summary In here we define utilities related to Plan entities.
  */
-const User = {};
+const Plan = {};
 
 // Load client-side, both utilities
 
 // Load server-only utilities
 if (Meteor.isServer) {
   import collection from './server/collection.js';
-  import utilities from './server/utilities.js';
+  import fixtures from './server/fixtures.js';
   import resolvers from './server/resolvers/index.js';
   import schema from './server/schema.js';
 
-  extend(User, {
+  extend(Plan, {
     collection,
-    utilities,
+    fixtures,
     resolvers,
     schema,
   });
 }
 
-export default User;
+export default Plan;

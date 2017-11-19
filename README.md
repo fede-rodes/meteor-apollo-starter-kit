@@ -71,23 +71,27 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- auth with password, after signup show welcome screen + open your email btn
-- welcome page/loggedInRoute check for current loggedIn service instead
-
-- fix FB login for style equals to 'redirect' (we have a patch right now)
-- Accounts.config from Meteor.docs (do we need to set something in here?)
+- use compose from react-apollo rather then recompse, it can be removed from project
+- apis: change base name to root and schema to types
+- welcome screen + open your email btn
+- css outside imports folder (lazy load) is better for performance?
+- Better to load from DNS?
+- Accounts.config from Meteor.docs (do we need to set something in here?, email only and so on)
 
 - tests
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
 - ssr to speed-up first load and SEO
-- css outside imports folder (lazy load) is better for performance?
 - react helmet
 - PWA: push notifications + sync (take a look at workbox)
 - clean Redux folder
-- Better to load from DNS?
+
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
+
+### DONE BUT COULD BE IMPROVED
+- welcome page/loggedInRoute check for current loggedIn service instead
+- fix FB login for style equals to 'redirect' (we have a patch right now)
 
 ### UI components library with styled components:
 - https://ak-mk-2-prod.netlify.com/packages/elements/datetime-picker

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import { withApollo } from 'react-apollo';
+import { withApollo, compose } from 'react-apollo';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------

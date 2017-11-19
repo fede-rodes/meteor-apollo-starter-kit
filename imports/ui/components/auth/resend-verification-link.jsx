@@ -1,7 +1,6 @@
-import { compose } from 'recompose';
-import { graphql } from 'react-apollo';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql, compose } from 'react-apollo';
 import sendVerificationEmailMutation from './send-verification-email.graphql';
 
 //------------------------------------------------------------------------------

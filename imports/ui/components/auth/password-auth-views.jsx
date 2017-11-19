@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { compose } from 'recompose';
+import { compose } from 'react-apollo';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'antd/lib/form'; // for js
@@ -161,7 +161,7 @@ class PasswordAuthViews extends React.Component {
             break;
           }
           default:
-            onServerErrorHook('Unknown view option!');
+            onClientErrorHook('Unknown view option!');
             break;
         }
       }
