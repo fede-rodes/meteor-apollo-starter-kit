@@ -14,7 +14,6 @@ import WelcomePage from './pages/welcome-page.jsx';
 import VerifyEmailPage from './pages/verify-email-page.jsx';
 import LinkExpiredPage from './pages/link-expired-page.jsx';
 import HomePage from './pages/home-page.jsx';
-import ChoosePlanPage from './pages/choose-plan-page.jsx';
 import NotFoundPage from './pages/not-found-page.jsx';
 
 //------------------------------------------------------------------------------
@@ -27,16 +26,6 @@ const Routes = props => (
       name="home"
       path="/"
       component={HomePage}
-      // loggedOutRedirectTo="/auth"
-      loggedOutOverlayComponent={AuthPage}
-      notVerifiedOverlayComponent={WelcomePage}
-      {...props}
-    />
-    <LoggedInRoute
-      exact
-      name="choosePlan"
-      path="/choose-plan"
-      component={ChoosePlanPage}
       // loggedOutRedirectTo="/auth"
       loggedOutOverlayComponent={AuthPage}
       notVerifiedOverlayComponent={WelcomePage}

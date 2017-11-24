@@ -32,12 +32,10 @@
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-stripe-elements": "^1.2.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "sanitize.css": "^5.0.0",
     "simpl-schema": "^0.3.2",
-    "stripe": "^5.3.0",
     "styled-components": "^2.2.3"
   },
   "devDependencies": {

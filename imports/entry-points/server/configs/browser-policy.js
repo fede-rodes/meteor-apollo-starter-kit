@@ -11,10 +11,6 @@ BrowserPolicy.content.disallowInlineScripts();
 BrowserPolicy.content.disallowEval();
 BrowserPolicy.content.disallowConnect();
 
-// Stripe
-BrowserPolicy.content.allowFontOrigin('data:');
-BrowserPolicy.content.allowOriginForAll('*.stripe.com');
-
 // Google fonts
 BrowserPolicy.content.allowEval('http://fonts.googleapis.com');
 BrowserPolicy.content.allowFontDataUrl('http://fonts.googleapis.com');

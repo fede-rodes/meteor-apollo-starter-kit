@@ -1,7 +1,0 @@
-#import './fragment-plan.graphql'
-
-query {
-  plans {
-    ...planFragment
-  }
-}

@@ -1,0 +1,116 @@
+SOURCE: https://forums.meteor.com/t/apollo-subscriptions-in-meteor-apollo-package/31098/4
+
+//SET UP APOLLO QUERY AND MUTATIONS
+import express from 'express';
+import Schema from '/imports/api/schema';
+import Mocks from '/imports/api/mocks';
+import Resolvers from '/imports/api/resolvers';
+import Connectors from '/imports/api/db-connectors';
+import { apolloExpress, graphiqlExpress } from 'apollo-server';
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import  cors  from 'cors';
+import bodyParser from 'body-parser';
+import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+
+
+const GRAPHQL_PORT = 3010;
+const SUBSCRIPTION_PORT = 8080;
+const graphQLServer = express();
+
+//TAKE CARE OF CORS
+//http://stackoverflow.com/a/33483759/364966
+var whitelist = [
+    'http://localhost:3000',
+];
+var corsOptions = {
+    origin: function(origin, callback){
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
+    credentials: true
+};
+graphQLServer.use(cors(corsOptions));
+//END OF CODE TO TAKE CARE OF CORS
+
+// `context` must be an object and can't be undefined when using connectors
+graphQLServer.use('/graphql', bodyParser.json(), apolloExpress({
+    schema: Schema,
+    context: {}, //at least(!) an empty object
+}));
+
+graphQLServer.use('/graphiql', graphiqlExpress({
+    endpointURL: '/graphql',
+}));
+
+graphQLServer.listen(GRAPHQL_PORT, () => console.log(
+    `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql`
+));
+//END OF SET UP APOLLO QUERIES AND MUTATIONS
+
+//SET UP APOLLO PUBSUB
+// WebSocket server for subscriptions
+const ApolloPubSubServer = createServer((request, response) => {
+    response.writeHead(404);
+    response.end();
+});
+
+ApolloPubSubServer.listen(SUBSCRIPTION_PORT, () => console.log( // eslint-disable-line no-console
+    `Websocket Server is now running on http://localhost:${SUBSCRIPTION_PORT}`
+));
+
+// eslint-disable-next-line
+new SubscriptionServer(
+    {
+        subscriptionManager,
+
+        // the obSubscribe function is called for every new subscription
+        // and we use it to set the GraphQL context for this subscription
+        onSubscribe: (msg, params) => {
+
+            return Object.assign({}, params, {
+                context: {},
+            });
+        },
+    },
+    ApolloPubSubServer
+);
+//END OF SET UP APOLLO PUBSUB
+
+//------------------------------------------------------------------------------
+
+// And on the client:
+
+import ApolloClient, { createBatchingNetworkInterface, addTypename } from 'apollo-client';
+
+
+const graphQLClient = new Client('ws://localhost:8080', { reconnect: true });
+
+const networkInterface = createBatchingNetworkInterface({
+    uri: 'http://localhost:3010/graphql',
+    opts: {
+        credentials: 'same-origin',
+    },
+    transportBatching: true,
+    batchInterval: 10
+});
+
+
+const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
+    networkInterface,
+    graphQLClient,
+);
+
+const ApolloClientWithSubscribeEnabled = new ApolloClient({
+    networkInterface: networkInterfaceWithSubscriptions,
+    queryTransformer: addTypename,
+    dataIdFromObject: (result) => {
+        if (result.id && result.__typename) { // eslint-disable-line no-underscore-dangle
+            return result.__typename + result.id; // eslint-disable-line no-underscore-dangle
+        }
+        return null;
+    },
+    shouldBatch: true,
+    initialState: window.__APOLLO_STATE__, // eslint-disable-line no-underscore-dangle
+    ssrForceFetchDelay: 100,
+});

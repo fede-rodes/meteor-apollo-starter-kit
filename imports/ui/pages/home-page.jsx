@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo, compose } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
-import { Link } from 'react-router-dom';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { LogoutBtn } from '../components/auth/index.js';
 
@@ -14,9 +13,6 @@ const HomePage = ({ client, refetch, curUser }) => (
     <LogoutBtn onLogoutHook={() => client.resetStore()} />
     <pre>{JSON.stringify(curUser, null, 2)}</pre>
     <button onClick={() => refetch()}>Refetch the query!</button>
-    <Link to="/choose-plan" className="block mt2">
-      Choose Stripe Plan
-    </Link>
   </div>
 );
 

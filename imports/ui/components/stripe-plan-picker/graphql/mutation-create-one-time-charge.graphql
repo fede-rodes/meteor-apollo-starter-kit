@@ -1,7 +1,0 @@
-mutation ($planId: String!, $source: String!) {
-  createOneTimeCharge(planId: $planId, source: $source) {
-    id
-    object
-    amount
-  }
-}

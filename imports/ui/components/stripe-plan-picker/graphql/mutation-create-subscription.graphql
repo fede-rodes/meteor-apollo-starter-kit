@@ -1,7 +1,0 @@
-mutation ($planId: String!, $source: String!) {
-  createSubscription(planId: $planId, source: $source) {
-    id
-    object
-    amount
-  }
-}
