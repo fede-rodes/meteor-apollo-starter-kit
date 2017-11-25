@@ -79,6 +79,9 @@ OR
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
 - ssr to speed-up first load and SEO
+  - https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
+
+
 - react helmet
 - PWA: push notifications + sync (take a look at workbox)
 - clean Redux folder

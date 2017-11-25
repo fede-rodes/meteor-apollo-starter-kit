@@ -5,7 +5,9 @@
     "start": "meteor run",
     "lint": "eslint --quiet --ext .js,.jsx .",
     "prettier": "prettier --write \"client/**/*.js\" \"imports/**/*.js\" \"server/**/*.js\" --single-quote=true --trailing-comma=es5 --print-width=100",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "antd": "^2.13.6",
@@ -60,6 +62,10 @@
     "redux-devtools": "^3.3.2",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.2.0",
-    "stylelint": "^5.2.1"
+    "stylelint": "^5.2.1",
+    "babel-root-slash-import": "^1.1.0",
+    "@storybook/react": "^3.2.16",
+    "@storybook/addon-actions": "^3.2.16",
+    "@storybook/addon-links": "^3.2.16"
   }
 }

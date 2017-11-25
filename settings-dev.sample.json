@@ -12,12 +12,5 @@
   },
   "googleMaps": {
     "apiKey": "GOOGLEMAPS_APIKEY"
-  },
-  "herokuDNS": "https://<NAME>.herokuapp.com",
-  "public": {
-    "facebook": {
-      "appId": "FACEBOOK_APPID",
-      "commentsUrl": "http//facebook.com"
-    }
   }
 }
