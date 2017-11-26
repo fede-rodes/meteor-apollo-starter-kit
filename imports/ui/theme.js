@@ -4,9 +4,10 @@ const Theme = {
   dangerColor: 'tomato',
   successColor: 'green',
   linkColor: 'dodgerBlue ',
-  baseRadius: '3px',
+  baseRadius: '2px',
   baseFontSize: 1, // em
   baseFontColor: 'black',
+  baseFontFamily: 'Lato, "Helvetica Neue", Arial, Helvetica',
 };
 
 export default Theme;

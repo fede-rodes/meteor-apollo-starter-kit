@@ -75,11 +75,11 @@ const StyledButton = styled(Button)`
   };
   font-weight: 400;
   line-height: ${props =>
-    (props.size === 'small' && '2.2') ||
-    (props.size === 'large' && '1.25') ||
-    '2.5'
+    (props.size === 'small' && 2.2) ||
+    (props.size === 'large' && 1) ||
+    2
   };
-  padding: ${props => (props.size === 'large' && '16px 25px 17px') || '0 12px'};
+  padding: ${props => (props.size === 'large' && '14px 25px') || '0 12px'};
   position: relative;
   text-align: center;
   color: ${props =>
@@ -87,6 +87,7 @@ const StyledButton = styled(Button)`
     (props.type === 'link' && props.theme.linkColor) ||
     'white'
   };
+  font-family: ${props => props.theme.baseFontFamily};
   background-color: ${props =>
     ((props.inverted || props.type === 'link') && 'white') ||
     (props.variant && props.theme[`${props.variant}Color`])
