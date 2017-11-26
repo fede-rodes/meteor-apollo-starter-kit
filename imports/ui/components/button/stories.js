@@ -11,9 +11,9 @@ storiesOf('Button', module)
     width: '60%',
   }))
   .add('Primary', () => (
-    <Button variant="primary">Click!</Button>
-  ))
-  .add('Secondary', () => (
+    <Button primary>Click!</Button>
+  ));
+  /* .add('Secondary', () => (
     <Button variant="secondary">Click!</Button>
   ))
   .add('Text only', () => (
@@ -39,4 +39,4 @@ storiesOf('Button', module)
   ))
   .add('onClick callback', () => (
     <Button onClick={action('clicked')}>Click me with callback!</Button>
-  ));
+  )); */

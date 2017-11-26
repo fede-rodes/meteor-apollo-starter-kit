@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Button = (props) => {
-  const { label, href, type, disabled, className, onClick } = props;
+  const { children, href, type, disabled, className, onClick } = props;
 
   if (type === 'link') {
-    return <Link to={href} className={className}>{label}</Link>;
+    return (
+      <Link
+        to={href}
+        className={className}
+      >
+        {children}
+      </Link>
+    );
   }
 
   return (
@@ -20,33 +27,33 @@ const Button = (props) => {
       disabled={disabled}
       onClick={onClick}
     >
-      {label}
+      {children}
     </button>
   );
 };
 
 Button.propTypes = {
-  label: PropTypes.string,
+  children: PropTypes.string.isRequired,
   href: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
   className: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
-  label: '',
-  href: null,
+  href: '',
   type: '',
   disabled: false,
   className: '',
+  onClick: () => {},
 };
 //------------------------------------------------------------------------------
 // STYLES:
 //------------------------------------------------------------------------------
 const StyledButton = styled(Button)`
-  background: ${props => (props.primary && 'palevioletred') || 'white'};
-  color: ${props => (props.primary && 'white') || 'palevioletred'};
+  background: ${props => (props.primary && props.theme.primaryColor) || 'white'};
+  color: ${props => (props.primary && props.theme.primaryColor) || 'palevioletred'};
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
@@ -54,12 +61,12 @@ const StyledButton = styled(Button)`
 `;
 
 StyledButton.propTypes = {
-  primary: PropTypes.string,
+  primary: PropTypes.bool,
 };
 
 StyledButton.defaultProps = {
-  primary: null,
+  primary: false,
 };
 //------------------------------------------------------------------------------
 
-export default StyledButton;
+export default withTheme(StyledButton);
