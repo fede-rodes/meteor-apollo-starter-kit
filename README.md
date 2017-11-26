@@ -24,21 +24,19 @@ Lighthouse audit:
 - reactive-var@1.0.11 // Reactive variable for tracker
 - tracker@1.1.3 // Meteor's client-side reactive programming library
 
-
-### Running it
+### Running the app
 ```
 meteor npm install
 meteor --settings settings-dev.json
 ```
+GraphiQL is available at [http://localhost:3000/graphiql](http://localhost:3000/graphiql).
 
-GraphiQL is enabled at [/graphiql](http://localhost:3000/graphiql).
-
-### Resources
-
-#### Meteor Apollo
-- [Meteor `apollo` package docs](http://dev.apollodata.com/core/meteor.html)
-- [Apollo docs](http://dev.apollodata.com/)
-- https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
+### Running storybook
+```
+npm i -g @storybook/cli
+npm run storybook
+```
+Stroybook is available at [http://localhost:6006/](http://localhost:6006/).
 
 #### Favicon / manifest generator
 https://realfavicongenerator.net/
@@ -61,6 +59,14 @@ OR
 9. git push heroku mongo:master
 10. heroku open
 ```
+
+### Resources
+
+#### Meteor Apollo
+- [Meteor `apollo` package docs](http://dev.apollodata.com/core/meteor.html)
+- [Apollo docs](http://dev.apollodata.com/)
+- https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
+
 
 #### Progressive Web Apps
 - https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
