@@ -108,7 +108,7 @@ class PasswordAuthViews extends React.Component {
   }
 
   render() {
-    const { view, btnText, disabled, form: { getFieldDecorator } } = this.props;
+    const { view, btnLabel, disabled, form: { getFieldDecorator } } = this.props;
     const { fields } = STATES[view];
 
     return (
@@ -158,7 +158,7 @@ class PasswordAuthViews extends React.Component {
             size="large"
             className="full-width"
           >
-            {btnText}
+            {btnLabel}
           </Button>
         </FormItem>
       </Form>
@@ -174,7 +174,7 @@ PasswordAuthViews.propTypes = {
     'resetPassword',
   ]).isRequired,
   token: PropTypes.string,
-  btnText: PropTypes.string,
+  btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
@@ -184,7 +184,7 @@ PasswordAuthViews.propTypes = {
 
 PasswordAuthViews.defaultProps = {
   token: '',
-  btnText: 'Submit',
+  btnLabel: 'Submit',
   disabled: false,
   onBeforeHook: () => {},
   onClientErrorHook: () => {},

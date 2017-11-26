@@ -77,6 +77,7 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
+- storybook: we need a global and a local theme provider for each component
 - welcome screen + open your email btn
 - css outside imports folder (lazy load) is better for performance?
 - Better to load from DNS?

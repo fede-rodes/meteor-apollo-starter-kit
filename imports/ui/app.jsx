@@ -4,7 +4,7 @@ import { meteorClientConfig } from 'meteor/apollo';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-client';
 import { ThemeProvider } from 'styled-components';
-import theme from './theme.js';
+import Theme from './theme.js';
 import createReduxStore from './redux/store.js';
 import GlobalDataProvider from './global-data-provider.jsx';
 import DefaultLayout from './layouts/default/index.jsx';
@@ -19,17 +19,17 @@ const client = new ApolloClient(meteorClientConfig());
 const store = createReduxStore(client);
 
 const App = () => (
-  <Router>
-    <ApolloProvider client={client} store={store}>
-      <GlobalDataProvider>
-        <ThemeProvider theme={theme}>
+  <ThemeProvider theme={Theme}>
+    <Router>
+      <ApolloProvider client={client} store={store}>
+        <GlobalDataProvider>
           <DefaultLayout>
             <Routes />
           </DefaultLayout>
-        </ThemeProvider>
-      </GlobalDataProvider>
-    </ApolloProvider>
-  </Router>
+        </GlobalDataProvider>
+      </ApolloProvider>
+    </Router>
+  </ThemeProvider>
 );
 
 export default App;

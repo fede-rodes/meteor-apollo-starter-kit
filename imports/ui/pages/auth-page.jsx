@@ -20,30 +20,30 @@ const STATES = {
     title: 'Log In',
     subtitle: 'Don&apos;t have an account?&nbsp;',
     linkTo: 'signup',
-    linkText: 'Sign Up',
-    btnText: 'Log In',
+    linkLabel: 'Sign Up',
+    btnLabel: 'Log In',
   },
   signup: {
     title: 'Sign Up',
     subtitle: 'Already have an account?&nbsp;',
     linkTo: 'login',
-    linkText: 'Log In',
-    btnText: 'Sign Up',
+    linkLabel: 'Log In',
+    btnLabel: 'Sign Up',
   },
   forgotPassword: {
     title: 'Forgot your Password?',
     subtitle: `We&apos;ll send a link to your email to reset<br />
     your password and get you back on track.`,
     // linkTo: '',
-    // linkText: '',
-    btnText: 'Send Link',
+    // linkLabel: '',
+    btnLabel: 'Send Link',
   },
   resetPassword: {
     title: 'Reset your Password',
     // subtitle: '',
     // linkTo: '',
-    // linkText: '',
-    btnText: 'Set New Password',
+    // linkLabel: '',
+    btnLabel: 'Set New Password',
   },
 };
 //------------------------------------------------------------------------------
@@ -116,6 +116,7 @@ class AuthPage extends React.Component {
   handleSucess() {
     const { view } = this.state;
     const { client } = this.props;
+    console.log('sucess');
 
     switch (view) {
       case 'login':
@@ -142,22 +143,22 @@ class AuthPage extends React.Component {
 
   render() {
     const { view, disabled, service, errorMsg, successMsg } = this.state;
-    const { title, subtitle, linkTo, linkText, btnText } = STATES[view];
+    const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
       <div className="full-width">
         <h1 className="center">{title}</h1>
         <p className="center">
           <span dangerouslySetInnerHTML={{ __html: subtitle }} />
-          {linkTo && linkText && (
+          {linkTo && linkLabel && (
             <a href={`/${linkTo}`} onClick={this.changeViewTo(linkTo)}>
-              {linkText}
+              {linkLabel}
             </a>
           )}
         </p>
         <PasswordAuthViews
           view={view}
-          btnText={btnText}
+          btnLabel={btnLabel}
           disabled={disabled}
           onBeforeHook={() => this.handleBefore({ service: 'password' })}
           onClientErrorHook={this.handleClientError}
@@ -200,7 +201,7 @@ class AuthPage extends React.Component {
             <Divider key="divider" />
             <FBAuthBtn
               key="fb-btn"
-              btnText="Continue with facebook"
+              btnLabel="Continue with facebook"
               disabled={disabled}
               onBeforeHook={() => this.handleBefore({ service: 'facebook' })}
               onServerErrorHook={this.handleServerError}

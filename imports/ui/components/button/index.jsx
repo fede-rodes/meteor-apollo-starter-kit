@@ -1,29 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import styled, { withTheme } from 'styled-components';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Button = (props) => {
-  const { children, href, type, disabled, className, onClick } = props;
+  const { children, type, href, disabled, className, onClick } = props;
 
   if (type === 'link') {
     return (
-      <Link
-        to={href}
+      <a
+        href={href}
         className={className}
+        onClick={onClick}
       >
         {children}
-      </Link>
+      </a>
+    );
+  }
+
+  if (type === 'submit') {
+    return (
+      <input
+        type="submit"
+        className={className}
+        value={children}
+      />
     );
   }
 
   return (
     <button
       className={className}
-      type={type}
       disabled={disabled}
       onClick={onClick}
     >
@@ -34,16 +43,16 @@ const Button = (props) => {
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['button', 'link', 'submit']),
   href: PropTypes.string,
-  type: PropTypes.string,
   disabled: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
+  type: 'button',
   href: '',
-  type: '',
   disabled: false,
   className: '',
   onClick: () => {},
@@ -52,20 +61,61 @@ Button.defaultProps = {
 // STYLES:
 //------------------------------------------------------------------------------
 const StyledButton = styled(Button)`
-  background: ${props => (props.primary && props.theme.primaryColor) || 'white'};
-  color: ${props => (props.primary && props.theme.primaryColor) || 'palevioletred'};
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
+  border: ${props =>
+    (props.inverted && `1px solid ${props.theme[`${props.variant}Color`]}`) ||
+    'none'
+  };
+  border-radius: ${props => props.theme.baseRadius};
+  cursor: ${props => (props.disabled && 'not-allowed') || 'pointer'};
+  display: ${props => (props.expanded && 'block') || 'inline-block'};
+  font-size: ${props =>
+    (props.size === 'small' && `${props.theme.baseFontSize * 0.875}em`) ||
+    (props.size === 'large' && `${props.theme.baseFontSize * 1.375}em`) ||
+    `${props.theme.baseFontSize}em`
+  };
+  font-weight: 400;
+  line-height: ${props =>
+    (props.size === 'small' && '2.2') ||
+    (props.size === 'large' && '1.25') ||
+    '2.5'
+  };
+  padding: ${props => (props.size === 'large' && '16px 25px 17px') || '0 12px'};
+  position: relative;
+  text-align: center;
+  color: ${props =>
+    (props.inverted && props.theme[`${props.variant}Color`]) ||
+    (props.type === 'link' && props.theme.linkColor) ||
+    'white'
+  };
+  background-color: ${props =>
+    ((props.inverted || props.type === 'link') && 'white') ||
+    (props.variant && props.theme[`${props.variant}Color`])
+  };
+  width: ${props => (props.expanded && '100%') || 'auto'};
+  opacity: ${props => (props.disabled && 0.5) || 1};
+  text-decoration: none;
+  &:hover {
+    ${props => (props.type === 'link' && 'text-decoration: underline') || 'text-decoration: none'};
+  }
 `;
 
 StyledButton.propTypes = {
-  primary: PropTypes.bool,
+  theme: PropTypes.object.isRequired, // eslint-disable-line
+  type: PropTypes.oneOf(['button', 'link', 'text', 'submit']),
+  size: PropTypes.oneOf(['small', 'normal', 'large']),
+  variant: PropTypes.oneOf(['default', 'primary', 'success', 'danger']),
+  inverted: PropTypes.bool,
+  disabled: PropTypes.bool,
+  expanded: PropTypes.bool,
 };
 
 StyledButton.defaultProps = {
-  primary: false,
+  type: 'button',
+  size: 'normal',
+  variant: 'default',
+  inverted: false,
+  disabled: false,
+  expanded: false,
 };
 //------------------------------------------------------------------------------
 
