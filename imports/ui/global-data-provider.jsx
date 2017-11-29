@@ -20,69 +20,40 @@ class GlobalDataProvider extends React.Component {
     // Refecth user data every time login state changes
     Tracker.autorun(() => {
       Meteor.userId();
-      this.props.refetch();
+      this.props.userData.refetch();
     });
   }
 
   render() {
-    const { refetch, hasErrors, userLoading, curUser, children, ...rest } = this.props;
+    const { userData, children, ...rest } = this.props;
 
-    if (hasErrors) {
+    if (userData.error) {
+      console.log(userData.error);
       return <div>Something bad happend!</div>;
     }
 
-    if (userLoading) {
+    if (userData.loading) {
       return <Loading />;
     }
 
-    return React.cloneElement(children, { refetch, curUser, ...rest });
+    return React.cloneElement(children, { curUser: userData.user, ...rest });
   }
 }
 
 GlobalDataProvider.propTypes = {
-  hasErrors: PropTypes.bool,
-  refetch: PropTypes.func,
-  userLoading: PropTypes.bool,
-  curUser: propType(userFragment),
+  userData: PropTypes.shape({
+    error: PropTypes.string,
+    loading: PropTypes.bool,
+    user: propType(userFragment),
+    refetch: PropTypes.func,
+  }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
   ]).isRequired,
 };
 
-GlobalDataProvider.defaultProps = {
-  hasErrors: false,
-  refetch: () => {},
-  userLoading: false,
-  curUser: null,
-};
-
-//------------------------------------------------------------------------------
-// APOLLO INTEGRATION:
-//------------------------------------------------------------------------------
-/*
- * We use the `graphql` higher order component to send the graphql query to our
- * server. See for more information: http://dev.apollodata.com/react/
- */
-const withData = graphql(userQuery, {
-  // Destructure the default props to more explicit ones
-  props: ({ data: { error, loading, user, refetch } }) => {
-    if (loading) {
-      return { userLoading: true };
-    }
-
-    if (error) {
-      console.log(error);
-      return { hasErrors: true };
-    }
-
-    return {
-      curUser: user,
-      refetch,
-    };
-  },
-});
-
-//------------------------------------------------------------------------------
+// Apollo integration
+const withData = graphql(userQuery, { name: 'userData' });
 
 export default withData(GlobalDataProvider);

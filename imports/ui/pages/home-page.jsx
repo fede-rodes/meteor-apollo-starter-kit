@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withApollo, compose } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { LogoutBtn } from '../components/auth/index.js';
@@ -22,8 +22,5 @@ HomePage.propTypes = {
   curUser: propType(userFragment).isRequired,
 };
 
-const enhance = compose(
-  withApollo, // To have access to client.resetStore()
-);
-
-export default enhance(HomePage);
+// withApollo provides access to client.resetStore()
+export default withApollo(HomePage);

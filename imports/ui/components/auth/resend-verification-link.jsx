@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql, compose } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import sendVerificationEmailMutation from './graphql/mutation-send-verification-email.graphql';
 
 //------------------------------------------------------------------------------
@@ -61,8 +61,7 @@ ResendVerificationLink.defaultProps = {
   onSucessHook: () => {},
 };
 
-const enhance = compose(
-  graphql(sendVerificationEmailMutation, { name: 'sendVerificationEmail' }), // Apollo integration
-);
+// Apollo integration
+const withMutation = graphql(sendVerificationEmailMutation, { name: 'sendVerificationEmail' });
 
-export default enhance(ResendVerificationLink);
+export default withMutation(ResendVerificationLink);
