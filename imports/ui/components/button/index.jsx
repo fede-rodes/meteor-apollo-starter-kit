@@ -68,11 +68,7 @@ const StyledButton = styled(Button)`
   border-radius: ${props => props.theme.baseRadius};
   cursor: ${props => (props.disabled && 'not-allowed') || 'pointer'};
   display: ${props => (props.expanded && 'block') || 'inline-block'};
-  font-size: ${props =>
-    (props.size === 'small' && `${props.theme.baseFontSize * 0.875}em`) ||
-    (props.size === 'large' && `${props.theme.baseFontSize * 1.375}em`) ||
-    `${props.theme.baseFontSize}em`
-  };
+  font-size: ${props => (props.size === 'small' && '14px') || '16px'};
   font-weight: 400;
   line-height: ${props =>
     (props.size === 'small' && 2.2) ||

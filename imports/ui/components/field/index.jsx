@@ -64,11 +64,11 @@ class Field extends React.Component {
           placeholder={placeholder}
           defaultValue={defaultValue}
         />
-        {message && (
+        {/* message && (
           <span className={['message', message.type].join(' ').trim()}>
             {message.message}
           </span>
-        )}
+        ) */}
       </div>
     );
   }
