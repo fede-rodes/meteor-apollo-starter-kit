@@ -73,11 +73,11 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- storybook: we need a global and a local theme provider for each component
-- welcome screen + open your email btn
+- get rid of ant design (too heavy)
+- storybook: we need a global and a local theme for each component
+- welcome screen: open your email btn
 - css outside imports folder (lazy load) is better for performance?
 - Better to load from DNS?
-- get rid of ant design
 
 - dynamic imports
 - bundle-visualizer to see what is taking up the most memory.
@@ -95,7 +95,7 @@ OR
 
 
 https://guide.meteor.com/accounts.html
-
+```
 Accounts.onResetPasswordLink
 Accounts.onEnrollmentLink
 Accounts.onEmailVerificationLink
@@ -112,6 +112,7 @@ Accounts.onResetPasswordLink((token, done) => {
     }
   });
 })
+```
 
 ### DONE BUT COULD BE IMPROVED
 - welcome page/loggedInRoute check for current loggedIn service instead
