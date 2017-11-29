@@ -20,10 +20,6 @@ Lighthouse audit:
 - basscss
 - Progressive Web App
 
-### This project does NOT include the following packages:
-- reactive-var@1.0.11 // Reactive variable for tracker
-- tracker@1.1.3 // Meteor's client-side reactive programming library
-
 ### Running the app
 ```
 meteor npm install
@@ -97,9 +93,28 @@ OR
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
 
+
+https://guide.meteor.com/accounts.html
+
+Accounts.onResetPasswordLink
+Accounts.onEnrollmentLink
+Accounts.onEmailVerificationLink
+Here’s how you would use one of these functions:
+
+Accounts.onResetPasswordLink((token, done) => {
+  // Display the password reset UI, get the new password...
+  Accounts.resetPassword(token, newPassword, (err) => {
+    if (err) {
+      // Display error
+    } else {
+      // Resume normal operation
+      done();
+    }
+  });
+})
+
 ### DONE BUT COULD BE IMPROVED
 - welcome page/loggedInRoute check for current loggedIn service instead
-- fix FB login for style equals to 'redirect' (we have a patch right now)
 
 ### UI components library with styled components:
 - https://ak-mk-2-prod.netlify.com/packages/elements/datetime-picker
