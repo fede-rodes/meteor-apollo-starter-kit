@@ -14,3 +14,5 @@ const Input = styled.input`
 `;
 
 export default withTheme(Input);
+
+// TODO: add error field below input

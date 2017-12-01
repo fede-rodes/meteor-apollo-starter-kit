@@ -1,5 +1,5 @@
 /**
- * @namespace Constants.
+ * @namespace Constants
  */
 const Constants = {
   SITE_BRAND: 'SITE_BRAND',

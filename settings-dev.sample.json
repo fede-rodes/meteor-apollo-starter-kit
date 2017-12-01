@@ -9,8 +9,5 @@
   "facebook": {
     "appId": "FACEBOOK_APPID",
     "secret": "FACEBOOK_SECRET"
-  },
-  "googleMaps": {
-    "apiKey": "GOOGLEMAPS_APIKEY"
   }
 }

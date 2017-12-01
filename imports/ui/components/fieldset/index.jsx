@@ -1,7 +1,7 @@
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 
 const Fieldset = styled.fieldset`
   border: none;
 `;
 
-export default withTheme(Fieldset);
+export default Fieldset;
