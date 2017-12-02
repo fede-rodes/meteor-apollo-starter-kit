@@ -22,9 +22,9 @@ class WelcomePage extends React.Component {
   }
 
   handleBefore() {
-    // OBSERVATION: this hook allows you to trigger some action
-    // before the resend link request is sent or simply interrupt the
-    // normal flow by throwing an error.
+    // OBSERVATION: this hook allows you to trigger some action(s)
+    // before the login request is sent or simply interrupt the normal
+    // login flow by throwing an error.
     this.setState({
       loading: true,
       serverError: '',

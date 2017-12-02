@@ -33,8 +33,8 @@ class FBAuthBtn extends React.Component {
       } else {
         // OBSERVATION: this code is only reachable when using FB loginStyle
         // equals 'popup' at serviceConfiguration. In case loginStyle equals
-        // 'redirect' we'll need to get the user tokens from the cookie since
-        // we wont be able to call resetStore.
+        // 'redirect' you'll need to use Accounts.onLogin() to listen to state
+        // changes. See GlobalDataProvider.componentWillMount().
         onSucessHook();
       }
     });

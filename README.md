@@ -85,6 +85,7 @@ OR
 
 ### TODO LIST
 - need a message/alert component such as s-alert or Bert
+- fix layout style
 - replace check with simpl-schema in ErrorHandling and other places
 - storybook: we need a global and a local theme for each component
 - welcome screen: open your email btn
@@ -106,6 +107,7 @@ OR
 - https://stackify.com/what-is-real-user-monitoring/
 
 
+What about this? We are not using it:
 https://guide.meteor.com/accounts.html
 ```
 Accounts.onResetPasswordLink

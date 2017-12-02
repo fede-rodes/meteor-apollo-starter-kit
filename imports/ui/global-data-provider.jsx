@@ -11,8 +11,8 @@ import Loading from './components/loading.jsx';
 // COMPONENT:
 //------------------------------------------------------------------------------
 /**
- * @summary Injects global data (current user and/or global settings to name a
- * few examples) into child components.
+ * @summary Injects global data (current user, global settings, whatever) into
+ * child components.
  */
 class GlobalDataProvider extends React.Component {
   componentWillMount() {

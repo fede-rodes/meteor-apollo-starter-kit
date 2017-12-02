@@ -20,17 +20,6 @@ const STATES = {
   resetPassword: { fields: ['password'] },
 };
 //------------------------------------------------------------------------------
-// AUX FUNCTIONS:
-//------------------------------------------------------------------------------
-// Determine if a given field is being used (active) for the current view
-const isActiveField = (view, field) => {
-  // Get list of active fields for the current view ('email' and/or 'password')
-  const activeFields = STATES[view].fields;
-
-  // Return whether or not the given field is in the active list
-  return activeFields.indexOf(field) !== -1;
-};
-//------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 class PasswordAuthViews extends React.Component {
@@ -41,9 +30,20 @@ class PasswordAuthViews extends React.Component {
       password: '',
       errors: { email: [], password: [] },
     };
+    this.isActiveField = this.isActiveField.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.validateFields = this.validateFields.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  isActiveField(field) {
+    const { view } = this.props;
+
+    // Get list of active fields for the current view ('email' and/or 'password')
+    const activeFields = STATES[view].fields;
+
+    // Return whether or not the given field is in the active list
+    return activeFields.indexOf(field) !== -1;
   }
 
   handleChange(evt) {
@@ -59,20 +59,16 @@ class PasswordAuthViews extends React.Component {
   }
 
   validateFields({ email, password }) {
-    // Get current view ('login', 'signup', 'forgotPassword', 'resetPassword')
-    const { view } = this.props;
-
     // Initialize errors
     const errors = {
       email: [],
       password: [],
     };
 
-    // Validate active fields
     const MIN_CHARS = 6;
     const MAX_CHARS = 30;
 
-    if (isActiveField(view, 'email')) {
+    if (this.isActiveField('email')) {
       // Sanitize input
       const _email = email && email.trim(); // eslint-disable-line
 
@@ -85,7 +81,7 @@ class PasswordAuthViews extends React.Component {
       }
     }
 
-    if (isActiveField(view, 'password')) {
+    if (this.isActiveField('password')) {
       // Do not sanitize password, spaces are valid characters in this case
       if (!password) {
         errors.password.push('Password is required!');
@@ -116,18 +112,18 @@ class PasswordAuthViews extends React.Component {
       return; // return silently
     }
 
-    // Get field value
+    // Get field values
     const { email, password } = this.state;
 
     // Clear previous errors if any
     this.setState({ errors: { email: [], password: [] } });
 
-    // Check for errors
+    // Validate fields
     const err1 = this.validateFields({ email, password });
+
+    // In case of errors, display on UI and return handler to parent component
     if (ErrorHandling.hasErrors(err1)) {
-      // Display errors on UI
       this.setState({ errors: err1 });
-      // Return handler to client
       onClientErrorHook(err1);
       return;
     }
@@ -184,12 +180,11 @@ class PasswordAuthViews extends React.Component {
 
   render() {
     const { email, password, errors } = this.state;
-    const { view, btnLabel, disabled } = this.props;
-    const { fields } = STATES[view];
+    const { btnLabel, disabled } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="mt2">
-        {fields.indexOf('email') !== -1 && (
+        {this.isActiveField('email') && (
           <Fieldset className="mt2">
             <Label htmlFor="email" required>
               Email
@@ -207,7 +202,7 @@ class PasswordAuthViews extends React.Component {
             />
           </Fieldset>
         )}
-        {fields.indexOf('password') !== -1 && (
+        {this.isActiveField('password') && (
           <Fieldset className="mt2">
             <Label htmlFor="password" required>
               Password

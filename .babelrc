@@ -4,16 +4,7 @@
     "react"
   ],
   "plugins": [
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "style": "css"
-      }
-    ],
-    [
-      "styled-components"
-    ],
+    "styled-components",
     "babel-root-slash-import"
   ]
 }
