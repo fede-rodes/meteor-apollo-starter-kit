@@ -34,10 +34,10 @@ npm run storybook
 ```
 Stroybook is available at [http://localhost:6006/](http://localhost:6006/).
 
-#### Favicon / manifest generator
+### Favicon / manifest generator
 https://realfavicongenerator.net/
 
-#### Configure facebook account
+### Configure facebook account
 https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e
 
 ### Bundle-visualizer
@@ -50,7 +50,7 @@ Then got to: [http://localhost:3000/](http://localhost:3000/)
 
 Before deploying to production, if you used --extra-packages, simply remove bundle-visualizer from the list of included packages and run meteor as normal.
 
-#### Deploy to heroku
+### Deploy to heroku
 ```
 1. git clone https://github.com/fede-rodes/meteor-apollo-starter-kit.git
 2. cd meteor-apollo-starter-kit

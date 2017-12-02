@@ -28,6 +28,7 @@ const LoggedOutRoute = ({
         ? <Redirect to={redirectTo.trim()} />
         : React.createElement(overlay, { curUser, ...rest, ...props });
 
+      // If user is NOT logged in, render requested component. Otherwise, resolve
       return !curUser
         ? React.createElement(component, { curUser, ...rest, ...props })
         : resolver;

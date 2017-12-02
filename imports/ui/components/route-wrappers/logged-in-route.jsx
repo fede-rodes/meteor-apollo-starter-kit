@@ -37,7 +37,7 @@ const LoggedInRoute = ({
       const isPasswordService = curUser.services.indexOf('password') !== -1;
       const isEmailVerified = isPasswordService && curUser.emails[0].verified === true;
 
-      // In case is password service and email is NOT verified, resolve...
+      // If password service and email is NOT verified, resolve...
       if (isPasswordService && !isEmailVerified) {
         return React.createElement(emailNotVerifiedOverlay, { curUser, ...rest, ...ownProps });
       }
