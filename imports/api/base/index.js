@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { extend } from 'lodash';
+import extend from 'lodash/extend';
 
 /**
  * @namespace Base

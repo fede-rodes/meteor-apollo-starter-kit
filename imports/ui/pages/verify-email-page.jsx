@@ -3,8 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { withApollo, compose } from 'react-apollo';
-import message from 'antd/lib/message'; // for js
-import 'antd/lib/message/style/css'; // for css
 import Loading from '../components/loading.jsx';
 
 //------------------------------------------------------------------------------
@@ -23,7 +21,7 @@ class VerifyEmailPage extends React.Component {
         console.log(`[router] ${err.reason}`);
         history.push('/link-expired');
       } else {
-        message.success('Account verified successfully. Thanks!');
+        // message.success('Account verified successfully. Thanks!');
         client.resetStore();
         history.push('/');
       }

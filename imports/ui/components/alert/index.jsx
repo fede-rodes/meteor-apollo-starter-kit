@@ -26,8 +26,10 @@ Div.propTypes = {
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const Alert = ({ type, content }) => (
-  content ? <Div type={type}>{content}</Div> : null
+const Alert = ({ type, content, ...rest }) => (
+  content && content.trim().length > 0
+  ? <Div type={type} {...rest}>{content}</Div>
+  : null
 );
 
 Alert.propTypes = {

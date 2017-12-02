@@ -1,7 +1,7 @@
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 import { mergeTypes } from 'merge-graphql-schemas';
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 import Base from '../../api/base/index.js';
 import User from '../../api/user/index.js';
 

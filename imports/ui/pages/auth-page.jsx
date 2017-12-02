@@ -103,7 +103,6 @@ class AuthPage extends React.Component {
 
   handleClientError(err) {
     console.log(err);
-    // this.setState({ errorMsg: err });
     this.enableBtn();
   }
 

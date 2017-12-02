@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { withApollo, compose } from 'react-apollo';
-import message from 'antd/lib/message'; // for js
-import 'antd/lib/message/style/css'; // for css
 import { PasswordAuthViews } from '../components/auth/index.js';
 
 //------------------------------------------------------------------------------
@@ -53,7 +51,7 @@ class ResetPasswordPage extends React.Component {
       case 'resetPassword':
         client.resetStore();
         this.enableBtn();
-        message.success('Password reset successfully!');
+        // message.success('Password reset successfully!');
         history.push('/');
         break;
       case 'forgotPassword':

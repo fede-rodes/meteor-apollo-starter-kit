@@ -1,12 +1,10 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Alert from 'antd/lib/alert'; // for js
-import 'antd/lib/alert/style/css'; // for css
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
 import Loading from '../components/loading.jsx';
+import Alert from '../components/alert/index.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -54,36 +52,28 @@ class LinkExpiredPage extends React.Component {
     const { curUser } = this.props;
     const { loading, serverError, successMessage } = this.state;
 
-    const text = curUser
-      ? (
-        <p className="center">
-          Please, click&nbsp;
-          <ResendVerificationLink
-            text="here"
-            onBeforeHook={this.handleBefore}
-            onServerErrorHook={this.handleServerError}
-            onSucessHook={this.handleSucess}
-          />
-          &nbsp;to resend confirmation link.
-        </p>
-      )
-      : (
-        <p className="center">
-          Please, <Link to="/auth">login</Link> to be able to <strong>resend confirmation link</strong>.
-        </p>
-      );
-
     return (
       <div className="full-width">
         <h1 className="center">The link has expired!</h1>
-        {text}
+        {curUser ? (
+          <p className="center">
+            Please, click&nbsp;
+            <ResendVerificationLink
+              text="here"
+              onBeforeHook={this.handleBefore}
+              onServerErrorHook={this.handleServerError}
+              onSucessHook={this.handleSucess}
+            />
+            &nbsp;to resend confirmation link.
+          </p>
+        ) : (
+          <p className="center">
+            Please, <Link to="/auth">login</Link> to be able to <strong>resend confirmation link</strong>.
+          </p>
+        )}
         {loading && <Loading />}
-        {serverError && serverError.length > 0 && (
-          <Alert type="error" message={serverError} className="mt1" banner />
-        )}
-        {successMessage && successMessage.length > 0 && (
-          <Alert type="success" message={successMessage} className="mt1" banner />
-        )}
+        <Alert type="error" content={serverError} className="mt1" />
+        <Alert type="success" content={successMessage} className="mt1" />
       </div>
     );
   }

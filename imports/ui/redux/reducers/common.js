@@ -1,5 +1,3 @@
-// import _ from 'lodash';
-// TODO: change name to 'common reducers'
 /**
 * Given the same arguments, it should calculate the next state and return it.
 * No surprises. No side effects. No API calls. No mutations. Just a calculation.
@@ -52,7 +50,7 @@ export const booleanFieldReducer = (state = true, action) => {
   }
 };
 
-const errorReducer = (state = [], action) => {
+/* const errorReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_ERROR': {
       return state.concat(action.array);
@@ -90,4 +88,4 @@ export const errorsReducer = (state = {}, action) => {
     default:
       return state;
   }
-};
+}; */

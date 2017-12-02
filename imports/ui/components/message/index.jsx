@@ -20,8 +20,10 @@ Span.propTypes = {
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const Message = ({ type, content }) => (
-  content ? <Span type={type}>{content}</Span> : null
+const Message = ({ type, content, ...rest }) => (
+  content && content.trim().length > 0
+  ? <Span type={type} {...rest}>{content}</Span>
+  : null
 );
 
 Message.propTypes = {

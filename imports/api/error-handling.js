@@ -1,5 +1,6 @@
 import { check, Match } from 'meteor/check';
-import { isString, isArray } from 'lodash';
+import isString from 'lodash/isString';
+import isArray from 'lodash/isArray';
 
 /**
 * @namespace ErrorHandling

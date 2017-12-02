@@ -40,6 +40,17 @@ https://realfavicongenerator.net/
 #### Configure facebook account
 https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e
 
+### Bundle-visualizer
+```
+cd app/
+meteor --extra-packages bundle-visualizer --production --settings settings-dev.json
+```
+
+Then got to: [http://localhost:3000/](http://localhost:3000/)
+
+Before deploying to production, if you used --extra-packages, simply remove bundle-visualizer from the list of included packages and run meteor as normal.
+
+
 #### Deploy to heroku
 ```
 1. git clone https://github.com/fede-rodes/meteor-apollo-starter-kit.git
@@ -73,7 +84,7 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- get rid of ant design (too heavy)
+- need a message/alert component such as s-alert or Bert
 - replace check with simpl-schema in ErrorHandling and other places
 - storybook: we need a global and a local theme for each component
 - welcome screen: open your email btn

@@ -10,7 +10,6 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "antd": "^2.13.6",
     "apollo-client": "^1.9.3",
     "apollo-server-express": "^1.1.3",
     "babel-runtime": "^6.26.0",
