@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { withApollo, compose } from 'react-apollo';
-import Loading from '../components/loading.jsx';
+import Loading from '../components/loading/index.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
-import Loading from '../components/loading.jsx';
+import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
 //------------------------------------------------------------------------------
