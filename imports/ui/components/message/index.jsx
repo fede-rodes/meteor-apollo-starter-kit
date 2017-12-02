@@ -5,7 +5,7 @@ import styled from 'styled-components';
 //------------------------------------------------------------------------------
 // STYLES:
 //------------------------------------------------------------------------------
-const Span = styled.span`
+const Div = styled.div`
   color: ${props =>
     (props.type === 'error' && 'tomato') ||
     (props.type === 'success' && 'green') ||
@@ -14,16 +14,14 @@ const Span = styled.span`
   font-size: 14px;
 `;
 
-Span.propTypes = {
+Div.propTypes = {
   type: PropTypes.oneOf(['error', 'success']).isRequired,
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Message = ({ type, content, ...rest }) => (
-  content && content.trim().length > 0
-  ? <Span type={type} {...rest}>{content}</Span>
-  : null
+  <Div type={type} {...rest}>{content}</Div>
 );
 
 Message.propTypes = {

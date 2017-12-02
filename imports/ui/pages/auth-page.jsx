@@ -147,9 +147,9 @@ class AuthPage extends React.Component {
           onSucessHook={this.handleSucess}
         />
         {service === 'password' && (
-          <div className="mt2">
-            <Alert type="error" content={errorMsg} />
-            <Alert type="success" content={successMsg} />
+          <div className="mt1">
+            <Alert type="error" content={errorMsg} className="mt1" />
+            <Alert type="success" content={successMsg} className="mt1" />
           </div>
         )}
         {view === 'login' && (
@@ -186,9 +186,9 @@ class AuthPage extends React.Component {
           </div>
         )}
         {service === 'facebook' && (
-          <div className="mt2">
-            <Alert type="error" content={errorMsg} />
-            <Alert type="success" content={successMsg} />
+          <div className="mt1">
+            <Alert type="error" content={errorMsg} className="mt1" />
+            <Alert type="success" content={successMsg} className="mt1" />
           </div>
         )}
       </div>
