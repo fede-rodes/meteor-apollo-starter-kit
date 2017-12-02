@@ -8,6 +8,9 @@ import extend from 'lodash/extend';
 const Base = {};
 
 // Load client-side, both utilities
+if (Meteor.isClient) {
+  // TODO
+}
 
 // Load server-only utilities
 if (Meteor.isServer) {
