@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -91,11 +92,15 @@ class ResetPasswordPage extends React.Component {
     const { history } = this.props;
 
     switch (view) {
-      case 'resetPassword':
+      case 'resetPassword': {
         this.enableBtn();
-        // message.success('Password reset successfully!');
+        const handler = Meteor.setTimeout(() => {
+          alert('Password reset successfully!');
+          Meteor.clearTimeout(handler);
+        }, 1000);
         history.push('/');
         break;
+      }
       case 'forgotPassword':
         this.enableBtn();
         break;

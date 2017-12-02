@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,7 +21,10 @@ class VerifyEmailPage extends React.Component {
         console.log(`[router] ${err.reason}`);
         history.push('/link-expired');
       } else {
-        // message.success('Account verified successfully. Thanks!');
+        const handler = Meteor.setTimeout(() => {
+          alert('Account verified successfully. Thanks!');
+          Meteor.clearTimeout(handler);
+        }, 1000);
         history.push('/');
       }
     });
