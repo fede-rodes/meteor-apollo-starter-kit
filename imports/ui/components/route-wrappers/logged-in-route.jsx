@@ -9,59 +9,57 @@ import userFragment from '../../apollo-client/fragments/user.graphql';
 //------------------------------------------------------------------------------
 /**
  * @summary Makes sure that the user that is trying to access the wrapped route
- * is authenticated. If not, the LoggedInRoute component provides 2 options to
+ * is authenticated. If not, the LoggedInRoute component provides 2 ways to
  * handle this situation: redirect (redirectTo) the user to the given route; or
- * render on top of the current route the overlayComponent.
+ * render on top of the current route the overlay component.
  */
-const LoggedInRoute = (props) => {
-  const {
-    curUser,
-    component,
-    loggedOutRedirectTo,
-    loggedOutOverlayComponent,
-    notVerifiedOverlayComponent,
-    ...rest
-  } = props;
+const LoggedInRoute = ({
+  curUser,
+  component,
+  redirectTo,
+  overlay,
+  emailNotVerifiedOverlay,
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={(ownProps) => {
+      // User NOT logged in resolver
+      const resolver = redirectTo.trim().length > 0
+        ? <Redirect to={redirectTo.trim()} />
+        : React.createElement(overlay, { curUser, ...rest, ...ownProps });
 
-  return (
-    <Route
-      {...rest}
-      render={(ownProps) => {
-        if (curUser) {
-          // TODO: we should use currentlyLoogedInService instead of all
-          // available services
-          const isPasswordService = curUser.services.indexOf('password') !== -1;
-          const isEmailVerified = isPasswordService && curUser.emails[0].verified === true;
+      if (!curUser) {
+        return resolver;
+      }
 
-          // In case is password service and email is not verified, return welcome
-          // page
-          if (isPasswordService && !isEmailVerified) {
-            return React.createElement(notVerifiedOverlayComponent, { curUser, ...rest, ...ownProps });
-          }
-          // Is not password service or email is verified, return requested page
-          return React.createElement(component, { curUser, ...rest, ...ownProps });
-        }
+      // TODO: use currentlyLoogedInService instead of all available services
+      const isPasswordService = curUser.services.indexOf('password') !== -1;
+      const isEmailVerified = isPasswordService && curUser.emails[0].verified === true;
 
-        return loggedOutRedirectTo.trim().length > 0
-          ? <Redirect to={loggedOutRedirectTo.trim()} />
-          : React.createElement(loggedOutOverlayComponent, { curUser, ...rest, ...ownProps });
-      }}
-    />
-  );
-};
+      // In case is password service and email is NOT verified, resolve...
+      if (isPasswordService && !isEmailVerified) {
+        return React.createElement(emailNotVerifiedOverlay, { curUser, ...rest, ...ownProps });
+      }
+
+      // ...Otherwise, render requested component
+      return React.createElement(component, { curUser, ...rest, ...ownProps });
+    }}
+  />
+);
 
 LoggedInRoute.propTypes = {
   curUser: propType(userFragment),
   component: PropTypes.func.isRequired,
-  loggedOutRedirectTo: PropTypes.string,
-  loggedOutOverlayComponent: PropTypes.func,
-  notVerifiedOverlayComponent: PropTypes.func.isRequired,
+  redirectTo: PropTypes.string,
+  overlay: PropTypes.func,
+  emailNotVerifiedOverlay: PropTypes.func.isRequired,
 };
 
 LoggedInRoute.defaultProps = {
   curUser: null,
-  loggedOutRedirectTo: '',
-  loggedOutOverlayComponent: () => {},
+  redirectTo: '',
+  overlay: () => {},
 };
 
 export default LoggedInRoute;
