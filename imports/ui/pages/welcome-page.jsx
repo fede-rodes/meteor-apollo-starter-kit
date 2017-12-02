@@ -1,5 +1,8 @@
 import React from 'react';
-import { ResendVerificationLink } from '../components/auth/index.js';
+import PropTypes from 'prop-types';
+import { withApollo } from 'react-apollo';
+import { propType } from 'graphql-anywhere';
+import { ResendVerificationLink, LogoutBtn } from '../components/auth/index.js';
 import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
@@ -70,6 +73,7 @@ class WelcomePage extends React.Component {
   }
 
   render() {
+    const { client } = this.props;
     const { disabled, errorMsg, successMsg } = this.state;
 
     return (
@@ -84,9 +88,17 @@ class WelcomePage extends React.Component {
         {disabled && <Loading className="center mt2" />}
         <Alert type="error" content={errorMsg} className="mt2" />
         <Alert type="success" content={successMsg} className="mt2" />
+        <LogoutBtn onLogoutHook={() => client.resetStore()} />
       </div>
     );
   }
 }
 
-export default WelcomePage;
+WelcomePage.propTypes = {
+  client: PropTypes.shape({
+    resetStore: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+// withApollo provides access to client.resetStore()
+export default withApollo(WelcomePage);
