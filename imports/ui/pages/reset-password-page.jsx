@@ -105,8 +105,8 @@ class ResetPasswordPage extends React.Component {
   }
 
   render() {
-    const { view, disabled, errorMsg } = this.state;
     const { match: { params: { token } } } = this.props;
+    const { view, disabled, errorMsg } = this.state;
     const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
