@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withApollo } from 'react-apollo';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
 import Alert from '../components/alert/index.jsx';
 
@@ -24,18 +22,13 @@ const STATES = {
   },
   forgotPassword: {
     title: 'Forgot your Password?',
-    subtitle: `We&apos;ll send a link to your email to reset<br />
-    your password and get you back on track.`,
+    subtitle: `
+      We&apos;ll send a link to your email to reset<br />
+      your password and get you back on track.
+    `,
     // linkTo: '',
     // linkLabel: '',
     btnLabel: 'Send Link',
-  },
-  resetPassword: {
-    title: 'Reset your Password',
-    // subtitle: '',
-    // linkTo: '',
-    // linkLabel: '',
-    btnLabel: 'Set New Password',
   },
 };
 //------------------------------------------------------------------------------
@@ -106,8 +99,6 @@ class AuthPage extends React.Component {
 
   handleSucess() {
     const { view } = this.state;
-    const { client } = this.props;
-    console.log('sucess');
 
     switch (view) {
       case 'login':
@@ -116,7 +107,6 @@ class AuthPage extends React.Component {
         // using FB loginStyle equals 'popup' at serviceConfiguration. In case
         // loginStyle equals 'redirect' you'll need to use Accounts.onLogin() to
         // listen to state changes. See GlobalDataProvider.componentWillMount().
-        client.resetStore();
         this.enableBtn();
         // At this point either the requested url-page will be rendered (if
         // overlayComponent is being used in LoggedInRoute) or the user will be
@@ -165,25 +155,18 @@ class AuthPage extends React.Component {
         {view === 'login' && (
           <p className="center mt2">
             <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
-              Forgot Password?
+              Forgot password?
             </a>
           </p>
         )}
         {view === 'forgotPassword' && (
           <p className="center mt2">
             <a href="/login" onClick={this.changeViewTo('login')}>
-              Log In
+              Log in
             </a>
             &nbsp;|&nbsp;
             <a href="/signup" onClick={this.changeViewTo('signup')}>
-              Sign Up
-            </a>
-          </p>
-        )}
-        {view === 'resetPassword' && (
-          <p className="center mt2">
-            <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
-              Resend reset password link
+              Sign up
             </a>
           </p>
         )}
@@ -213,10 +196,4 @@ class AuthPage extends React.Component {
   }
 }
 
-AuthPage.propTypes = {
-  client: PropTypes.shape({
-    resetStore: PropTypes.func.isRequired,
-  }).isRequired,
-};
-
-export default withApollo(AuthPage);
+export default AuthPage;
