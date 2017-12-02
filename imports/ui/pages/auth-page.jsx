@@ -1,5 +1,6 @@
 import React from 'react';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
+import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
 //------------------------------------------------------------------------------
@@ -147,9 +148,10 @@ class AuthPage extends React.Component {
           onSucessHook={this.handleSucess}
         />
         {service === 'password' && (
-          <div className="mt1">
-            <Alert type="error" content={errorMsg} className="mt1" />
-            <Alert type="success" content={successMsg} className="mt1" />
+          <div>
+            {disabled && <Loading className="center mt2" />}
+            <Alert type="error" content={errorMsg} className="mt2" />
+            <Alert type="success" content={successMsg} className="mt2" />
           </div>
         )}
         {view === 'login' && (
@@ -186,9 +188,10 @@ class AuthPage extends React.Component {
           </div>
         )}
         {service === 'facebook' && (
-          <div className="mt1">
-            <Alert type="error" content={errorMsg} className="mt1" />
-            <Alert type="success" content={successMsg} className="mt1" />
+          <div>
+            {disabled && <Loading className="center mt2" />}
+            <Alert type="error" content={errorMsg} className="mt2" />
+            <Alert type="success" content={successMsg} className="mt2" />
           </div>
         )}
       </div>

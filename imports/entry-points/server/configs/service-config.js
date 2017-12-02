@@ -11,6 +11,6 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 const { appId, secret } = Meteor.settings.facebook;
 ServiceConfiguration.configurations.upsert(
   { service: 'facebook' },
-  { $set: { appId, secret, loginStyle: 'redirect' } },
-  // { $set: { appId, secret, loginStyle: 'popup' } },
+  // { $set: { appId, secret, loginStyle: 'redirect' } },
+  { $set: { appId, secret, loginStyle: 'popup' } },
 );

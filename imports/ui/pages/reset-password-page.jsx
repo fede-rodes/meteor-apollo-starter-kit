@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { PasswordAuthViews } from '../components/auth/index.js';
+import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
 //------------------------------------------------------------------------------
@@ -37,6 +38,7 @@ class ResetPasswordPage extends React.Component {
       view: 'resetPassword',
       disabled: false,
       errorMsg: '',
+      successMsg: '',
     };
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
@@ -103,6 +105,7 @@ class ResetPasswordPage extends React.Component {
       }
       case 'forgotPassword':
         this.enableBtn();
+        this.setState({ successMsg: 'A new email has been sent to your inbox!' });
         break;
       default:
         throw new Error('Unknown view option!');
@@ -111,7 +114,7 @@ class ResetPasswordPage extends React.Component {
 
   render() {
     const { match: { params: { token } } } = this.props;
-    const { view, disabled, errorMsg } = this.state;
+    const { view, disabled, errorMsg, successMsg } = this.state;
     const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
@@ -135,7 +138,9 @@ class ResetPasswordPage extends React.Component {
           onServerErrorHook={this.handleServerError}
           onSucessHook={this.handleSucess}
         />
+        {disabled && <Loading className="center mt2" />}
         <Alert type="error" content={errorMsg} className="mt2" />
+        <Alert type="success" content={successMsg} className="mt2" />
         {view === 'resetPassword' && (
           <p className="center mt2">
             <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>

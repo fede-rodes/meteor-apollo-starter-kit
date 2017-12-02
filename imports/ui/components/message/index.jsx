@@ -12,6 +12,7 @@ const Div = styled.div`
     'black'
   };
   font-size: 14px;
+  padding: 5px 0;
 `;
 
 Div.propTypes = {
@@ -21,7 +22,7 @@ Div.propTypes = {
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Message = ({ type, content, ...rest }) => (
-  <Div type={type} {...rest}>{content}</Div>
+  content ? <Div type={type} {...rest}>{content}</Div> : null
 );
 
 Message.propTypes = {

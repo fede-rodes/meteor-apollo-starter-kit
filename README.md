@@ -48,6 +48,11 @@ meteor --extra-packages bundle-visualizer --production --settings settings-dev.j
 
 Then got to: [http://localhost:3000/](http://localhost:3000/)
 
+Finding dependencies:
+```
+npm ls <lib-name>
+```
+
 Before deploying to production, if you used --extra-packages, simply remove bundle-visualizer from the list of included packages and run meteor as normal.
 
 ### Deploy to heroku
@@ -99,7 +104,7 @@ OR
 - react helmet
 - PWA: push notifications + sync (take a look at workbox)
 - tests
-
+- https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
 

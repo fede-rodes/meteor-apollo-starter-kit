@@ -88,9 +88,9 @@ class LinkExpiredPage extends React.Component {
             Please, <Link to="/auth">login</Link> to be able to resend confirmation link.
           </p>
         )}
-        {disabled && <Loading />}
-        <Alert type="error" content={errorMsg} className="mt1" />
-        <Alert type="success" content={successMsg} className="mt1" />
+        {disabled && <Loading className="center mt2" />}
+        <Alert type="error" content={errorMsg} className="mt2" />
+        <Alert type="success" content={successMsg} className="mt2" />
       </div>
     );
   }
