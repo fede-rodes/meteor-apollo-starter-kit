@@ -15,5 +15,5 @@ Meteor.startup(() => {
   } */
 
   // Inject react app
-  render(<App />, document.getElementById('app'));
+  render(<App />, document.getElementById('root'));
 });

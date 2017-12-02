@@ -9,17 +9,5 @@
   "facebook": {
     "appId": "FACEBOOK_APPID",
     "secret": "FACEBOOK_SECRET"
-  },
-  "googleMaps": {
-    "apiKey": "GOOGLEMAPS_APIKEY"
-  },
-  "stripeSecret": "STRIPE_SECRETKEY",
-  "herokuDNS": "https://<NAME>.herokuapp.com",
-  "public": {
-    "facebook": {
-      "appId": "FACEBOOK_APPID",
-      "commentsUrl": "http//facebook.com"
-    },
-    "stripePublic": "STRIPE_PUBLICKEY"
   }
 }

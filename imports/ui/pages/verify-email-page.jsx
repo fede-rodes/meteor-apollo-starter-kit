@@ -1,18 +1,16 @@
+import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { withApollo, compose } from 'react-apollo';
-import message from 'antd/lib/message'; // for js
-import 'antd/lib/message/style/css'; // for css
-import Loading from '../components/loading.jsx';
+import Loading from '../components/loading/index.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 class VerifyEmailPage extends React.Component {
   componentWillMount() {
-    const { history, client, match } = this.props;
+    const { history, match } = this.props;
     const token = (match && match.params && match.params.token) || '';
 
     // QUESTION: what about Accounts._verifyEmailToken?
@@ -23,8 +21,10 @@ class VerifyEmailPage extends React.Component {
         console.log(`[router] ${err.reason}`);
         history.push('/link-expired');
       } else {
-        message.success('Account verified successfully. Thanks!');
-        client.resetStore();
+        const handler = Meteor.setTimeout(() => {
+          alert('Account verified successfully. Thanks!');
+          Meteor.clearTimeout(handler);
+        }, 1000);
         history.push('/');
       }
     });
@@ -39,9 +39,6 @@ VerifyEmailPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  client: PropTypes.shape({
-    resetStore: PropTypes.func.isRequired,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string,
@@ -49,9 +46,5 @@ VerifyEmailPage.propTypes = {
   }).isRequired,
 };
 
-const enhance = compose(
-  withRouter, // To have access to history.push
-  withApollo, // To have access to client.resetStore()
-);
-
-export default enhance(VerifyEmailPage);
+// Router integration. To have access to history.push
+export default withRouter(VerifyEmailPage);

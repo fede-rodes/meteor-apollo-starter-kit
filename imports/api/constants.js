@@ -1,9 +1,9 @@
 /**
- * @namespace Constants.
+ * @namespace Constants
  */
 const Constants = {
-  SITE_BRAND: 'SITE_BRAND',
-  DOMAIN_NAME: 'DOMAIN_NAME',
+  SITE_BRAND: 'yourBrand',
+  DOMAIN_NAME: 'yourbrand.com',
 };
 
 export default Constants;

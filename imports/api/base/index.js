@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { extend } from 'lodash';
+import extend from 'lodash/extend';
 
 /**
  * @namespace Base
@@ -8,6 +8,9 @@ import { extend } from 'lodash';
 const Base = {};
 
 // Load client-side, both utilities
+if (Meteor.isClient) {
+  // TODO
+}
 
 // Load server-only utilities
 if (Meteor.isServer) {

@@ -1,11 +1,7 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import Alert from 'antd/lib/alert'; // for js
-import 'antd/lib/alert/style/css'; // for css
-import { propType } from 'graphql-anywhere';
-import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
-import Loading from '../components/loading.jsx';
+import Loading from '../components/loading/index.jsx';
+import Alert from '../components/alert/index.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -14,77 +10,83 @@ class WelcomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
-      serverError: '',
-      successMessage: '',
+      disabled: false,
+      errorMsg: '',
+      successMsg: '',
     };
+    this.enableBtn = this.enableBtn.bind(this);
+    this.disableBtn = this.disableBtn.bind(this);
+    this.clearMessages = this.clearMessages.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
     this.handleServerError = this.handleServerError.bind(this);
     this.handleSucess = this.handleSucess.bind(this);
+    this.renderLink = this.renderLink.bind(this);
+  }
+
+  enableBtn() {
+    this.setState({ disabled: false });
+  }
+
+  disableBtn() {
+    this.setState({ disabled: true });
+  }
+
+  clearMessages() {
+    this.setState({ errorMsg: '', successMsg: '' });
   }
 
   handleBefore() {
-    // OBSERVATION: this hook allows you to trigger some action
-    // before the resend link request is sent or simply interrupt the
-    // normal flow by throwing an error.
-    this.setState({
-      loading: true,
-      serverError: '',
-      successMessage: '',
-    });
+    // OBSERVATION: this hook allows you to trigger some action(s)
+    // before the login request is sent or simply interrupt the normal
+    // login flow by throwing an error.
+    this.disableBtn();
+    this.clearMessages();
   }
 
   handleServerError(err) {
     console.log(err);
-    this.setState({
-      loading: false,
-      serverError: err.message || 'Unexpected error',
-    });
+    this.setState({ errorMsg: err.reason || err.message || 'Unexpected error' });
+    this.enableBtn();
   }
 
   handleSucess() {
-    this.setState({
-      loading: false,
-      successMessage: 'A new email has been sent to you inbox!',
-    });
+    this.enableBtn();
+    this.setState({ successMsg: 'A new email has been sent to your inbox!' });
+  }
+
+  renderLink() {
+    const { disabled } = this.state;
+
+    return disabled ? (
+      <span>here</span>
+    ) : (
+      <ResendVerificationLink
+        text="here"
+        onBeforeHook={this.handleBefore}
+        onServerErrorHook={this.handleServerError}
+        onSucessHook={this.handleSucess}
+      />
+    );
   }
 
   render() {
-    const { loading, serverError, successMessage } = this.state;
+    const { disabled, errorMsg, successMsg } = this.state;
 
     return (
       <div className="full-width">
         <h1 className="center">Thanks for joining!</h1>
         <p className="center mt1">
           <strong>Check your email</strong> and click on the link provided to confirm your account.
-          <br />
-          If you did not receive an email, click&nbsp;
-          <ResendVerificationLink
-            text="here"
-            onBeforeHook={this.handleBefore}
-            onServerErrorHook={this.handleServerError}
-            onSucessHook={this.handleSucess}
-          />
-          &nbsp;to resend the confirmation link.
         </p>
-        {loading && <Loading />}
-        {serverError && serverError.length > 0 && (
-          <Alert type="error" message={serverError} className="mt1" banner />
-        )}
-        {successMessage && successMessage.length > 0 && (
-          <Alert type="success" message={successMessage} className="mt1" banner />
-        )}
+        <p className="center">
+          If you did not receive an email, click {this.renderLink()} to resend the confirmation link.
+        </p>
+        {disabled && <Loading className="center mt2" />}
+        <Alert type="error" content={errorMsg} className="mt2" />
+        <Alert type="success" content={successMsg} className="mt2" />
       </div>
     );
   }
 }
-
-WelcomePage.propTypes = {
-  curUser: propType(userFragment),
-};
-
-WelcomePage.defaultProps = {
-  curUser: null,
-};
 
 export default WelcomePage;

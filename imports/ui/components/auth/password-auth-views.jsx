@@ -2,16 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Form from 'antd/lib/form'; // for js
-import 'antd/lib/form/style/css'; // for css
-import Input from 'antd/lib/input'; // for js
-import 'antd/lib/input/style/css'; // for css
-import Button from 'antd/lib/button'; // for js
-import 'antd/lib/button/style/css'; // for css
-import Icon from 'antd/lib/icon'; // for js
-import 'antd/lib/icon/style/css'; // for css
-
-const FormItem = Form.Item;
+import Form from '../form/index.jsx';
+import Fieldset from '../fieldset/index.jsx';
+import Label from '../label/index.jsx';
+import Input from '../input/index.jsx';
+import Message from '../message/index.jsx';
+import Button from '../button/index.jsx';
+import ErrorHandling from '../../../api/error-handling.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -28,7 +25,72 @@ const STATES = {
 class PasswordAuthViews extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      email: '',
+      password: '',
+      errors: { email: [], password: [] },
+    };
+    this.isActiveField = this.isActiveField.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.validateFields = this.validateFields.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  isActiveField(field) {
+    const { view } = this.props;
+
+    // Get list of active fields for the current view ('email' and/or 'password')
+    const activeFields = STATES[view].fields;
+
+    // Return whether or not the given field is in the active list
+    return activeFields.indexOf(field) !== -1;
+  }
+
+  handleChange(evt) {
+    const field = evt.target.id;
+    const value = evt.target.value;
+    const errors = this.state.errors;
+
+    // Update value and clear errors for the given field
+    this.setState({
+      [field]: value,
+      errors: ErrorHandling.clearErrors(errors, field),
+    });
+  }
+
+  validateFields({ email, password }) {
+    // Initialize errors
+    const errors = {
+      email: [],
+      password: [],
+    };
+
+    const MIN_CHARS = 6;
+    const MAX_CHARS = 30;
+
+    if (this.isActiveField('email')) {
+      // Sanitize input
+      const _email = email && email.trim(); // eslint-disable-line
+
+      if (!_email) {
+        errors.email.push('Email is required!');
+      } else if (!ErrorHandling.isValidEmail(_email)) {
+        errors.email.push('Please, provide a valid email address!');
+      } else if (_email.length > MAX_CHARS) {
+        errors.email.push(`Must be no more than ${MAX_CHARS} characters!`);
+      }
+    }
+
+    if (this.isActiveField('password')) {
+      // Do not sanitize password, spaces are valid characters in this case
+      if (!password) {
+        errors.password.push('Password is required!');
+      } else if (password.length < MIN_CHARS) {
+        errors.password.push(`Please, at least ${MIN_CHARS} characters long!`);
+      }
+    }
+
+    return errors;
   }
 
   handleSubmit(evt) {
@@ -41,7 +103,6 @@ class PasswordAuthViews extends React.Component {
       onClientErrorHook,
       onServerErrorHook,
       onSucessHook,
-      form,
     } = this.props;
 
     // Run before logic if provided and return on error
@@ -51,116 +112,125 @@ class PasswordAuthViews extends React.Component {
       return; // return silently
     }
 
-    form.validateFields((err1, { email, password }) => {
-      if (err1) {
-        onClientErrorHook(err1);
-      } else {
-        switch (view) {
-          case 'login': {
-            Meteor.loginWithPassword(email, password, (err2) => {
-              if (err2) {
-                onServerErrorHook(err2);
-              } else {
-                onSucessHook();
-              }
-            });
-            break;
+    // Get field values
+    const { email, password } = this.state;
+
+    // Clear previous errors if any
+    this.setState({ errors: { email: [], password: [] } });
+
+    // Validate fields
+    const err1 = this.validateFields({ email, password });
+
+    // In case of errors, display on UI and return handler to parent component
+    if (ErrorHandling.hasErrors(err1)) {
+      this.setState({ errors: err1 });
+      onClientErrorHook(err1);
+      return;
+    }
+
+    switch (view) {
+      case 'login': {
+        Meteor.loginWithPassword(email, password, (err2) => {
+          if (err2) {
+            onServerErrorHook(err2);
+          } else {
+            onSucessHook();
           }
-          case 'signup': {
-            Accounts.createUser({ email, password }, (err2) => {
-              if (err2) {
-                onServerErrorHook(err2);
-              } else {
-                // OBSERVATION: see /entry-points/server/configs/accounts-config.js
-                // for sendVerificationEmail logic
-                onSucessHook();
-              }
-            });
-            break;
-          }
-          case 'forgotPassword': {
-            Accounts.forgotPassword({ email }, (err2) => {
-              if (err2) {
-                onServerErrorHook(err2);
-              } else {
-                this.setState({ serverSuccess: 'A new email has been sent to your inbox!' });
-                onSucessHook();
-              }
-            });
-            break;
-          }
-          case 'resetPassword': {
-            Accounts.resetPassword(token, password, (err2) => {
-              if (err2) {
-                onServerErrorHook(err2);
-              } else {
-                onSucessHook();
-              }
-            });
-            break;
-          }
-          default:
-            onClientErrorHook('Unknown view option!');
-            break;
-        }
+        });
+        break;
       }
-    });
+      case 'signup': {
+        Accounts.createUser({ email, password }, (err2) => {
+          if (err2) {
+            onServerErrorHook(err2);
+          } else {
+            // OBSERVATION: see /entry-points/server/configs/accounts-config.js
+            // for sendVerificationEmail logic
+            onSucessHook();
+          }
+        });
+        break;
+      }
+      case 'forgotPassword': {
+        Accounts.forgotPassword({ email }, (err2) => {
+          if (err2) {
+            onServerErrorHook(err2);
+          } else {
+            this.setState({ serverSuccess: 'A new email has been sent to your inbox!' });
+            onSucessHook();
+          }
+        });
+        break;
+      }
+      case 'resetPassword': {
+        Accounts.resetPassword(token, password, (err2) => {
+          if (err2) {
+            onServerErrorHook(err2);
+          } else {
+            onSucessHook();
+          }
+        });
+        break;
+      }
+      default:
+        onClientErrorHook('Unknown view option!');
+        break;
+    }
   }
 
   render() {
-    const { view, btnText, disabled, form: { getFieldDecorator } } = this.props;
-    const { fields } = STATES[view];
+    const { email, password, errors } = this.state;
+    const { btnLabel, disabled } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="mt2">
-        {fields.indexOf('email') !== -1 && (
-          <FormItem label="Email">
-            {getFieldDecorator('email', {
-              validateTrigger: 'onSubmit',
-              rules: [
-                { required: true, message: 'Email is required' },
-                { type: 'email', message: 'Please, provide a valid email address' },
-                { max: 100, message: 'Must be no more than 100 characters!' },
-              ],
-            })(
-              <Input
-                type="text"
-                prefix={<Icon type="mail" />}
-                placeholder="Email"
-              />,
-            )}
-          </FormItem>
+        {this.isActiveField('email') && (
+          <Fieldset className="mt2">
+            <Label htmlFor="email" required>
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={this.handleChange}
+            />
+            <Message
+              type="error"
+              content={ErrorHandling.getFieldErrors(errors, 'email')}
+            />
+          </Fieldset>
         )}
-        {fields.indexOf('password') !== -1 && (
-          <FormItem label="Password">
-            {getFieldDecorator('password', {
-              validateTrigger: 'onSubmit',
-              rules: [
-                { required: true, message: 'Password is required' },
-                { min: 6, message: 'Please, at least 6 characters long' },
-                { max: 100, message: 'Must be no more than 100 characters!' },
-              ],
-            })(
-              <Input
-                type="password"
-                prefix={<Icon type="lock" />}
-                placeholder="Password"
-              />,
-            )}
-          </FormItem>
+        {this.isActiveField('password') && (
+          <Fieldset className="mt2">
+            <Label htmlFor="password" required>
+              Password
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={this.handleChange}
+            />
+            <Message
+              type="error"
+              content={ErrorHandling.getFieldErrors(errors, 'password')}
+            />
+          </Fieldset>
         )}
-        <FormItem>
+        <Fieldset className="mt3">
           <Button
-            type="primary"
-            htmlType="submit"
+            type="submit"
+            variant="primary"
             disabled={disabled}
-            loading={disabled}
             size="large"
-            className="full-width"
+            expanded
           >
-            {btnText}
+            {btnLabel}
           </Button>
-        </FormItem>
+        </Fieldset>
       </Form>
     );
   }
@@ -174,7 +244,7 @@ PasswordAuthViews.propTypes = {
     'resetPassword',
   ]).isRequired,
   token: PropTypes.string,
-  btnText: PropTypes.string,
+  btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
@@ -184,7 +254,7 @@ PasswordAuthViews.propTypes = {
 
 PasswordAuthViews.defaultProps = {
   token: '',
-  btnText: 'Submit',
+  btnLabel: 'Submit',
   disabled: false,
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
@@ -192,4 +262,4 @@ PasswordAuthViews.defaultProps = {
   onSucessHook: () => {},
 };
 
-export default Form.create()(PasswordAuthViews);
+export default PasswordAuthViews;

@@ -1,28 +1,53 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { withApollo, compose } from 'react-apollo';
-import message from 'antd/lib/message'; // for js
-import 'antd/lib/message/style/css'; // for css
 import { PasswordAuthViews } from '../components/auth/index.js';
+import Loading from '../components/loading/index.jsx';
+import Alert from '../components/alert/index.jsx';
 
+//------------------------------------------------------------------------------
+// COMPONENT STATES:
+//------------------------------------------------------------------------------
+const STATES = {
+  resetPassword: {
+    title: 'Reset your Password',
+    // subtitle: '',
+    // linkTo: '',
+    // linkLabel: '',
+    btnLabel: 'Reset Password',
+  },
+  forgotPassword: {
+    title: 'Forgot your Password?',
+    subtitle: `
+      We&apos;ll send a link to your email to reset<br />
+      your password and get you back on track.
+    `,
+    // linkTo: '',
+    // linkLabel: '',
+    btnLabel: 'Send Link',
+  },
+};
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 class ResetPasswordPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { view: 'resetPassword', disabled: false };
-    this.handleViewChange = this.handleViewChange.bind(this);
+    this.state = {
+      view: 'resetPassword',
+      disabled: false,
+      errorMsg: '',
+      successMsg: '',
+    };
     this.enableBtn = this.enableBtn.bind(this);
     this.disableBtn = this.disableBtn.bind(this);
+    this.clearMessages = this.clearMessages.bind(this);
+    this.changeViewTo = this.changeViewTo.bind(this);
     this.handleBefore = this.handleBefore.bind(this);
-    this.handleError = this.handleError.bind(this);
+    this.handleClientError = this.handleClientError.bind(this);
+    this.handleServerError = this.handleServerError.bind(this);
     this.handleSucess = this.handleSucess.bind(this);
-  }
-
-  handleViewChange(view) {
-    this.setState({ view });
   }
 
   enableBtn() {
@@ -33,31 +58,54 @@ class ResetPasswordPage extends React.Component {
     this.setState({ disabled: true });
   }
 
-  handleBefore() {
-    // OBSERVATION: this hook allows you to trigger some action
-    // before the login request is sent or simply interrupt the
-    // login flow by throwing an error.
-    this.disableBtn();
+  clearMessages() {
+    this.setState({ errorMsg: '', successMsg: '' });
   }
 
-  handleError(err) {
+  changeViewTo(to) {
+    return (evt) => {
+      evt.preventDefault();
+      this.clearMessages();
+      this.setState({ view: to });
+    };
+  }
+
+  handleBefore() {
+    // OBSERVATION: this hook allows you to trigger some action(s)
+    // before the login request is sent or simply interrupt the normal
+    // login flow by throwing an error.
+    this.disableBtn();
+    this.clearMessages();
+  }
+
+  handleClientError(err) {
     console.log(err);
+    this.enableBtn();
+  }
+
+  handleServerError(err) {
+    console.log(err);
+    this.setState({ errorMsg: err.reason || err.message || 'Unexpected error' });
     this.enableBtn();
   }
 
   handleSucess() {
     const { view } = this.state;
-    const { history, client } = this.props;
+    const { history } = this.props;
 
     switch (view) {
-      case 'resetPassword':
-        client.resetStore();
+      case 'resetPassword': {
         this.enableBtn();
-        message.success('Password reset successfully!');
+        const handler = Meteor.setTimeout(() => {
+          alert('Password reset successfully!');
+          Meteor.clearTimeout(handler);
+        }, 1000);
         history.push('/');
         break;
+      }
       case 'forgotPassword':
         this.enableBtn();
+        this.setState({ successMsg: 'A new email has been sent to your inbox!' });
         break;
       default:
         throw new Error('Unknown view option!');
@@ -65,20 +113,49 @@ class ResetPasswordPage extends React.Component {
   }
 
   render() {
-    const { view, disabled } = this.state;
     const { match: { params: { token } } } = this.props;
+    const { view, disabled, errorMsg, successMsg } = this.state;
+    const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
-      <PasswordAuthViews
-        view={view}
-        onViewChange={this.handleViewChange}
-        token={token}
-        disabled={disabled}
-        onBeforeHook={this.handleBefore}
-        onClientErrorHook={this.handleError}
-        onServerErrorHook={this.handleError}
-        onSucessHook={this.handleSucess}
-      />
+      <div className="full-width">
+        <h1 className="center">{title}</h1>
+        <p className="center">
+          <span dangerouslySetInnerHTML={{ __html: subtitle }} />
+          {linkTo && linkLabel && (
+            <a href={`/${linkTo}`} onClick={this.changeViewTo(linkTo)}>
+              {linkLabel}
+            </a>
+          )}
+        </p>
+        <PasswordAuthViews
+          view={view}
+          btnLabel={btnLabel}
+          token={token}
+          disabled={disabled}
+          onBeforeHook={this.handleBefore}
+          onClientErrorHook={this.handleClientError}
+          onServerErrorHook={this.handleServerError}
+          onSucessHook={this.handleSucess}
+        />
+        {disabled && <Loading className="center mt2" />}
+        <Alert type="error" content={errorMsg} className="mt2" />
+        <Alert type="success" content={successMsg} className="mt2" />
+        {view === 'resetPassword' && (
+          <p className="center mt2">
+            <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
+              Resend reset password link
+            </a>
+          </p>
+        )}
+        {view === 'forgotPassword' && (
+          <p className="center mt2">
+            <a href="/login" onClick={this.changeViewTo('resetPassword')}>
+              Reset password
+            </a>
+          </p>
+        )}
+      </div>
     );
   }
 }
@@ -87,9 +164,6 @@ ResetPasswordPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  client: PropTypes.shape({
-    resetStore: PropTypes.func.isRequired,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string,
@@ -97,9 +171,5 @@ ResetPasswordPage.propTypes = {
   }).isRequired,
 };
 
-const enhance = compose(
-  withRouter, // To have access to history.push
-  withApollo, // To have access to client.resetStore()
-);
-
-export default enhance(ResetPasswordPage);
+// Router integration. To have access to history.push
+export default withRouter(ResetPasswordPage);

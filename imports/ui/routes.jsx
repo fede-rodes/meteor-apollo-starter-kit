@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import userFragment from './apollo-client/fragments/user.graphql';
@@ -14,7 +13,6 @@ import WelcomePage from './pages/welcome-page.jsx';
 import VerifyEmailPage from './pages/verify-email-page.jsx';
 import LinkExpiredPage from './pages/link-expired-page.jsx';
 import HomePage from './pages/home-page.jsx';
-import ChoosePlanPage from './pages/choose-plan-page.jsx';
 import NotFoundPage from './pages/not-found-page.jsx';
 
 //------------------------------------------------------------------------------
@@ -27,24 +25,16 @@ const Routes = props => (
       name="home"
       path="/"
       component={HomePage}
-      // loggedOutRedirectTo="/auth"
-      loggedOutOverlayComponent={AuthPage}
-      notVerifiedOverlayComponent={WelcomePage}
+      // redirectTo="/auth"
+      overlay={AuthPage}
+      emailNotVerifiedOverlay={WelcomePage}
       {...props}
     />
-    <LoggedInRoute
-      exact
-      name="choosePlan"
-      path="/choose-plan"
-      component={ChoosePlanPage}
-      // loggedOutRedirectTo="/auth"
-      loggedOutOverlayComponent={AuthPage}
-      notVerifiedOverlayComponent={WelcomePage}
-      {...props}
-    />
-    {/* The following route can be removed when using overlayComponent, just
-      fix the login link at link-expired-page.jsx (simply redirect user to
-      /home or any other loggedIn route) */}
+    {/*
+      The following route can be removed when using overlay strategy (above),
+      just fix the login link at link-expired-page.jsx (simply redirect user to
+      home ('/') or any other loggedIn route)
+    */}
     <LoggedOutRoute
       name="auth"
       path="/auth"

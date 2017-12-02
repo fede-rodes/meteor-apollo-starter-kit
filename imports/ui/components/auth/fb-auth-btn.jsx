@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'antd/lib/button'; // for js
-import 'antd/lib/button/style/css'; // for css
+import Button from '../button/index.jsx';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -34,27 +33,25 @@ class FBAuthBtn extends React.Component {
       } else {
         // OBSERVATION: this code is only reachable when using FB loginStyle
         // equals 'popup' at serviceConfiguration. In case loginStyle equals
-        // 'redirect' we'll need to get the user tokens from the cookie since
-        // we wont be able to call resetStore.
+        // 'redirect' you'll need to use Accounts.onLogin() to listen to state
+        // changes. See GlobalDataProvider.componentWillMount().
         onSucessHook();
       }
     });
   }
 
   render() {
-    const { btnText, disabled } = this.props;
+    const { btnLabel, disabled } = this.props;
 
     return (
       <Button
-        type="primary"
-        htmlType="submit"
+        variant="primary"
         disabled={disabled}
-        loading={disabled}
         size="large"
-        className="full-width"
+        expanded
         onClick={this.handleClick}
       >
-        {btnText}
+        {btnLabel}
       </Button>
     );
   }
@@ -62,7 +59,7 @@ class FBAuthBtn extends React.Component {
 
 FBAuthBtn.propTypes = {
   requestPermissions: PropTypes.arrayOf(PropTypes.string),
-  btnText: PropTypes.string.isRequired,
+  btnLabel: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
