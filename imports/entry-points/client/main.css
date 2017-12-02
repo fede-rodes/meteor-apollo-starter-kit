@@ -8,17 +8,8 @@ html, body, #root {
 }
 
 a {
-  color: blue !important;
+  color: blue;
 }
 
 .full-width { width: 100%; }
 .full-height { height: 100%; }
-.full-vh { height: 100vh; }
-.full-vw { width: 100vw; }
-.black { color: black; }
-.success { color: green; }
-.danger { color: #f04134; }
-.dark-grey { color: #C0BFBF; }
-.line-through { text-decoration: line-through; }
-.pointer { cursor: pointer };
-.link { color: blue; text-decoration: underline; }
