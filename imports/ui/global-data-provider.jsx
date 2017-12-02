@@ -1,5 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-import { Tracker } from 'meteor/tracker';
+import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
@@ -17,9 +16,9 @@ import Loading from './components/loading.jsx';
  */
 class GlobalDataProvider extends React.Component {
   componentWillMount() {
-    // Refecth user data every time login state changes
-    Tracker.autorun(() => {
-      Meteor.userId();
+    // Refecth user data every time Meteor.loginTokens are set. This is required
+    // when using FB loginStyle equals to 'redirect' at serviceConfiguration,
+    Accounts.onLogin(() => {
       this.props.userData.refetch();
     });
   }

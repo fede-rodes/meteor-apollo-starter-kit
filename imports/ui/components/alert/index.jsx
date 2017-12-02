@@ -5,33 +5,39 @@ import styled from 'styled-components';
 //------------------------------------------------------------------------------
 // STYLES:
 //------------------------------------------------------------------------------
-const Span = styled.span`
-  color: ${props =>
+const Div = styled.div`
+  background-color: ${props =>
+    (props.type === 'error' && '#fcdbd9') ||
+    (props.type === 'success' && '#cfefdf') ||
+    'white'
+  };
+  border: 1px solid ${props =>
     (props.type === 'error' && 'tomato') ||
     (props.type === 'success' && 'green') ||
     'black'
   };
   font-size: 14px;
+  padding: 10px 15px;
 `;
 
-Span.propTypes = {
+Div.propTypes = {
   type: PropTypes.oneOf(['error', 'success']).isRequired,
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const Message = ({ type, content }) => (
-  content ? <Span type={type}>{content}</Span> : null
+const Alert = ({ type, content }) => (
+  content ? <Div type={type}>{content}</Div> : null
 );
 
-Message.propTypes = {
+Alert.propTypes = {
   type: PropTypes.oneOf(['error', 'success']).isRequired,
   content: PropTypes.string,
 };
 
-Message.defaultProps = {
+Alert.defaultProps = {
   content: '',
 };
 //------------------------------------------------------------------------------
 
-export default Message;
+export default Alert;

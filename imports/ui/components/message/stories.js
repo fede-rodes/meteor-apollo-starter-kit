@@ -3,16 +3,19 @@ import { storiesOf } from '@storybook/react';
 // import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
 import { host } from 'storybook-host';
-/* import Input from './index.jsx';
+import Message from './index.jsx';
 
-storiesOf('Input', module)
+storiesOf('Message', module)
   .addDecorator(host({
     align: 'center middle',
     width: '60%',
   }))
-  .add('Input placeholder', () => (
-    <Input placeholder="I'm the placeholder" />
+  .add('Message success', () => (
+    <Message type="success" content="I'm the content" />
   ))
-  .add('Input value', () => (
-    <Input value="I'm the value" />
-  )); */
+  .add('Message error', () => (
+    <Message type="error" content="I'm the content" />
+  ))
+  .add('Message no content', () => (
+    <Message type="error" content="" />
+  ));

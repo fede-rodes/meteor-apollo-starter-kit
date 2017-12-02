@@ -2,24 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Form from 'antd/lib/form'; // for js
-// import 'antd/lib/form/style/css'; // for css
-// import Input from 'antd/lib/input'; // for js
-// import 'antd/lib/input/style/css'; // for css
-// import Button from 'antd/lib/button'; // for js
-// import 'antd/lib/button/style/css'; // for css
-// import Icon from 'antd/lib/icon'; // for js
-// import 'antd/lib/icon/style/css'; // for css
 import Form from '../form/index.jsx';
 import Fieldset from '../fieldset/index.jsx';
 import Label from '../label/index.jsx';
 import Input from '../input/index.jsx';
 import Message from '../message/index.jsx';
 import Button from '../button/index.jsx';
-import AuxFunctions from '../../api/aux-functions.js';
-import ErrorHandling from '../../api/error-handling.js';
-
-// const FormItem = Form.Item;
+import ErrorHandling from '../../../api/error-handling.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -29,6 +18,17 @@ const STATES = {
   signup: { fields: ['email', 'password'] },
   forgotPassword: { fields: ['email'] },
   resetPassword: { fields: ['password'] },
+};
+//------------------------------------------------------------------------------
+// AUX FUNCTIONS:
+//------------------------------------------------------------------------------
+// Determine if a given field is being used (active) for the current view
+const isActiveField = (view, field) => {
+  // Get list of active fields for the current view ('email' and/or 'password')
+  const activeFields = STATES[view].fields;
+
+  // Return whether or not the given field is in the active list
+  return activeFields.indexOf(field) !== -1;
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -51,7 +51,7 @@ class PasswordAuthViews extends React.Component {
     const value = evt.target.value;
     const errors = this.state.errors;
 
-    // Update and clear erros for the given field
+    // Update value and clear errors for the given field
     this.setState({
       [field]: value,
       errors: ErrorHandling.clearErrors(errors, field),
@@ -62,40 +62,34 @@ class PasswordAuthViews extends React.Component {
     // Get current view ('login', 'signup', 'forgotPassword', 'resetPassword')
     const { view } = this.props;
 
-    // Get active fields for the current view ('email' and/or 'password')
-    const activeFields = STATES[view].fields;
-
-    // Determine if a given field is active for the current view
-    const isActiveField = field => activeFields.indexOf(field) !== -1;
-
     // Initialize errors
     const errors = {
       email: [],
       password: [],
     };
 
+    // Validate active fields
     const MIN_CHARS = 6;
     const MAX_CHARS = 30;
 
-    // Sanitize inputs
-    const _email = email.trim(); // eslint-disable-line
-    const _password = password.trim(); // eslint-disable-line
+    if (isActiveField(view, 'email')) {
+      // Sanitize input
+      const _email = email && email.trim(); // eslint-disable-line
 
-    // Validate active fields
-    if (isActiveField('email')) {
       if (!_email) {
         errors.email.push('Email is required!');
-      } else if (!AuxFunctions.isValidEmail(_email)) {
+      } else if (!ErrorHandling.isValidEmail(_email)) {
         errors.email.push('Please, provide a valid email address!');
       } else if (_email.length > MAX_CHARS) {
         errors.email.push(`Must be no more than ${MAX_CHARS} characters!`);
       }
     }
 
-    if (isActiveField('password')) {
-      if (!_password) {
+    if (isActiveField(view, 'password')) {
+      // Do not sanitize password, spaces are valid characters in this case
+      if (!password) {
         errors.password.push('Password is required!');
-      } else if (_password.length < MIN_CHARS) {
+      } else if (password.length < MIN_CHARS) {
         errors.password.push(`Please, at least ${MIN_CHARS} characters long!`);
       }
     }
@@ -122,22 +116,18 @@ class PasswordAuthViews extends React.Component {
       return; // return silently
     }
 
-    const form = evt.currentTarget.elements;
-    const email = form.email.value;
-    const password = form.password.value;
+    // Get field value
+    const { email, password } = this.state;
 
-    console.log(
-      'email', email,
-      'password', password,
-    );
+    // Clear previous errors if any
+    this.setState({ errors: { email: [], password: [] } });
 
-    // TODO: clear errors
-
-    const errors = this.validateFields({ email, password });
-
-
-    const err1 = null;
-    if (err1) {
+    // Check for errors
+    const err1 = this.validateFields({ email, password });
+    if (ErrorHandling.hasErrors(err1)) {
+      // Display errors on UI
+      this.setState({ errors: err1 });
+      // Return handler to client
       onClientErrorHook(err1);
       return;
     }
@@ -211,7 +201,10 @@ class PasswordAuthViews extends React.Component {
               value={email}
               onChange={this.handleChange}
             />
-            {/* <Message type="error" content={getFirstError(errors, 'email')} /> */}
+            <Message
+              type="error"
+              content={ErrorHandling.getFieldErrors(errors, 'email')}
+            />
           </Fieldset>
         )}
         {fields.indexOf('password') !== -1 && (
@@ -226,7 +219,10 @@ class PasswordAuthViews extends React.Component {
               value={password}
               onChange={this.handleChange}
             />
-            {/* <Message type="error" content={getFirstError(errors, 'password')} /> */}
+            <Message
+              type="error"
+              content={ErrorHandling.getFieldErrors(errors, 'password')}
+            />
           </Fieldset>
         )}
         <Fieldset className="mt3">

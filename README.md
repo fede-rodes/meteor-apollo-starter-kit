@@ -74,6 +74,7 @@ OR
 
 ### TODO LIST
 - get rid of ant design (too heavy)
+- replace check with simpl-schema in ErrorHandling and other places
 - storybook: we need a global and a local theme for each component
 - welcome screen: open your email btn
 - css outside imports folder (lazy load) is better for performance?

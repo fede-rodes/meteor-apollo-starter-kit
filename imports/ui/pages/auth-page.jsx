@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
-import DisplayMsg from '../components/display-msg.jsx';
+import Alert from '../components/alert/index.jsx';
 
 //------------------------------------------------------------------------------
 // AUX COMPONENT:
@@ -103,7 +103,7 @@ class AuthPage extends React.Component {
 
   handleClientError(err) {
     console.log(err);
-    this.setState({ errorMsg: err });
+    // this.setState({ errorMsg: err });
     this.enableBtn();
   }
 
@@ -166,9 +166,9 @@ class AuthPage extends React.Component {
           onSucessHook={this.handleSucess}
         />
         {service === 'password' && (
-          <div>
-            <DisplayMsg type="error" msg={errorMsg} />
-            <DisplayMsg type="success" msg={successMsg} />
+          <div className="mt2">
+            <Alert type="error" content={errorMsg} />
+            <Alert type="success" content={successMsg} />
           </div>
         )}
         {view === 'login' && (
@@ -210,9 +210,9 @@ class AuthPage extends React.Component {
           </div>
         )}
         {service === 'facebook' && (
-          <div>
-            <DisplayMsg type="error" msg={errorMsg} />
-            <DisplayMsg type="success" msg={successMsg} />
+          <div className="mt2">
+            <Alert type="error" content={errorMsg} />
+            <Alert type="success" content={successMsg} />
           </div>
         )}
       </div>
