@@ -15,10 +15,10 @@ Lighthouse audit:
 - Meteor accounts (password & facebook)
 - ES6 syntax
 - [styled components](https://youtu.be/qu4U7lwZTRI)
-- ant design
+- service worker (Progressive Web App)
+- Storybook
 - sanitize.css
 - basscss
-- Progressive Web App
 
 ### Running the app
 ```
@@ -49,7 +49,6 @@ meteor --extra-packages bundle-visualizer --production --settings settings-dev.j
 Then got to: [http://localhost:3000/](http://localhost:3000/)
 
 Before deploying to production, if you used --extra-packages, simply remove bundle-visualizer from the list of included packages and run meteor as normal.
-
 
 #### Deploy to heroku
 ```
@@ -93,14 +92,12 @@ OR
 - Better to load from DNS?
 
 - dynamic imports
-- bundle-visualizer to see what is taking up the most memory.
 - ssr to speed-up first load and SEO
   - https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
 
 
 - react helmet
 - PWA: push notifications + sync (take a look at workbox)
-- clean Redux folder
 - tests
 
 - https://www.webpagetest.org
@@ -131,5 +128,5 @@ Accounts.onResetPasswordLink((token, done) => {
 ### DONE BUT COULD BE IMPROVED
 - welcome page/loggedInRoute check for current loggedIn service instead
 
-### UI components library with styled components:
+### UI components library built with styled components:
 - https://ak-mk-2-prod.netlify.com/packages/elements/datetime-picker
