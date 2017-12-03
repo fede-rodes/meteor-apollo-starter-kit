@@ -118,7 +118,7 @@ class ResetPasswordPage extends React.Component {
     const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
-      <div className="full-width">
+      <div>
         <h1 className="center">{title}</h1>
         <p className="center">
           <span dangerouslySetInnerHTML={{ __html: subtitle }} />
@@ -138,18 +138,18 @@ class ResetPasswordPage extends React.Component {
           onServerErrorHook={this.handleServerError}
           onSucessHook={this.handleSucess}
         />
-        {disabled && <Loading className="center mt2" />}
-        <Alert type="error" content={errorMsg} className="mt2" />
-        <Alert type="success" content={successMsg} className="mt2" />
+        {disabled && <Loading className="center" />}
+        <Alert type="error" content={errorMsg} />
+        <Alert type="success" content={successMsg} />
         {view === 'resetPassword' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
               Resend reset password link
             </a>
           </p>
         )}
         {view === 'forgotPassword' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/login" onClick={this.changeViewTo('resetPassword')}>
               Reset password
             </a>

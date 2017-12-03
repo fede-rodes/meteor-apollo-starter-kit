@@ -9,6 +9,7 @@ import Button from '../button/index.jsx';
 const LogoutBtn = ({ disabled, onLogoutHook }) => (
   <Button
     disabled={disabled}
+    className="my2"
     onClick={() => Meteor.logout(onLogoutHook)}
   >
     Log out

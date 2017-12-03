@@ -76,7 +76,7 @@ class LinkExpiredPage extends React.Component {
     const { disabled, errorMsg, successMsg } = this.state;
 
     return (
-      <div className="full-width">
+      <div>
         <h1 className="center">The link has expired!</h1>
         {curUser ? (
           <p className="center">
@@ -87,9 +87,9 @@ class LinkExpiredPage extends React.Component {
             Please, <Link to="/auth">login</Link> to be able to resend confirmation link.
           </p>
         )}
-        {disabled && <Loading className="center mt2" />}
-        <Alert type="error" content={errorMsg} className="mt2" />
-        <Alert type="success" content={successMsg} className="mt2" />
+        {disabled && <Loading className="center" />}
+        <Alert type="error" content={errorMsg} />
+        <Alert type="success" content={successMsg} />
       </div>
     );
   }

@@ -49,6 +49,7 @@ class FBAuthBtn extends React.Component {
         disabled={disabled}
         size="large"
         expanded
+        className="my2"
         onClick={this.handleClick}
       >
         {btnLabel}

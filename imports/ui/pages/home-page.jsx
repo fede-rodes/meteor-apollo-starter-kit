@@ -9,9 +9,11 @@ import { LogoutBtn } from '../components/auth/index.js';
 // COMPONENT:
 //------------------------------------------------------------------------------
 const HomePage = ({ client, curUser }) => (
-  <div className="full-width">
+  <div>
+    <pre style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
+      {JSON.stringify(curUser, null, 2)}
+    </pre>
     <LogoutBtn onLogoutHook={() => client.resetStore()} />
-    <pre>{JSON.stringify(curUser, null, 2)}</pre>
   </div>
 );
 

@@ -183,7 +183,7 @@ class PasswordAuthViews extends React.Component {
     const { btnLabel, disabled } = this.props;
 
     return (
-      <Form onSubmit={this.handleSubmit} className="mt2">
+      <Form onSubmit={this.handleSubmit} className="my2">
         {this.isActiveField('email') && (
           <Fieldset className="mt2">
             <Label htmlFor="email" required>

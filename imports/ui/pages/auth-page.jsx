@@ -128,7 +128,7 @@ class AuthPage extends React.Component {
     const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
-      <div className="full-width">
+      <div>
         <h1 className="center">{title}</h1>
         <p className="center">
           <span dangerouslySetInnerHTML={{ __html: subtitle }} />
@@ -149,20 +149,20 @@ class AuthPage extends React.Component {
         />
         {service === 'password' && (
           <div>
-            {disabled && <Loading className="center mt2" />}
-            <Alert type="error" content={errorMsg} className="mt2" />
-            <Alert type="success" content={successMsg} className="mt2" />
+            {disabled && <Loading className="center" />}
+            <Alert type="error" content={errorMsg} />
+            <Alert type="success" content={successMsg} />
           </div>
         )}
         {view === 'login' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
               Forgot password?
             </a>
           </p>
         )}
         {view === 'forgotPassword' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/login" onClick={this.changeViewTo('login')}>
               Log in
             </a>
@@ -173,8 +173,8 @@ class AuthPage extends React.Component {
           </p>
         )}
         {['login', 'signup'].indexOf(view) !== -1 && (
-          <div className="full-width">
-            <div className="full-width center p2">
+          <div>
+            <div className="center">
               - OR -
             </div>
             <FBAuthBtn
@@ -189,9 +189,9 @@ class AuthPage extends React.Component {
         )}
         {service === 'facebook' && (
           <div>
-            {disabled && <Loading className="center mt2" />}
-            <Alert type="error" content={errorMsg} className="mt2" />
-            <Alert type="success" content={successMsg} className="mt2" />
+            {disabled && <Loading className="center" />}
+            <Alert type="error" content={errorMsg} />
+            <Alert type="success" content={successMsg} />
           </div>
         )}
       </div>

@@ -46,7 +46,7 @@ cd app/
 meteor --extra-packages bundle-visualizer --production --settings settings-dev.json
 ```
 
-Then got to: [http://localhost:3000/](http://localhost:3000/)
+Then go to: [http://localhost:3000/](http://localhost:3000/)
 
 Finding dependencies:
 ```
