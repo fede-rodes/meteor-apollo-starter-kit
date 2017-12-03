@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const Title = ({ children, ...rest }) => (
-  <h1 className="center" {...rest}>{children}</h1>
+const Title = ({ children }) => (
+  <h1 className="center">{children}</h1>
 );
 
 Title.propTypes = {
