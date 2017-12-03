@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Title from '../components/title/index.jsx';
+import Title from '../components/title/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

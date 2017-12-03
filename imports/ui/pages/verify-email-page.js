@@ -3,7 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import Loading from '../components/loading/index.jsx';
+import Loading from '../components/loading/index.js';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

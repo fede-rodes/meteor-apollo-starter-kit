@@ -1,9 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-// import { action } from '@storybook/addon-actions';
-// import { linkTo } from '@storybook/addon-links';
 import { host } from 'storybook-host';
-import Alert from './index.jsx';
+import Alert from './index.js';
 
 storiesOf('Alert', module)
   .addDecorator(host({

@@ -2,12 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Form from '../form/index.jsx';
-import Fieldset from '../fieldset/index.jsx';
-import Label from '../label/index.jsx';
-import Input from '../input/index.jsx';
-import Message from '../message/index.jsx';
-import Button from '../button/index.jsx';
+import Form from '../form/index.js';
+import Fieldset from '../fieldset/index.js';
+import Label from '../label/index.js';
+import Input from '../input/index.js';
+import Message from '../message/index.js';
+import Button from '../button/index.js';
 import ErrorHandling from '../../../api/error-handling.js';
 
 //------------------------------------------------------------------------------

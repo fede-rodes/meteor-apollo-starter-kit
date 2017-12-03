@@ -6,9 +6,9 @@ import ApolloClient from 'apollo-client';
 import { ThemeProvider } from 'styled-components';
 import Theme from './theme.js';
 import createReduxStore from './redux/store.js';
-import GlobalDataProvider from './global-data-provider.jsx';
-import DefaultLayout from './layouts/default/index.jsx';
-import Routes from './routes.jsx';
+import GlobalDataProvider from './global-data-provider.js';
+import DefaultLayout from './layouts/default/index.js';
+import Routes from './routes.js';
 
 // To get started, create an ApolloClient instance and point it at your GraphQL
 // server (handled in our case by meteor-apollo). By default, this client will

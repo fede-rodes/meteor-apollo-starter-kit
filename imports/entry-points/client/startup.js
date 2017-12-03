@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import 'sanitize.css/sanitize.css';
 import 'basscss/css/basscss.min.css';
 import './main.css';
-import App from '../../ui/app.jsx';
+import App from '../../ui/app.js';
 
 Meteor.startup(() => {
   // Register service worker

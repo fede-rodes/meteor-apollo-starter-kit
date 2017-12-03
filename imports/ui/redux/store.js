@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 // import { createLogger } from 'redux-logger'; // DISABLE ON PRODUCTION
-// import DevTools from './dev-tools.jsx'; // DISABLE ON PRODUCTION
+// import DevTools from './dev-tools.js'; // DISABLE ON PRODUCTION
 import createRootReducer from './root-reducer.js';
 
 //------------------------------------------------------------------------------

@@ -88,7 +88,7 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- clean layout style
+- implement Label required
 - storybook: clean theme usage
 - welcome screen: open your email btn
 - dynamic imports
