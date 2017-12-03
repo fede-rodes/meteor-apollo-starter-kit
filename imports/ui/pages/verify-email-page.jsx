@@ -15,7 +15,6 @@ class VerifyEmailPage extends React.Component {
 
     // QUESTION: what about Accounts._verifyEmailToken?
 
-    // Verify email account using token
     Accounts.verifyEmail(token, (err) => {
       if (err) {
         console.log(`[router] ${err.reason}`);

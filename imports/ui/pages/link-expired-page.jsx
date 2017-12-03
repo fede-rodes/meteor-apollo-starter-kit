@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/auth/index.js';
+import Title from '../components/title/index.jsx';
 import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
@@ -77,7 +78,7 @@ class LinkExpiredPage extends React.Component {
 
     return (
       <div>
-        <h1 className="center">The link has expired!</h1>
+        <Title>The link has expired!</Title>
         {curUser ? (
           <p className="center">
             Please, click {this.renderLink()} to resend confirmation link.

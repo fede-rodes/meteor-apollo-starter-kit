@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { ResendVerificationLink, LogoutBtn } from '../components/auth/index.js';
+import Title from '../components/title/index.jsx';
 import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
@@ -76,7 +77,7 @@ class WelcomePage extends React.Component {
 
     return (
       <div>
-        <h1 className="center">Thanks for joining!</h1>
+        <Title>Thanks for joining!</Title>
         <p className="center">
           <strong>Check your email</strong> and click on the link provided to confirm your account.
         </p>

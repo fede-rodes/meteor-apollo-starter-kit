@@ -1,5 +1,6 @@
 import React from 'react';
 import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
+import Title from '../components/title/index.jsx';
 import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
@@ -129,7 +130,7 @@ class AuthPage extends React.Component {
 
     return (
       <div>
-        <h1 className="center">{title}</h1>
+        <Title>{title}</Title>
         <p className="center">
           <span dangerouslySetInnerHTML={{ __html: subtitle }} />
           {linkTo && linkLabel && (

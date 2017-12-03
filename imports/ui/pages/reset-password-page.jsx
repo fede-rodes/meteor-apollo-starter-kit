@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { PasswordAuthViews } from '../components/auth/index.js';
+import Title from '../components/title/index.jsx';
 import Loading from '../components/loading/index.jsx';
 import Alert from '../components/alert/index.jsx';
 
@@ -119,7 +120,7 @@ class ResetPasswordPage extends React.Component {
 
     return (
       <div>
-        <h1 className="center">{title}</h1>
+        <Title>{title}</Title>
         <p className="center">
           <span dangerouslySetInnerHTML={{ __html: subtitle }} />
           {linkTo && linkLabel && (
