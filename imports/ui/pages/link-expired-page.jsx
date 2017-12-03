@@ -60,11 +60,10 @@ class LinkExpiredPage extends React.Component {
   renderLink() {
     const { disabled } = this.state;
 
-    return disabled ? (
-      <span>here</span>
-    ) : (
+    return (
       <ResendVerificationLink
-        text="here"
+        label="here"
+        disabled={disabled}
         onBeforeHook={this.handleBefore}
         onServerErrorHook={this.handleServerError}
         onSucessHook={this.handleSucess}

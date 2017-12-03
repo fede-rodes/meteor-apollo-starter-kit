@@ -88,14 +88,9 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- need a message/alert component such as s-alert or Bert
-- fix layout style
-- replace check with simpl-schema in ErrorHandling and other places
-- storybook: we need a global and a local theme for each component
+- clean layout style
+- storybook: clean theme usage
 - welcome screen: open your email btn
-- css outside imports folder (lazy load) is better for performance?
-- Better to load from DNS?
-
 - dynamic imports
 - ssr to speed-up first load and SEO
   - https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
@@ -107,7 +102,8 @@ OR
 - https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
-
+- css outside imports folder (lazy load) is better for performance?
+- Better to load from DNS?
 
 What about this? We are not using it:
 https://guide.meteor.com/accounts.html

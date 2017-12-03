@@ -171,5 +171,5 @@ ResetPasswordPage.propTypes = {
   }).isRequired,
 };
 
-// Router integration. To have access to history.push
+// withRouter provides access to history.push()
 export default withRouter(ResetPasswordPage);

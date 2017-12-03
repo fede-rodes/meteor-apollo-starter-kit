@@ -9,7 +9,7 @@ import App from '../../ui/app.jsx';
 Meteor.startup(() => {
   // Register service worker
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js') // maybe remove scope , { scope: './' }
+    navigator.serviceWorker.register('/sw.js')
     .then(() => console.info('Service worker is registered!'))
     .catch(err => console.info('ServiceWorker registration failed: ', err));
   }
