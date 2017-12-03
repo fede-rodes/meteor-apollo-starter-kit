@@ -3,7 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import Loading from '../components/loading/index.jsx';
+import Loading from '../components/loading';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -15,7 +15,6 @@ class VerifyEmailPage extends React.Component {
 
     // QUESTION: what about Accounts._verifyEmailToken?
 
-    // Verify email account using token
     Accounts.verifyEmail(token, (err) => {
       if (err) {
         console.log(`[router] ${err.reason}`);
@@ -46,5 +45,5 @@ VerifyEmailPage.propTypes = {
   }).isRequired,
 };
 
-// Router integration. To have access to history.push
+// withRouter provides access to history.push()
 export default withRouter(VerifyEmailPage);

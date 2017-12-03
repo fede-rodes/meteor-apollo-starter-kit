@@ -2,9 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { PasswordAuthViews } from '../components/auth/index.js';
-import Loading from '../components/loading/index.jsx';
-import Alert from '../components/alert/index.jsx';
+import { PasswordAuthViews } from '../components/auth';
+import Title from '../components/title';
+import Subtitle from '../components/subtitle';
+import Loading from '../components/loading';
+import Alert from '../components/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -118,16 +120,16 @@ class ResetPasswordPage extends React.Component {
     const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
-      <div className="full-width">
-        <h1 className="center">{title}</h1>
-        <p className="center">
-          <span dangerouslySetInnerHTML={{ __html: subtitle }} />
-          {linkTo && linkLabel && (
-            <a href={`/${linkTo}`} onClick={this.changeViewTo(linkTo)}>
-              {linkLabel}
-            </a>
-          )}
-        </p>
+      <div>
+        <Title>{title}</Title>
+        {view === 'forgotPassword' && (
+          <Subtitle
+            text={subtitle}
+            linkTo={linkTo}
+            linkLabel={linkLabel}
+            onLinkClick={this.changeViewTo(linkTo)}
+          />
+        )}
         <PasswordAuthViews
           view={view}
           btnLabel={btnLabel}
@@ -138,18 +140,18 @@ class ResetPasswordPage extends React.Component {
           onServerErrorHook={this.handleServerError}
           onSucessHook={this.handleSucess}
         />
-        {disabled && <Loading className="center mt2" />}
-        <Alert type="error" content={errorMsg} className="mt2" />
-        <Alert type="success" content={successMsg} className="mt2" />
+        {disabled && <Loading className="center" />}
+        <Alert type="error" content={errorMsg} />
+        <Alert type="success" content={successMsg} />
         {view === 'resetPassword' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
               Resend reset password link
             </a>
           </p>
         )}
         {view === 'forgotPassword' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/login" onClick={this.changeViewTo('resetPassword')}>
               Reset password
             </a>
@@ -171,5 +173,5 @@ ResetPasswordPage.propTypes = {
   }).isRequired,
 };
 
-// Router integration. To have access to history.push
+// withRouter provides access to history.push()
 export default withRouter(ResetPasswordPage);

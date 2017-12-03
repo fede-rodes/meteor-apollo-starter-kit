@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Form from '../form/index.jsx';
-import Fieldset from '../fieldset/index.jsx';
-import Label from '../label/index.jsx';
-import Input from '../input/index.jsx';
-import Message from '../message/index.jsx';
-import Button from '../button/index.jsx';
-import ErrorHandling from '../../../api/error-handling.js';
+import Form from '../form';
+import Fieldset from '../fieldset';
+import Label from '../label';
+import Input from '../input';
+import Message from '../message';
+import Button from '../button';
+import ErrorHandling from '../../../api/error-handling';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -144,7 +144,7 @@ class PasswordAuthViews extends React.Component {
           if (err2) {
             onServerErrorHook(err2);
           } else {
-            // OBSERVATION: see /entry-points/server/configs/accounts-config.js
+            // OBSERVATION: see /entry-points/server/configs/accounts-config
             // for sendVerificationEmail logic
             onSucessHook();
           }
@@ -183,7 +183,7 @@ class PasswordAuthViews extends React.Component {
     const { btnLabel, disabled } = this.props;
 
     return (
-      <Form onSubmit={this.handleSubmit} className="mt2">
+      <Form onSubmit={this.handleSubmit} className="my2">
         {this.isActiveField('email') && (
           <Fieldset className="mt2">
             <Label htmlFor="email" required>

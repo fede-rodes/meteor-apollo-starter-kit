@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
-import { ResendVerificationLink } from '../components/auth/index.js';
-import Loading from '../components/loading/index.jsx';
-import Alert from '../components/alert/index.jsx';
+import { ResendVerificationLink } from '../components/auth';
+import Title from '../components/title';
+import Loading from '../components/loading';
+import Alert from '../components/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -60,11 +61,10 @@ class LinkExpiredPage extends React.Component {
   renderLink() {
     const { disabled } = this.state;
 
-    return disabled ? (
-      <span>here</span>
-    ) : (
+    return (
       <ResendVerificationLink
-        text="here"
+        label="here"
+        disabled={disabled}
         onBeforeHook={this.handleBefore}
         onServerErrorHook={this.handleServerError}
         onSucessHook={this.handleSucess}
@@ -77,8 +77,8 @@ class LinkExpiredPage extends React.Component {
     const { disabled, errorMsg, successMsg } = this.state;
 
     return (
-      <div className="full-width">
-        <h1 className="center">The link has expired!</h1>
+      <div>
+        <Title>The link has expired!</Title>
         {curUser ? (
           <p className="center">
             Please, click {this.renderLink()} to resend confirmation link.
@@ -88,9 +88,9 @@ class LinkExpiredPage extends React.Component {
             Please, <Link to="/auth">login</Link> to be able to resend confirmation link.
           </p>
         )}
-        {disabled && <Loading className="center mt2" />}
-        <Alert type="error" content={errorMsg} className="mt2" />
-        <Alert type="success" content={successMsg} className="mt2" />
+        {disabled && <Loading className="center" />}
+        <Alert type="error" content={errorMsg} />
+        <Alert type="success" content={successMsg} />
       </div>
     );
   }

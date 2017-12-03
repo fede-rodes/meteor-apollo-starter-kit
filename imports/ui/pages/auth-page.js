@@ -1,7 +1,9 @@
 import React from 'react';
-import { PasswordAuthViews, FBAuthBtn } from '../components/auth/index.js';
-import Loading from '../components/loading/index.jsx';
-import Alert from '../components/alert/index.jsx';
+import { PasswordAuthViews, FBAuthBtn } from '../components/auth';
+import Title from '../components/title';
+import Subtitle from '../components/subtitle';
+import Loading from '../components/loading';
+import Alert from '../components/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -128,16 +130,14 @@ class AuthPage extends React.Component {
     const { title, subtitle, linkTo, linkLabel, btnLabel } = STATES[view];
 
     return (
-      <div className="full-width">
-        <h1 className="center">{title}</h1>
-        <p className="center">
-          <span dangerouslySetInnerHTML={{ __html: subtitle }} />
-          {linkTo && linkLabel && (
-            <a href={`/${linkTo}`} onClick={this.changeViewTo(linkTo)}>
-              {linkLabel}
-            </a>
-          )}
-        </p>
+      <div>
+        <Title>{title}</Title>
+        <Subtitle
+          text={subtitle}
+          linkTo={linkTo}
+          linkLabel={linkLabel}
+          onLinkClick={this.changeViewTo(linkTo)}
+        />
         <PasswordAuthViews
           view={view}
           btnLabel={btnLabel}
@@ -149,20 +149,20 @@ class AuthPage extends React.Component {
         />
         {service === 'password' && (
           <div>
-            {disabled && <Loading className="center mt2" />}
-            <Alert type="error" content={errorMsg} className="mt2" />
-            <Alert type="success" content={successMsg} className="mt2" />
+            {disabled && <Loading className="center" />}
+            <Alert type="error" content={errorMsg} />
+            <Alert type="success" content={successMsg} />
           </div>
         )}
         {view === 'login' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
               Forgot password?
             </a>
           </p>
         )}
         {view === 'forgotPassword' && (
-          <p className="center mt2">
+          <p className="center">
             <a href="/login" onClick={this.changeViewTo('login')}>
               Log in
             </a>
@@ -173,8 +173,8 @@ class AuthPage extends React.Component {
           </p>
         )}
         {['login', 'signup'].indexOf(view) !== -1 && (
-          <div className="full-width">
-            <div className="full-width center p2">
+          <div>
+            <div className="center">
               - OR -
             </div>
             <FBAuthBtn
@@ -189,9 +189,9 @@ class AuthPage extends React.Component {
         )}
         {service === 'facebook' && (
           <div>
-            {disabled && <Loading className="center mt2" />}
-            <Alert type="error" content={errorMsg} className="mt2" />
-            <Alert type="success" content={successMsg} className="mt2" />
+            {disabled && <Loading className="center" />}
+            <Alert type="error" content={errorMsg} />
+            <Alert type="success" content={successMsg} />
           </div>
         )}
       </div>

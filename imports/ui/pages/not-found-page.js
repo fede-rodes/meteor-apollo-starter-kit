@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Title from '../components/title';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const NotFoundPage = () => (
-  <div className="full-width">
-    <h1 className="center">404 - Page Not Found</h1>
+  <div>
+    <Title>404 - Page Not Found</Title>
     <p className="center">Back to <Link to="/">Home</Link></p>
   </div>
 );

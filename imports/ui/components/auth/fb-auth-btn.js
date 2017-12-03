@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../button/index.jsx';
+import Button from '../button';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -49,6 +49,7 @@ class FBAuthBtn extends React.Component {
         disabled={disabled}
         size="large"
         expanded
+        className="my2"
         onClick={this.handleClick}
       >
         {btnLabel}

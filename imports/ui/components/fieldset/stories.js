@@ -1,18 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-// import { action } from '@storybook/addon-actions';
-// import { linkTo } from '@storybook/addon-links';
 import { host } from 'storybook-host';
-/* import Input from './index.jsx';
+import Fieldset from './index';
 
-storiesOf('Input', module)
+storiesOf('Fieldset', module)
   .addDecorator(host({
     align: 'center middle',
     width: '60%',
   }))
-  .add('Input placeholder', () => (
-    <Input placeholder="I'm the placeholder" />
-  ))
-  .add('Input value', () => (
-    <Input value="I'm the value" />
-  )); */
+  .add('Fieldset placeholder', () => (
+    <Fieldset>
+      I&apos;m inside a Fieldset
+    </Fieldset>
+  ));

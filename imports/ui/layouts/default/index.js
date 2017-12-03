@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Header from './header.jsx';
+import Header from './header';
 
 //------------------------------------------------------------------------------
 // STYLES:
 //------------------------------------------------------------------------------
-const Block = styled.div`
-  width: 100%;
+const Outer = styled.div`
+  min-height: 100vh;
+`;
+//------------------------------------------------------------------------------
+const Container = styled.div`
   max-width: 420px;
-  height: 100%;
   min-height: 420px;
+`;
+//------------------------------------------------------------------------------
+const Inner = styled.div`
   padding: 30px;
   background-color: white;
   box-shadow: 0 6px 15px rgba(36,37,38,0.08);
@@ -20,14 +25,14 @@ const Block = styled.div`
 // COMPONENT:
 //------------------------------------------------------------------------------
 const DefaultLayout = ({ children, ...rest }) => (
-  <div className="flex flex-column justify-around items-center">
-    <Header />
-    <Block className="flex justify-center items-center">
-      <div className="flex flex-column justify-between full-width">
+  <Outer className="flex justify-around items-center">
+    <Container className="full-width">
+      <Header />
+      <Inner className="flex flex-column justify-between">
         {React.cloneElement(children, { ...rest })}
-      </div>
-    </Block>
-  </div>
+      </Inner>
+    </Container>
+  </Outer>
 );
 
 DefaultLayout.propTypes = {

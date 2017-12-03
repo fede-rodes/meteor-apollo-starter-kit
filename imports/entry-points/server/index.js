@@ -1,11 +1,11 @@
 // Import your server-side configs
-import './apollo-server.js';
-import './configs/index.js';
-import './startup.js';
+import './apollo-server';
+import './configs';
+import './startup';
 
 // Import all your server-side collections
-// import '../../api/installers/collection.js';
-// import '../../api/customers/collection.js';
+// import '../../api/installers/collection';
+// import '../../api/customers/collection';
 
 // Import cronjobs
-// import './cron-jobs/<cron-job-name>.js';
+// import './cron-jobs/<cron-job-name>';

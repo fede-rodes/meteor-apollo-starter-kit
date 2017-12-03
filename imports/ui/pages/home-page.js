@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
-import { LogoutBtn } from '../components/auth/index.js';
+import { LogoutBtn } from '../components/auth';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const HomePage = ({ client, curUser }) => (
-  <div className="full-width">
+  <div>
+    <pre style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
+      {JSON.stringify(curUser, null, 2)}
+    </pre>
     <LogoutBtn onLogoutHook={() => client.resetStore()} />
-    <pre>{JSON.stringify(curUser, null, 2)}</pre>
   </div>
 );
 

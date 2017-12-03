@@ -38,17 +38,21 @@ class ResendVerificationLink extends React.Component {
   }
 
   render() {
-    const { text } = this.props;
-    return (
+    const { label, disabled } = this.props;
+
+    return disabled ? (
+      <span>{label}</span>
+    ) : (
       <a href="" onClick={this.handleClick}>
-        {text}
+        {label}
       </a>
     );
   }
 }
 
 ResendVerificationLink.propTypes = {
-  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
   sendVerificationEmail: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
@@ -56,6 +60,7 @@ ResendVerificationLink.propTypes = {
 };
 
 ResendVerificationLink.defaultProps = {
+  disabled: false,
   onBeforeHook: () => {},
   onServerErrorHook: () => {},
   onSucessHook: () => {},

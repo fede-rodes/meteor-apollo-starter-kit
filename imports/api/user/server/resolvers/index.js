@@ -1,6 +1,6 @@
-import User from './user.js';
-import Query from './query.js';
-import Mutation from './mutation.js';
+import User from './user';
+import Query from './query';
+import Mutation from './mutation';
 
 // User namespace resolvers
 const resolvers = {

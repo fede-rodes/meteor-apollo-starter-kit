@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
-import { propType } from 'graphql-anywhere';
-import { ResendVerificationLink, LogoutBtn } from '../components/auth/index.js';
-import Loading from '../components/loading/index.jsx';
-import Alert from '../components/alert/index.jsx';
+import { ResendVerificationLink, LogoutBtn } from '../components/auth';
+import Title from '../components/title';
+import Loading from '../components/loading';
+import Alert from '../components/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -60,11 +60,10 @@ class WelcomePage extends React.Component {
   renderLink() {
     const { disabled } = this.state;
 
-    return disabled ? (
-      <span>here</span>
-    ) : (
+    return (
       <ResendVerificationLink
-        text="here"
+        label="here"
+        disabled={disabled}
         onBeforeHook={this.handleBefore}
         onServerErrorHook={this.handleServerError}
         onSucessHook={this.handleSucess}
@@ -77,17 +76,17 @@ class WelcomePage extends React.Component {
     const { disabled, errorMsg, successMsg } = this.state;
 
     return (
-      <div className="full-width">
-        <h1 className="center">Thanks for joining!</h1>
-        <p className="center mt1">
+      <div>
+        <Title>Thanks for joining!</Title>
+        <p className="center">
           <strong>Check your email</strong> and click on the link provided to confirm your account.
         </p>
         <p className="center">
           If you did not receive an email, click {this.renderLink()} to resend the confirmation link.
         </p>
-        {disabled && <Loading className="center mt2" />}
-        <Alert type="error" content={errorMsg} className="mt2" />
-        <Alert type="success" content={successMsg} className="mt2" />
+        {disabled && <Loading className="center" />}
+        <Alert type="error" content={errorMsg} />
+        <Alert type="success" content={successMsg} />
         <LogoutBtn onLogoutHook={() => client.resetStore()} />
       </div>
     );

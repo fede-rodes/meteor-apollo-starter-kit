@@ -15,7 +15,7 @@ if (Meteor.isClient) {
 // Load server-only utilities
 if (Meteor.isServer) {
   import types from './server/types.graphql';
-  import resolvers from './server/resolvers/index.js';
+  import resolvers from './server/resolvers';
 
   extend(Base, { types, resolvers });
 }

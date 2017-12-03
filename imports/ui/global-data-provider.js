@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import userFragment from './apollo-client/fragments/user.graphql';
 import userQuery from './apollo-client/queries/user.graphql';
-import Loading from './components/loading/index.jsx';
+import Loading from './components/loading';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
