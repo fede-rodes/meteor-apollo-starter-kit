@@ -1,5 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
-import Constants from '../../../api/constants.js';
+import Constants from '../../../api/constants';
 
 //------------------------------------------------------------------------------
 // EMAIL TEMPLATES

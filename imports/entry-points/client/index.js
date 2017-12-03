@@ -1,1 +1,1 @@
-import './startup.js';
+import './startup';

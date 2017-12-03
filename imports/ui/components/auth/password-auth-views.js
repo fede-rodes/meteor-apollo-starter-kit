@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Form from '../form/index.js';
-import Fieldset from '../fieldset/index.js';
-import Label from '../label/index.js';
-import Input from '../input/index.js';
-import Message from '../message/index.js';
-import Button from '../button/index.js';
-import ErrorHandling from '../../../api/error-handling.js';
+import Form from '../form';
+import Fieldset from '../fieldset';
+import Label from '../label';
+import Input from '../input';
+import Message from '../message';
+import Button from '../button';
+import ErrorHandling from '../../../api/error-handling';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -144,7 +144,7 @@ class PasswordAuthViews extends React.Component {
           if (err2) {
             onServerErrorHook(err2);
           } else {
-            // OBSERVATION: see /entry-points/server/configs/accounts-config.js
+            // OBSERVATION: see /entry-points/server/configs/accounts-config
             // for sendVerificationEmail logic
             onSucessHook();
           }

@@ -1,6 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
 import { GraphQLError } from 'graphql';
-import collection from '../collection.js';
+import collection from '../collection';
 
 // Attach namespace to collection for clarity
 const User = { collection };

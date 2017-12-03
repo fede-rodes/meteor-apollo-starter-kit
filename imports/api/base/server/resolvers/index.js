@@ -1,4 +1,4 @@
-import Date from './date.js';
+import Date from './date';
 
 // Date namespace resolvers
 const resolvers = {

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../button/index.js';
+import Button from '../button';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

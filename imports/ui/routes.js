@@ -6,14 +6,14 @@ import {
   LoggedInRoute,
   LoggedOutRoute,
   RouteWithProps,
-} from './components/route-wrappers/index.js';
-import AuthPage from './pages/auth-page.js';
-import ResetPasswordPage from './pages/reset-password-page.js';
-import WelcomePage from './pages/welcome-page.js';
-import VerifyEmailPage from './pages/verify-email-page.js';
-import LinkExpiredPage from './pages/link-expired-page.js';
-import HomePage from './pages/home-page.js';
-import NotFoundPage from './pages/not-found-page.js';
+} from './components/route-wrappers';
+import AuthPage from './pages/auth-page';
+import ResetPasswordPage from './pages/reset-password-page';
+import WelcomePage from './pages/welcome-page';
+import VerifyEmailPage from './pages/verify-email-page';
+import LinkExpiredPage from './pages/link-expired-page';
+import HomePage from './pages/home-page';
+import NotFoundPage from './pages/not-found-page';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -32,7 +32,7 @@ const Routes = props => (
     />
     {/*
       The following route can be removed when using overlay strategy (above),
-      just fix the login link at link-expired-page.js (simply redirect user to
+      just fix the login link at link-expired-page (simply redirect user to
       home ('/') or any other loggedIn route)
     */}
     <LoggedOutRoute

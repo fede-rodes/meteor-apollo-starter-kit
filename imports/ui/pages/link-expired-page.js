@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
-import { ResendVerificationLink } from '../components/auth/index.js';
-import Title from '../components/title/index.js';
-import Loading from '../components/loading/index.js';
-import Alert from '../components/alert/index.js';
+import { ResendVerificationLink } from '../components/auth';
+import Title from '../components/title';
+import Loading from '../components/loading';
+import Alert from '../components/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

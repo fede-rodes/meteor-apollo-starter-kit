@@ -89,6 +89,7 @@ OR
 
 ### TODO LIST
 - implement Label required
+- theme --> small letters
 - storybook: clean theme usage
 - welcome screen: open your email btn
 - dynamic imports

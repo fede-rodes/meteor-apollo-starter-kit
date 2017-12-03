@@ -1,8 +1,8 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { mergeTypes } from 'merge-graphql-schemas';
 import merge from 'lodash/merge';
-import Base from '../../base/index.js';
-import User from '../../user/index.js';
+import Base from '../../base';
+import User from '../../user';
 
 const typeDefs = mergeTypes([
   Base.types,

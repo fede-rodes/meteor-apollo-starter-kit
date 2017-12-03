@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { host } from 'storybook-host';
-import Button from './index.js';
+import Button from './index';
 
 storiesOf('Button', module)
   .addDecorator(host({

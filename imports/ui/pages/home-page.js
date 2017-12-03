@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
-import { LogoutBtn } from '../components/auth/index.js';
+import { LogoutBtn } from '../components/auth';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

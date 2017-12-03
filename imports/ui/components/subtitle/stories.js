@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { host } from 'storybook-host';
-import Subtitle from './index.js';
+import Subtitle from './index';
 
 storiesOf('Subtitle', module)
   .addDecorator(host({

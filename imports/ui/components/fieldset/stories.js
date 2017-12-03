@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { host } from 'storybook-host';
-import Fieldset from './index.js';
+import Fieldset from './index';
 
 storiesOf('Fieldset', module)
   .addDecorator(host({

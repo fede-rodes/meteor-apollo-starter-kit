@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { host } from 'storybook-host';
-import Input from './index.js';
+import Input from './index';
 
 storiesOf('Input', module)
   .addDecorator(host({
