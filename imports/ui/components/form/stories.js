@@ -14,7 +14,7 @@ storiesOf('Form', module)
   .add('Form', () => (
     <Form>
       <Fieldset>
-        <Label htmlFor="label" required>
+        <Label htmlFor="label">
           Label
         </Label>
         <Input

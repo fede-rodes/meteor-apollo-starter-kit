@@ -87,6 +87,8 @@ class PasswordAuthViews extends React.Component {
         errors.password.push('Password is required!');
       } else if (password.length < MIN_CHARS) {
         errors.password.push(`Please, at least ${MIN_CHARS} characters long!`);
+      } else if (password.length > MAX_CHARS) {
+        errors.password.push(`Must be no more than ${MAX_CHARS} characters!`);
       }
     }
 
@@ -186,7 +188,7 @@ class PasswordAuthViews extends React.Component {
       <Form onSubmit={this.handleSubmit} className="my2">
         {this.isActiveField('email') && (
           <Fieldset className="mt2">
-            <Label htmlFor="email" required>
+            <Label htmlFor="email">
               Email
             </Label>
             <Input
@@ -204,7 +206,7 @@ class PasswordAuthViews extends React.Component {
         )}
         {this.isActiveField('password') && (
           <Fieldset className="mt2">
-            <Label htmlFor="password" required>
+            <Label htmlFor="password">
               Password
             </Label>
             <Input

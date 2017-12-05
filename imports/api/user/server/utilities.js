@@ -20,7 +20,7 @@ utilities.checkLoggedInAndVerified = (userId) => {
     throw new GraphQLError('The user is not registered in our database');
   }
 
-  // TODO: use currentlyLoogedInService instead
+  // TODO: use current loggedIn service instead
   const isPasswordService = Object.keys(user.services).indexOf('password') !== -1;
   const isEmailVerified = isPasswordService && user.emails[0].verified === true;
   if (isPasswordService && !isEmailVerified) {

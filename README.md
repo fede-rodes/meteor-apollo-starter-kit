@@ -88,18 +88,12 @@ OR
 - https://youtu.be/cmGr0RszHc8
 
 ### TODO LIST
-- implement Label required
-- theme --> small letters
-- storybook: clean theme usage
-- welcome screen: open your email btn
-- dynamic imports
-- ssr to speed-up first load and SEO
-  - https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
 
+- https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
 
-- react helmet
-- PWA: push notifications + sync (take a look at workbox)
 - tests
+- react helmet
+- ssr to speed-up first load and SEO
 - https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
@@ -126,9 +120,6 @@ Accounts.onResetPasswordLink((token, done) => {
   });
 })
 ```
-
-### DONE BUT COULD BE IMPROVED
-- welcome page/loggedInRoute check for current loggedIn service instead
 
 ### UI components library built with styled components:
 - https://ak-mk-2-prod.netlify.com/packages/elements/datetime-picker

@@ -1,4 +1,4 @@
-const Theme = {
+const theme = {
   defaultColor: 'grey',
   primaryColor: 'blue',
   dangerColor: 'tomato',
@@ -10,4 +10,4 @@ const Theme = {
   baseFontFamily: 'Lato, "Helvetica Neue", Arial, Helvetica',
 };
 
-export default Theme;
+export default theme;
