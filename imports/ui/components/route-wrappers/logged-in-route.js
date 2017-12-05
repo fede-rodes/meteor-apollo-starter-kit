@@ -33,7 +33,7 @@ const LoggedInRoute = ({
         return resolver;
       }
 
-      // TODO: use currentlyLoogedInService instead of all available services
+      // TODO: use current loggedIn service instead of all available services
       const isPasswordService = curUser.services.indexOf('password') !== -1;
       const isEmailVerified = isPasswordService && curUser.emails[0].verified === true;
 
