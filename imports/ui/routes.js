@@ -6,7 +6,7 @@ import {
   LoggedInRoute,
   LoggedOutRoute,
   RouteWithProps,
-} from './components/route-wrappers';
+} from './components/smart/route-wrappers';
 import AuthPage from './pages/auth-page';
 import ResetPasswordPage from './pages/reset-password-page';
 import WelcomePage from './pages/welcome-page';

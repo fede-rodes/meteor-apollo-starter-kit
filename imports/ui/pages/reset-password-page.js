@@ -2,11 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { PasswordAuthViews } from '../components/auth';
-import Title from '../components/title';
-import Subtitle from '../components/subtitle';
-import Loading from '../components/loading';
-import Alert from '../components/alert';
+import { PasswordAuthViews } from '../components/smart/auth';
+import Title from '../components/dumb/title';
+import Subtitle from '../components/dumb/subtitle';
+import Loading from '../components/dumb/loading';
+import Alert from '../components/dumb/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:

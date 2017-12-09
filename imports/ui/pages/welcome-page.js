@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
-import { ResendVerificationLink, LogoutBtn } from '../components/auth';
-import Title from '../components/title';
-import Loading from '../components/loading';
-import Alert from '../components/alert';
+import { ResendVerificationLink, LogoutBtn } from '../components/smart/auth';
+import Title from '../components/dumb/title';
+import Loading from '../components/dumb/loading';
+import Alert from '../components/dumb/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
