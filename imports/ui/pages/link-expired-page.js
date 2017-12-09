@@ -4,8 +4,7 @@ import { propType } from 'graphql-anywhere';
 import userFragment from '../apollo-client/fragments/user.graphql';
 import { ResendVerificationLink } from '../components/smart/auth';
 import Title from '../components/dumb/title';
-import Loading from '../components/dumb/loading';
-import Alert from '../components/dumb/alert';
+import Feedback from '../components/dumb/feedback';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -88,9 +87,11 @@ class LinkExpiredPage extends React.Component {
             Please, <Link to="/auth">login</Link> to be able to resend confirmation link.
           </p>
         )}
-        {disabled && <Loading className="center" />}
-        <Alert type="error" content={errorMsg} />
-        <Alert type="success" content={successMsg} />
+        <Feedback
+          loading={disabled}
+          errorMsg={errorMsg}
+          successMsg={successMsg}
+        />
       </div>
     );
   }

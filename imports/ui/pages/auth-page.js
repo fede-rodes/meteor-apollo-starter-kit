@@ -2,8 +2,7 @@ import React from 'react';
 import { PasswordAuthViews, FBAuthBtn } from '../components/smart/auth';
 import Title from '../components/dumb/title';
 import Subtitle from '../components/dumb/subtitle';
-import Loading from '../components/dumb/loading';
-import Alert from '../components/dumb/alert';
+import Feedback from '../components/dumb/feedback';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -148,11 +147,11 @@ class AuthPage extends React.Component {
           onSucessHook={this.handleSucess}
         />
         {service === 'password' && (
-          <div>
-            {disabled && <Loading className="center" />}
-            <Alert type="error" content={errorMsg} />
-            <Alert type="success" content={successMsg} />
-          </div>
+          <Feedback
+            loading={disabled}
+            errorMsg={errorMsg}
+            successMsg={successMsg}
+          />
         )}
         {view === 'login' && (
           <p className="center">
@@ -188,11 +187,11 @@ class AuthPage extends React.Component {
           </div>
         )}
         {service === 'facebook' && (
-          <div>
-            {disabled && <Loading className="center" />}
-            <Alert type="error" content={errorMsg} />
-            <Alert type="success" content={successMsg} />
-          </div>
+          <Feedback
+            loading={disabled}
+            errorMsg={errorMsg}
+            successMsg={successMsg}
+          />
         )}
       </div>
     );

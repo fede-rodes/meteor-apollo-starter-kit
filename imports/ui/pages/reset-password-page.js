@@ -5,8 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { PasswordAuthViews } from '../components/smart/auth';
 import Title from '../components/dumb/title';
 import Subtitle from '../components/dumb/subtitle';
-import Loading from '../components/dumb/loading';
-import Alert from '../components/dumb/alert';
+import Feedback from '../components/dumb/feedback';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
@@ -140,9 +139,11 @@ class ResetPasswordPage extends React.Component {
           onServerErrorHook={this.handleServerError}
           onSucessHook={this.handleSucess}
         />
-        {disabled && <Loading className="center" />}
-        <Alert type="error" content={errorMsg} />
-        <Alert type="success" content={successMsg} />
+        <Feedback
+          loading={disabled}
+          errorMsg={errorMsg}
+          successMsg={successMsg}
+        />
         {view === 'resetPassword' && (
           <p className="center">
             <a href="/forgot-password" onClick={this.changeViewTo('forgotPassword')}>
