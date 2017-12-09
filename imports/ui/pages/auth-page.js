@@ -1,9 +1,9 @@
 import React from 'react';
-import { PasswordAuthViews, FBAuthBtn } from '../components/auth';
-import Title from '../components/title';
-import Subtitle from '../components/subtitle';
-import Loading from '../components/loading';
-import Alert from '../components/alert';
+import { PasswordAuthViews, FBAuthBtn } from '../components/smart/auth';
+import Title from '../components/dumb/title';
+import Subtitle from '../components/dumb/subtitle';
+import Loading from '../components/dumb/loading';
+import Alert from '../components/dumb/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT STATES:
