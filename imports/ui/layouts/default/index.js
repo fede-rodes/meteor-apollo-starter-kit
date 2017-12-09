@@ -13,6 +13,7 @@ const Outer = styled.div`
 const Container = styled.div`
   max-width: 420px;
   min-height: 420px;
+  width: 100%;
 `;
 //------------------------------------------------------------------------------
 const Inner = styled.div`
@@ -26,7 +27,7 @@ const Inner = styled.div`
 //------------------------------------------------------------------------------
 const DefaultLayout = ({ children, ...rest }) => (
   <Outer className="flex justify-around items-center">
-    <Container className="full-width">
+    <Container>
       <Header />
       <Inner className="flex flex-column justify-between">
         {React.cloneElement(children, { ...rest })}

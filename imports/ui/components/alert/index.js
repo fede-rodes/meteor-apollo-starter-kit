@@ -7,16 +7,16 @@ import styled from 'styled-components';
 //------------------------------------------------------------------------------
 const Div = styled.div`
   background-color: ${props =>
-    (props.type === 'error' && '#fcdbd9') ||
-    (props.type === 'success' && '#cfefdf') ||
+    (props.type === 'error' && props.theme.color.dangerLight) ||
+    (props.type === 'success' && props.theme.color.successLight) ||
     'white'
   };
   border: 1px solid ${props =>
-    (props.type === 'error' && 'tomato') ||
-    (props.type === 'success' && 'green') ||
+    (props.type === 'error' && props.theme.color.danger) ||
+    (props.type === 'success' && props.theme.color.success) ||
     'black'
   };
-  font-size: 14px;
+  font-size: ${props => props.theme.fontSize.small};
   padding: 10px 15px;
 `;
 
