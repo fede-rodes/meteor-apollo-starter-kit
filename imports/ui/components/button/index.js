@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -60,15 +60,24 @@ Button.defaultProps = {
 //------------------------------------------------------------------------------
 // STYLES:
 //------------------------------------------------------------------------------
+// Note that when you style a component, you need to make sure that your
+// component has this.props.className attached to its DOM. Because after
+// Style-Components generated a unique class name, it will pass the class name
+// to your component. If you are not sure whether a third party component has
+// this.props.className or not, you can simply wrap it up in your own
+// <div className={this.props.className}> tag.
 const StyledButton = styled(Button)`
   border: ${props =>
-    (props.inverted && `1px solid ${props.theme[`${props.variant}Color`]}`) ||
+    (props.inverted && `1px solid ${props.theme.color[props.variant]}`) ||
     'none'
   };
-  border-radius: ${props => props.theme.baseRadius};
+  border-radius: 2px;
   cursor: ${props => (props.disabled && 'not-allowed') || 'pointer'};
   display: ${props => (props.expanded && 'block') || 'inline-block'};
-  font-size: ${props => (props.size === 'small' && '14px') || '16px'};
+  font-size: ${props =>
+    (props.size === 'small' && props.theme.fontSize.small) ||
+    'initial'
+  };
   font-weight: 400;
   line-height: ${props =>
     (props.size === 'small' && 2.2) ||
@@ -79,14 +88,13 @@ const StyledButton = styled(Button)`
   position: relative;
   text-align: center;
   color: ${props =>
-    (props.inverted && props.theme[`${props.variant}Color`]) ||
-    (props.type === 'link' && props.theme.linkColor) ||
+    (props.inverted && props.variant && props.theme.color[props.variant]) ||
+    (props.type === 'link' && props.theme.color.link) ||
     'white'
   };
-  font-family: ${props => props.theme.baseFontFamily};
   background-color: ${props =>
     ((props.inverted || props.type === 'link') && 'white') ||
-    (props.variant && props.theme[`${props.variant}Color`])
+    (props.variant && props.theme.color[props.variant])
   };
   width: ${props => (props.expanded && '100%') || 'auto'};
   opacity: ${props => (props.disabled && 0.5) || 1};
@@ -97,7 +105,6 @@ const StyledButton = styled(Button)`
 `;
 
 StyledButton.propTypes = {
-  theme: PropTypes.object.isRequired, // eslint-disable-line
   type: PropTypes.oneOf(['button', 'link', 'text', 'submit']),
   size: PropTypes.oneOf(['small', 'normal', 'large']),
   variant: PropTypes.oneOf(['default', 'primary', 'success', 'danger']),
@@ -116,4 +123,4 @@ StyledButton.defaultProps = {
 };
 //------------------------------------------------------------------------------
 
-export default withTheme(StyledButton);
+export default StyledButton;

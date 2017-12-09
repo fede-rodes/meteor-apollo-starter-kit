@@ -1,13 +1,17 @@
 const theme = {
-  defaultColor: 'grey',
-  primaryColor: 'blue',
-  dangerColor: 'tomato',
-  successColor: 'green',
-  linkColor: 'dodgerBlue ',
-  baseRadius: '2px',
-  baseFontSize: 1, // em
-  baseFontColor: 'black',
-  baseFontFamily: 'Lato, "Helvetica Neue", Arial, Helvetica',
+  color: {
+    default: 'grey',
+    primary: 'blue',
+    danger: 'tomato',
+    dangerLight: '#fcdbd9',
+    success: 'green',
+    successLight: '#cfefdf',
+    link: 'blue',
+  },
+  fontSize: {
+    small: '14px',
+    normal: '16px',
+  },
 };
 
 export default theme;
