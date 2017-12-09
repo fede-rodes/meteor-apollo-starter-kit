@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { ResendVerificationLink, LogoutBtn } from '../components/smart/auth';
 import Title from '../components/dumb/title';
-import Loading from '../components/dumb/loading';
-import Alert from '../components/dumb/alert';
+import Feedback from '../components/dumb/feedback';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -84,9 +83,11 @@ class WelcomePage extends React.Component {
         <p className="center">
           If you did not receive an email, click {this.renderLink()} to resend the confirmation link.
         </p>
-        {disabled && <Loading className="center" />}
-        <Alert type="error" content={errorMsg} />
-        <Alert type="success" content={successMsg} />
+        <Feedback
+          loading={disabled}
+          errorMsg={errorMsg}
+          successMsg={successMsg}
+        />
         <LogoutBtn onLogoutHook={() => client.resetStore()} />
       </div>
     );
