@@ -67,7 +67,7 @@ OR
 6. heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>
 7. heroku config:set ROOT_URL=https://<YOUR_APP_NAME>.herokuapp.com
 8. heroku config:add METEOR_SETTINGS="$(cat settings.json)"
-9. git push heroku mongo:master
+9. git push heroku master
 10. heroku open
 ```
 
