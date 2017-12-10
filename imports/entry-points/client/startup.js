@@ -1,19 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 
+// See: https://youtu.be/j-WcyAjVceM
 async function renderAsync() {
   const React = await import('react');
   const { render } = await import('react-dom');
-  const { default: App } = await import('../../ui/app');
-
-  // Inject react app
-  render(<App />, document.getElementById('root'));
-}
-
-async function styleAsync() {
   const { injectGlobal } = await import('styled-components');
   await import('sanitize.css/sanitize.css');
   await import('basscss/css/basscss.min.css');
   const { default: theme } = await import('../../ui/theme');
+  const { default: App } = await import('../../ui/app');
+
+  // Inject react app
+  render(<App />, document.getElementById('root'));
 
   // Global styles
   injectGlobal([`
@@ -47,15 +45,10 @@ Meteor.startup(() => {
     console.log(`renderAsync took: ${renderTime}ms`);
     console.log(`Total time: ${startupTime + renderTime}ms`);
   });
-
-  styleAsync().then(() => {
-    const styleTime = Date.now() - renderStart;
-    console.log(`styleAsync took: ${styleTime}ms`);
-    console.log(`Total time: ${startupTime + styleTime}ms`);
-  });
 });
 
-/* import { Meteor } from 'meteor/meteor';
+/*
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
 import { injectGlobal } from 'styled-components';
@@ -100,4 +93,5 @@ Meteor.startup(() => {
   const styleTime = Date.now() - renderStart;
   console.log(`styleAsync took: ${styleTime}ms`);
   console.log(`Total time: ${startupTime + styleTime}ms`);
-}); */
+});
+*/
