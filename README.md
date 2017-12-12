@@ -55,6 +55,27 @@ npm ls <lib-name>
 
 Before deploying to production, if you used --extra-packages, simply remove bundle-visualizer from the list of included packages and run meteor as normal.
 
+source:
+- https://blog.meteor.com/announcing-meteor-1-5-b82be66571bb
+- https://blog.meteor.com/putting-your-app-on-a-diet-with-meteor-1-5s-bundle-visualizer-6845b685a119
+
+### Look for meteor package dependencies
+```
+meteor list --tree
+
+OR
+
+for p in `meteor list | grep '^[a-z]' | awk '{sub(/[+*]$/, "", $2);
+print $1"@"$2 }'`;
+do echo "$p";
+meteor show "$p" | grep -E '^  [a-z]';
+echo;
+done
+```
+source:
+- https://github.com/meteor/meteor/issues/2853#issuecomment-283320603
+
+
 ### Deploy to heroku
 ```
 1. git clone https://github.com/fede-rodes/meteor-apollo-starter-kit.git
@@ -67,7 +88,9 @@ OR
 6. heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>
 7. heroku config:set ROOT_URL=https://<YOUR_APP_NAME>.herokuapp.com
 8. heroku config:add METEOR_SETTINGS="$(cat settings.json)"
-9. git push heroku mongo:master
+9. git push heroku master
+OR (if you are working on a different branch than master)
+9. git push heroku <BRANCH-NAME>:master
 10. heroku open
 ```
 
@@ -86,6 +109,10 @@ OR
 - https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
 - https://developers.google.com/web/tools/workbox/
 - https://youtu.be/cmGr0RszHc8
+
+#### Dynamic imports
+- https://youtu.be/j-WcyAjVceM
+
 
 ### TODO LIST
 

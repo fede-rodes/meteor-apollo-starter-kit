@@ -31,12 +31,13 @@
     "react": "^16.0.0",
     "react-apollo": "^2.0.0",
     "react-dom": "^16.0.0",
+    "react-loadable": "^5.3.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "sanitize.css": "^5.0.0",
-    "simpl-schema": "^0.3.2",
+    "simpl-schema": "^1.2.1",
     "styled-components": "^2.2.3"
   },
   "devDependencies": {
