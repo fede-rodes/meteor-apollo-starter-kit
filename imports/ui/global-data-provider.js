@@ -3,8 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
-import userFragment from './apollo-client/fragments/user.graphql';
-import userQuery from './apollo-client/queries/user.graphql';
+import { userFragment, userQuery } from './apollo-client/user';
 import Loading from './components/dumb/loading';
 
 //------------------------------------------------------------------------------
