@@ -3,24 +3,21 @@ import isString from 'lodash/isString';
 import isArray from 'lodash/isArray';
 
 /**
-* @namespace ErrorHandling
-*/
+ * @namespace ErrorHandling
+ * @summary error handling related utilities.
+ * @example 'errors' object example:
+ * const errors = {
+ *   email: ['Email is required!', 'Please, provide a valid email address!', ...],
+ *   password: ['Please, at least 6 characters long!', ...],
+ *   ...
+ * }
+ */
 const ErrorHandling = {};
-
-/*
-* Example of 'errors' object:
-*
-* const errors = {
-*   field1: ['some error', 'some other error', ...],
-*   field2: ['some error', 'some other error', ...],
-*   ...
-* }
-*/
 
 //------------------------------------------------------------------------------
 /**
 * @summary Traverses errors object keys and fires callback when condition is met
-* or we reach the end of the loop.
+* or when the end of the errors object is reached.
 */
 ErrorHandling.traverseErrors = (errors, cond) => {
   check(errors, Object);
@@ -48,8 +45,8 @@ ErrorHandling.getFirstError = (errors) => {
   // Condition: at least one of the error fields is not empty
   const cond = (err, key) => err[key].length > 0;
 
-  // Traverse the errors array and apply the condition above until it's met or
-  // the end of the array is reached.
+  // Traverse the errors object and apply the condition above until it's met or
+  // the end of the object is reached.
   const { index, key } = ErrorHandling.traverseErrors(errors, cond);
 
   // Handle no errors
@@ -63,7 +60,7 @@ ErrorHandling.getFirstError = (errors) => {
 //------------------------------------------------------------------------------
 /**
 * @summary Returns 'true' if the errors object contains at least one non-empty
-* field.
+* error field.
 */
 ErrorHandling.hasErrors = (errors) => {
   check(errors, Object);
@@ -81,13 +78,14 @@ ErrorHandling.getFieldErrors = (errors, field) => {
   const keys = Object.keys(errors);
 
   if (keys.indexOf(field) === -1) {
-    throw new Error('Check your errors object, the field is not a valid key');
+    throw new Error(404, 'Check your errors object, the field is not a valid key');
   }
 
-  const array = errors[field]; // array of errors for the given field
+  // Get array of errors for the given field
+  const array = errors[field];
 
   if (!isArray(array)) {
-    throw new Error('Check your errors object, the value is not a valid array');
+    throw new Error(401, 'Check your errors object, the value is not a valid array');
   }
 
   return array.toString();
@@ -118,6 +116,8 @@ ErrorHandling.clearErrors = (errors, fields) => {
 //------------------------------------------------------------------------------
 ErrorHandling.isValidEmail = (email) => {
   check(email, String);
+
+  // eslint-disable-next-line
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
   return re.test(email);
 };

@@ -110,6 +110,9 @@ OR (if you are working on a different branch than master)
 - https://developers.google.com/web/tools/workbox/
 - https://youtu.be/cmGr0RszHc8
 
+#### Service Worker
+- https://classroom.udacity.com/courses/ud899
+
 #### Dynamic imports
 - https://youtu.be/j-WcyAjVceM
 

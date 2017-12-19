@@ -3,11 +3,11 @@ import extend from 'lodash/extend';
 
 /**
  * @namespace User
- * @summary In here we define utilities related to User entities.
+ * @summary defines utilities related to User entities.
  */
 const User = {};
 
-// Load client-side, both utilities
+// Load client-only or client-server utilities if any
 
 // Load server-only utilities
 if (Meteor.isServer) {

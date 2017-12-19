@@ -3,23 +3,26 @@ const version = 'MSW V0.3';
 
 function removeHash(element) {
   if (typeof element === 'string') return element.split('?hash=')[0];
+  throw new Error(401, 'Element is not a string');
 }
 
 function hasHash(element) {
   if (typeof element === 'string') return /\?hash=.*/.test(element);
+  throw new Error(401, 'Element is not a string');
 }
 
 function hasSameHash(firstUrl, secondUrl) {
   if (typeof firstUrl === 'string' && typeof secondUrl === 'string') {
     return /\?hash=(.*)/.exec(firstUrl)[1] === /\?hash=(.*)/.exec(secondUrl)[1];
   }
+  throw new Error(401, 'Url is not a string');
 }
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(version)
     .then(cache => cache.add(HTMLToCache).then(self.skipWaiting()))
-    .catch(error => console.error('Failed to cache', error))
+    .catch(error => console.error('Failed to cache', error)),
   );
 });
 
@@ -29,7 +32,7 @@ self.addEventListener('activate', (event) => {
     .then(cacheNames => Promise.all(cacheNames.map((cacheName) => {
       if (version !== cacheName) return caches.delete(cacheName);
     })))
-    .then(self.clients.claim())
+    .then(self.clients.claim()),
   );
 });
 
@@ -45,7 +48,6 @@ self.addEventListener('fetch', (event) => {
         if (!hasHash(event.request.url) && !/text\/html/.test(resourceType)) {
           return cached;
         }
-
         // If the CSS/JS didn't change since it's been cached, return the cached version
         if (hasHash(event.request.url) && hasSameHash(event.request.url, cached.url)) {
           return cached;
@@ -54,12 +56,10 @@ self.addEventListener('fetch', (event) => {
       return fetch(requestToFetch).then((response) => {
         const clonedResponse = response.clone();
         const contentType = clonedResponse.headers.get('content-type');
-
         if (!clonedResponse || clonedResponse.status !== 200 || clonedResponse.type !== 'basic'
         || /\/sockjs\//.test(event.request.url)) {
           return response;
         }
-
         if (/html/.test(contentType)) {
           caches.open(version).then(cache => cache.put(HTMLToCache, clonedResponse));
         } else {
@@ -71,8 +71,10 @@ self.addEventListener('fetch', (event) => {
               }
             })));
           }
-
-          caches.open(version).then(cache => cache.put(event.request, clonedResponse));
+          // Added by fefon
+          if (event.request.method === 'GET') {
+            caches.open(version).then(cache => cache.put(event.request, clonedResponse));
+          }
         }
         return response;
       }).catch(() => {

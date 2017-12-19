@@ -3,11 +3,11 @@ import extend from 'lodash/extend';
 
 /**
  * @namespace Base
- * @summary In here we define common types and scalars used accross the app.
+ * @summary defines common types and scalars used accross the app.
  */
 const Base = {};
 
-// Load client-side, both utilities
+// Load client-only or client-server utilities if any
 
 // Load server-only utilities
 if (Meteor.isServer) {

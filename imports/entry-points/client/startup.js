@@ -49,13 +49,23 @@ Meteor.startup(() => {
 
 // See: https://youtu.be/j-WcyAjVceM
 async function renderAsync() {
-  const React = await import('react');
-  const { render } = await import('react-dom');
-  const { injectGlobal } = await import('styled-components');
-  await import('sanitize.css/sanitize.css');
-  await import('basscss/css/basscss.min.css');
-  const { default: theme } = await import('../../ui/theme');
-  const { default: App } = await import('../../ui/app');
+  const [
+    React,
+    { render },
+    { injectGlobal },
+    ,
+    ,
+    { default: theme },
+    { default: App },
+  ] = await Promise.all([
+    import('react'),
+    import('react-dom'),
+    import('styled-components'),
+    import('sanitize.css/sanitize.css'),
+    import('basscss/css/basscss.min.css'),
+    import('../../ui/theme'),
+    import('../../ui/app'),
+  ]);
 
   // Inject react app
   render(<App />, document.getElementById('root'));

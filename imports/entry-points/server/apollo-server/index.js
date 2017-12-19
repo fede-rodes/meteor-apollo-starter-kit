@@ -1,4 +1,4 @@
 import { createApolloServer } from 'meteor/apollo';
-import schema from '../../api/schema/server';
+import schema from './exec-schema';
 
 createApolloServer({ schema });

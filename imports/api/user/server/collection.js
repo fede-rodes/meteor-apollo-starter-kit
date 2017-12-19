@@ -69,7 +69,7 @@ const schema = new SimpleSchema({
     optional: true,
   },
 
-  // this must be optional if you also use other login services like facebook,
+  // This must be optional if you also use other login services like facebook,
   // but if you use only accounts-password, then it can be required
   emails: {
     type: Array,

@@ -1,9 +1,9 @@
 import { Accounts } from 'meteor/accounts-base';
 import { GraphQLError } from 'graphql';
-import collection from '../collection';
+import utilities from '../utilities';
 
-// Attach namespace to collection for clarity
-const User = { collection };
+// Wrap utilities with namespace for clarity
+const User = { utilities };
 
 // User mutation resolvers
 const Mutation = {};
@@ -13,20 +13,8 @@ Mutation.sendVerificationEmail = (root, args, context) => {
   console.log('About to send verification email...');
   const { userId } = context;
 
-  // User should be logged in at this stage
-  if (!userId) {
-    throw new GraphQLError('User should be logged in at sendVerificationLink');
-  }
-
-  // Make sure the user exists in our database
-  const user = User.collection.findOne({ _id: userId });
-  if (!user || !user.emails || !user.emails[0]) {
-    throw new GraphQLError('The user is not registered in our database');
-  }
-
-  if (user.emails[0].verified === true) {
-    throw new GraphQLError('Email already verified!');
-  }
+  // TODO: pass email to verify as an argument
+  User.utilities.checkLoggedInAndNotVerified(userId);
 
   try {
     Accounts.sendVerificationEmail(userId);
