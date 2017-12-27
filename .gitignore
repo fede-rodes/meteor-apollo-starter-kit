@@ -3,3 +3,4 @@ notes.txt
 settings.json
 settings-dev.json
 settings-prod.json
+public/sw2.js

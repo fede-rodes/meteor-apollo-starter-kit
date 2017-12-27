@@ -1,6 +1,6 @@
 import Date from './date';
 
-// Date namespace resolvers
+// Base namespace resolvers
 const resolvers = {
   Date,
 };

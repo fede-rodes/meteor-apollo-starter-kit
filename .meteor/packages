@@ -17,9 +17,9 @@ static-html
 dynamic-import@0.2.0
 accounts-facebook@1.3.0
 service-configuration@1.0.11
-apollo
 swydo:graphql
 force-ssl@1.1.0
 browser-policy@1.1.0
 check@1.2.5
-orcprogramming:collection2-core-server
+orcprogramming:collection2-core-server   # server side only version of aldeed:collection2-core
+orcprogramming:apollo   # patch for apollo package until the official version 2 is released

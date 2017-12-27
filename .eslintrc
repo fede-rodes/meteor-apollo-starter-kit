@@ -51,7 +51,10 @@
           "_name",
           "__parseValue",
           "__serialize",
-          "__parseLiteral"
+          "__parseLiteral",
+          "_storedLoginToken",
+          "_hashLoginToken",
+          "_tokenExpiration"
         ]
       }
     ]

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import sendVerificationEmailMutation from './graphql/mutation-send-verification-email.graphql';
+import sendVerificationEmailMutation from './mutations.graphql';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

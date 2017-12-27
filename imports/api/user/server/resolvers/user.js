@@ -15,8 +15,8 @@ User.services = (root, args, context) => {
     return [];
   }
 
-  // TODO: we should return current loggedIn service instead of all available
-  // services
+  // TODO: we should only return current loggedIn service instead of all
+  // available services
   return (user.services && Object.keys(user.services)) || [];
 };
 //------------------------------------------------------------------------------

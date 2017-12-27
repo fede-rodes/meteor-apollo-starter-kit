@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 //------------------------------------------------------------------------------
-// avatar: `http://graph.facebook.com/${id}/picture/?type=large`,
-// Should we add avatar to profile? email to emails?
 Accounts.onCreateUser((options, user) => {
   console.log('\nsign up attempt:', new Date());
 
@@ -17,17 +15,17 @@ Accounts.onCreateUser((options, user) => {
       '\nemail:', email,
     );
 
-    // Don't wait for this task to be done before giving the client the green
-    // light to move ahead
+    // Don't wait for the following task to be completed before giving the
+    // client the green light to move ahead
     Meteor.defer(() => {
-      // At this point the user record hasn't been created yet in the DB. For
+      // At this point, the user record hasn't been created yet in our DB. For
       // this reason, we need to delay calling Accounts.sendVerificationEmail
       // until the record is created
       const handler = Meteor.setTimeout(() => {
         Accounts.sendVerificationEmail(user._id);
         Meteor.clearTimeout(handler);
         console.log('Verification email sent!');
-      }, 3000);
+      }, 1000);
     });
 
     // Extend user's profile by adding default name and avatar
@@ -59,5 +57,5 @@ Accounts.onCreateUser((options, user) => {
   }
 
   // Throw in case of a different service
-  throw new Error('Sign up attempt with service different than facebook, password');
+  throw new Error(401, 'Sign up attempt with service different than facebook, password');
 });

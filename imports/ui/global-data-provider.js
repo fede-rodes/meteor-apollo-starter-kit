@@ -3,8 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
-import userFragment from './apollo-client/fragments/user.graphql';
-import userQuery from './apollo-client/queries/user.graphql';
+import { userFragment, userQuery } from './apollo-client/user';
 import Loading from './components/dumb/loading';
 
 //------------------------------------------------------------------------------
@@ -24,27 +23,35 @@ class GlobalDataProvider extends React.Component {
   }
 
   render() {
-    const { userData, children, ...rest } = this.props;
+    const {
+      userData: {
+        error,
+        loading,
+        user,
+      },
+      children,
+      ...rest
+    } = this.props;
 
-    if (userData.error) {
-      console.log(userData.error);
+    if (error) {
+      console.log(error);
       return <div>Something bad happend!</div>;
     }
 
-    if (userData.loading) {
+    if (loading) {
       return <Loading />;
     }
 
-    return React.cloneElement(children, { curUser: userData.user, ...rest });
+    return React.cloneElement(children, { curUser: user, ...rest });
   }
 }
 
 GlobalDataProvider.propTypes = {
   userData: PropTypes.shape({
-    error: PropTypes.string,
-    loading: PropTypes.bool,
+    error: PropTypes.object,
+    loading: PropTypes.bool, // TODO: not required?
     user: propType(userFragment),
-    refetch: PropTypes.func,
+    refetch: PropTypes.func, // TODO: not required?
   }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object,
