@@ -23,27 +23,35 @@ class GlobalDataProvider extends React.Component {
   }
 
   render() {
-    const { userData, children, ...rest } = this.props;
+    const {
+      userData: {
+        error,
+        loading,
+        user,
+      },
+      children,
+      ...rest
+    } = this.props;
 
-    if (userData.error) {
-      console.log(userData.error);
+    if (error) {
+      console.log(error);
       return <div>Something bad happend!</div>;
     }
 
-    if (userData.loading) {
+    if (loading) {
       return <Loading />;
     }
 
-    return React.cloneElement(children, { curUser: userData.user, ...rest });
+    return React.cloneElement(children, { curUser: user, ...rest });
   }
 }
 
 GlobalDataProvider.propTypes = {
   userData: PropTypes.shape({
-    error: PropTypes.string,
-    loading: PropTypes.bool,
+    error: PropTypes.object,
+    loading: PropTypes.bool, // TODO: not required?
     user: propType(userFragment),
-    refetch: PropTypes.func,
+    refetch: PropTypes.func, // TODO: not required?
   }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object,

@@ -12,7 +12,6 @@ class VerifyEmailPage extends React.Component {
   componentWillMount() {
     const { history, match } = this.props;
     const token = (match && match.params && match.params.token) || '';
-    console.log('heloo');
 
     // QUESTION: what about Accounts._verifyEmailToken?
 
