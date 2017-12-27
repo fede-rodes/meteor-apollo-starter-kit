@@ -9,7 +9,7 @@ Lighthouse audit:
 
 ### This project includes the following libraries/functionality
 - GraphQL server running with Express bound to the Meteor app
-- Apollo client
+- Apollo 2
 - React 16
 - Redux
 - Meteor accounts (password & facebook)
@@ -58,6 +58,14 @@ Before deploying to production, if you used --extra-packages, simply remove bund
 source:
 - https://blog.meteor.com/announcing-meteor-1-5-b82be66571bb
 - https://blog.meteor.com/putting-your-app-on-a-diet-with-meteor-1-5s-bundle-visualizer-6845b685a119
+
+### Lighthouse
+```
+npm install -g lighthouse
+# or use yarn:
+# yarn global add lighthouse
+```
+Run it: lighthouse http://localhost:3000
 
 ### Look for meteor package dependencies
 ```

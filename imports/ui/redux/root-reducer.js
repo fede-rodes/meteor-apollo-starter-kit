@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
 
-// Integrate Apollo client reducers with our own Redux reducers.
-const createRootReducer = apolloClient => (
-  // rootReducer
-  combineReducers({
-    // page: pageReducer,
-    apollo: apolloClient.reducer(),
-  })
-);
+const rootReducer = combineReducers({
+  // page: pageReducer,
+  // ...add all your individual reducers here
+});
 
-export default createRootReducer;
+export default rootReducer;

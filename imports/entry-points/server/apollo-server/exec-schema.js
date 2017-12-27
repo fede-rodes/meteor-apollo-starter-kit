@@ -30,27 +30,3 @@ const logger = { log: e => console.error(e.stack) };
 const schema = makeExecutableSchema({ typeDefs, resolvers, logger });
 
 export default schema;
-
-/*
-import { makeExecutableSchema } from 'graphql-tools';
-import { mergeTypes } from 'merge-graphql-schemas';
-import merge from 'lodash/merge';
-import { Base, User } from '../../../api';
-
-// Merge all types and resolvers from APIs to create our executable schema
-const typeDefs = mergeTypes([
-  Base.types,
-  User.types,
-]);
-
-const resolvers = merge(
-  Base.resolvers,
-  User.resolvers,
-);
-
-const logger = { log: e => console.error(e.stack) };
-
-const schema = makeExecutableSchema({ typeDefs, resolvers, logger });
-
-export default schema;
-*/
