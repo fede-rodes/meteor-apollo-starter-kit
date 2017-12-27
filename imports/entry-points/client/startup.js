@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+/* import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
 import { injectGlobal } from 'styled-components';
@@ -43,9 +43,9 @@ Meteor.startup(() => {
   const styleTime = Date.now() - renderStart;
   console.log(`styleAsync took: ${styleTime}ms`);
   console.log(`Total time: ${startupTime + styleTime}ms`);
-});
+}); */
 
-/* import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 
 // See: https://youtu.be/j-WcyAjVceM
 async function renderAsync() {
@@ -102,4 +102,4 @@ Meteor.startup(() => {
     console.log(`renderAsync took: ${renderTime}ms`);
     console.log(`Total time: ${startupTime + renderTime}ms`);
   });
-}); */
+});
