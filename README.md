@@ -21,28 +21,35 @@ Lighthouse audit:
 - basscss
 
 ### Running the app
+First, clone the project and install NPM dependecies:
 ```
+git clone https://github.com/fede-rodes/meteor-apollo-starter-kit.git
+cd meteor-apollo-starter-kit/
 meteor npm install
+```
+After that, define your settings-dev.json based on the provided settings-dev.sample.json file. You'll need to register the app in both mailgun and facebook (more on this [here](https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e)).
+
+Finally, run the app:
+```
 meteor --settings settings-dev.json
 ```
-GraphiQL is available at [http://localhost:3000/graphiql](http://localhost:3000/graphiql).
+GraphiQL will be available at [http://localhost:3000/graphiql](http://localhost:3000/graphiql).
 
 ### Running storybook
+Open a new terminal (the meteor app doesn't need to be running) and type:
 ```
 npm i -g @storybook/cli
 npm run storybook
 ```
-Stroybook is available at [http://localhost:6006/](http://localhost:6006/).
+Stroybook will be available at [http://localhost:6006/](http://localhost:6006/).
 
 ### Favicon / manifest generator
+In order to generate the favicons for your project, you can use the following generator:
 https://realfavicongenerator.net/
-
-### Configure facebook account
-https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e
 
 ### Bundle-visualizer
 ```
-cd app/
+cd meteor-apollo-starter-kit/
 meteor --extra-packages bundle-visualizer --production --settings settings-dev.json
 ```
 
@@ -55,7 +62,7 @@ npm ls <lib-name>
 
 Before deploying to production, if you used --extra-packages, simply remove bundle-visualizer from the list of included packages and run meteor as normal.
 
-source:
+Learn more at:
 - https://blog.meteor.com/announcing-meteor-1-5-b82be66571bb
 - https://blog.meteor.com/putting-your-app-on-a-diet-with-meteor-1-5s-bundle-visualizer-6845b685a119
 
@@ -68,6 +75,7 @@ npm install -g lighthouse
 Run it: lighthouse http://localhost:3000
 
 ### Look for meteor package dependencies
+The following command is handy when trying to reduce your client bundle size and need to identify where the dependencies are coming from.
 ```
 meteor list --tree
 
@@ -80,7 +88,7 @@ meteor show "$p" | grep -E '^  [a-z]';
 echo;
 done
 ```
-source:
+Learn more:
 - https://github.com/meteor/meteor/issues/2853#issuecomment-283320603
 
 

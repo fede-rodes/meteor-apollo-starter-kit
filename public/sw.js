@@ -71,7 +71,7 @@ self.addEventListener('fetch', (event) => {
               }
             })));
           }
-          // Added by fefon
+          // Added by fede-rodes
           if (event.request.method === 'GET') {
             caches.open(version).then(cache => cache.put(event.request, clonedResponse));
           }

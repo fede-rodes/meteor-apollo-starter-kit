@@ -18,9 +18,9 @@ Accounts.onCreateUser((options, user) => {
     // Don't wait for the following task to be completed before giving the
     // client the green light to move ahead
     Meteor.defer(() => {
-      // At this point, the user record hasn't been created yet in our DB. For
-      // this reason, we need to delay calling Accounts.sendVerificationEmail
-      // until the record is created
+      // At this point, the user record is not in our DB yet. For this reason,
+      // we need to delay the call to Accounts.sendVerificationEmail until the
+      // record is created
       const handler = Meteor.setTimeout(() => {
         Accounts.sendVerificationEmail(user._id);
         Meteor.clearTimeout(handler);
@@ -57,5 +57,5 @@ Accounts.onCreateUser((options, user) => {
   }
 
   // Throw in case of a different service
-  throw new Error(401, 'Sign up attempt with service different than facebook, password');
+  throw new Error(401, 'Sign up attempt with service different than facebook or password');
 });
