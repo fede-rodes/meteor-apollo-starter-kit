@@ -22,4 +22,4 @@ force-ssl@1.1.0
 browser-policy@1.1.0
 check@1.2.5
 orcprogramming:collection2-core-server   # server side only version of aldeed:collection2-core
-orcprogramming:apollo   # patch for apollo package until the official version 2 is released
+orcprogramming:meteor-apollo2            # patch for the official apollo package until it's released

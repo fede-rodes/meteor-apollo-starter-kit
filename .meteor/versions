@@ -60,8 +60,8 @@ npm-bcrypt@0.9.3
 npm-mongo@2.2.33
 oauth@1.2.1
 oauth2@1.2.0
-orcprogramming:apollo@2.0.1
 orcprogramming:collection2-core-server@0.0.4
+orcprogramming:meteor-apollo2@0.0.1
 ordered-dict@1.0.9
 promise@0.10.0
 raix:eventemitter@0.1.3
