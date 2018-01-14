@@ -3,4 +3,5 @@ notes.txt
 settings.json
 settings-dev.json
 settings-prod.json
-public/sw2.js
+public/sw-nitro.js
+public/sw-playground.js
