@@ -1,4 +1,4 @@
-import { createApolloServer } from 'meteor/orcprogramming:meteor-apollo2';
+import { createApolloServer } from 'meteor/apollo';
 import schema from './exec-schema';
 
 createApolloServer({ schema });

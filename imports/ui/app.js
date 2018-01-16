@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { createApolloClient } from 'meteor/orcprogramming:meteor-apollo2';
+import { createApolloClient } from 'meteor/apollo';
 import { ApolloProvider } from 'react-apollo';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
