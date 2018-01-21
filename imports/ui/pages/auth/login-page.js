@@ -5,28 +5,34 @@ import AuthPageLayout from '../../layouts/auth-page';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const VIEW = {
-  view: 'forgotPassword',
-  title: 'Forgot your Password?',
-  subtitle: `
-    We&apos;ll send a link to your email to reset<br />
-    your password and get you back on track.
-  `,
-  // linkTo: '',
-  // linkLabel: '',
-  btnLabel: 'Send Link',
+const PAGE = {
+  name: 'login',
+  title: 'Log In',
+  subtitle: 'Don&apos;t have an account?&nbsp;',
+  linkTo: 'signup',
+  linkLabel: 'Sign Up',
+  btnLabel: 'Log In',
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ForgotPasswordPage extends React.PureComponent {
+class LoginPage extends React.PureComponent {
+  // This method is just for consistency, it doesn't do anything really!
   handleSuccess = () => {
-    const { handleSuccess, setSuccessMessage } = this.props.authPage;
+    const { handleSuccess } = this.props.authPage;
 
-    // Extend handleSuccess method provided by authPage HOC
-    handleSuccess(() => {
-      setSuccessMessage('A new email has been sent to your inbox!');
-    });
+    // Do nothing, just call handleSuccess from authPage HOC.
+    handleSuccess();
+
+    // OBSERVATION: in case of facebook auth service, this code is only
+    // reachable when using 'popup' loginStyle at serviceConfiguration. In
+    // case of loginStyle equals 'redirect', the page will be re-loaded
+    // after the response is returned by facebook and therefore this hook
+    // will never be fired.
+
+    // At this point, the user logged-in-state will change from 'logged out'
+    // to 'logged in'. This will trigger the LoggedOutRoute component's
+    // logic which will result in redirecting the user to home page '/'.
   }
 
   render() {
@@ -45,7 +51,7 @@ class ForgotPasswordPage extends React.PureComponent {
 
     return (
       <AuthPageLayout
-        view={VIEW}
+        page={PAGE}
         service={service}
         errorMsg={errorMsg}
         successMsg={successMsg}
@@ -60,9 +66,9 @@ class ForgotPasswordPage extends React.PureComponent {
   }
 }
 
-ForgotPasswordPage.propTypes = {
+LoginPage.propTypes = {
   authPage: authPageProps.isRequired,
 };
 
 // authPageState provides common state fields and methods used accross all auth pages.
-export default authPageState(ForgotPasswordPage);
+export default authPageState(LoginPage);
