@@ -137,9 +137,7 @@ OR (if you are working on a different branch than master)
 
 
 ### TODO LIST
-- introduce auth page template for having title, substitle and so on
-- move disabled and error handling logic to single auth component (too much repetition)
-- use individual routes for login, signup, reset password, ... --> keep track of
+- keep track of
 visited routes in order to send the user. Also add link in the verification email link to take the user back to the original page
 
  https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage

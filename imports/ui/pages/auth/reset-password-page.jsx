@@ -62,10 +62,10 @@ class ResetPasswordPage extends React.PureComponent {
         successMsg={successMsg}
         disabled={disabled}
         changeViewTo={changeViewTo}
-        onBeforeHook={handleBefore}
-        onClientErrorHook={handleClientError}
-        onServerErrorHook={handleServerError}
-        onSuccessHook={this.handleSuccess}
+        handleBefore={handleBefore}
+        handleClientError={handleClientError}
+        handleServerError={handleServerError}
+        handleSuccess={this.handleSuccess}
       />
     );
   }

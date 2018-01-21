@@ -56,7 +56,7 @@ const hoc = (WrappedComponent) => {
     }
 
     handleClientError = (err) => {
-      console.log(err);
+      // console.log(err);
       this.enableBtn();
     }
 
@@ -83,9 +83,6 @@ const hoc = (WrappedComponent) => {
           successMsg,
           disabled,
           setSuccessMessage: this.setSuccessMessage,
-          clearMessages: this.clearMessages,
-          disableBtn: this.disableBtn,
-          enableBtn: this.enableBtn,
           changeViewTo: this.changeViewTo,
           handleBefore: this.handleBefore,
           handleClientError: this.handleClientError,
@@ -113,9 +110,6 @@ export const authPageProps = PropTypes.shape({
   successMsg: PropTypes.string.isRequired,
   disabled: PropTypes.bool.isRequired,
   setSuccessMessage: PropTypes.func.isRequired,
-  clearMessages: PropTypes.func.isRequired,
-  disableBtn: PropTypes.func.isRequired,
-  enableBtn: PropTypes.func.isRequired,
   changeViewTo: PropTypes.func.isRequired,
   handleBefore: PropTypes.func.isRequired,
   handleClientError: PropTypes.func.isRequired,

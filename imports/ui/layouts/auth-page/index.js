@@ -26,10 +26,10 @@ const AuthPageLayout = (props) => {
     successMsg,
     disabled,
     changeViewTo,
-    onBeforeHook,
-    onClientErrorHook,
-    onServerErrorHook,
-    onSuccessHook,
+    handleBefore,
+    handleClientError,
+    handleServerError,
+    handleSuccess,
   } = props;
 
   return (
@@ -48,10 +48,10 @@ const AuthPageLayout = (props) => {
         btnLabel={btnLabel}
         token={token} // only used at resetPassword view.
         disabled={disabled}
-        onBeforeHook={() => onBeforeHook({ service: 'password' })}
-        onClientErrorHook={onClientErrorHook}
-        onServerErrorHook={onServerErrorHook}
-        onSuccessHook={onSuccessHook}
+        onBeforeHook={() => handleBefore({ service: 'password' })}
+        onClientErrorHook={handleClientError}
+        onServerErrorHook={handleServerError}
+        onSuccessHook={handleSuccess}
       />
       {service === 'password' && (
         <Feedback
@@ -84,9 +84,9 @@ const AuthPageLayout = (props) => {
             key="fb-btn"
             btnLabel="Continue with facebook"
             disabled={disabled}
-            onBeforeHook={() => onBeforeHook({ service: 'facebook' })}
-            onServerErrorHook={onServerErrorHook}
-            onSuccessHook={onSuccessHook}
+            onBeforeHook={() => handleBefore({ service: 'facebook' })}
+            onServerErrorHook={handleServerError}
+            onSuccessHook={handleSuccess}
           />
           {service === 'facebook' && (
             <Feedback
@@ -121,10 +121,10 @@ AuthPageLayout.propTypes = {
   successMsg: PropTypes.string.isRequired,
   disabled: PropTypes.bool.isRequired,
   changeViewTo: PropTypes.func.isRequired,
-  onBeforeHook: PropTypes.func.isRequired,
-  onClientErrorHook: PropTypes.func.isRequired,
-  onServerErrorHook: PropTypes.func.isRequired,
-  onSuccessHook: PropTypes.func.isRequired,
+  handleBefore: PropTypes.func.isRequired,
+  handleClientError: PropTypes.func.isRequired,
+  handleServerError: PropTypes.func.isRequired,
+  handleSuccess: PropTypes.func.isRequired,
 };
 
 AuthPageLayout.defaultProps = {
