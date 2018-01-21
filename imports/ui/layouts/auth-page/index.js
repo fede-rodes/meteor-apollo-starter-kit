@@ -12,15 +12,15 @@ import Feedback from '../../components/dumb/feedback';
 //------------------------------------------------------------------------------
 const AuthPageLayout = (props) => {
   const {
-    view: {
-      view,
+    page: {
+      name,
       title,
       subtitle,
       linkTo,
       linkLabel,
       btnLabel,
     },
-    token = '',
+    token,
     service,
     errorMsg,
     successMsg,
@@ -35,7 +35,7 @@ const AuthPageLayout = (props) => {
   return (
     <div>
       <Title>{title}</Title>
-      {['login', 'signup', 'forgotPassword'].indexOf(view) !== -1 && (
+      {['login', 'signup', 'forgotPassword'].indexOf(name) !== -1 && (
         <Subtitle
           text={subtitle}
           linkTo={linkTo}
@@ -44,9 +44,9 @@ const AuthPageLayout = (props) => {
         />
       )}
       <PasswordAuthViews
-        view={view}
+        view={name}
         btnLabel={btnLabel}
-        token={token} // only used at resetPassword view.
+        token={token} // only used in resetPassword page.
         disabled={disabled}
         onBeforeHook={() => handleBefore({ service: 'password' })}
         onClientErrorHook={handleClientError}
@@ -60,22 +60,22 @@ const AuthPageLayout = (props) => {
           successMsg={successMsg}
         />
       )}
-      {view === 'login' && (
+      {name === 'login' && (
         <p className="center">
           <Link to="/forgot-password">Forgot password?</Link>
         </p>
       )}
-      {view === 'forgotPassword' && (
+      {name === 'forgotPassword' && (
         <p className="center">
           <Link to="/login">Log in</Link> | <Link to="/signup">Sign up</Link>
         </p>
       )}
-      {view === 'resetPassword' && (
+      {name === 'resetPassword' && (
         <p className="center">
           <Link to="/forgot-password">Resend reset password link</Link>
         </p>
       )}
-      {['login', 'signup'].indexOf(view) !== -1 && (
+      {['login', 'signup'].indexOf(name) !== -1 && (
         <div>
           <div className="center">
             - OR -
@@ -102,8 +102,8 @@ const AuthPageLayout = (props) => {
 };
 
 AuthPageLayout.propTypes = {
-  view: PropTypes.shape({
-    view: PropTypes.oneOf([
+  page: PropTypes.shape({
+    name: PropTypes.oneOf([
       'login',
       'signup',
       'resetPassword',
@@ -115,7 +115,7 @@ AuthPageLayout.propTypes = {
     linkLabel: PropTypes.string,
     btnLabel: PropTypes.string,
   }).isRequired,
-  token: PropTypes.string, // only required by resetPassword view.
+  token: PropTypes.string, // only required for resetPassword page.
   service: PropTypes.oneOf([...Constants.AUTH_SERVICES, '']).isRequired,
   errorMsg: PropTypes.string.isRequired,
   successMsg: PropTypes.string.isRequired,

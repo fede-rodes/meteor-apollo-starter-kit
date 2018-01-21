@@ -1,33 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
 import authPageState, { authPageProps } from '../../hocs/auth-page-state';
-import AuxFunctions from '../../../api/aux-functions';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const VIEW = {
-  view: 'resetPassword',
-  title: 'Reset your Password',
-  // subtitle: '',
-  // linkTo: '',
-  // linkLabel: '',
-  btnLabel: 'Reset Password',
+const PAGE = {
+  name: 'signup',
+  title: 'Sign Up',
+  subtitle: 'Already have an account?&nbsp;',
+  linkTo: 'login',
+  linkLabel: 'Log In',
+  btnLabel: 'Sign Up',
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ResetPasswordPage extends React.PureComponent {
+class SignupPage extends React.PureComponent {
+  // This method is just for consistency, it doesn't do anything really!
   handleSuccess = () => {
     const { handleSuccess } = this.props.authPage;
 
-    // Extend handleSuccess method provided by authPage HOC
-    handleSuccess(() => {
-      AuxFunctions.delayedAlert('Password reset successfully!', 700);
-    });
+    // Do nothing, just call handleSuccess from authPage HOC.
+    handleSuccess();
+
+    // OBSERVATION: in case of facebook auth service, this code is only
+    // reachable when using 'popup' loginStyle at serviceConfiguration. In
+    // case of loginStyle equals 'redirect', the page will be re-loaded
+    // after the response is returned by facebook and therefore this hook
+    // will never be fired.
 
     // At this point, the user logged-in-state will change from 'logged out'
     // to 'logged in'. This will trigger the LoggedOutRoute component's
@@ -36,11 +37,6 @@ class ResetPasswordPage extends React.PureComponent {
 
   render() {
     const {
-      match: {
-        params: {
-          token = '',
-        },
-      },
       authPage: {
         service,
         errorMsg,
@@ -55,8 +51,7 @@ class ResetPasswordPage extends React.PureComponent {
 
     return (
       <AuthPageLayout
-        view={VIEW}
-        token={token}
+        page={PAGE}
         service={service}
         errorMsg={errorMsg}
         successMsg={successMsg}
@@ -71,18 +66,9 @@ class ResetPasswordPage extends React.PureComponent {
   }
 }
 
-ResetPasswordPage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      token: PropTypes.string, // only required for resetPassword view
-    }).isRequired,
-  }).isRequired,
+SignupPage.propTypes = {
   authPage: authPageProps.isRequired,
 };
 
-const enhance = compose(
-  withRouter, // provides access to match.params.
-  authPageState, // provides common state fields and methods used accross all auth pages.
-);
-
-export default enhance(ResetPasswordPage);
+// authPageState provides common state fields and methods used accross all auth pages.
+export default authPageState(SignupPage);

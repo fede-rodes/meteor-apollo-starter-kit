@@ -61,7 +61,7 @@ const hoc = (WrappedComponent) => {
     }
 
     handleServerError = (err) => {
-      console.log(err);
+      // console.log(err);
       this.setState({ errorMsg: err.reason || err.message || 'Unexpected error' });
       this.enableBtn();
     }
