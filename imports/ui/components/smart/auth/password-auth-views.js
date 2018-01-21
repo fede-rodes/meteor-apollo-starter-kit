@@ -19,9 +19,6 @@ const STATES = {
   forgotPassword: { fields: ['email'] },
   resetPassword: { fields: ['password'] },
 };
-// TODO: simpler to write:
-// email: ['login', 'signup', 'forgotPassword']
-// password: ['login', 'signup', 'resetPassword']
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
