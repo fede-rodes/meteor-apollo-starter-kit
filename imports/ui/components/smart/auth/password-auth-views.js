@@ -11,7 +11,7 @@ import Button from '../../dumb/button';
 import ErrorHandling from '../../../../api/error-handling';
 
 //------------------------------------------------------------------------------
-// COMPONENT STATES:
+// CONSTANTS:
 //------------------------------------------------------------------------------
 const STATES = {
   login: { fields: ['email', 'password'] },
@@ -19,24 +19,28 @@ const STATES = {
   forgotPassword: { fields: ['email'] },
   resetPassword: { fields: ['password'] },
 };
+// TODO: simpler to write:
+// email: ['login', 'signup', 'forgotPassword']
+// password: ['login', 'signup', 'resetPassword']
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 class PasswordAuthViews extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      errors: { email: [], password: [] },
-    };
-    this.isActiveField = this.isActiveField.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.validateFields = this.validateFields.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  state = {
+    email: '',
+    password: '',
+    errors: { email: [], password: [] },
   }
 
-  isActiveField(field) {
+  handleSuccess = () => {
+    // Clear fields
+    this.setState({ email: '', password: '' });
+    // Pass event up to parent component
+    this.props.onSuccessHook();
+  }
+
+  // Whether or not the given field is present in the current view.
+  isActiveField = (field) => {
     const { view } = this.props;
 
     // Get list of active fields for the current view ('email' and/or 'password')
@@ -46,7 +50,7 @@ class PasswordAuthViews extends React.Component {
     return activeFields.indexOf(field) !== -1;
   }
 
-  handleChange(evt) {
+  handleChange = (evt) => {
     const field = evt.target.id;
     const value = evt.target.value;
     const errors = this.state.errors;
@@ -58,7 +62,7 @@ class PasswordAuthViews extends React.Component {
     });
   }
 
-  validateFields({ email, password }) {
+  validateFields = ({ email, password }) => {
     // Initialize errors
     const errors = {
       email: [],
@@ -95,7 +99,7 @@ class PasswordAuthViews extends React.Component {
     return errors;
   }
 
-  handleSubmit(evt) {
+  handleSubmit = (evt) => {
     evt.preventDefault();
 
     const {
@@ -104,7 +108,6 @@ class PasswordAuthViews extends React.Component {
       onBeforeHook,
       onClientErrorHook,
       onServerErrorHook,
-      onSucessHook,
     } = this.props;
 
     // Run before logic if provided and return on error
@@ -136,7 +139,7 @@ class PasswordAuthViews extends React.Component {
           if (err2) {
             onServerErrorHook(err2);
           } else {
-            onSucessHook();
+            this.handleSuccess();
           }
         });
         break;
@@ -148,7 +151,7 @@ class PasswordAuthViews extends React.Component {
           } else {
             // OBSERVATION: see /entry-points/server/configs/accounts-config
             // for sendVerificationEmail logic
-            onSucessHook();
+            this.handleSuccess();
           }
         });
         break;
@@ -158,8 +161,7 @@ class PasswordAuthViews extends React.Component {
           if (err2) {
             onServerErrorHook(err2);
           } else {
-            this.setState({ serverSuccess: 'A new email has been sent to your inbox!' });
-            onSucessHook();
+            this.handleSuccess();
           }
         });
         break;
@@ -169,13 +171,13 @@ class PasswordAuthViews extends React.Component {
           if (err2) {
             onServerErrorHook(err2);
           } else {
-            onSucessHook();
+            this.handleSuccess();
           }
         });
         break;
       }
       default:
-        onClientErrorHook('Unknown view option!');
+        onClientErrorHook('Unknown view option!', view);
         break;
     }
   }
@@ -239,19 +241,14 @@ class PasswordAuthViews extends React.Component {
 }
 
 PasswordAuthViews.propTypes = {
-  view: PropTypes.oneOf([
-    'login',
-    'signup',
-    'forgotPassword',
-    'resetPassword',
-  ]).isRequired,
+  view: PropTypes.oneOf(Object.keys(STATES)).isRequired,
   token: PropTypes.string,
   btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onSucessHook: PropTypes.func,
+  onSuccessHook: PropTypes.func,
 };
 
 PasswordAuthViews.defaultProps = {
@@ -261,7 +258,7 @@ PasswordAuthViews.defaultProps = {
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
-  onSucessHook: () => {},
+  onSuccessHook: () => {},
 };
 
 export default PasswordAuthViews;

@@ -7,11 +7,17 @@ import {
   LoggedOutRoute,
   RouteWithProps,
 } from './components/smart/route-wrappers';
-import AuthPage from './pages/auth-page';
-import ResetPasswordPage from './pages/reset-password-page';
-import WelcomePage from './pages/welcome-page';
-import VerifyEmailPage from './pages/verify-email-page';
-import LinkExpiredPage from './pages/link-expired-page';
+
+// Auth routes
+import LoginPage from './pages/auth/login-page';
+import SignupPage from './pages/auth/signup-page';
+import ResetPasswordPage from './pages/auth/reset-password-page';
+import ForgotPasswordPage from './pages/auth/forgot-password-page';
+import WelcomePage from './pages/auth/welcome-page';
+import VerifyEmailPage from './pages/auth/verify-email-page';
+import LinkExpiredPage from './pages/auth/link-expired-page';
+
+// Other routes
 import HomePage from './pages/home-page';
 import NotFoundPage from './pages/not-found-page';
 
@@ -25,27 +31,21 @@ const Routes = props => (
       name="home"
       path="/"
       component={HomePage}
-      // redirectTo="/auth"
-      overlay={AuthPage}
+      redirectTo="/login"
       emailNotVerifiedOverlay={WelcomePage}
       {...props}
     />
-    {/*
-      The following route can be removed when using overlay strategy (above),
-      just fix the login link at link-expired-page (simply redirect user to
-      home ('/') or any other loggedIn route)
-    */}
     <LoggedOutRoute
-      name="auth"
-      path="/auth"
-      component={AuthPage}
+      name="login"
+      path="/login"
+      component={LoginPage}
       redirectTo="/"
       {...props}
     />
     <LoggedOutRoute
-      name="resetPassword"
-      path="/reset-password/:token"
-      component={ResetPasswordPage}
+      name="signup"
+      path="/signup"
+      component={SignupPage}
       redirectTo="/"
       {...props}
     />
@@ -59,6 +59,20 @@ const Routes = props => (
       name="linkExpired"
       path="/link-expired"
       component={LinkExpiredPage}
+      {...props}
+    />
+    <LoggedOutRoute
+      name="forgotPassword"
+      path="/forgot-password"
+      component={ForgotPasswordPage}
+      redirectTo="/"
+      {...props}
+    />
+    <LoggedOutRoute
+      name="resetPassword"
+      path="/reset-password/:token"
+      component={ResetPasswordPage}
+      redirectTo="/"
       {...props}
     />
     <Route

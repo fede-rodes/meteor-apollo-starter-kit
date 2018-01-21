@@ -6,20 +6,15 @@ import sendVerificationEmailMutation from './mutations.graphql';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ResendVerificationLink extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  async handleClick(evt) {
+class ResendVerificationLink extends React.PureComponent {
+  handleClick = async (evt) => {
     evt.preventDefault();
 
     const {
       sendVerificationEmail,
       onBeforeHook,
       onServerErrorHook,
-      onSucessHook,
+      onSuccessHook,
     } = this.props;
 
     // Run before logic if provided and return on error
@@ -31,7 +26,7 @@ class ResendVerificationLink extends React.Component {
 
     try {
       await sendVerificationEmail();
-      onSucessHook();
+      onSuccessHook();
     } catch (exc) {
       onServerErrorHook(exc);
     }
@@ -40,13 +35,15 @@ class ResendVerificationLink extends React.Component {
   render() {
     const { label, disabled } = this.props;
 
-    return disabled ? (
-      <span>{label}</span>
-    ) : (
+    const text = <span>{label}</span>;
+
+    const link = (
       <a href="" onClick={this.handleClick}>
         {label}
       </a>
     );
+
+    return disabled ? text : link;
   }
 }
 
@@ -56,14 +53,14 @@ ResendVerificationLink.propTypes = {
   sendVerificationEmail: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onSucessHook: PropTypes.func,
+  onSuccessHook: PropTypes.func,
 };
 
 ResendVerificationLink.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
   onServerErrorHook: () => {},
-  onSucessHook: () => {},
+  onSuccessHook: () => {},
 };
 
 // Apollo integration

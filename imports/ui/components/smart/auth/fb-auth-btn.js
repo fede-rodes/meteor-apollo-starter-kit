@@ -6,18 +6,13 @@ import Button from '../../dumb/button';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class FBAuthBtn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
+class FBAuthBtn extends React.PureComponent {
+  handleClick = () => {
     const {
       requestPermissions,
       onBeforeHook,
       onServerErrorHook,
-      onSucessHook,
+      onSuccessHook,
     } = this.props;
 
     // Run before logic if provided and return on error
@@ -35,7 +30,7 @@ class FBAuthBtn extends React.Component {
         // equals 'popup' at serviceConfiguration. In case loginStyle equals
         // 'redirect' you'll need to use Accounts.onLogin() to listen to state
         // changes. See GlobalDataProvider.componentWillMount().
-        onSucessHook();
+        onSuccessHook();
       }
     });
   }
@@ -64,7 +59,7 @@ FBAuthBtn.propTypes = {
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
-  onSucessHook: PropTypes.func,
+  onSuccessHook: PropTypes.func,
 };
 
 FBAuthBtn.defaultProps = {
@@ -75,7 +70,7 @@ FBAuthBtn.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
   onServerErrorHook: () => {},
-  onSucessHook: () => {},
+  onSuccessHook: () => {},
 };
 
 export default FBAuthBtn;

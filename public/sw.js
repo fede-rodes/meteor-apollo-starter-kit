@@ -4,7 +4,7 @@
 ;(function (self) {
   'use strict';
   var CACHE_NAME = 'meteor_apollo_starter_v1';
-  var pages      = ['/', '/sw.min.js', '/manifest-pwa.json'];
+  var pages      = ['/', '/sw.js', '/manifest-pwa.json'];
   var origin     = self.location.origin;
   var RE         = {
     method: /GET/i,

@@ -9,13 +9,13 @@ import Header from './header';
 const Outer = styled.div`
   min-height: 100vh;
 `;
-//------------------------------------------------------------------------------
+
 const Container = styled.div`
   max-width: 420px;
   min-height: 420px;
   width: 100%;
 `;
-//------------------------------------------------------------------------------
+
 const Inner = styled.div`
   padding: 30px;
   background-color: white;

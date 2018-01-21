@@ -11,7 +11,7 @@ const Outer = styled.div`
   max-height: 200px;
   padding: 15px 10px;
 `;
-//------------------------------------------------------------------------------
+
 const Logo = styled.img`
   max-height: 150px;
   width: 50%;
