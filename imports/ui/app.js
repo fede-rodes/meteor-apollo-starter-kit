@@ -15,6 +15,9 @@ import Routes from './routes';
 // send queries to the '/graphql' endpoint on the same host.
 const client = createApolloClient({});
 
+//------------------------------------------------------------------------------
+// COMPONENT:
+//------------------------------------------------------------------------------
 const App = () => (
   <ThemeProvider theme={theme}>
     <Router>

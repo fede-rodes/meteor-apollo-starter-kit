@@ -137,8 +137,12 @@ OR (if you are working on a different branch than master)
 
 
 ### TODO LIST
+- introduce auth page template for having title, substitle and so on
+- move disabled and error handling logic to single auth component (too much repetition)
+- use individual routes for login, signup, reset password, ... --> keep track of
+visited routes in order to send the user. Also add link in the verification email link to take the user back to the original page
 
-- https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
+ https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
 
 - tests
 - react helmet
@@ -146,29 +150,3 @@ OR (if you are working on a different branch than master)
 - https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab
 - https://www.webpagetest.org
 - https://stackify.com/what-is-real-user-monitoring/
-- css outside imports folder (lazy load) is better for performance?
-- Better to load from DNS?
-
-What about this? We are not using it:
-https://guide.meteor.com/accounts.html
-```
-Accounts.onResetPasswordLink
-Accounts.onEnrollmentLink
-Accounts.onEmailVerificationLink
-Here’s how you would use one of these functions:
-
-Accounts.onResetPasswordLink((token, done) => {
-  // Display the password reset UI, get the new password...
-  Accounts.resetPassword(token, newPassword, (err) => {
-    if (err) {
-      // Display error
-    } else {
-      // Resume normal operation
-      done();
-    }
-  });
-})
-```
-
-### UI components library built with styled components:
-- https://ak-mk-2-prod.netlify.com/packages/elements/datetime-picker

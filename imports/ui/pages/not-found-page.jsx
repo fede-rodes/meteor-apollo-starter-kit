@@ -8,7 +8,9 @@ import Title from '../components/dumb/title';
 const NotFoundPage = () => (
   <div>
     <Title>404 - Page Not Found</Title>
-    <p className="center">Back to <Link to="/">Home</Link></p>
+    <p className="center">
+      Back to <Link to="/">Home</Link>
+    </p>
   </div>
 );
 
