@@ -56,4 +56,57 @@
       }));
     }));
   });
+
+  // SOURCE: https://developers.google.com/web/fundamentals/codelabs/push-notifications/
+  self.addEventListener('push', function(event) {
+    console.log('[Service Worker] Push Received.');
+    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+    const title = 'Push notification demo';
+    const options = {
+      body: 'Yay it works.',
+      tag: 'demo',
+      icon: '/images/apple-touch-icon.png',
+      badge: '/images/apple-touch-icon.png',
+      // Custom actions buttons
+      'actions': [
+        { "action": "yes", "title": "I ♥ this app!"},
+        { "action": "no", "title": "I don\'t like this app"}
+      ]
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
+  });
+
+  // SOURCE: https://developers.google.com/web/fundamentals/codelabs/push-notifications/
+  self.addEventListener('notificationclick', function(event) {
+    console.log('[Service Worker] Notification click Received.');
+
+    var appURL = new URL('/', location).href;
+    console.log('appURL', appURL);
+
+    // Listen to custom action buttons in push notification
+    if (event.action === 'yes') {
+      console.log('I ♥ this app!');
+    }
+    else if (event.action === 'no') {
+      console.warn('I don\'t like this app');
+    }
+
+    event.notification.close();
+
+    event.waitUntil(clients.matchAll({
+      type: 'window'
+    }).then(function(clientList) {
+      for (var i = 0; i < clientList.length; i++) {
+        var client = clientList[i];
+        if (client.url === '/' && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(appURL);
+      }
+    }));
+  });
 })(this);

@@ -35,37 +35,14 @@ class ResetPasswordPage extends React.PureComponent {
   }
 
   render() {
-    const {
-      match: {
-        params: {
-          token = '',
-        },
-      },
-      authPage: {
-        service,
-        errorMsg,
-        successMsg,
-        disabled,
-        changeViewTo,
-        handleBefore,
-        handleClientError,
-        handleServerError,
-      },
-    } = this.props;
+    const { token = '' } = this.props.match.params;
 
     return (
       <AuthPageLayout
         page={PAGE}
         token={token}
-        service={service}
-        errorMsg={errorMsg}
-        successMsg={successMsg}
-        disabled={disabled}
-        changeViewTo={changeViewTo}
-        handleBefore={handleBefore}
-        handleClientError={handleClientError}
-        handleServerError={handleServerError}
-        handleSuccess={this.handleSuccess}
+        {...this.props.authPage} // Pass all state fields and methods to AuthPageLayout.
+        handleSuccess={this.handleSuccess} // overwrite handleSuccess method provided by authPage HOC.
       />
     );
   }

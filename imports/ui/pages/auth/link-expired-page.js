@@ -27,6 +27,8 @@ class LinkExpiredPage extends React.PureComponent {
         errorMsg,
         successMsg,
         disabled,
+        handleBefore,
+        handleServerError,
       },
     } = this.props;
 
@@ -34,8 +36,8 @@ class LinkExpiredPage extends React.PureComponent {
       <ResendVerificationLink
         label="here"
         disabled={disabled}
-        onBeforeHook={this.handleBefore}
-        onServerErrorHook={this.handleServerError}
+        onBeforeHook={handleBefore}
+        onServerErrorHook={handleServerError}
         onSuccessHook={this.handleSuccess}
       />
     );
