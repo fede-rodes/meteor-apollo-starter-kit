@@ -49,9 +49,9 @@ class GlobalDataProvider extends React.Component {
 GlobalDataProvider.propTypes = {
   userData: PropTypes.shape({
     error: PropTypes.object,
-    loading: PropTypes.bool, // TODO: not required?
+    loading: PropTypes.bool.isRequired,
     user: propType(userFragment),
-    refetch: PropTypes.func, // TODO: not required?
+    refetch: PropTypes.func.isRequired,
   }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object,

@@ -121,16 +121,15 @@ OR (if you are working on a different branch than master)
 - https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
 
 
-#### Progressive Web Apps
+#### Progressive Web Apps / Service Workers
 - https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
 - https://www.made-on-mars.com/blog/how-to-pwa-an-introduction-on-progressive-web-app-and-a-tutorial-to-create-one-with-full-features-push-notification-service-worker-offline-mode/
 - https://github.com/NitroBAY/meteor-service-worker
 - https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
 - https://developers.google.com/web/tools/workbox/
 - https://youtu.be/cmGr0RszHc8
-
-#### Service Worker
 - https://classroom.udacity.com/courses/ud899
+- https://developers.google.com/web/fundamentals/codelabs/push-notifications/
 
 #### Dynamic imports
 - https://youtu.be/j-WcyAjVceM

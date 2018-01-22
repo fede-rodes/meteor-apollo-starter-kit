@@ -30,31 +30,11 @@ class ForgotPasswordPage extends React.PureComponent {
   }
 
   render() {
-    const {
-      authPage: {
-        service,
-        errorMsg,
-        successMsg,
-        disabled,
-        changeViewTo,
-        handleBefore,
-        handleClientError,
-        handleServerError,
-      },
-    } = this.props;
-
     return (
       <AuthPageLayout
         page={PAGE}
-        service={service}
-        errorMsg={errorMsg}
-        successMsg={successMsg}
-        disabled={disabled}
-        changeViewTo={changeViewTo}
-        handleBefore={handleBefore}
-        handleClientError={handleClientError}
-        handleServerError={handleServerError}
-        handleSuccess={this.handleSuccess}
+        {...this.props.authPage} // Pass all state fields and methods to AuthPageLayout.
+        handleSuccess={this.handleSuccess} // overwrite handleSuccess method provided by authPage HOC.
       />
     );
   }
