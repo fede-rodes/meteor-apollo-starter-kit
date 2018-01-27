@@ -6,12 +6,12 @@ import AuthPageLayout from '../../layouts/auth-page';
 // CONSTANTS:
 //------------------------------------------------------------------------------
 const PAGE = {
-  name: 'signup',
-  title: 'Sign Up',
-  subtitle: 'Already have an account?&nbsp;',
-  linkTo: 'login',
-  linkLabel: 'Log In',
-  btnLabel: 'Sign Up',
+  name: 'login',
+  title: 'Log In',
+  subtitle: 'Don&apos;t have an account?&nbsp;',
+  linkTo: 'signup',
+  linkLabel: 'Sign Up',
+  btnLabel: 'Log In',
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -25,9 +25,9 @@ const PAGE = {
 // On the other hand, after authPageProps.handleSuccess is fired, the user
 // logged-in-state will change from 'logged out' to 'logged in'. This will
 // trigger the LoggedOutRoute component's logic (said component wraps the
-// SignupPage component) which will result in redirecting the user to home page
+// LoginPage component) which will result in redirecting the user to home page
 // automatically.
-const SignupPage = () => (
+const LoginPage = () => (
   <AuthPageProps>
     {authPageProps => (
       <AuthPageLayout
@@ -39,4 +39,4 @@ const SignupPage = () => (
   </AuthPageProps>
 );
 
-export default SignupPage;
+export default LoginPage;
