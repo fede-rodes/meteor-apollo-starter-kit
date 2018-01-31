@@ -10,7 +10,7 @@ import Loading from '../../components/dumb/loading';
 //------------------------------------------------------------------------------
 class VerifyEmailPage extends React.Component {
   componentWillMount() {
-    const { history, match } = this.props;
+    const { match, history } = this.props;
 
     // Get token from url params
     const token = (match && match.params && match.params.token) || '';
@@ -32,15 +32,15 @@ class VerifyEmailPage extends React.Component {
 }
 
 VerifyEmailPage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string,
     }).isRequired,
   }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-// withRouter provides access to history.push()
+// withRouter provides access to match.params and history.push()
 export default withRouter(VerifyEmailPage);

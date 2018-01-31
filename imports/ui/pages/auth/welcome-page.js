@@ -1,5 +1,5 @@
 import React from 'react';
-import authPageState, { authPageProps } from '../../hocs/auth-page-state';
+import AuthPageProps from './auth-page-props';
 import { ResendVerificationLink, LogoutBtn } from '../../components/smart/auth';
 import Title from '../../components/dumb/title';
 import Feedback from '../../components/dumb/feedback';
@@ -7,60 +7,54 @@ import Feedback from '../../components/dumb/feedback';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class WelcomePage extends React.Component {
-  handleSuccess = () => {
-    const { handleSuccess, setSuccessMessage } = this.props.authPage;
-
-    // Extend handleSuccess method provided by authPage HOC
-    handleSuccess(() => {
-      setSuccessMessage('A new email has been sent to your inbox!');
-    });
-  }
-
-  render() {
-    const {
-      authPage: {
+const WelcomePage = () => (
+  <AuthPageProps>
+    {(authPageProps) => {
+      const {
+        disabled,
         errorMsg,
         successMsg,
-        disabled,
+        setSuccessMessage,
         handleBefore,
         handleServerError,
-      },
-    } = this.props;
+        handleSuccess,
+      } = authPageProps;
 
-    const resendLink = (
-      <ResendVerificationLink
-        label="here"
-        disabled={disabled}
-        onBeforeHook={handleBefore}
-        onServerErrorHook={handleServerError}
-        onSuccessHook={this.handleSuccess}
-      />
-    );
-
-    return (
-      <div>
-        <Title>Thanks for joining!</Title>
-        <p className="center">
-          <strong>Check your email</strong> and click on the link provided to confirm your account.
-        </p>
-        <p className="center">
-          If you did not receive an email, click {resendLink} to resend the confirmation link.
-        </p>
-        <Feedback
-          loading={disabled}
-          errorMsg={errorMsg}
-          successMsg={successMsg}
+      const resendLink = (
+        <ResendVerificationLink
+          label="here"
+          disabled={disabled}
+          onBeforeHook={handleBefore}
+          onServerErrorHook={handleServerError}
+          onSuccessHook={() => {
+            // Extend authPageProps.handleSuccess to show a success message
+            // after action is completed
+            handleSuccess(() => {
+              setSuccessMessage('A new email has been sent to your inbox!');
+            });
+          }}
         />
-        <LogoutBtn />
-      </div>
-    );
-  }
-}
+      );
 
-WelcomePage.propTypes = {
-  authPage: authPageProps.isRequired,
-};
+      return (
+        <div>
+          <Title>Thanks for joining!</Title>
+          <p className="center">
+            <strong>Check your email</strong> and click on the link provided to confirm your account.
+          </p>
+          <p className="center">
+            If you did not receive an email, click {resendLink} to resend the confirmation link.
+          </p>
+          <Feedback
+            loading={disabled}
+            errorMsg={errorMsg}
+            successMsg={successMsg}
+          />
+          <LogoutBtn />
+        </div>
+      );
+    }}
+  </AuthPageProps>
+);
 
-// authPageState provides common state fields and methods used accross all auth pages.
-export default authPageState(WelcomePage);
+export default WelcomePage;

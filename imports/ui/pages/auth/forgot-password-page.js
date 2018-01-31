@@ -1,5 +1,5 @@
 import React from 'react';
-import authPageState, { authPageProps } from '../../hocs/auth-page-state';
+import AuthPageProps from './auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
@@ -19,30 +19,24 @@ const PAGE = {
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ForgotPasswordPage extends React.PureComponent {
-  handleSuccess = () => {
-    const { handleSuccess, setSuccessMessage } = this.props.authPage;
-
-    // Extend handleSuccess method provided by authPage HOC
-    handleSuccess(() => {
-      setSuccessMessage('A new email has been sent to your inbox!');
-    });
-  }
-
-  render() {
-    return (
+const ForgotPasswordPage = () => (
+  <AuthPageProps>
+    {authPageProps => (
       <AuthPageLayout
         page={PAGE}
-        {...this.props.authPage} // Pass all state fields and methods to AuthPageLayout.
-        handleSuccess={this.handleSuccess} // overwrite handleSuccess method provided by authPage HOC.
+        // Pass all states and methods from authPageProps
+        {...authPageProps}
+        // Overwrite authPageProps.handleSuccess
+        handleSuccess={() => {
+          // Extend authPageProps.handleSuccess to show a success message after
+          // action is completed
+          authPageProps.handleSuccess(() => {
+            authPageProps.setSuccessMessage('A new email has been sent to your inbox!');
+          });
+        }}
       />
-    );
-  }
-}
+    )}
+  </AuthPageProps>
+);
 
-ForgotPasswordPage.propTypes = {
-  authPage: authPageProps.isRequired,
-};
-
-// authPageState provides common state fields and methods used accross all auth pages.
-export default authPageState(ForgotPasswordPage);
+export default ForgotPasswordPage;

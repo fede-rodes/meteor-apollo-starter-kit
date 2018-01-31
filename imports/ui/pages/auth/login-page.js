@@ -1,5 +1,5 @@
 import React from 'react';
-import authPageState, { authPageProps } from '../../hocs/auth-page-state';
+import AuthPageProps from './auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
@@ -16,39 +16,27 @@ const PAGE = {
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class LoginPage extends React.PureComponent {
-  // This method is just for consistency, it doesn't do anything really!
-  handleSuccess = () => {
-    const { handleSuccess } = this.props.authPage;
+// OBSERVATION: in case of facebook authentication, authPageProps.handleSuccess
+// is only reachable when using 'popup' loginStyle at serviceConfiguration. On
+// the contrary, when loginStyle equals 'redirect', the page will be re-loaded
+// just after the response is coming back from facebook and therefore this hook
+// will never be fired.
 
-    // Do nothing, just call handleSuccess from authPage HOC.
-    handleSuccess();
-
-    // OBSERVATION: in case of facebook auth service, this code is only
-    // reachable when using 'popup' loginStyle at serviceConfiguration. In
-    // case of loginStyle equals 'redirect', the page will be re-loaded
-    // after the response is returned by facebook and therefore this hook
-    // will never be fired.
-
-    // At this point, the user logged-in-state will change from 'logged out'
-    // to 'logged in'. This will trigger the LoggedOutRoute component's
-    // logic which will result in redirecting the user to home page '/'.
-  }
-
-  render() {
-    return (
+// On the other hand, after authPageProps.handleSuccess is fired, the user
+// logged-in-state will change from 'logged out' to 'logged in'. This will
+// trigger the LoggedOutRoute component's logic (said component wraps the
+// LoginPage component) which will result in redirecting the user to home page
+// automatically.
+const LoginPage = () => (
+  <AuthPageProps>
+    {authPageProps => (
       <AuthPageLayout
         page={PAGE}
-        {...this.props.authPage} // Pass all state fields and methods to AuthPageLayout.
-        handleSuccess={this.handleSuccess} // overwrite handleSuccess method provided by authPage HOC.
+        // Pass all states and methods from authPageProps
+        {...authPageProps}
       />
-    );
-  }
-}
+    )}
+  </AuthPageProps>
+);
 
-LoginPage.propTypes = {
-  authPage: authPageProps.isRequired,
-};
-
-// authPageState provides common state fields and methods used accross all auth pages.
-export default authPageState(LoginPage);
+export default LoginPage;

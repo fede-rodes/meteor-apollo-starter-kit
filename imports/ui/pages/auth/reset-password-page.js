@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import authPageState, { authPageProps } from '../../hocs/auth-page-state';
 import AuxFunctions from '../../../api/aux-functions';
+import AuthPageProps from './auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
@@ -20,46 +19,44 @@ const PAGE = {
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class ResetPasswordPage extends React.PureComponent {
-  handleSuccess = () => {
-    const { handleSuccess } = this.props.authPage;
+// OBSERVATION: after authPageProps.handleSuccess is fired, the user
+// logged-in-state will change from 'logged out' to 'logged in'. This will
+// trigger the LoggedOutRoute component's logic (said component wraps the
+// LoginPage component) which will result in redirecting the user to home page
+// automatically.
+const ResetPasswordPage = ({ match }) => {
+  // Get token from url params
+  const token = (match && match.params && match.params.token) || '';
 
-    // Extend handleSuccess method provided by authPage HOC
-    handleSuccess(() => {
-      AuxFunctions.delayedAlert('Password reset successfully!', 700);
-    });
-
-    // At this point, the user logged-in-state will change from 'logged out'
-    // to 'logged in'. This will trigger the LoggedOutRoute component's
-    // logic which will result in redirecting the user to home page '/'.
-  }
-
-  render() {
-    const { token = '' } = this.props.match.params;
-
-    return (
-      <AuthPageLayout
-        page={PAGE}
-        token={token}
-        {...this.props.authPage} // Pass all state fields and methods to AuthPageLayout.
-        handleSuccess={this.handleSuccess} // overwrite handleSuccess method provided by authPage HOC.
-      />
-    );
-  }
-}
+  return (
+    <AuthPageProps>
+      {authPageProps => (
+        <AuthPageLayout
+          page={PAGE}
+          token={token}
+          // Pass all states and methods from authPageProps
+          {...authPageProps}
+          // Overwrite authPageProps.handleSuccess
+          handleSuccess={() => {
+            // Extend authPageProps.handleSuccess to show an alert message after
+            // action is completed
+            authPageProps.handleSuccess(() => {
+              AuxFunctions.delayedAlert('Password reset successfully!', 700);
+            });
+          }}
+        />
+      )}
+    </AuthPageProps>
+  );
+};
 
 ResetPasswordPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      token: PropTypes.string, // only required for resetPassword view
+      token: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  authPage: authPageProps.isRequired,
 };
 
-const enhance = compose(
-  withRouter, // provides access to match.params.
-  authPageState, // provides common state fields and methods used accross all auth pages.
-);
-
-export default enhance(ResetPasswordPage);
+// withRouter provides access to match.params
+export default withRouter(ResetPasswordPage);

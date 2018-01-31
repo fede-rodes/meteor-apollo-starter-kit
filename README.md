@@ -136,6 +136,7 @@ OR (if you are working on a different branch than master)
 
 
 ### TODO LIST
+- divide HOC into disabled, messages, hooks and changeViewTo
 - keep track of
 visited routes in order to send the user. Also add link in the verification email link to take the user back to the original page
 

@@ -13,7 +13,7 @@ import ErrorHandling from '../../../../api/error-handling';
 //------------------------------------------------------------------------------
 // CONSTANTS:
 //------------------------------------------------------------------------------
-const STATES = {
+const VIEWS = {
   login: { fields: ['email', 'password'] },
   signup: { fields: ['email', 'password'] },
   forgotPassword: { fields: ['email'] },
@@ -41,9 +41,9 @@ class PasswordAuthViews extends React.Component {
     const { view } = this.props;
 
     // Get list of active fields for the current view ('email' and/or 'password')
-    const activeFields = STATES[view].fields;
+    const activeFields = VIEWS[view].fields;
 
-    // Return whether or not the given field is in the active list
+    // Return whether or not the given field is present in the active list
     return activeFields.indexOf(field) !== -1;
   }
 
@@ -71,7 +71,7 @@ class PasswordAuthViews extends React.Component {
 
     if (this.isActiveField('email')) {
       // Sanitize input
-      const _email = email && email.trim(); // eslint-disable-line
+      const _email = email && email.trim(); // eslint-disable-line no-underscore-dangle
 
       if (!_email) {
         errors.email.push('Email is required!');
@@ -238,7 +238,7 @@ class PasswordAuthViews extends React.Component {
 }
 
 PasswordAuthViews.propTypes = {
-  view: PropTypes.oneOf(Object.keys(STATES)).isRequired,
+  view: PropTypes.oneOf(Object.keys(VIEWS)).isRequired,
   token: PropTypes.string,
   btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
