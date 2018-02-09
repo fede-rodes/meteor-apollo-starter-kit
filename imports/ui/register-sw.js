@@ -6,6 +6,7 @@ const updateReady = () => {
   // handle requests until this page and any other instances of this page
   // (in other tabs, etc.) have been closed/reloaded.
   alert('New version available, please reload.'); // eslint-disable-line no-alert
+  // TODO: use a confirm instead and reload on ok
 };
 //------------------------------------------------------------------------------
 const trackInstalling = (worker) => {

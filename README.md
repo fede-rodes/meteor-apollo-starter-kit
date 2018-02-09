@@ -162,12 +162,13 @@ OR (if you are working on a different branch than master)
 - https://youtu.be/qu4U7lwZTRI
 
 ### TODO LIST
-- bump meteor version
+- sw updateReady: use a confirm instead and reload on ok
 - improve readme: step by step guide
 - clean sw
 - react helmet
 - decide what to do with render props / state passing
 - Update 'User' namespace to 'Users'
+- bump meteor version
 - code-splitting
 
 
