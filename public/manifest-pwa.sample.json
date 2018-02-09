@@ -1,7 +1,7 @@
 {
-  "name": "Meteor-Apollo starter kit",
-  "gcm_sender_id": "971422553171",
-  "short_name": "Meteor-Apollo starter kit",
+  "name": "<YOUR_APP_NAME>",
+  "gcm_sender_id": "<YOUR_GCM_SENDER_ID_FROM_FIREBASE>",
+  "short_name": "<YOUR_APP_SHORT_NAME>",
   "icons": [{
     "src": "images/icons/android-chrome-72x72.png",
     "sizes": "72x72",

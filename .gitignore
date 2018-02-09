@@ -5,4 +5,6 @@ settings-dev.json
 settings-prod.json
 public/sw-nitro.js
 public/sw-playground.js
-imports/api/service-worker.js
+imports/ui/service-worker.js
+imports/ui/service-worker-2.js
+imports/ui/components/smart/pwa/subscribe-btn/script.js

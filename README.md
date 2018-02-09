@@ -14,7 +14,7 @@ Lighthouse audit:
 - Redux
 - Meteor accounts (password & facebook)
 - ES6 syntax
-- [styled components](https://youtu.be/qu4U7lwZTRI)
+- styled components
 - service worker (Progressive Web App)
 - Storybook
 - sanitize.css
@@ -113,6 +113,14 @@ OR (if you are working on a different branch than master)
 10. heroku open
 ```
 
+### Setup Push Notifications Service
+1. get your GCM server key and sender id from Firebase;
+2. add sender id to your manifest-pwa.json file;
+3. install 'web-push' globally: ```npm i -g web-push```;
+4. generate VAPID keys: ```web-push generate-vapid-keys --json```;
+5. copy-paste your VAPID keys into your settings-dev.json file;
+
+
 ### Resources
 
 #### Meteor Apollo
@@ -120,30 +128,56 @@ OR (if you are working on a different branch than master)
 - [Apollo docs](http://dev.apollodata.com/)
 - https://blog.meteor.com/create-a-simple-hello-world-app-with-meteor-and-apollo-64bab66a456f
 
-
 #### Progressive Web Apps / Service Workers
 - https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
+- https://dzone.com/articles/introduction-to-progressive-web-apps-offline-first
+- https://dzone.com/articles/introduction-to-progressive-web-apps-instant-loadi
+- https://dzone.com/articles/introduction-to-progressive-web-apps-push-notifica
+- https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
+- https://medium.com/@addyosmani/a-tinder-progressive-web-app-performance-case-study-78919d98ece0
 - https://www.made-on-mars.com/blog/how-to-pwa-an-introduction-on-progressive-web-app-and-a-tutorial-to-create-one-with-full-features-push-notification-service-worker-offline-mode/
-- https://github.com/NitroBAY/meteor-service-worker
-- https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
-- https://developers.google.com/web/tools/workbox/
 - https://youtu.be/cmGr0RszHc8
 - https://classroom.udacity.com/courses/ud899
 - https://developers.google.com/web/fundamentals/codelabs/push-notifications/
+- https://dzone.com/articles/web-push-notifications-1
+- https://medium.com/@firt/pwas-are-coming-to-ios-11-3-cupertino-we-have-a-problem-2ff49fd7d6ea
+- https://serviceworke.rs
+- https://ada.is/progressive-web-apps-talk/
+- https://web-push-book.gauntface.com
+- https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
+- https://developers.google.com/web/fundamentals/app-install-banners/?hl=en#deferring_or_cancelling_the_prompt
+- https://developers.google.com/web/tools/workbox/
+
+### Service Workers Scripts
+- https://github.com/mozilla/serviceworker-cookbook
+- https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker
+- https://github.com/jakearchibald/isserviceworkerready/tree/gh-pages/demos
+- https://github.com/NitroBAY/meteor-service-worker
+- https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
 
 #### Dynamic imports
 - https://youtu.be/j-WcyAjVceM
 
+#### styled components
+- https://youtu.be/qu4U7lwZTRI
 
 ### TODO LIST
-- divide HOC into disabled, messages, hooks and changeViewTo
-- keep track of
-visited routes in order to send the user. Also add link in the verification email link to take the user back to the original page
+- bump meteor version
+- improve readme: step by step guide
+- clean sw
+- react helmet
+- decide what to do with render props / state passing
+- Update 'User' namespace to 'Users'
+- code-splitting
+
+
+- keep track of visited routes in order to send the user back to the initial page. Additionally, add initial page at verification link in order to take the user
+ back to the initial page after email account verification.
 
  https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
 
 - tests
-- react helmet
+
 - ssr to speed-up first load and SEO
 - https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab
 - https://www.webpagetest.org

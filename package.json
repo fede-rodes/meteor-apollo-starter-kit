@@ -41,7 +41,8 @@
     "redux-logger": "^3.0.6",
     "sanitize.css": "^5.0.0",
     "simpl-schema": "^1.2.2",
-    "styled-components": "^2.2.3"
+    "styled-components": "^2.2.3",
+    "web-push": "^3.2.5"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.16",

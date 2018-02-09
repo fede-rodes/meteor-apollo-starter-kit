@@ -1,13 +1,25 @@
 {
   "smtp": {
     "protocol": "smtp",
-    "username": "MGUSERNAME.mailgun.org",
-    "password": "MGPASSWORD",
+    "username": "MAILGUN_USERNAME.mailgun.org",
+    "password": "MAILGUN_PASSWORD",
     "server": "smtp.mailgun.org",
     "port": "587"
   },
   "facebook": {
-    "appId": "FACEBOOK_APPID",
+    "appId": "FACEBOOK_APP_ID",
     "secret": "FACEBOOK_SECRET"
+  },
+  "firebase": {
+    "privateKey": "FIREBASE_SERVER_KEY"
+  },
+  "vapid": {
+    "subject": "mailto:YOUR_EMAIL_ADDRESS",
+    "privateKey": "WEB_PUSH_SERVER_KEY"
+  },
+  "public": {
+    "vapid": {
+      "publicKey": "WEB_PUSH_PUBLIC_KEY"
+    }
   }
 }

@@ -4,7 +4,7 @@ import SimpleSchema from 'simpl-schema';
 //------------------------------------------------------------------------------
 // COLLECTION:
 //------------------------------------------------------------------------------
-// collection = new Mongo.Collection('users');
+// const collection = new Mongo.Collection('users');
 const collection = Meteor.users;
 
 //------------------------------------------------------------------------------
@@ -92,8 +92,39 @@ const schema = new SimpleSchema({
 
   services: {
     type: Object,
+    label: 'Auth services such as facebook, google plus or twitter',
     optional: true,
     blackbox: true,
+  },
+
+  subscriptions: {
+    type: Array,
+    label: 'Array of push subscriptions',
+    defaultValue: [],
+  },
+
+  'subscriptions.$': {
+    type: Object,
+  },
+
+  'subscriptions.$.endpoint': {
+    type: String,
+    label: 'Push subscription URL',
+  },
+
+  'subscriptions.$.keys': {
+    type: Object,
+    label: 'User encryption keys',
+  },
+
+  'subscriptions.$.keys.auth': {
+    type: String,
+    label: 'User public encryption key',
+  },
+
+  'subscriptions.$.keys.p256dh': {
+    type: String,
+    label: 'User auth secret',
   },
 
   accountDeactivated: {
