@@ -4,6 +4,7 @@ settings.json
 settings-dev.json
 settings-prod.json
 public/sw-nitro.js
+public/sw-dirty.js
 public/sw-playground.js
 imports/ui/service-worker.js
 imports/ui/service-worker-2.js

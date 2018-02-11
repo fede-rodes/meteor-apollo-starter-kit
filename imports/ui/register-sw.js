@@ -5,8 +5,10 @@ const updateReady = () => {
   // At this point, registration has taken place. The service worker will not
   // handle requests until this page and any other instances of this page
   // (in other tabs, etc.) have been closed/reloaded.
-  alert('New version available, please reload.'); // eslint-disable-line no-alert
-  // TODO: use a confirm instead and reload on ok
+  const ok = confirm('A new version of the app is available, we need to reload the page.'); // eslint-disable-line
+  if (ok) {
+    window.location.reload(true);
+  }
 };
 //------------------------------------------------------------------------------
 const trackInstalling = (worker) => {
@@ -56,10 +58,10 @@ if ('serviceWorker' in navigator) {
 
       console.log('service worker installed');
     })
-    .catch(err => (
+    .catch(exc => (
       // Something went wrong during registration. The sw.js file might be
       // unavailable or contain a syntax error.
-      console.info('servicecworker registration failed', err)
+      console.info('servicecworker registration failed', exc)
     ));
 } else {
   console.log('the current browser doesn\'t support service workers.');
