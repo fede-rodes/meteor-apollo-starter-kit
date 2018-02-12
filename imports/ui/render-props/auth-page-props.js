@@ -21,7 +21,6 @@ const AuthPageProps = props => (
               <ChangeViewProps>
                 {changeViewProps => (
                   <SubmitProps
-                    serviceProps={serviceProps}
                     disabledProps={disabledProps}
                     messageProps={messageProps}
                   >
@@ -37,7 +36,15 @@ const AuthPageProps = props => (
                           // clearing any messages before redirecting the user
                           changeViewProps.changeViewTo(to, messageProps.clearMessages)
                         ),
-                        handleBefore: submitProps.handleBefore,
+                        handleBefore: obj => (
+                          // Extend handleBefore's default functionality by
+                          // keeping track of the auth service being used
+                          submitProps.handleBefore(() => {
+                            if (obj && obj.service) {
+                              serviceProps.setService(obj.service);
+                            }
+                          })
+                        ),
                         handleClientError: submitProps.handleClientError,
                         handleServerError: submitProps.handleServerError,
                         handleSuccess: submitProps.handleSuccess,
