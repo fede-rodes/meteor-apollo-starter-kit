@@ -28,8 +28,8 @@ const ForgotPasswordPage = () => (
         {...authPageProps}
         // Overwrite authPageProps.handleSuccess
         handleSuccess={() => {
-          // Extend authPageProps.handleSuccess to show a success message after
-          // action is completed
+          // Extend btnProps.handleSuccess' default functionality by showing a
+          // success message after action is completed
           authPageProps.handleSuccess(() => {
             authPageProps.setSuccessMessage('A new email has been sent to your inbox!');
           });

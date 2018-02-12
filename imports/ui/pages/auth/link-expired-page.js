@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from '../../apollo-client/user';
-import AuthPageProps from '../../render-props/auth-page-props';
+import BtnProps from '../../render-props/btn-props';
 import { ResendVerificationLink } from '../../components/smart/auth';
 import Title from '../../components/dumb/title';
 import Feedback from '../../components/dumb/feedback';
@@ -11,8 +11,8 @@ import Feedback from '../../components/dumb/feedback';
 // COMPONENT:
 //------------------------------------------------------------------------------
 const LinkExpiredPage = ({ curUser }) => (
-  <AuthPageProps>
-    {(authPageProps) => {
+  <BtnProps>
+    {(btnProps) => {
       const {
         disabled,
         errorMsg,
@@ -21,7 +21,7 @@ const LinkExpiredPage = ({ curUser }) => (
         handleBefore,
         handleServerError,
         handleSuccess,
-      } = authPageProps;
+      } = btnProps;
 
       const resendLink = (
         <ResendVerificationLink
@@ -30,8 +30,8 @@ const LinkExpiredPage = ({ curUser }) => (
           onBeforeHook={handleBefore}
           onServerErrorHook={handleServerError}
           onSuccessHook={() => {
-            // Extend authPageProps.handleSuccess to show a success message
-            // after action is completed
+            // Extend btnProps.handleSuccess' default functionality by showing a
+            // success message after action is completed
             handleSuccess(() => {
               setSuccessMessage('A new email has been sent to your inbox!');
             });
@@ -56,7 +56,7 @@ const LinkExpiredPage = ({ curUser }) => (
         </div>
       );
     }}
-  </AuthPageProps>
+  </BtnProps>
 );
 
 LinkExpiredPage.propTypes = {

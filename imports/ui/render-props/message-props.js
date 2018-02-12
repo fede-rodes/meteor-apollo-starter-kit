@@ -19,7 +19,6 @@ class MessageProps extends React.PureComponent {
   }
 
   clearMessages = () => {
-    console.log('clear msgs');
     this.setState(() => ({ errorMsg: '', successMsg: '' }));
   }
 

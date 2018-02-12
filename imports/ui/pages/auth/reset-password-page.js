@@ -38,8 +38,8 @@ const ResetPasswordPage = ({ match }) => {
           {...authPageProps}
           // Overwrite authPageProps.handleSuccess
           handleSuccess={() => {
-            // Extend authPageProps.handleSuccess to show an alert message after
-            // action is completed
+            // Extend authPageProps.handleSuccess' by showing an alert message
+            // after action is completed
             authPageProps.handleSuccess(() => {
               AuxFunctions.delayedAlert('Password reset successfully!', 700);
             });
