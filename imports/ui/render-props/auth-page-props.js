@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   ServiceProps,
-  DisabledProps,
-  MessageProps,
+  servicePropTypes,
   ChangeViewProps,
-  SubmitProps,
+  changeViewPropTypes,
+  BtnProps,
+  btnPropTypes,
 } from './index';
 
 //------------------------------------------------------------------------------
@@ -14,53 +15,47 @@ import {
 const AuthPageProps = props => (
   <ServiceProps>
     {serviceProps => (
-      <DisabledProps>
-        {disabledProps => (
-          <MessageProps>
-            {messageProps => (
-              <ChangeViewProps>
-                {changeViewProps => (
-                  <SubmitProps
-                    disabledProps={disabledProps}
-                    messageProps={messageProps}
-                  >
-                    {(submitProps) => {
-                      const api = {
-                        service: serviceProps.service,
-                        disabled: disabledProps.disabled,
-                        errorMsg: messageProps.errorMsg,
-                        successMsg: messageProps.successMsg,
-                        setSuccessMessage: messageProps.setSuccessMessage,
-                        changeViewTo: to => (
-                          // Extend changeViewTo's default functionality by
-                          // clearing any messages before redirecting the user
-                          changeViewProps.changeViewTo(to, messageProps.clearMessages)
-                        ),
-                        handleBefore: obj => (
-                          // Extend handleBefore's default functionality by
-                          // keeping track of the auth service being used
-                          submitProps.handleBefore(() => {
-                            if (obj && obj.service) {
-                              serviceProps.setService(obj.service);
-                            }
-                          })
-                        ),
-                        handleClientError: submitProps.handleClientError,
-                        handleServerError: submitProps.handleServerError,
-                        handleSuccess: submitProps.handleSuccess,
-                      };
+      <ChangeViewProps>
+        {changeViewProps => (
+          <BtnProps>
+            {(btnProps) => {
+              const api = {
+                service: serviceProps.service,
+                changeViewTo: to => (
+                  // Extend changeViewTo's default functionality by
+                  // clearing any messages before redirecting the user
+                  changeViewProps.changeViewTo(to, btnProps.clearMessages)
+                ),
+                // Pass all state values and methods from btnProps
+                ...btnProps,
+                // Overwrite btnProps.handleSuccess
+                handleBefore: obj => (
+                  // Extend bntProps.handleBefore's default functionality by
+                  // keeping track of the auth service being used
+                  btnProps.handleBefore(() => {
+                    if (obj && obj.service) {
+                      serviceProps.setService(obj.service);
+                    }
+                  })
+                ),
+              };
 
-                      return props.children(api);
-                    }}
-                  </SubmitProps>
-                )}
-              </ChangeViewProps>
-            )}
-          </MessageProps>
+              return props.children(api);
+            }}
+          </BtnProps>
         )}
-      </DisabledProps>
+      </ChangeViewProps>
     )}
   </ServiceProps>
 );
 
 export default AuthPageProps;
+
+//------------------------------------------------------------------------------
+// PROP TYPES:
+//------------------------------------------------------------------------------
+export const authPagePropTypes = {
+  service: servicePropTypes.service,
+  changeViewTo: changeViewPropTypes.changeViewTo,
+  ...btnPropTypes,
+};

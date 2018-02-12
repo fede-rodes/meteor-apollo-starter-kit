@@ -53,7 +53,7 @@ export default SubmitProps;
 //------------------------------------------------------------------------------
 // PROPS:
 //------------------------------------------------------------------------------
-export const authPagePropTypes = {
+export const submitPropTypes = {
   handleBefore: PropTypes.func.isRequired,
   handleClientError: PropTypes.func.isRequired,
   handleServerError: PropTypes.func.isRequired,

@@ -24,7 +24,7 @@ const ForgotPasswordPage = () => (
     {authPageProps => (
       <AuthPageLayout
         page={PAGE}
-        // Pass all states and methods from authPageProps
+        // Pass all state values and methods from authPageProps
         {...authPageProps}
         // Overwrite authPageProps.handleSuccess
         handleSuccess={() => {

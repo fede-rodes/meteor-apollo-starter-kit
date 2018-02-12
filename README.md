@@ -162,8 +162,7 @@ OR (if you are working on a different branch than master)
 - https://youtu.be/qu4U7lwZTRI
 
 ### TODO LIST
-- define BtnProps renderProps component (disabled, btnLabel, handleSuccess, etc)
-- replace AuthPageProps with BtnProps in WelcomePage and LinkExpiredPage
+- simplify pwa btns
 - improve readme: step by step guide
 - react helmet
 - decide what to do with render props / state passing
@@ -178,7 +177,6 @@ OR (if you are working on a different branch than master)
  https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage
 
 - tests
-
 - ssr to speed-up first load and SEO
 - https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab
 - https://www.webpagetest.org

@@ -1,8 +1,11 @@
 import React from 'react';
 import {
   DisabledProps,
+  disabledPropTypes,
   MessageProps,
+  messagePropTypes,
   SubmitProps,
+  submitPropTypes,
 } from './index';
 
 //------------------------------------------------------------------------------
@@ -24,6 +27,7 @@ const BtnProps = props => (
                 errorMsg: messageProps.errorMsg,
                 successMsg: messageProps.successMsg,
                 setSuccessMessage: messageProps.setSuccessMessage,
+                clearMessages: messageProps.clearMessages,
                 handleBefore: submitProps.handleBefore,
                 handleClientError: submitProps.handleClientError,
                 handleServerError: submitProps.handleServerError,
@@ -40,3 +44,15 @@ const BtnProps = props => (
 );
 
 export default BtnProps;
+
+//------------------------------------------------------------------------------
+// PROP TYPES:
+//------------------------------------------------------------------------------
+export const btnPropTypes = {
+  disabled: disabledPropTypes.disabled,
+  errorMsg: messagePropTypes.errorMsg,
+  successMsg: messagePropTypes.successMsg,
+  setSuccessMessage: messagePropTypes.setSuccessMessage,
+  clearMessages: messagePropTypes.clearMessages,
+  ...submitPropTypes,
+};

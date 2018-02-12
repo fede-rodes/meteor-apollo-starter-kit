@@ -35,7 +35,7 @@ export default ServiceProps;
 //------------------------------------------------------------------------------
 // PROP TYPES:
 //------------------------------------------------------------------------------
-export const disabledPropTypes = {
+export const servicePropTypes = {
   service: PropTypes.string.isRequired,
   setService: PropTypes.func.isRequired,
   clearService: PropTypes.func.isRequired,

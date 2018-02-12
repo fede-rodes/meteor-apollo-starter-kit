@@ -34,7 +34,7 @@ const ResetPasswordPage = ({ match }) => {
         <AuthPageLayout
           page={PAGE}
           token={token}
-          // Pass all states and methods from authPageProps
+          // Pass all state values and methods from authPageProps
           {...authPageProps}
           // Overwrite authPageProps.handleSuccess
           handleSuccess={() => {

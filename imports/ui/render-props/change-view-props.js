@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-/* import {
-  servicePropTypes,
-  disabledPropTypes,
-  messagePropTypes,
-} from './index'; */
 
 //------------------------------------------------------------------------------
 // PROPS PROVIDER:
