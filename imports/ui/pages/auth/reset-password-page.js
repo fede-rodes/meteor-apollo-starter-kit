@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import AuxFunctions from '../../../api/aux-functions';
-import AuthPageProps from './auth-page-props';
+import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from '../../apollo-client/user';
-import AuthPageProps from './auth-page-props';
+import AuthPageProps from '../../render-props/auth-page-props';
 import { ResendVerificationLink } from '../../components/smart/auth';
 import Title from '../../components/dumb/title';
 import Feedback from '../../components/dumb/feedback';

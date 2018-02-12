@@ -14,7 +14,11 @@ const RE = {
 };
 
 self.addEventListener('install', (evt) => {
+  // Allow the service worker to progress from the registration's 'waiting'
+  // position to 'active' even while service worker clients are using the
+  // registration
   self.skipWaiting();
+
   evt.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -25,9 +29,11 @@ self.addEventListener('install', (evt) => {
 });
 
 self.addEventListener('fetch', (evt) => {
+  // Go through all the clients and attempt to have the currently executing
+  // service worker take control
   self.clients.claim();
 
-  // In case it's a get request or a websocket, skip
+  // In case it's a GET request or a websocket, skip
   if (!RE.method.test(evt.request.method) || RE.sockjs.test(evt.request.url)) {
     return;
   }

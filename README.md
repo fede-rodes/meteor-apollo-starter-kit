@@ -162,16 +162,16 @@ OR (if you are working on a different branch than master)
 - https://youtu.be/qu4U7lwZTRI
 
 ### TODO LIST
-- sw updateReady: use a confirm instead and reload on ok
+- define BtnProps renderProps component (disabled, btnLabel, handleSuccess, etc)
+- replace AuthPageProps with BtnProps in WelcomePage and LinkExpiredPage
 - improve readme: step by step guide
-- clean sw
 - react helmet
 - decide what to do with render props / state passing
 - Update 'User' namespace to 'Users'
 - bump meteor version
+
+- tests for sw
 - code-splitting
-
-
 - keep track of visited routes in order to send the user back to the initial page. Additionally, add initial page at verification link in order to take the user
  back to the initial page after email account verification.
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import {
   servicePropTypes,
   disabledPropTypes,
@@ -11,13 +11,13 @@ import {
 // PROPS PROVIDER:
 //------------------------------------------------------------------------------
 class SubmitProps extends React.PureComponent {
-  changeViewTo = to => (
+  /* changeViewTo = to => (
     (evt) => {
       evt.preventDefault();
       this.props.messageProps.clearMessages();
       this.props.history.push(to);
     }
-  )
+  ) */
 
   handleBefore = (obj) => {
     this.props.disabledProps.disableBtn();
@@ -41,39 +41,40 @@ class SubmitProps extends React.PureComponent {
   handleSuccess = (cb) => {
     this.props.disabledProps.enableBtn();
     this.props.messageProps.clearMessages();
-    // Allow other methods to extend handleSuccess functionality.
+    // Allow other components to extend handleSuccess default functionality
     if (cb) { cb(); }
   }
 
   render() {
-    const ui = {
-      changeViewTo: this.changeViewTo,
+    const api = {
+      // changeViewTo: this.changeViewTo,
       handleBefore: this.handleBefore,
       handleClientError: this.handleClientError,
       handleServerError: this.handleServerError,
       handleSuccess: this.handleSuccess,
     };
 
-    return this.props.children(ui);
+    return this.props.children(api);
   }
 }
 
 SubmitProps.propTypes = {
-  history: PropTypes.shape({
+  /* history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  }).isRequired,
+  }).isRequired, */
   serviceProps: PropTypes.shape(servicePropTypes).isRequired,
   disabledProps: PropTypes.shape(disabledPropTypes).isRequired,
   messageProps: PropTypes.shape(messagePropTypes).isRequired,
 };
 
-export default withRouter(SubmitProps);
+// export default withRouter(SubmitProps);
+export default SubmitProps;
 
 //------------------------------------------------------------------------------
 // PROPS:
 //------------------------------------------------------------------------------
 export const authPagePropTypes = {
-  changeViewTo: PropTypes.func.isRequired,
+  // changeViewTo: PropTypes.func.isRequired,
   handleBefore: PropTypes.func.isRequired,
   handleClientError: PropTypes.func.isRequired,
   handleServerError: PropTypes.func.isRequired,

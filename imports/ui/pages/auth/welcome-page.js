@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthPageProps from './auth-page-props';
+import AuthPageProps from '../../render-props/auth-page-props';
 import { ResendVerificationLink, LogoutBtn } from '../../components/smart/auth';
 import Title from '../../components/dumb/title';
 import Feedback from '../../components/dumb/feedback';

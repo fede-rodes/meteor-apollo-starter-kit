@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthPageProps from './auth-page-props';
+import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
