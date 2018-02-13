@@ -38,43 +38,44 @@ Mailgun will allow you to use password authentication service and send emails fr
 In order to get started, first access your [Mailgun](https://www.mailgun.com/) account. Then, grab your sandbox domain smtp username and password and copy said values into your settings.json file. Finally, add your email address to the list of [Auhtorized Recipients](https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients).
 
 #### 4. Register the app on Facebook:
-Follow [this](https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e) tutorial to register the app on Facebook; this will allow you to use Facebook authentication service. Once you get your appId and secret key, copy said values back to your settings.json file.
+Follow [this](https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e) tutorial to register the app on Facebook; this will allow you to use Facebook authentication service. Once you get your appId and secret key, copy said values back into your settings.json file.
 
 #### 5. Setup Push Notifications Service
 1. create a new file called ```manifest-pwa.json``` based on the provided ```manifest-pwa.sample.json``` (see ```/public``` folder).
-2. get your GCM server key and sender id from Firebase:
-  * first got to your Firabase account: https://console.firebase.google.com/;
+2. get your Google Cloud Message (GCM) server key and sender id from Firebase:
+  * first, got to your Firebase account: https://console.firebase.google.com/;
   * click on 'Add project';
   * click on the 'gear' icon (settings);
-  * finally, move to the 'CLOUD MESSAGING' tab at the top; you should be able to see both server key and sender id;
-3. copy your sender id to your manifest-pwa.json file and your server key in your settings.json file (firebase.privateKey);
+  * move to the 'CLOUD MESSAGING' tab at the top;
+  * you should now be able to see both server key and sender id;
+3. copy your sender id to your manifest-pwa.json file and your server key to your settings.json file (firebase.privateKey);
 4. open a terminal and install 'web-push' globally: ```npm i -g web-push```;
 5. generate VAPID keys: ```web-push generate-vapid-keys --json```;
 6. copy-paste your VAPID keys into your settings.json file;
 
 #### 6. Run the app
-That's enough config for today, you should now be able to run the app locally by typing:
+That's enough config for today, you should now be able to run the app locally:
 ```
 meteor --settings settings.json
 ```
 GraphiQL should be available at [http://localhost:3000/graphiql](http://localhost:3000/graphiql).
 
 #### 7. Deploy to Heroku
-In case you want to deploy your app to Heroku, follow these steps:
-
+In case you want to deploy the app to Heroku, follow these steps:
+```
 1. open a new terminal
-2. type: ```heroku login``` (enter your credentials)
-3. ```heroku create <YOUR_APP_NAME>```
-4. ```heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse.git```
-5. ```heroku addons:create mongolab```
+2. type: 'heroku login' (enter your credentials)
+3. heroku create <YOUR_APP_NAME>
+4. heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse.git
+5. heroku addons:create mongolab
 OR
-5. ```heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>```
-6. ```heroku config:set ROOT_URL=https://<YOUR_APP_NAME>.herokuapp.com```
-7. ```heroku config:add METEOR_SETTINGS="$(cat settings.json)"```
-8. ```git push heroku master```
+5. heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>
+6. heroku config:set ROOT_URL=https://<YOUR_APP_NAME>.herokuapp.com
+7. heroku config:add METEOR_SETTINGS="$(cat settings.json)"
+8. git push heroku master
 OR (if you are working on a different branch than master)
-8. ```git push heroku <BRANCH-NAME>:master```
-9. ```heroku open```
+8. git push heroku <BRANCH-NAME>:master
+9. heroku open
 ```
 
 ### More resources
@@ -183,6 +184,7 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - react helmet
 - Update 'User' namespace to 'Users'
 - bump meteor version
+- add subscriptions data to home/user
 
 - tests for sw
 - code-splitting
