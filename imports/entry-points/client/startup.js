@@ -9,11 +9,7 @@ import theme from '../../ui/theme';
 
 Meteor.startup(() => {
   // Register service worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-    .then(() => console.info('Service worker is registered!'))
-    .catch(err => console.info('ServiceWorker registration failed: ', err));
-  }
+  import '../../ui/register-sw';
 
   // Inject react app
   render(<App />, document.getElementById('root'));

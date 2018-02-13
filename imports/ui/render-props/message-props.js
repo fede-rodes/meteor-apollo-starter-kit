@@ -11,21 +11,21 @@ class MessageProps extends React.PureComponent {
   }
 
   setErrorMessage = (msg) => {
-    this.setState({ errorMsg: msg });
+    this.setState(() => ({ errorMsg: msg }));
   }
 
   setSuccessMessage = (msg) => {
-    this.setState({ successMsg: msg });
+    this.setState(() => ({ successMsg: msg }));
   }
 
   clearMessages = () => {
-    this.setState({ errorMsg: '', successMsg: '' });
+    this.setState(() => ({ errorMsg: '', successMsg: '' }));
   }
 
   render() {
     const { errorMsg, successMsg } = this.state;
 
-    const ui = {
+    const api = {
       errorMsg,
       successMsg,
       setErrorMessage: this.setErrorMessage,
@@ -33,7 +33,7 @@ class MessageProps extends React.PureComponent {
       clearMessages: this.clearMessages,
     };
 
-    return this.props.children(ui);
+    return this.props.children(api);
   }
 }
 

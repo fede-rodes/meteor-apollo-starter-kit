@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthPageProps from './auth-page-props';
+import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ const LoginPage = () => (
     {authPageProps => (
       <AuthPageLayout
         page={PAGE}
-        // Pass all states and methods from authPageProps
+        // Pass all state values and methods from authPageProps
         {...authPageProps}
       />
     )}

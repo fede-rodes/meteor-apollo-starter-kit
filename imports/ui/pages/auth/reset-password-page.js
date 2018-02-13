@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import AuxFunctions from '../../../api/aux-functions';
-import AuthPageProps from './auth-page-props';
+import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
@@ -34,12 +34,12 @@ const ResetPasswordPage = ({ match }) => {
         <AuthPageLayout
           page={PAGE}
           token={token}
-          // Pass all states and methods from authPageProps
+          // Pass all state values and methods from authPageProps
           {...authPageProps}
           // Overwrite authPageProps.handleSuccess
           handleSuccess={() => {
-            // Extend authPageProps.handleSuccess to show an alert message after
-            // action is completed
+            // Extend authPageProps.handleSuccess' by showing an alert message
+            // after action is completed
             authPageProps.handleSuccess(() => {
               AuxFunctions.delayedAlert('Password reset successfully!', 700);
             });

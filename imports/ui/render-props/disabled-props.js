@@ -10,23 +10,23 @@ class DisabledProps extends React.PureComponent {
   }
 
   disableBtn = () => {
-    this.setState({ disabled: true });
+    this.setState(() => ({ disabled: true }));
   }
 
   enableBtn = () => {
-    this.setState({ disabled: false });
+    this.setState(() => ({ disabled: false }));
   }
 
   render() {
     const { disabled } = this.state;
 
-    const ui = {
+    const api = {
       disabled,
       disableBtn: this.disableBtn,
       enableBtn: this.enableBtn,
     };
 
-    return this.props.children(ui);
+    return this.props.children(api);
   }
 }
 

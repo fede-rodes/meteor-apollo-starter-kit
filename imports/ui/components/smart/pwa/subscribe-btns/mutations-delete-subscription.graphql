@@ -1,0 +1,5 @@
+mutation deleteSubscription($endpoint: String!) {
+  deleteSubscription(endpoint: $endpoint) {
+    _id
+  }
+}

@@ -10,23 +10,23 @@ class ServiceProps extends React.PureComponent {
   }
 
   setService = (service) => {
-    this.setState({ service });
+    this.setState(() => ({ service }));
   }
 
   clearService = () => {
-    this.setState({ service: '' });
+    this.setState(() => ({ service: '' }));
   }
 
   render() {
     const { service } = this.state;
 
-    const ui = {
+    const api = {
       service,
       setService: this.setService,
       clearService: this.clearService,
     };
 
-    return this.props.children(ui);
+    return this.props.children(api);
   }
 }
 
@@ -35,7 +35,7 @@ export default ServiceProps;
 //------------------------------------------------------------------------------
 // PROP TYPES:
 //------------------------------------------------------------------------------
-export const disabledPropTypes = {
+export const servicePropTypes = {
   service: PropTypes.string.isRequired,
   setService: PropTypes.func.isRequired,
   clearService: PropTypes.func.isRequired,

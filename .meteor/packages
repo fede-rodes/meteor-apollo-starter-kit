@@ -12,14 +12,16 @@ es5-shim@4.6.15               # ECMAScript 5 compatibility for older browsers.
 ecmascript@0.9.0              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.3.0
 
-accounts-password@1.5.0
-static-html
-dynamic-import@0.2.0
 accounts-facebook@1.3.0
+accounts-password@1.5.0
+apollo
+dynamic-import@0.2.0
 service-configuration@1.0.11
-swydo:graphql
+http
+static-html
 force-ssl@1.1.0
 browser-policy@1.1.0
 check@1.2.5
 orcprogramming:collection2-core-server   # server side only version of aldeed:collection2-core
-apollo
+aldeed:schema-index
+swydo:graphql

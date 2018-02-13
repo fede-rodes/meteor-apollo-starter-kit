@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthPageProps from './auth-page-props';
+import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
 //------------------------------------------------------------------------------
@@ -24,12 +24,12 @@ const ForgotPasswordPage = () => (
     {authPageProps => (
       <AuthPageLayout
         page={PAGE}
-        // Pass all states and methods from authPageProps
+        // Pass all state values and methods from authPageProps
         {...authPageProps}
         // Overwrite authPageProps.handleSuccess
         handleSuccess={() => {
-          // Extend authPageProps.handleSuccess to show a success message after
-          // action is completed
+          // Extend btnProps.handleSuccess' default functionality by showing a
+          // success message after action is completed
           authPageProps.handleSuccess(() => {
             authPageProps.setSuccessMessage('A new email has been sent to your inbox!');
           });
