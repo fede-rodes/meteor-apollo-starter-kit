@@ -1,9 +1,10 @@
 import React from 'react';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from '../apollo-client/user';
-import BtnProps from '../render-props/btn-props';
+import { PWABtnProps, BtnProps } from '../render-props';
 import { LogoutBtn } from '../components/smart/auth';
-import SubscribeBtns from '../components/smart/pwa/subscribe-btns';
+import SubscribeBtn from '../components/smart/pwa/subscribe-btn';
+import UnsubscribeBtn from '../components/smart/pwa/unsubscribe-btn';
 import PushBtn from '../components/smart/pwa/push-btn';
 import Feedback from '../components/dumb/feedback';
 
@@ -12,41 +13,59 @@ import Feedback from '../components/dumb/feedback';
 //------------------------------------------------------------------------------
 const ProfilePage = ({ curUser }) => (
   <div>
-    <BtnProps>
-      {(btnProps) => {
-        const {
-          disabled,
-          errorMsg,
-          successMsg,
-          handleBefore,
-          handleServerError,
-          handleSuccess,
-        } = btnProps;
+    <PWABtnProps>
+      {pwaBtnProps => (
+        <BtnProps>
+          {(btnProps) => {
+            // Do not render subscribe and push notification buttons in case
+            // notifications aren't supported
+            if (!pwaBtnProps.supported) {
+              return null;
+            }
 
-        return (
-          <div>
-            <SubscribeBtns
-              disabled={disabled}
-              onBeforeHook={handleBefore}
-              onServerErrorHook={handleServerError}
-              onSuccessHook={handleSuccess}
-            />
-            <div className="my1" />
-            <PushBtn
-              disabled={disabled}
-              onBeforeHook={handleBefore}
-              onServerErrorHook={handleServerError}
-              onSuccessHook={handleSuccess}
-            />
-            <Feedback
-              loading={disabled}
-              errorMsg={errorMsg}
-              successMsg={successMsg}
-            />
-          </div>
-        );
-      }}
-    </BtnProps>
+            return (
+              <div>
+                {pwaBtnProps.subscribed ? (
+                  <UnsubscribeBtn
+                    disabled={btnProps.disabled}
+                    onBeforeHook={btnProps.handleBefore}
+                    onServerErrorHook={btnProps.handleServerError}
+                    onSuccessHook={() => {
+                      pwaBtnProps.handleSubscriptionChange({ subscribed: false });
+                      btnProps.handleSuccess();
+                    }}
+                  />
+                ) : (
+                  <SubscribeBtn
+                    disabled={btnProps.disabled}
+                    onBeforeHook={btnProps.handleBefore}
+                    onServerErrorHook={btnProps.handleServerError}
+                    onSuccessHook={() => {
+                      pwaBtnProps.handleSubscriptionChange({ subscribed: true });
+                      btnProps.handleSuccess();
+                    }}
+                  />
+                )}
+                <div className="my1" />
+                {pwaBtnProps.subscribed && (
+                  <PushBtn
+                    disabled={btnProps.disabled}
+                    onBeforeHook={btnProps.handleBefore}
+                    onServerErrorHook={btnProps.handleServerError}
+                    onSuccessHook={btnProps.handleSuccess}
+                  />
+                )}
+                <Feedback
+                  loading={btnProps.disabled}
+                  errorMsg={btnProps.errorMsg}
+                  successMsg={btnProps.successMsg}
+                />
+              </div>
+            );
+          }}
+        </BtnProps>
+      )}
+    </PWABtnProps>
     <pre style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
       {JSON.stringify(curUser, null, 2)}
     </pre>

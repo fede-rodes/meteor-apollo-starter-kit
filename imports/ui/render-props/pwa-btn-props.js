@@ -1,21 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SubscribeBtn from './subscribe-btn';
-import UnsubscribeBtn from './unsubscribe-btn';
 
 //------------------------------------------------------------------------------
-// COMPONENT:
+// PROPS PROVIDER:
 //------------------------------------------------------------------------------
-// Source: https://github.com/GoogleChrome/samples/blob/gh-pages/push-messaging-and-notifications/main.js
-class SubscribeBtns extends React.PureComponent {
+class PWABtnProps extends React.PureComponent {
   state = {
-    showBtns: false, // show / hide subscribe-unsubscribe buttons
+    supported: false, // whether or not push notifications are supported
     subscribed: false, // whether or not the user is subscribe to push notifications
   }
 
   async componentDidMount() {
-    // Check that service workers are supported, if so, progressively
-    // enhance and add push messaging support, otherwise continue without it
+    // Check that service workers are supported, if so, progressively enhance
+    // and add push messaging support, otherwise continue without it
     if ('serviceWorker' in navigator) {
       try {
         await navigator.serviceWorker.ready;
@@ -30,13 +27,13 @@ class SubscribeBtns extends React.PureComponent {
   }
 
   initialiseState = async () => {
-    // Are Notifications supported in the service worker?
+    // Are notifications supported in the service worker?
     if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
       console.log('Notifications aren\'t supported.');
       return;
     }
 
-    // Check the current Notification permission. If its denied, it's a
+    // Check the current notification permission. If its denied, it's a
     // permanent block until the user changes the permission
     if (Notification.permission === 'denied') {
       console.log('The user has blocked notifications.');
@@ -57,7 +54,7 @@ class SubscribeBtns extends React.PureComponent {
       const subscription = await registration.pushManager.getSubscription();
 
       // Enable any UI which subscribes / unsubscribes from push messages
-      this.setState(() => ({ showBtns: true }));
+      this.setState(() => ({ supported: true }));
 
       if (!subscription) {
         // We aren’t subscribed to push, so set UI to allow the user to enable
@@ -72,49 +69,30 @@ class SubscribeBtns extends React.PureComponent {
     }
   }
 
-  handleSuccess = ({ subscribed }) => {
+  handleSubscriptionChange = ({ subscribed }) => {
     this.setState(() => ({ subscribed }));
-    this.props.onSuccessHook();
   }
 
   render() {
-    const { disabled, onBeforeHook, onServerErrorHook } = this.props;
-    const { showBtns, subscribed } = this.state;
+    const { supported, subscribed } = this.state;
 
-    if (!showBtns) {
-      return null;
-    }
+    const api = {
+      supported,
+      subscribed,
+      handleSubscriptionChange: this.handleSubscriptionChange,
+    };
 
-    return subscribed ? (
-      <UnsubscribeBtn
-        disabled={disabled}
-        onBeforeHook={onBeforeHook}
-        onServerErrorHook={onServerErrorHook}
-        onSuccessHook={() => this.handleSuccess({ subscribed: false })}
-      />
-    ) : (
-      <SubscribeBtn
-        disabled={disabled}
-        onBeforeHook={onBeforeHook}
-        onServerErrorHook={onServerErrorHook}
-        onSuccessHook={() => this.handleSuccess({ subscribed: true })}
-      />
-    );
+    return this.props.children(api);
   }
 }
 
-SubscribeBtns.propTypes = {
-  disabled: PropTypes.bool,
-  onBeforeHook: PropTypes.func,
-  onServerErrorHook: PropTypes.func,
-  onSuccessHook: PropTypes.func,
-};
+export default PWABtnProps;
 
-SubscribeBtns.defaultProps = {
-  disabled: false,
-  onBeforeHook: () => {},
-  onServerErrorHook: () => {},
-  onSuccessHook: () => {},
+//------------------------------------------------------------------------------
+// PROPS:
+//------------------------------------------------------------------------------
+export const pwaBtnPropTypes = {
+  supported: PropTypes.bool.isRequired,
+  subscribed: PropTypes.bool.isRequired,
+  handleSubscriptionChange: PropTypes.func.isRequired,
 };
-
-export default SubscribeBtns;

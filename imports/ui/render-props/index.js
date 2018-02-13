@@ -4,4 +4,5 @@ export { default as MessageProps, messagePropTypes } from './message-props';
 export { default as ChangeViewProps, changeViewPropTypes } from './change-view-props';
 export { default as SubmitProps, submitPropTypes } from './submit-props';
 export { default as BtnProps, btnPropTypes } from './btn-props';
+export { default as PWABtnProps, pwaBtnPropTypes } from './pwa-btn-props';
 export { default as AuthPageProps, authPagePropTypes } from './auth-page-props';

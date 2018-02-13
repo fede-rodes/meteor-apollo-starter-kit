@@ -8,5 +8,4 @@ public/sw-dirty.js
 public/sw-playground.js
 imports/ui/service-worker.js
 imports/ui/service-worker-2.js
-imports/ui/components/smart/pwa/subscribe-btns/script.js
-imports/ui/components/smart/pwa/subscribe-btns/index-old.js
+imports/ui/components/smart/pwa/subscribe-btns/
