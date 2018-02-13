@@ -12,7 +12,7 @@ Lighthouse audit:
 - Apollo 2
 - React 16
 - Redux
-- Meteor accounts (password & facebook)
+- Authentication: password & facebook (via meteor accounts)
 - ES6 syntax
 - styled components
 - Progressive Web App features: push notifications
@@ -35,7 +35,7 @@ Create a new file called ```settings.json``` based on the provided ```settings.s
 #### 3. Register the app on Mailgun:
 Mailgun will allow you to use password authentication service and send emails from your app.
 
-In order to get started, first access your Mailgun account. Then, grab your sandbox domain smtp username and password and copy said values into your settings.json file. Finally, add your email address to the list of [Auhtorized Recipients](https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients).
+In order to get started, first access your [Mailgun](https://www.mailgun.com/) account. Then, grab your sandbox domain smtp username and password and copy said values into your settings.json file. Finally, add your email address to the list of [Auhtorized Recipients](https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients).
 
 #### 4. Register the app on Facebook:
 Follow [this](https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-minutes-3c744b46009e) tutorial to register the app on Facebook; this will allow you to use Facebook authentication service. Once you get your appId and secret key, copy said values back to your settings.json file.
@@ -43,17 +43,17 @@ Follow [this](https://medium.com/@jaaaco/add-facebook-login-to-meteor-app-in-2-m
 #### 5. Setup Push Notifications Service
 1. create a new file called ```manifest-pwa.json``` based on the provided ```manifest-pwa.sample.json``` (see ```/public``` folder).
 2. get your GCM server key and sender id from Firebase:
- . First got to: https://console.firebase.google.com/;
- . Then, click on 'Add project';
- . Click on 'gear' icon (settings);
- . Finally, move to the 'CLOUD MESSAGING' tab at the top;
+  * first got to your Firabase account: https://console.firebase.google.com/;
+  * click on 'Add project';
+  * click on the 'gear' icon (settings);
+  * finally, move to the 'CLOUD MESSAGING' tab at the top; you should be able to see both server key and sender id;
 3. copy your sender id to your manifest-pwa.json file and your server key in your settings.json file (firebase.privateKey);
-4. install 'web-push' globally: ```npm i -g web-push```;
+4. open a terminal and install 'web-push' globally: ```npm i -g web-push```;
 5. generate VAPID keys: ```web-push generate-vapid-keys --json```;
 6. copy-paste your VAPID keys into your settings.json file;
 
 #### 6. Run the app
-That's enough config for today, we should now be able to run the app locally by typing:
+That's enough config for today, you should now be able to run the app locally by typing:
 ```
 meteor --settings settings.json
 ```
@@ -61,21 +61,20 @@ GraphiQL should be available at [http://localhost:3000/graphiql](http://localhos
 
 #### 7. Deploy to Heroku
 In case you want to deploy your app to Heroku, follow these steps:
-```
-1. git clone https://github.com/fede-rodes/meteor-apollo-starter-kit.git
-2. cd meteor-apollo-starter-kit
-3. heroku login (enter your credentials)
-4. heroku create <YOUR_APP_NAME>
-5. heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse.git
-6. heroku addons:create mongolab
+
+1. open a new terminal
+2. type: ```heroku login``` (enter your credentials)
+3. ```heroku create <YOUR_APP_NAME>```
+4. ```heroku buildpacks:set https://github.com/AdmitHub/meteor-buildpack-horse.git```
+5. ```heroku addons:create mongolab```
 OR
-6. heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>
-7. heroku config:set ROOT_URL=https://<YOUR_APP_NAME>.herokuapp.com
-8. heroku config:add METEOR_SETTINGS="$(cat settings.json)"
-9. git push heroku master
+5. ```heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>```
+6. ```heroku config:set ROOT_URL=https://<YOUR_APP_NAME>.herokuapp.com```
+7. ```heroku config:add METEOR_SETTINGS="$(cat settings.json)"```
+8. ```git push heroku master```
 OR (if you are working on a different branch than master)
-9. git push heroku <BRANCH-NAME>:master
-10. heroku open
+8. ```git push heroku <BRANCH-NAME>:master```
+9. ```heroku open```
 ```
 
 ### More resources
