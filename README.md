@@ -8,7 +8,7 @@ Lighthouse audit:
 ![meteor-apollo-light-house](https://user-images.githubusercontent.com/16927407/33520209-a856dc66-d7b6-11e7-9b6c-acc36ea2ee4f.png)
 
 ### This project includes the following libraries/functionality
-- GraphQL server running with Express bound to the Meteor app
+- GraphQL server running with Express bound to the Meteor (1.6.1) app
 - Apollo 2
 - React 16
 - Redux
@@ -186,7 +186,6 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 ### TODO LIST
 - react helmet
 - Update 'User' namespace to 'Users'
-- bump meteor version
 - add subscriptions data to home/user
 - issue #57
 
