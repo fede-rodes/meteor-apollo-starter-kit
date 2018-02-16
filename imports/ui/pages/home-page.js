@@ -7,6 +7,7 @@ import SubscribeBtn from '../components/smart/pwa/subscribe-btn';
 import UnsubscribeBtn from '../components/smart/pwa/unsubscribe-btn';
 import PushBtn from '../components/smart/pwa/push-btn';
 import Feedback from '../components/dumb/feedback';
+import Alert from '../components/dumb/alert';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -20,7 +21,12 @@ const ProfilePage = ({ curUser }) => (
             // Do not render subscribe and push notification buttons in case
             // notifications aren't supported
             if (!pwaBtnProps.supported) {
-              return null;
+              return (
+                <Alert
+                  type="error"
+                  content="Your browser doesn't support service workers :("
+                />
+              );
             }
 
             return (
