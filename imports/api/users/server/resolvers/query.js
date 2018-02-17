@@ -1,4 +1,4 @@
-// User query resolvers
+// Users namespace query resolvers
 const Query = {};
 
 //------------------------------------------------------------------------------

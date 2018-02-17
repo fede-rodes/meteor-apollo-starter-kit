@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import { userQuery } from '../../../../apollo-client/user';
 import deleteSubscriptionMutation from './mutations.graphql';
 import Button from '../../../dumb/button';
 
@@ -56,7 +57,10 @@ class UnsubscribeBtn extends React.PureComponent {
       const { endpoint } = subscription;
 
       // Delete subscription from user's record
-      await deleteSubscription({ variables: { endpoint } });
+      await deleteSubscription({
+        variables: { endpoint },
+        refetchQueries: [{ query: userQuery }],
+      });
 
       // QUESTION: shouldn't we make a request to your server to remove all user
       // subscriptions from our data store so we don't attempt to send them push

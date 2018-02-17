@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from '../../apollo-client/user';
+import SEO from '../../components/smart/seo';
 import BtnProps from '../../render-props/btn-props';
 import { ResendVerificationLink } from '../../components/smart/auth';
 import Title from '../../components/dumb/title';
@@ -41,6 +42,12 @@ const LinkExpiredPage = ({ curUser }) => (
 
       return (
         <div>
+          <SEO
+            schema="AboutPage"
+            title="Link Expired Page"
+            description="A starting point for Meteor applications."
+            contentType="product"
+          />
           <Title>The link has expired!</Title>
           <p className="center">
             {curUser

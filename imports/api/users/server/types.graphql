@@ -1,4 +1,4 @@
-# types for User namespace
+# types for Users namespace
 
 type Email {
   address: String

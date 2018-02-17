@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../../components/smart/seo';
 import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
@@ -30,11 +31,19 @@ const PAGE = {
 const SignupPage = () => (
   <AuthPageProps>
     {authPageProps => (
-      <AuthPageLayout
-        page={PAGE}
-        // Pass all state values and methods from authPageProps
-        {...authPageProps}
-      />
+      <div>
+        <SEO
+          schema="AboutPage"
+          title="Signup Page"
+          description="A starting point for Meteor applications."
+          contentType="product"
+        />
+        <AuthPageLayout
+          page={PAGE}
+          // Pass all state values and methods from authPageProps
+          {...authPageProps}
+        />
+      </div>
     )}
   </AuthPageProps>
 );

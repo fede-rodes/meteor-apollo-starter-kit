@@ -1,4 +1,4 @@
-// User resolvers
+// Users namespace user resolvers
 const User = {};
 
 //------------------------------------------------------------------------------

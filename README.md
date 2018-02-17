@@ -95,7 +95,7 @@ https://realfavicongenerator.net/
 #### Bundle-visualizer
 ```
 cd meteor-apollo-starter-kit/
-meteor --extra-packages bundle-visualizer --production --settings settings-dev.json
+meteor --extra-packages bundle-visualizer --production --settings settings.json
 ```
 
 Then go to: [http://localhost:3000/](http://localhost:3000/)
@@ -184,9 +184,9 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - Render props: https://www.youtube.com/watch?v=BcVAq3YFiuc
 
 ### TODO LIST
-- react helmet
-- Update 'User' namespace to 'Users'
-- add subscriptions data to home/user
+- app shell
+- off line mode with apollo
+- fix facebook config
 
 - tests for sw
 - code-splitting

@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../../components/smart/seo';
 import BtnProps from '../../render-props/btn-props';
 import { ResendVerificationLink, LogoutBtn } from '../../components/smart/auth';
 import Title from '../../components/dumb/title';
@@ -38,6 +39,12 @@ const WelcomePage = () => (
 
       return (
         <div>
+          <SEO
+            schema="AboutPage"
+            title="Welcome Page"
+            description="A starting point for Meteor applications."
+            contentType="product"
+          />
           <Title>Thanks for joining!</Title>
           <p className="center">
             <strong>Check your email</strong> and click on the link provided to confirm your account.

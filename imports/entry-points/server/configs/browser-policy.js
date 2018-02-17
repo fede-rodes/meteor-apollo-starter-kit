@@ -1,5 +1,6 @@
-/* global BrowserPolicy __meteor_runtime_config__ */
+/* global __meteor_runtime_config__ */
 /* eslint no-undef: "error" */
+import { BrowserPolicy } from 'meteor/browser-policy';
 
 // Disallow all rules
 BrowserPolicy.framing.disallow();
