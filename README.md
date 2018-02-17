@@ -184,7 +184,9 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - Render props: https://www.youtube.com/watch?v=BcVAq3YFiuc
 
 ### TODO LIST
-- react helmet
+- app shell
+- off line mode with apollo
+- fix facebook config
 
 - tests for sw
 - code-splitting

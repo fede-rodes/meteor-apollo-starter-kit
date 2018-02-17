@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../../components/smart/seo';
 import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
 
@@ -22,19 +23,27 @@ const PAGE = {
 const ForgotPasswordPage = () => (
   <AuthPageProps>
     {authPageProps => (
-      <AuthPageLayout
-        page={PAGE}
-        // Pass all state values and methods from authPageProps
-        {...authPageProps}
-        // Overwrite authPageProps.handleSuccess
-        handleSuccess={() => {
-          // Extend btnProps.handleSuccess' default functionality by showing a
-          // success message after action is completed
-          authPageProps.handleSuccess(() => {
-            authPageProps.setSuccessMessage('A new email has been sent to your inbox!');
-          });
-        }}
-      />
+      <div>
+        <SEO
+          schema="AboutPage"
+          title="Forgot Password Page"
+          description="A starting point for Meteor applications."
+          contentType="product"
+        />
+        <AuthPageLayout
+          page={PAGE}
+          // Pass all state values and methods from authPageProps
+          {...authPageProps}
+          // Overwrite authPageProps.handleSuccess
+          handleSuccess={() => {
+            // Extend btnProps.handleSuccess' default functionality by showing a
+            // success message after action is completed
+            authPageProps.handleSuccess(() => {
+              authPageProps.setSuccessMessage('A new email has been sent to your inbox!');
+            });
+          }}
+        />
+      </div>
     )}
   </AuthPageProps>
 );

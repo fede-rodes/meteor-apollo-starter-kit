@@ -2,6 +2,7 @@ import React from 'react';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from '../apollo-client/user';
 import { PWABtnProps, BtnProps } from '../render-props';
+import SEO from '../components/smart/seo';
 import { LogoutBtn } from '../components/smart/auth';
 import SubscribeBtn from '../components/smart/pwa/subscribe-btn';
 import UnsubscribeBtn from '../components/smart/pwa/unsubscribe-btn';
@@ -12,8 +13,14 @@ import Alert from '../components/dumb/alert';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const ProfilePage = ({ curUser }) => (
+const HomePage = ({ curUser }) => (
   <div>
+    <SEO
+      schema="AboutPage"
+      title="Home Page"
+      description="A starting point for Meteor applications."
+      contentType="product"
+    />
     <PWABtnProps>
       {pwaBtnProps => (
         <BtnProps>
@@ -79,8 +86,8 @@ const ProfilePage = ({ curUser }) => (
   </div>
 );
 
-ProfilePage.propTypes = {
+HomePage.propTypes = {
   curUser: propType(userFragment).isRequired,
 };
 
-export default ProfilePage;
+export default HomePage;

@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import AuxFunctions from '../../../api/aux-functions';
+import SEO from '../../components/smart/seo';
 import Loading from '../../components/dumb/loading';
 
 //------------------------------------------------------------------------------
@@ -27,7 +28,17 @@ class VerifyEmailPage extends React.Component {
   }
 
   render() {
-    return <Loading />;
+    return (
+      <div>
+        <SEO
+          schema="AboutPage"
+          title="Verify Email Page"
+          description="A starting point for Meteor applications."
+          contentType="product"
+        />
+        <Loading />;
+      </div>
+    );
   }
 }
 
