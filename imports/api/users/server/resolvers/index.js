@@ -2,7 +2,7 @@ import User from './user';
 import Query from './query';
 import Mutation from './mutation';
 
-// User namespace resolvers
+// Users namespace resolvers
 const resolvers = {
   User,
   Query,

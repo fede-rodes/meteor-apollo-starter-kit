@@ -5,8 +5,8 @@ import * as APIs from '../../../api';
 
 // Filter out those APIs for which 'types' and 'resolvers' are defined. In the
 // end we'll get something like the following:
-// const allTypes = [Base.types, User.types, ...];
-// const allResolvers = [Base.resolvers, User.resolvers, ...];
+// const allTypes = [Base.types, Users.types, ...];
+// const allResolvers = [Base.resolvers, Users.resolvers, ...];
 const allTypes = [];
 const allResolvers = [];
 

@@ -2,9 +2,9 @@ import { GraphQLError } from 'graphql';
 import collection from './collection';
 
 // Wrap collection around namespace for clarity
-const User = { collection };
+const Users = { collection };
 
-// User utilities
+// Users utilities
 const utilities = {};
 
 //------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ utilities.checkLoggedInAndVerified = (userId) => {
   }
 
   // Make sure the user exists in our database
-  const user = User.collection.findOne({ _id: userId });
+  const user = Users.collection.findOne({ _id: userId });
   if (!user || !user.services) {
     throw new GraphQLError('The user is not registered in our database');
   }
@@ -37,7 +37,7 @@ utilities.checkLoggedInAndNotVerified = (userId) => {
   }
 
   // Make sure the user exists in our database
-  const user = User.collection.findOne({ _id: userId });
+  const user = Users.collection.findOne({ _id: userId });
   if (!user || !user.emails || !user.emails[0]) {
     throw new GraphQLError('The user is not registered in our database');
   }
