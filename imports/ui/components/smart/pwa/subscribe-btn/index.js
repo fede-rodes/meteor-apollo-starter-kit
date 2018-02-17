@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import { userQuery } from '../../../../apollo-client/user';
 import saveSubscriptionMutation from './mutations.graphql';
 import Button from '../../../dumb/button';
 
@@ -90,7 +91,10 @@ class SubscribeBtn extends React.PureComponent {
 
       // Send the subscription to your server and save it to send a push message
       // at a later date.
-      await saveSubscription({ variables: { subscription: encSubscription } });
+      await saveSubscription({
+        variables: { subscription: encSubscription },
+        refetchQueries: [{ query: userQuery }],
+      });
 
       onSuccessHook();
     } catch (exc) {

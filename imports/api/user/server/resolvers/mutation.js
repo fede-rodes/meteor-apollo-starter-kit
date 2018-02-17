@@ -74,7 +74,6 @@ Mutation.deleteSubscription = (root, args, context) => {
 * @summary Send push notification to all subscribed users.
 */
 Mutation.sendPushNotification = (root, args, context) => {
-  console.log('About to send push notification...');
   const { userId } = context;
 
   User.utilities.checkLoggedInAndVerified(userId);
@@ -102,7 +101,7 @@ Mutation.sendPushNotification = (root, args, context) => {
   // Actually send the messages
   subscriptions.forEach((subscription) => {
     webPush.sendNotification(subscription, payload, options)
-      .then(() => console.log('Subscription delivered successfully'))
+      .then(() => {})
       .catch((err) => {
         console.log(`Error when trying to deliver message for ${subscription.endpoint}`, err);
         // This is probably an old subscription, remove it

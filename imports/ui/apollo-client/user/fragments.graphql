@@ -11,4 +11,11 @@ fragment userFragment on User {
     gender
     avatar
   }
+  subscriptions {
+    endpoint
+    keys {
+      auth
+      p256dh
+    }
+  }
 }

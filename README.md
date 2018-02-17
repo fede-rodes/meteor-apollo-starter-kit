@@ -186,7 +186,6 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 ### TODO LIST
 - react helmet
 - Update 'User' namespace to 'Users'
-- add subscriptions data to home/user
 
 - tests for sw
 - code-splitting
