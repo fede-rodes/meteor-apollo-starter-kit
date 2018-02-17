@@ -95,7 +95,7 @@ https://realfavicongenerator.net/
 #### Bundle-visualizer
 ```
 cd meteor-apollo-starter-kit/
-meteor --extra-packages bundle-visualizer --production --settings settings-dev.json
+meteor --extra-packages bundle-visualizer --production --settings settings.json
 ```
 
 Then go to: [http://localhost:3000/](http://localhost:3000/)
