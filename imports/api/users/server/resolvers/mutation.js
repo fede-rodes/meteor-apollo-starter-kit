@@ -5,14 +5,14 @@ import flatten from 'lodash/flatten';
 import { Accounts } from 'meteor/accounts-base';
 import { GraphQLError } from 'graphql';
 import collection from '../collection';
-import utilities from '../utilities';
+import utils from '../utils';
 
 const { privateKey: gcmPrivateKey } = Meteor.settings.firebase;
 const { publicKey: vapidPublicKey } = Meteor.settings.public.vapid;
 const { subject: vapidSubject, privateKey: vapidPrivateKey } = Meteor.settings.vapid;
 
-// Wrap collection and utilities around namespace for clarity
-const Users = { collection, utilities };
+// Wrap collection and utils around namespace for clarity
+const Users = { collection, utils };
 
 // Users namespace mutation resolvers
 const Mutation = {};
@@ -26,7 +26,7 @@ Mutation.sendVerificationEmail = (root, args, context) => {
   const { userId } = context;
 
   // TODO: pass email to verify as an argument
-  Users.utilities.checkLoggedInAndNotVerified(userId);
+  Users.utils.checkLoggedInAndNotVerified(userId);
 
   try {
     Accounts.sendVerificationEmail(userId);
@@ -45,7 +45,7 @@ Mutation.saveSubscription = (root, args, context) => {
   const { subscription } = args;
   const { userId } = context;
 
-  Users.utilities.checkLoggedInAndVerified(userId);
+  Users.utils.checkLoggedInAndVerified(userId);
 
   const selector = { _id: userId };
   const modifier = { $addToSet: { subscriptions: subscription } };
@@ -61,7 +61,7 @@ Mutation.deleteSubscription = (root, args, context) => {
   const { endpoint } = args;
   const { userId } = context;
 
-  Users.utilities.checkLoggedInAndVerified(userId);
+  Users.utils.checkLoggedInAndVerified(userId);
 
   const selector = { _id: userId };
   const modifier = { $pull: { subscriptions: { endpoint } } };
@@ -76,7 +76,7 @@ Mutation.deleteSubscription = (root, args, context) => {
 Mutation.sendPushNotification = (root, args, context) => {
   const { userId } = context;
 
-  Users.utilities.checkLoggedInAndVerified(userId);
+  Users.utils.checkLoggedInAndVerified(userId);
 
   // Set web-push keys
   webPush.setGCMAPIKey(gcmPrivateKey);
