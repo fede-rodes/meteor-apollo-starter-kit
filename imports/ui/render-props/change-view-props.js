@@ -30,6 +30,7 @@ ChangeViewProps.propTypes = {
   }).isRequired,
 };
 
+// withRouter provides access to histoy.push
 export default withRouter(ChangeViewProps);
 
 //------------------------------------------------------------------------------

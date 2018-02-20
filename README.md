@@ -193,6 +193,7 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 
 ### TODO LIST
 - app shell architecture
+- send verification email: send from client using Meteor.defer
 - off line mode with apollo
 - fix facebook config
 - replace sw scripts with [sw-precache](https://github.com/GoogleChromeLabs/sw-precache) + [sw-toolbox](https://github.com/GoogleChromeLabs/sw-toolbox) or [workbox](https://github.com/GoogleChrome/workbox)
