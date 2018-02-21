@@ -9,6 +9,7 @@ import UnsubscribeBtn from '../components/smart/pwa/unsubscribe-btn';
 import PushBtn from '../components/smart/pwa/push-btn';
 import Feedback from '../components/dumb/feedback';
 import Alert from '../components/dumb/alert';
+import Loading from '../components/dumb/loading';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -25,13 +26,18 @@ const HomePage = ({ curUser }) => (
       {pwaBtnProps => (
         <BtnProps>
           {(btnProps) => {
+            // Display loading indicator while checking push support
+            if (pwaBtnProps.supported === 'loading') {
+              return <Loading />;
+            }
+
             // Do not render subscribe and push notification buttons in case
             // notifications aren't supported
             if (!pwaBtnProps.supported) {
               return (
                 <Alert
                   type="error"
-                  content="Your browser doesn't support service workers :("
+                  content="Your browser doesn't support service workers"
                 />
               );
             }
