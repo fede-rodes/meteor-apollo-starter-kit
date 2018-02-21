@@ -75,28 +75,24 @@
             <path d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"></path>
           </svg>
         </span>
-        <span id="header" class="header__title no--select">PWA - Home</span>
+        <div id="header" class="header__title no--select">
+          <span>loading...</span>
+        </div>
       </header>
+
       <div class="menu">
         <div class="menu__header"></div>
         <ul class="menu__list">
           <li><a href="index.html">Home</a></li>
           <li><a href="latest.html">Latest</a></li>
       </div>
+
       <div class="menu__overlay"></div>
-      <div id="main" class="app__content">
-        <section class="section">
-          <h3> Stay Up to Date with R-I-L </h3>
-          <img class="profile-pic" src="./images/books.png" alt="Hello, World!">
-          <p class="home-note">Latest Commits on Resources I like!</a></p>
-        </section>
-        <div class="fab fab__push">
-          <div class="fab__ripple"></div>
-          <img class="fab__image" src="./images/push-off.png" alt="Push Notification" />
-        </div>
-        <!-- Toast msg's -->
-        <div class="toast__container"></div>
-      </div>
+
+      <div id="main" class="app__content"></div>
+
+      <!-- Toast msg's -->
+      <div class="toast__container"></div>   
     </div>
 
     <script src="./js/toast.js"></script>
