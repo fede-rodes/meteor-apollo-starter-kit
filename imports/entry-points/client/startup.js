@@ -13,6 +13,7 @@ Meteor.startup(() => {
 
   // Inject react app
   render(<App.Header />, document.getElementById('header'));
+  render(<App.Menu />, document.getElementById('menu'));
   render(<App.Main />, document.getElementById('main'));
 
   // Global style

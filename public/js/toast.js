@@ -1,4 +1,5 @@
 /* eslint-disable */
+// Source: https://dzone.com/articles/introduction-to-progressive-web-apps-offline-first
 (function (exports) {
   'use strict';
   var toastContainer = document.querySelector('.toast__container');

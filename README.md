@@ -192,14 +192,17 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - https://developers.google.com/web/tools/chrome-devtools/remote-debugging/?hl=en
 
 ### TODO LIST
-- app shell architecture
-- off line mode with apollo
+- app shell architecture:
+ - put menu btn on the right-side
+ - do not render menu button but in the home page (logged in routes)
+ - define Menu and/or Header component(s)
+- send verification email: use defer (pass it as a parameter)
 - fix facebook config
 - replace sw scripts with [sw-precache](https://github.com/GoogleChromeLabs/sw-precache) + [sw-toolbox](https://github.com/GoogleChromeLabs/sw-toolbox) or [workbox](https://github.com/GoogleChrome/workbox)
 
 - tests for sw
 - code-splitting
-- keep track of visited routes in order to send the user back to the initial page. Additionally, add initial page to the account verification link in order to take the user
+- keep track of visited routes in order to send the user back to the last (not auth) visited page. Additionally, add last visited page to the account verification link in order to take the user
  back to the initial page after email account is verified.
 
  https://github.com/meteor/meteor/blob/devel/packages/server-render/README.md#usage

@@ -18,6 +18,10 @@ const client = createApolloClient({});
 const App = {};
 
 const Header = () => (<span>I am the header</span>);
+const Menu = () => [
+  <li key="1"><a href="/page_1">Page One</a></li>,
+  <li key="2"><a href="/page_2">Page Two</a></li>,
+];
 
 //------------------------------------------------------------------------------
 // HEADER COMPONENT:
@@ -29,6 +33,22 @@ App.Header = () => (
         <ApolloProvider client={client}>
           <GlobalDataProvider>
             <Header />
+          </GlobalDataProvider>
+        </ApolloProvider>
+      </Provider>
+    </Router>
+  </ThemeProvider>
+);
+//------------------------------------------------------------------------------
+// HEADER COMPONENT:
+//------------------------------------------------------------------------------
+App.Menu = () => (
+  <ThemeProvider theme={theme}>
+    <Router>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <GlobalDataProvider>
+            <Menu />
           </GlobalDataProvider>
         </ApolloProvider>
       </Provider>
