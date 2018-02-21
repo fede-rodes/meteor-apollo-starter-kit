@@ -68,6 +68,7 @@ const HomePage = ({ curUser }) => (
                     onSuccessHook={btnProps.handleSuccess}
                   />
                 )}
+                <div className="my1" />
                 <Feedback
                   loading={btnProps.disabled}
                   errorMsg={btnProps.errorMsg}

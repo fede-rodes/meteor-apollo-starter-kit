@@ -3,9 +3,16 @@
 
 // Source: https://github.com/VeliovGroup/Meteor-Files-Demos/blob/master/demo/public/sw.js
 // self refers to the service worker implicitly
-console.log('self', self);
 const CACHE_NAME = 'meteor_apollo_starter_v1';
-const pages = ['/', '/sw.js', '/manifest-pwa.json'];
+const pages = [
+  '/',
+  '/sw.js',
+  '/manifest-pwa.json',
+  '/css/style.css',
+  '/js/toast.js',
+  '/js/offline.js',
+  '/js/menu.js',
+];
 const origin = self.location.origin;
 const RE = {
   method: /GET/i,

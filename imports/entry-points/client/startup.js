@@ -1,21 +1,22 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
-import { injectGlobal } from 'styled-components';
+// import { injectGlobal } from 'styled-components';
 import 'sanitize.css/sanitize.css';
 import 'basscss/css/basscss.min.css';
 import App from '../../ui/app';
-import theme from '../../ui/theme';
+// import theme from '../../ui/theme';
 
 Meteor.startup(() => {
   // Register service worker
   import '../../ui/register-sw';
 
   // Inject react app
-  render(<App />, document.getElementById('root'));
+  render(<App.Header />, document.getElementById('header'));
+  render(<App.Main />, document.getElementById('main'));
 
   // Global style
-  injectGlobal([`
+  /* injectGlobal([`
     html, body, #root {
       margin: 0;
       padding: 0;
@@ -26,5 +27,5 @@ Meteor.startup(() => {
     }
 
     a { color: ${theme.color.link}; }
-  `]);
+  `]); */
 });
