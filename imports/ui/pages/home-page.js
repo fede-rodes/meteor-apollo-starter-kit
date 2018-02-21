@@ -26,7 +26,7 @@ const HomePage = ({ curUser }) => (
       {pwaBtnProps => (
         <BtnProps>
           {(btnProps) => {
-            // Display loading indicator while checking push support
+            // Display loading indicator while checking for push support
             if (pwaBtnProps.supported === 'loading') {
               return <Loading />;
             }
