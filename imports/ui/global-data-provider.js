@@ -23,26 +23,23 @@ class GlobalDataProvider extends React.Component {
   }
 
   render() {
-    const {
-      userData: {
-        error,
-        loading,
-        user,
-      },
-      children,
-      ...rest
-    } = this.props;
+    const { userData } = this.props;
+    const { error, loading, user } = userData;
 
     if (error) {
       console.log(error);
-      return <div>Something bad happend!</div>;
+      return null;
     }
 
     if (loading) {
       return <Loading />;
     }
 
-    return React.cloneElement(children, { curUser: user, ...rest });
+    const api = {
+      curUser: user,
+    };
+
+    return this.props.children(api);
   }
 }
 
@@ -53,10 +50,6 @@ GlobalDataProvider.propTypes = {
     user: propType(userFragment),
     refetch: PropTypes.func.isRequired,
   }).isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]).isRequired,
 };
 
 // Apollo integration

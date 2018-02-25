@@ -11,11 +11,11 @@ import {
 // Auth routes
 import LoginPage from './pages/auth/login-page';
 import SignupPage from './pages/auth/signup-page';
-import ResetPasswordPage from './pages/auth/reset-password-page';
-import ForgotPasswordPage from './pages/auth/forgot-password-page';
 import WelcomePage from './pages/auth/welcome-page';
 import VerifyEmailPage from './pages/auth/verify-email-page';
 import LinkExpiredPage from './pages/auth/link-expired-page';
+import ForgotPasswordPage from './pages/auth/forgot-password-page';
+import ResetPasswordPage from './pages/auth/reset-password-page';
 
 // Other routes
 import HomePage from './pages/home-page';

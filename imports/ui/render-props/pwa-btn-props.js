@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 //------------------------------------------------------------------------------
 class PWABtnProps extends React.PureComponent {
   state = {
-    supported: false, // whether or not push notifications are supported
-    subscribed: false, // whether or not the user is subscribe to push notifications
+    supported: 'loading', // whether or not push notifications are supported
+    subscribed: 'loading', // whether or not the user is subscribe to push notifications
   }
 
   async componentDidMount() {
@@ -22,14 +22,26 @@ class PWABtnProps extends React.PureComponent {
         console.log(exc);
       }
     } else {
+      this.setSupported(false);
+      this.setSubscribed(false);
       console.log('Service workers aren\'t supported in this browser.');
     }
+  }
+
+  setSupported = (supported) => {
+    this.setState(() => ({ supported }));
+  }
+
+  setSubscribed = (subscribed) => {
+    this.setState(() => ({ subscribed }));
   }
 
   initialiseState = async () => {
     // Are notifications supported in the service worker?
     if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
       console.log('Notifications aren\'t supported.');
+      this.setSupported(false);
+      this.setSubscribed(false);
       return;
     }
 
@@ -37,12 +49,16 @@ class PWABtnProps extends React.PureComponent {
     // permanent block until the user changes the permission
     if (Notification.permission === 'denied') {
       console.log('The user has blocked notifications.');
+      this.setSupported(false);
+      this.setSubscribed(false);
       return;
     }
 
     // Check if push messaging is supported
     if (!('PushManager' in window)) {
       console.log('Push messaging isn\'t supported.');
+      this.setSupported(false);
+      this.setSubscribed(false);
       return;
     }
 
@@ -54,23 +70,24 @@ class PWABtnProps extends React.PureComponent {
       const subscription = await registration.pushManager.getSubscription();
 
       // Enable any UI which subscribes / unsubscribes from push messages
-      this.setState(() => ({ supported: true }));
+      this.setSupported(true);
 
       if (!subscription) {
         // We aren’t subscribed to push, so set UI to allow the user to enable
         // push
+        this.setSubscribed(false);
         return;
       }
 
       // Set your UI to show they have subscribed for push messages
-      this.setState(() => ({ subscribed: true }));
+      this.setSubscribed(true);
     } catch (exc) {
       console.log('Error during getSubscription()', exc);
     }
   }
 
   handleSubscriptionChange = ({ subscribed }) => {
-    this.setState(() => ({ subscribed }));
+    this.setSubscribed(subscribed);
   }
 
   render() {
@@ -92,7 +109,7 @@ export default PWABtnProps;
 // PROPS:
 //------------------------------------------------------------------------------
 export const pwaBtnPropTypes = {
-  supported: PropTypes.bool.isRequired,
-  subscribed: PropTypes.bool.isRequired,
+  supported: PropTypes.oneOf([true, false, 'loading']).isRequired,
+  subscribed: PropTypes.oneOf([true, false, 'loading']).isRequired,
   handleSubscriptionChange: PropTypes.func.isRequired,
 };

@@ -2,6 +2,9 @@
 
 A simple kit to start experimenting with Apollo, Meteor, React, PWA and Styled Components.
 
+Short video showing the app's capabilities:
+https://youtu.be/4eMNUycIbN8
+
 Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 
 Lighthouse audit:
@@ -20,6 +23,7 @@ Lighthouse audit:
   * caching;
   * add to home screen;
   * push notifications;
+  * app shell architecture;
 - Storybook
 - sanitize.css
 - basscss
@@ -198,11 +202,14 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - https://developers.google.com/web/tools/chrome-devtools/remote-debugging/?hl=en
 
 ### TODO LIST
+<<<<<<< HEAD
 - app shell architecture:
  - put menu btn on the right-side
  - do not render menu button but in the home page (logged in routes)
  - define Menu and/or Header component(s)
 
+=======
+>>>>>>> eed1b167c167a7e037d3bdbce0288464357a516f
 - send verification email: use defer (pass it as a parameter)
 - fix facebook config
 
