@@ -202,7 +202,6 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - app shell architecture:
  - put menu btn on the right-side
  - define Menu and/or Header component(s)
-
 - send verification email: use defer (pass it as a parameter)
 - fix facebook config
 

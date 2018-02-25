@@ -13,22 +13,13 @@
 
 /* RESET styles */
 
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-}
-
-html,
-body,
-p {
-  margin: 0;
-  padding: 0;
-}
-
 a {
   text-decoration: none;
   color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 ul,
@@ -43,13 +34,6 @@ li {
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-}
-
-h3 {
-  text-align: left;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  font-weight: 500;
 }
 
 /* MAIN styles */

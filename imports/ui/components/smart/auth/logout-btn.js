@@ -11,7 +11,8 @@ const LogoutBtn = ({ client, btnType, disabled, onLogoutHook }) => (
   <Button
     type={btnType}
     disabled={disabled}
-    onClick={() => {
+    onClick={(evt) => {
+      if (evt) { evt.preventDefault(); }
       Meteor.logout(() => {
         // Clear apollo store.
         client.resetStore();

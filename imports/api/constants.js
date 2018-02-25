@@ -8,7 +8,7 @@ const Constants = {
   SITE_TWITTER: '@yourBrand',
   AUTH_SERVICES: ['password', 'facebook'],
   ROUTES: [
-    { path: '/', label: 'Home' },
+    { path: '/', label: 'Home', auth: true },
     { path: '/login', label: 'Login' },
     { path: '/signup', label: 'Signup' },
     { path: '/verify-email', label: 'Verify Email' },

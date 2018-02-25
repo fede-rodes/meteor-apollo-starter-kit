@@ -8,6 +8,8 @@ const pages = [
   '/',
   '/sw.js',
   '/manifest-pwa.json',
+  '/css/sanitize.css',
+  '/css/basscss.min.css',
   '/css/style.css',
   '/js/toast.js',
   '/js/offline.js',

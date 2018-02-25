@@ -3,7 +3,6 @@ import { propType } from 'graphql-anywhere';
 import { userFragment } from '../apollo-client/user';
 import { PWABtnProps, BtnProps } from '../render-props';
 import SEO from '../components/smart/seo';
-import { LogoutBtn } from '../components/smart/auth';
 import SubscribeBtn from '../components/smart/pwa/subscribe-btn';
 import UnsubscribeBtn from '../components/smart/pwa/unsubscribe-btn';
 import PushBtn from '../components/smart/pwa/push-btn';
@@ -89,7 +88,6 @@ const HomePage = ({ curUser }) => (
     <pre style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
       {JSON.stringify(curUser, null, 2)}
     </pre>
-    <LogoutBtn />
   </div>
 );
 
