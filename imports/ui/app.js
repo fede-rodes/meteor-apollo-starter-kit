@@ -27,13 +27,15 @@ const client = createApolloClient({});
 // the same 'history' object will be shared among all three mentioned components.
 const history = createBrowserHistory();
 
-const App = ({ children }) => (
+const App = ({ component }) => (
   <ThemeProvider theme={theme}>
     <Router history={history}>
       <Provider store={store}>
         <ApolloProvider client={client}>
           <GlobalDataProvider>
-            {children}
+            {globalDataProps => (
+              React.createElement(component, { ...globalDataProps })
+            )}
           </GlobalDataProvider>
         </ApolloProvider>
       </Provider>

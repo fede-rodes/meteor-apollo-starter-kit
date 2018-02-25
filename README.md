@@ -201,7 +201,6 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 ### TODO LIST
 - app shell architecture:
  - put menu btn on the right-side
- - do not render menu button but in the home page (logged in routes)
  - define Menu and/or Header component(s)
 
 - send verification email: use defer (pass it as a parameter)

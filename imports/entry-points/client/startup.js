@@ -13,7 +13,7 @@ Meteor.startup(() => {
 
   // Inject react app components for App Shell Architecture
   // TODO: use <App component={Header} />...
-  render(<App><Header /></App>, document.getElementById('header'));
+  render(<App component={Header} />, document.getElementById('header'));
   // render(<App.Menu />, document.getElementById('menu'));
-  render(<App><Routes /></App>, document.getElementById('main'));
+  render(<App component={Routes} />, document.getElementById('main'));
 });

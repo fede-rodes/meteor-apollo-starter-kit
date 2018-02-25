@@ -1,65 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
-import { LogoutBtn } from './auth';
+import { withRouter } from 'react-router-dom';
+import { propType } from 'graphql-anywhere';
+import { userFragment } from '../../apollo-client/user';
+import Constants from '../../../api/constants';
 
 //------------------------------------------------------------------------------
-// CONSTANTS:
+// AUX FUNCTIONS:
 //------------------------------------------------------------------------------
-const ROUTES = {
-  '/': { name: 'home', label: 'Home', auth: true },
-  '/login': { name: 'login', label: 'Login', auth: false },
-  '/signup': { name: 'signup', label: 'Signup', auth: false },
-  '/verify-email': { name: 'verifyEmail', label: 'Verify Email', auth: false },
-  '/link-expired': { name: 'linkExpired', label: 'Link Expired', auth: false },
-  '/forgot-password': { name: 'forgotPassword', label: 'Forgot Password', auth: false },
-  '/reset-password': { name: 'resetPassword', label: 'Reset Password', auth: false },
+const showHideBurgerBtn = (curUser) => {
+  // Get the reference to the app's shell burger button
+  const menuIconElement = document.querySelector('.header__burger');
+  // Display burger button for logged in users only
+  menuIconElement.classList[curUser ? 'add' : 'remove']('header__burger--show');
+};
+//------------------------------------------------------------------------------
+const getRouteLabel = (pathname) => {
+  const route = Constants.ROUTES
+    // Sort routes by longest route paths first. '/' will be the last route in
+    // the list
+    .sort((r1, r2) => (
+      r2.path.length - r1.path.length
+    ))
+    // Use regular expression to find current route based on path. '/' must be
+    // the last path we test, otherwise the test will always return true
+    .find(({ path }) => {
+      const reg = new RegExp(path);
+      return reg.test(pathname);
+    });
+  return route ? route.label : undefined;
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 class Header extends React.Component {
   componentWillMount() {
-    const { location } = this.props;
-
-    // Get current location and display burger button if necessary
-    this.showHideBurgerBtn(location.pathname);
+    const { curUser } = this.props;
+    // Get current user and display burger button if necessary
+    showHideBurgerBtn(curUser);
   }
 
   componentDidUpdate(prevProps) {
-    const { location } = this.props;
-
-    // With every location change, display burger button if necessary
-    if ('location' in prevProps && location !== prevProps.location) {
-      this.showHideBurgerBtn(location.pathname);
+    const { curUser } = this.props;
+    // Listen to current user logged in state changes. Display burger button
+    // accordingly
+    if ('curUser' in prevProps && curUser !== prevProps.curUser) {
+      showHideBurgerBtn(curUser);
     }
-    return true;
-  }
-
-  showHideBurgerBtn = (pathname) => {
-    // Get the reference to the app's shell burger button
-    const menuIconElement = document.querySelector('.header__burger');
-
-    // Display burger button for authenticated routes only
-    const route = ROUTES[pathname];
-    menuIconElement.classList[route && route.auth ? 'add' : 'remove']('header__burger--show');
   }
 
   render() {
     const { location } = this.props;
-    console.log('location', location);
-
-    // Get current route label
-    const route = ROUTES[location.pathname];
-
-    return <span>{(route && route.label) || 'Not Found'}</span>;
+    const label = getRouteLabel(location.pathname);
+    return <span>{label || 'Not Found'}</span>;
   }
 }
 
 Header.propTypes = {
+  curUser: propType(userFragment),
   location: PropTypes.shape({
     pathname: PropTypes.String,
   }).isRequired,
+};
+
+Header.defaultProps = {
+  curUser: null,
 };
 
 // withRouter provides access to location.pathname
