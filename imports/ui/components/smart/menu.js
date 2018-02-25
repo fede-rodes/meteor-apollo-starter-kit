@@ -20,11 +20,19 @@ const Menu = ({ curUser }) => {
     .filter(({ auth }) => auth)
     .map(({ path, label }) => (
       <li key={path}>
-        <Link to={path}>{label}</Link>
+        <Link
+          to={path}
+          onClick={window.hideMenu}
+        >
+          {label}
+        </Link>
       </li>
     )),
     <li key="logout">
-      <LogoutBtn btnType="link" />
+      <LogoutBtn
+        btnType="link"
+        onLogoutHook={window.hideMenu}
+      />
     </li>,
   ];
 };

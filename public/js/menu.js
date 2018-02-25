@@ -1,6 +1,6 @@
 /* eslint-disable */
 // Source: https://dzone.com/articles/introduction-to-progressive-web-apps-offline-first
-(function () {
+(function (exports) {
   'use strict';
   var menuIconElement = document.querySelector('.header__burger');
   var menuElement = document.querySelector('.menu');
@@ -49,4 +49,8 @@
       menuElement.removeEventListener('transitionend', onTransitionEnd, false);
     }
   }
-})();
+
+  // Make these methods available in global
+  exports.showMenu = showMenu;
+  exports.hideMenu = hideMenu;
+})(typeof window === 'undefined' ? module.exports : window);

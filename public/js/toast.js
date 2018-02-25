@@ -9,7 +9,7 @@
     if (!msg) return;
     options = options || 3000;
     var toastMsg = document.createElement('div');
-    toastMsg.className = 'toast__msg';
+    toastMsg.className = 'flex justify-between items-center toast__msg';
     toastMsg.textContent = msg;
     toastContainer.appendChild(toastMsg);
 

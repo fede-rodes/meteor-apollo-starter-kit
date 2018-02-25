@@ -54,14 +54,11 @@ a {
 }
 
 header {
-  position: fixed;
   width: 100%;
   height: 56px;
-  top: 0;
   background-color: blue;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
   overflow: hidden;
-  z-index: 1;
   color: #fff;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -69,25 +66,6 @@ header {
   user-select: none;
   -webkit-transition: background-color 250ms linear;
   transition: background-color 250ms linear;
-}
-
-.header__content {
-  /* flex */
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  /* justify-between */
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  /* items-center */
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  -ms-grid-row-align: center;
-  align-items: center;
 }
 
 .app__offline {
@@ -98,15 +76,6 @@ header {
   width: 48px;
   height: 48px;
   margin: 4px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
@@ -125,21 +94,13 @@ header {
 .header__title {
   color: #fff;
   font-size: 20px;
-  -ms-flex-item-align: center;
-  -ms-grid-row-align: center;
-  align-self: center;
-  /* margin-left: 10px; */
 }
 
 .menu {
-  width: 280px;
+  width: 200px;
   height: 100%;
   background: #fff;
-  position: fixed;
-  top: 0;
-  bottom: 0;
   box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.4);
-  z-index: 1;
   -webkit-transition: transform 0.3s cubic-bezier(0, 0, 0.30, 1);
   -webkit-transition: -webkit-transform 0.3s cubic-bezier(0, 0, 0.30, 1);
   transition: -webkit-transform 0.3s cubic-bezier(0, 0, 0.30, 1);
@@ -148,7 +109,6 @@ header {
   -webkit-transform: translateX(-110%);
   transform: translateX(-110%);
   will-change: transform;
-  z-index: 2;
 }
 
 .menu--show {
@@ -159,17 +119,11 @@ header {
 .menu__overlay {
   width: 100%;
   height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background: rgba(0, 0, 0, 0.3);
   -webkit-transition: opacity 0.15s cubic-bezier(0, 0, 0.30, 1);
   transition: opacity 0.15s cubic-bezier(0, 0, 0.30, 1);
   visibility: hidden;
   opacity: 0;
-  z-index: 1;
 }
 
 .menu__overlay--show {
@@ -208,12 +162,11 @@ header {
   width: 320px;
   height: 100%;
   margin: 0 auto;
-  margin-top: 56px;
+  margin-top: 30px;
   padding-top: 10px;
 }
 
 .toast__container {
-  position: fixed;
   bottom: 20px;
   left: 20px;
   pointer-events: none;
@@ -224,15 +177,6 @@ header {
   min-height: 50px;
   background: rgba(0, 0, 0, 0.9);
   color: #fff;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   font-size: 14px;
   font-weight: 500;
   padding-left: 15px;
