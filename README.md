@@ -8,7 +8,8 @@ https://youtu.be/4eMNUycIbN8
 Code is deployed here: https://meteor-apollo-starter.herokuapp.com/
 
 Lighthouse audit:
-![meteor-apollo-light-house](https://user-images.githubusercontent.com/16927407/33520209-a856dc66-d7b6-11e7-9b6c-acc36ea2ee4f.png)
+![lighthouse](https://user-images.githubusercontent.com/16927407/36643435-6dc17b1a-1a4b-11e8-80ff-eb395877b542.png)
+
 
 ### This project includes the following libraries/functionality
 - GraphQL server running with Express bound to the Meteor (1.6.1) app
