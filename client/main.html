@@ -60,9 +60,43 @@
     <p>Please, enable JavaScript in your browser :)</p>
   </noscript>
 
-  <link rel="manifest" href="./manifest-pwa.json">
+  <!-- SW manifest -->
+  <link rel="manifest" href="/manifest-pwa.json">
+
+  <!-- App shell styles -->
+  <link rel="stylesheet" type="text/css" href="/css/sanitize.css">
+  <link rel="stylesheet" type="text/css" href="/css/basscss.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
-  <div id="root"></div>
+  <header className="fixed top-0 z1">
+    <div class="flex justify-between items-center">
+      <div class="flex justify-center items-center header__burger">
+        <svg class="menu__icon no--select" width="24px" height="24px" viewBox="0 0 48 48" fill="#fff">
+          <path d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"></path>
+        </svg>
+      </div>
+      <div id="header" class="center header__title no--select">
+        <span>loading...</span>
+      </div>
+      <div class="header__avatar"></div>
+    </div>
+  </header>
+
+  <div class="fixed top-0 bottom-0 z2 menu">
+    <div class="menu__header"></div>
+    <ul id="menu" class="menu__list"></ul>
+  </div>
+
+  <div class="fixed top-0 bottom-0 left-0 right-0 z1 menu__overlay"></div>
+
+  <div id="main" class="app__content"></div>
+
+  <!-- Toast msg's -->
+  <div class="fixed toast__container"></div>
+
+  <script src="/js/toast.js"></script>
+  <script src="/js/offline.js"></script>
+  <script src="/js/menu.js"></script>
 </body>

@@ -9,3 +9,4 @@ public/sw-playground.js
 imports/ui/service-worker.js
 imports/ui/service-worker-2.js
 imports/ui/components/smart/pwa/subscribe-btns/
+imports/ui/layouts/default/
