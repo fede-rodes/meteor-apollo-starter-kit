@@ -4,13 +4,16 @@ import { render } from 'react-dom';
 import 'sanitize.css/sanitize.css';
 import 'basscss/css/basscss.min.css';
 import App from '../../ui/app';
+import Routes from '../../ui/routes';
+import Header from '../../ui/components/smart/header';
 
 Meteor.startup(() => {
   // Register service worker
   import '../../ui/register-sw';
 
-  // Inject react app
-  render(<App.Header />, document.getElementById('header'));
-  render(<App.Menu />, document.getElementById('menu'));
-  render(<App.Main />, document.getElementById('main'));
+  // Inject react app components for App Shell Architecture
+  // TODO: use <App component={Header} />...
+  render(<App><Header /></App>, document.getElementById('header'));
+  // render(<App.Menu />, document.getElementById('menu'));
+  render(<App><Routes /></App>, document.getElementById('main'));
 });

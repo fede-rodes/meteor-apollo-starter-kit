@@ -7,10 +7,10 @@ import Button from '../../dumb/button';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LogoutBtn = ({ client, disabled, onLogoutHook }) => (
+const LogoutBtn = ({ client, btnType, disabled, onLogoutHook }) => (
   <Button
+    type={btnType}
     disabled={disabled}
-    className="my2"
     onClick={() => {
       Meteor.logout(() => {
         // Clear apollo store.
@@ -28,11 +28,13 @@ LogoutBtn.propTypes = {
   client: PropTypes.shape({
     resetStore: PropTypes.func.isRequired,
   }).isRequired,
+  btnType: PropTypes.oneOf(['button', 'link', 'submit']),
   disabled: PropTypes.bool,
   onLogoutHook: PropTypes.func,
 };
 
 LogoutBtn.defaultProps = {
+  btnType: 'button',
   disabled: false,
   onLogoutHook: () => {},
 };

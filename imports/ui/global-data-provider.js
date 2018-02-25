@@ -23,15 +23,8 @@ class GlobalDataProvider extends React.Component {
   }
 
   render() {
-    const {
-      userData: {
-        error,
-        loading,
-        user,
-      },
-      children,
-      ...rest
-    } = this.props;
+    const { userData, children, ...rest } = this.props;
+    const { error, loading, user } = userData;
 
     if (error) {
       console.log(error);

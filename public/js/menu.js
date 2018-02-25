@@ -2,7 +2,7 @@
 // Source: https://dzone.com/articles/introduction-to-progressive-web-apps-offline-first
 (function () {
   'use strict';
-  var menuIconElement = document.querySelector('.header__icon');
+  var menuIconElement = document.querySelector('.header__burger');
   var menuElement = document.querySelector('.menu');
   var menuOverlayElement = document.querySelector('.menu__overlay');
 
