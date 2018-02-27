@@ -1,7 +1,7 @@
 import React from 'react';
 import SEO from '../../components/smart/seo';
 import BtnProps from '../../render-props/btn-props';
-import { ResendVerificationLink, LogoutBtn } from '../../components/smart/auth';
+import { ResendVerificationLink } from '../../components/smart/auth';
 import Title from '../../components/dumb/title';
 import Feedback from '../../components/dumb/feedback';
 
@@ -57,7 +57,6 @@ const WelcomePage = () => (
             errorMsg={errorMsg}
             successMsg={successMsg}
           />
-          <LogoutBtn />
         </div>
       );
     }}

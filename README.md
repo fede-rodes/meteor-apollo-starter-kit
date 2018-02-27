@@ -95,7 +95,7 @@ Open a new terminal (the meteor app doesn't need to be running) and type:
 npm i -g @storybook/cli
 npm run storybook
 ```
-Stroybook will be available at [http://localhost:6006/](http://localhost:6006/).
+Storybook will be available at [http://localhost:6006/](http://localhost:6006/).
 
 #### Favicon / manifest generator
 In order to generate the favicons for your project, you can use the following generator:
@@ -203,13 +203,13 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - https://developers.google.com/web/tools/chrome-devtools/remote-debugging/?hl=en
 
 ### TODO LIST
-- send verification email: use defer (pass it as a parameter)
 - fix facebook config
 
 - code-splitting
 - keep track of visited routes in order to send the user back to the last (not auth) visited page. Additionally, add last visited page to the account verification link in order to take the user
  back to the initial page after email account is verified.
-
+- setup apollo subscriptions
+- Preact branch
 
 - replace sw scripts with [sw-precache](https://github.com/GoogleChromeLabs/sw-precache) + [sw-toolbox](https://github.com/GoogleChromeLabs/sw-toolbox) or [workbox](https://github.com/GoogleChrome/workbox)
 

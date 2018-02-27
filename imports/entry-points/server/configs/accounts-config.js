@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 //------------------------------------------------------------------------------
@@ -14,19 +13,6 @@ Accounts.onCreateUser((options, user) => {
       '\nname:', name,
       '\nemail:', email,
     );
-
-    // Don't wait for the following task to be completed before giving the
-    // client the green light to move ahead
-    Meteor.defer(() => {
-      // At this point, the user record is not in our DB yet. For this reason,
-      // we need to delay the call to Accounts.sendVerificationEmail until the
-      // record is created
-      const handler = Meteor.setTimeout(() => {
-        Accounts.sendVerificationEmail(user._id);
-        Meteor.clearTimeout(handler);
-        console.log('Verification email sent!');
-      }, 1000);
-    });
 
     // Extend user's profile by adding default name and avatar
     const profile = {

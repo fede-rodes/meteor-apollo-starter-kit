@@ -25,7 +25,6 @@ Mutation.sendVerificationEmail = (root, args, context) => {
   console.log('About to send verification email...');
   const { userId } = context;
 
-  // TODO: pass email to verify as an argument
   Users.utils.checkLoggedInAndNotVerified(userId);
 
   try {
@@ -33,7 +32,6 @@ Mutation.sendVerificationEmail = (root, args, context) => {
     console.log('Verification email sent!');
     return { _id: userId };
   } catch (exc) {
-    console.log(exc);
     throw new GraphQLError(`Verification email couldn't be delivered. Reason: ${exc.response}`);
   }
 };
