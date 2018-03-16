@@ -158,12 +158,14 @@ header {
   background: #e7e7e7;
 }
 
-.app__content {
-  width: 320px;
-  height: 100%;
-  margin: 0 auto;
-  margin-top: 30px;
-  padding-top: 10px;
+.app__outer {
+  min-height: calc(100vh - 56px); /* do not consider header height */
+}
+
+.app__container {
+  max-width: 420px;
+  min-height: 420px;
+  width: 100%;
 }
 
 .toast__container {

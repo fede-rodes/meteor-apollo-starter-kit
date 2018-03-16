@@ -147,7 +147,7 @@ class PasswordAuthViews extends React.Component {
 
     switch (view) {
       case 'login': {
-        Meteor.loginWithPassword(email, password, handleResponse);
+        Meteor.loginWithPassword(email, password, handleResponse());
         break;
       }
       case 'signup': {
@@ -156,11 +156,11 @@ class PasswordAuthViews extends React.Component {
         break;
       }
       case 'forgotPassword': {
-        Accounts.forgotPassword({ email }, handleResponse);
+        Accounts.forgotPassword({ email }, handleResponse());
         break;
       }
       case 'resetPassword': {
-        Accounts.resetPassword(token, password, handleResponse);
+        Accounts.resetPassword(token, password, handleResponse());
         break;
       }
       default:
