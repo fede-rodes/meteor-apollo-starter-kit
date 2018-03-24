@@ -4,6 +4,7 @@ import Loadable from 'react-loadable';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from './apollo-client/user';
 import {
+  ScrollToTop,
   LoggedInRoute,
   LoggedOutRoute,
   RouteWithProps,
@@ -28,87 +29,88 @@ function MyLoadingComponent({ error, pastDelay }) {
     return <div>Error!</div>;
   } else if (pastDelay) {
     return <div>Loading...</div>;
-  } else {
-    return null;
   }
+  return null;
 }
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 const Routes = props => (
-  <Switch>
-    <LoggedInRoute
-      exact
-      name="home"
-      path="/"
-      component={
-        // LoadableWrapper({ loader: () => import('./pages/home-page') })
-        Loadable({
-          loader: () => import('./pages/home-page').then(({ default: HomePage }) => HomePage),
-          loading: MyLoadingComponent,
-          delay: 300,
-        })
-      }
-      redirectTo="/login"
-      emailNotVerifiedOverlay={
-        // LoadableWrapper({ loader: () => import('./pages/welcome-page') })
-        Loadable({
-          loader: () => import('./pages/welcome-page').then(({ default: WelcomePage }) => WelcomePage),
-          loading: MyLoadingComponent,
-          delay: 300,
-        })
-      }
-      {...props}
-    />
-    <LoggedOutRoute
-      name="login"
-      path="/login"
-      component={LoginPage}
-      redirectTo="/"
-      {...props}
-    />
-    <LoggedOutRoute
-      name="signup"
-      path="/signup"
-      component={SignupPage}
-      redirectTo="/"
-      {...props}
-    />
-    <RouteWithProps
-      name="verifyEmail"
-      path="/verify-email/:token"
-      component={VerifyEmailPage}
-      {...props}
-    />
-    <RouteWithProps
-      name="linkExpired"
-      path="/link-expired"
-      component={LinkExpiredPage}
-      {...props}
-    />
-    <LoggedOutRoute
-      name="forgotPassword"
-      path="/forgot-password"
-      component={ForgotPasswordPage}
-      redirectTo="/"
-      {...props}
-    />
-    <LoggedOutRoute
-      name="resetPassword"
-      path="/reset-password/:token"
-      component={ResetPasswordPage}
-      redirectTo="/"
-      {...props}
-    />
-    <Route
-      name="notFound"
-      component={NotFoundPage}
-    />
-  </Switch>
+  <ScrollToTop>
+    <Switch>
+      <LoggedInRoute
+        exact
+        name="home"
+        path="/"
+        component={
+          // LoadableWrapper({ loader: () => import('./pages/home-page') })
+          Loadable({
+            loader: () => import('./pages/home-page').then(({ default: HomePage }) => HomePage),
+            loading: MyLoadingComponent,
+            delay: 300,
+          })
+        }
+        redirectTo="/login"
+        emailNotVerifiedOverlay={
+          // LoadableWrapper({ loader: () => import('./pages/welcome-page') })
+          Loadable({
+            loader: () => import('./pages/welcome-page').then(({ default: WelcomePage }) => WelcomePage),
+            loading: MyLoadingComponent,
+            delay: 300,
+          })
+        }
+        {...props}
+      />
+      <LoggedOutRoute
+        name="login"
+        path="/login"
+        component={LoginPage}
+        redirectTo="/"
+        {...props}
+      />
+      <LoggedOutRoute
+        name="signup"
+        path="/signup"
+        component={SignupPage}
+        redirectTo="/"
+        {...props}
+      />
+      <RouteWithProps
+        name="verifyEmail"
+        path="/verify-email/:token"
+        component={VerifyEmailPage}
+        {...props}
+      />
+      <RouteWithProps
+        name="linkExpired"
+        path="/link-expired"
+        component={LinkExpiredPage}
+        {...props}
+      />
+      <LoggedOutRoute
+        name="forgotPassword"
+        path="/forgot-password"
+        component={ForgotPasswordPage}
+        redirectTo="/"
+        {...props}
+      />
+      <LoggedOutRoute
+        name="resetPassword"
+        path="/reset-password/:token"
+        component={ResetPasswordPage}
+        redirectTo="/"
+        {...props}
+      />
+      <Route
+        name="notFound"
+        component={NotFoundPage}
+      />
+    </Switch>
+  </ScrollToTop>
 );
 
 Routes.propTypes = {
-  curUser: propType(userFragment),
+  curUser: propType(userFragment), // eslint-disable-line
 };
 
 Routes.defaultProps = {
