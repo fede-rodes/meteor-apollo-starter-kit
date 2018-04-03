@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
+import Constants from '../../constants';
 
 //------------------------------------------------------------------------------
 // COLLECTION:
@@ -97,6 +98,16 @@ const schema = new SimpleSchema({
     blackbox: true,
   },
 
+  roles: {
+    type: Array,
+    defaultValue: [],
+  },
+
+  'roles.$': {
+    type: String,
+    allowedValues: Constants.ALL_ROLES,
+  },
+
   subscriptions: {
     type: Array,
     label: 'Array of push subscriptions',
@@ -125,11 +136,6 @@ const schema = new SimpleSchema({
   'subscriptions.$.keys.p256dh': {
     type: String,
     label: 'User auth secret',
-  },
-
-  accountDeactivated: {
-    type: Boolean,
-    optional: true,
   },
 
   // In order to avoid an 'Exception in setInterval callback' from Meteor

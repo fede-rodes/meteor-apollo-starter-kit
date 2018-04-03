@@ -12,6 +12,7 @@ Meteor.startup(() => {
   process.env.MAIL_URL = `${protocol}://${username}:${password}@${server}:${port}`;
 
   // Setup default users if any
+  import './fixtures';
 
   // Run schema migrations if any.
 

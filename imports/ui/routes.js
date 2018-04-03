@@ -7,6 +7,7 @@ import {
   LoggedInRoute,
   LoggedOutRoute,
   RouteWithProps,
+  AdminRoute,
 } from './components/smart/route-wrappers';
 import LoadableWrapper from './components/dumb/loadable-wrapper';
 
@@ -63,6 +64,14 @@ const Routes = props => (
         path="/reset-password/:token"
         component={LoadableWrapper({ loader: () => import('./pages/auth/reset-password-page') })}
         redirectTo="/"
+        {...props}
+      />
+      <AdminRoute
+        exact
+        name="admin"
+        path="/admin"
+        component={LoadableWrapper({ loader: () => import('./pages/admin/admin-page') })}
+        redirectTo="/login"
         {...props}
       />
       <Route

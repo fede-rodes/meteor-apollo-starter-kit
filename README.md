@@ -22,6 +22,7 @@ Lighthouse audit:
 - Storybook
 - sanitize.css
 - basscss
+- basic admin functionality via alanning:roles
 - Progressive Web App features:
   * service-worker;
   * caching;
