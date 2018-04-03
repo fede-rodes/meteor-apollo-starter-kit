@@ -7,17 +7,6 @@ import { PasswordAuthViews, FBAuthBtn } from '../../components/smart/auth';
 import Feedback from '../../components/dumb/feedback';
 
 //------------------------------------------------------------------------------
-// CONSTANTS:
-//------------------------------------------------------------------------------
-/* const PAGE = {
-  name: 'login',
-  title: 'Log In',
-  subtitle: 'Don&apos;t have an account?&nbsp;',
-  linkTo: 'signup',
-  linkLabel: 'Sign Up',
-  btnLabel: 'Log In',
-}; */
-//------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 // OBSERVATION: in case of facebook authentication, authPageProps.handleSuccess
@@ -35,7 +24,7 @@ const LoginPage = () => [
   <SEO
     key="seo"
     schema="AboutPage"
-    title="Login Page"
+    title="Log In Page"
     description="A starting point for Meteor applications."
     contentType="product"
   />,
