@@ -28,17 +28,16 @@ class VerifyEmailPage extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <SEO
-          schema="AboutPage"
-          title="Verify Email Page"
-          description="A starting point for Meteor applications."
-          contentType="product"
-        />
-        <Loading />;
-      </div>
-    );
+    return [
+      <SEO
+        key="seo"
+        schema="AboutPage"
+        title="Verify Email Page"
+        description="A starting point for Meteor applications."
+        contentType="product"
+      />,
+      <Loading key="view" />,
+    ];
   }
 }
 

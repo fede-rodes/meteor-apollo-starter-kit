@@ -1,15 +1,22 @@
 import React from 'react';
 import SEO from '../../components/smart/seo';
 import BtnProps from '../../render-props/btn-props';
+import AuthPageLayout from '../../layouts/auth-page';
 import { ResendVerificationLink } from '../../components/smart/auth';
-import Title from '../../components/dumb/title';
 import Feedback from '../../components/dumb/feedback';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const WelcomePage = () => (
-  <BtnProps>
+const WelcomePage = () => [
+  <SEO
+    key="seo"
+    schema="AboutPage"
+    title="Welcome Page"
+    description="A starting point for Meteor applications."
+    contentType="product"
+  />,
+  <BtnProps key="view">
     {(btnProps) => {
       const {
         disabled,
@@ -28,9 +35,9 @@ const WelcomePage = () => (
           onBeforeHook={handleBefore}
           onServerErrorHook={handleServerError}
           onSuccessHook={() => {
-            // Extend btnProps.handleSuccess' default functionality by showing a
-            // success message after action is completed
+            // Extend btnProps.handleSuccess' default functionality
             handleSuccess(() => {
+              // Display success message after action is completed
               setSuccessMessage('A new email has been sent to your inbox!');
             });
           }}
@@ -38,14 +45,7 @@ const WelcomePage = () => (
       );
 
       return (
-        <div>
-          <SEO
-            schema="AboutPage"
-            title="Welcome Page"
-            description="A starting point for Meteor applications."
-            contentType="product"
-          />
-          <Title>Thanks for joining!</Title>
+        <AuthPageLayout title="Thanks for joining!">
           <p className="center">
             <strong>Check your email</strong> and click on the link provided to confirm your account.
           </p>
@@ -57,10 +57,10 @@ const WelcomePage = () => (
             errorMsg={errorMsg}
             successMsg={successMsg}
           />
-        </div>
+        </AuthPageLayout>
       );
     }}
-  </BtnProps>
-);
+  </BtnProps>,
+];
 
 export default WelcomePage;

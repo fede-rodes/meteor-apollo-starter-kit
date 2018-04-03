@@ -4,15 +4,22 @@ import { propType } from 'graphql-anywhere';
 import { userFragment } from '../../apollo-client/user';
 import SEO from '../../components/smart/seo';
 import BtnProps from '../../render-props/btn-props';
+import AuthPageLayout from '../../layouts/auth-page';
 import { ResendVerificationLink } from '../../components/smart/auth';
-import Title from '../../components/dumb/title';
 import Feedback from '../../components/dumb/feedback';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LinkExpiredPage = ({ curUser }) => (
-  <BtnProps>
+const LinkExpiredPage = ({ curUser }) => [
+  <SEO
+    key="seo"
+    schema="AboutPage"
+    title="Link Expired Page"
+    description="A starting point for Meteor applications."
+    contentType="product"
+  />,
+  <BtnProps key="view">
     {(btnProps) => {
       const {
         disabled,
@@ -31,9 +38,9 @@ const LinkExpiredPage = ({ curUser }) => (
           onBeforeHook={handleBefore}
           onServerErrorHook={handleServerError}
           onSuccessHook={() => {
-            // Extend btnProps.handleSuccess' default functionality by showing a
-            // success message after action is completed
+            // Extend btnProps.handleSuccess' default functionality
             handleSuccess(() => {
+              // Display success message after action is completed
               setSuccessMessage('A new email has been sent to your inbox!');
             });
           }}
@@ -41,14 +48,7 @@ const LinkExpiredPage = ({ curUser }) => (
       );
 
       return (
-        <div>
-          <SEO
-            schema="AboutPage"
-            title="Link Expired Page"
-            description="A starting point for Meteor applications."
-            contentType="product"
-          />
-          <Title>The link has expired!</Title>
+        <AuthPageLayout title="The link has expired!">
           <p className="center">
             {curUser
               ? <span>Please, click {resendLink} to resend confirmation link.</span>
@@ -60,11 +60,11 @@ const LinkExpiredPage = ({ curUser }) => (
             errorMsg={errorMsg}
             successMsg={successMsg}
           />
-        </div>
+        </AuthPageLayout>
       );
     }}
-  </BtnProps>
-);
+  </BtnProps>,
+];
 
 LinkExpiredPage.propTypes = {
   curUser: propType(userFragment),

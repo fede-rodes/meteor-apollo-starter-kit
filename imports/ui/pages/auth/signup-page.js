@@ -1,19 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SEO from '../../components/smart/seo';
 import AuthPageProps from '../../render-props/auth-page-props';
 import AuthPageLayout from '../../layouts/auth-page';
+import { PasswordAuthViews, FBAuthBtn } from '../../components/smart/auth';
+import Feedback from '../../components/dumb/feedback';
 
-//------------------------------------------------------------------------------
-// CONSTANTS:
-//------------------------------------------------------------------------------
-const PAGE = {
-  name: 'signup',
-  title: 'Sign Up',
-  subtitle: 'Already have an account?&nbsp;',
-  linkTo: 'login',
-  linkLabel: 'Log In',
-  btnLabel: 'Sign Up',
-};
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
@@ -28,24 +20,66 @@ const PAGE = {
 // trigger the LoggedOutRoute component's logic (said component wraps the
 // SignupPage component) which will result in redirecting the user to home page
 // automatically.
-const SignupPage = () => (
-  <AuthPageProps>
-    {authPageProps => (
-      <div>
-        <SEO
-          schema="AboutPage"
-          title="Signup Page"
-          description="A starting point for Meteor applications."
-          contentType="product"
+const SignupPage = () => [
+  <SEO
+    key="seo"
+    schema="AboutPage"
+    title="Sign Up Page"
+    description="A starting point for Meteor applications."
+    contentType="product"
+  />,
+  <AuthPageProps key="view">
+    {({
+      service,
+      disabled,
+      errorMsg,
+      successMsg,
+      handleBefore,
+      handleClientError,
+      handleServerError,
+      handleSuccess,
+    }) => (
+      <AuthPageLayout
+        title="Sign Up"
+        subtitle="Already have an account?&nbsp;"
+        link={<Link to="/login">Log In</Link>}
+      >
+        <PasswordAuthViews
+          view="signup"
+          btnLabel="Sign Up"
+          disabled={disabled}
+          onBeforeHook={() => handleBefore({ service: 'password' })}
+          onClientErrorHook={handleClientError}
+          onServerErrorHook={handleServerError}
+          onSuccessHook={handleSuccess}
         />
-        <AuthPageLayout
-          page={PAGE}
-          // Pass all state values and methods from authPageProps
-          {...authPageProps}
+        {service === 'password' && (
+          <Feedback
+            loading={disabled}
+            errorMsg={errorMsg}
+            successMsg={successMsg}
+          />
+        )}
+        <div className="center">
+          - OR -
+        </div>
+        <FBAuthBtn
+          btnLabel="Sign Up with Facebook"
+          disabled={disabled}
+          onBeforeHook={() => handleBefore({ service: 'facebook' })}
+          onServerErrorHook={handleServerError}
+          onSuccessHook={handleSuccess}
         />
-      </div>
+        {service === 'facebook' && (
+          <Feedback
+            loading={disabled}
+            errorMsg={errorMsg}
+            successMsg={successMsg}
+          />
+        )}
+      </AuthPageLayout>
     )}
-  </AuthPageProps>
-);
+  </AuthPageProps>,
+];
 
 export default SignupPage;
