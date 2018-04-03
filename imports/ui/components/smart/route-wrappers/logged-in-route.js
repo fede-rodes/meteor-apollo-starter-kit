@@ -24,7 +24,6 @@ const LoggedInRoute = ({
   <Route
     {...rest}
     render={(ownProps) => {
-      console.log('component', component);
       // User NOT logged in resolver
       const resolver = redirectTo.trim().length > 0
         ? <Redirect to={redirectTo.trim()} />

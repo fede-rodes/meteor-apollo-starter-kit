@@ -19,15 +19,16 @@ Lighthouse audit:
 - Authentication: password & facebook (via meteor accounts)
 - ES6 syntax
 - styled components
+- Storybook
+- sanitize.css
+- basscss
 - Progressive Web App features:
   * service-worker;
   * caching;
   * add to home screen;
   * push notifications;
   * app shell architecture;
-- Storybook
-- sanitize.css
-- basscss
+
 
 ### Step by step guide to get started with this boilerplate
 

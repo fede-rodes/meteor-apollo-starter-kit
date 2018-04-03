@@ -1,4 +1,4 @@
-/* import React from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 import Loadable from 'react-loadable';
 import LoadableLoading from '../loadable-loading';
@@ -6,21 +6,21 @@ import LoadableLoading from '../loadable-loading';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LoadableWrapper = opts => (
+const LoadableWrapper = ({ loader, delay }) => (
   Loadable({
     loading: LoadableLoading,
-    ...opts,
+    loader,
+    delay,
   })
 );
 
 LoadableWrapper.propTypes = {
-  LoadingComponent: PropTypes.oject,
+  loader: PropTypes.func.isRequired,
   delay: PropTypes.number,
 };
 
 LoadableWrapper.defaultProps = {
-  LoadingComponent: null,
-  delay: 200,
+  delay: 300,
 };
 
-export default LoadableWrapper; */
+export default LoadableWrapper;

@@ -1,4 +1,4 @@
-/* import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 
 // Source: https://youtu.be/j-WcyAjVceM
 async function renderAsync() {
@@ -37,9 +37,9 @@ Meteor.startup(() => {
     console.log(`renderAsync took: ${renderTime}ms`);
     console.log(`Total time: ${startupTime + renderTime}ms`);
   });
-}); */
+});
 
-import { Meteor } from 'meteor/meteor';
+/* import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
 import App from '../../ui/app';
@@ -55,4 +55,4 @@ Meteor.startup(() => {
   render(<App component={Header} />, document.getElementById('header'));
   render(<App component={Menu} />, document.getElementById('menu'));
   render(<App component={Routes} />, document.getElementById('main'));
-});
+}); */
