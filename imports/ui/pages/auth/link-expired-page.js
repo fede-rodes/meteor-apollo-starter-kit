@@ -40,7 +40,7 @@ const LinkExpiredPage = ({ curUser }) => [
           onSuccessHook={() => {
             // Extend btnProps.handleSuccess' default functionality
             handleSuccess(() => {
-              // Show success message after action is completed
+              // Display success message after action is completed
               setSuccessMessage('A new email has been sent to your inbox!');
             });
           }}

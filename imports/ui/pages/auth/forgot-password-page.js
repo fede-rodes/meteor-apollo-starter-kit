@@ -46,7 +46,7 @@ const ForgotPasswordPage = () => [
           onSuccessHook={() => {
             // Extend authPageProps.handleSuccess' default functionality
             handleSuccess(() => {
-              // Show success message after action is completed
+              // Display success message after action is completed
               setSuccessMessage('A new email has been sent to your inbox!');
             });
           }}
