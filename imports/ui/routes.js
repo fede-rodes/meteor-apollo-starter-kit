@@ -22,7 +22,7 @@ const Routes = props => (
         path="/"
         component={LoadableWrapper({ loader: () => import('./pages/home-page') })}
         redirectTo="/login"
-        emailNotVerifiedOverlay={LoadableWrapper({ loader: () => import('./pages/welcome-page') })}
+        emailNotVerifiedOverlay={LoadableWrapper({ loader: () => import('./pages/auth/welcome-page') })}
         {...props}
       />
       <LoggedOutRoute

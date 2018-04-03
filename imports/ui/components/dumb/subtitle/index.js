@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //------------------------------------------------------------------------------
 const Subtitle = ({ text, link }) => (
   <p className="center">
-    <span dangerouslySetInnerHTML={{ __html: text }} /> {link}
+    <span dangerouslySetInnerHTML={{ __html: text }} /> {link || null}
   </p>
 );
 
