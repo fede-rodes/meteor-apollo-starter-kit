@@ -4,6 +4,29 @@ import PropTypes from 'prop-types';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
+const Subtitle = ({ text, link }) => (
+  <p className="center">
+    <span dangerouslySetInnerHTML={{ __html: text }} /> {link}
+  </p>
+);
+
+Subtitle.propTypes = {
+  text: PropTypes.string.isRequired,
+  link: PropTypes.object, // eslint-disable-line
+};
+
+Subtitle.defaultProps = {
+  link: null,
+};
+
+export default Subtitle;
+
+/* import React from 'react';
+import PropTypes from 'prop-types';
+
+//------------------------------------------------------------------------------
+// COMPONENT:
+//------------------------------------------------------------------------------
 const Subtitle = ({ text, linkTo, linkLabel, onLinkClick }) => (
   <p className="center">
     <span dangerouslySetInnerHTML={{ __html: text }} />
@@ -28,4 +51,4 @@ Subtitle.defaultProps = {
   onLinkClick: () => {},
 };
 
-export default Subtitle;
+export default Subtitle; */
