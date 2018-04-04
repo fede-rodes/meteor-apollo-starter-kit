@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from '../../apollo-client/user';
 import SEO from '../../components/smart/seo';
-import BtnProps from '../../render-props/btn-props';
+import FormProps from '../../render-props/form-props';
 import AuthPageLayout from '../../layouts/auth-page';
 import { ResendVerificationLink } from '../../components/smart/auth';
 import Feedback from '../../components/dumb/feedback';
@@ -19,8 +19,8 @@ const LinkExpiredPage = ({ curUser }) => [
     description="A starting point for Meteor applications."
     contentType="product"
   />,
-  <BtnProps key="view">
-    {(btnProps) => {
+  <FormProps key="view">
+    {(formProps) => {
       const {
         disabled,
         errorMsg,
@@ -29,7 +29,7 @@ const LinkExpiredPage = ({ curUser }) => [
         handleBefore,
         handleServerError,
         handleSuccess,
-      } = btnProps;
+      } = formProps;
 
       const resendLink = (
         <ResendVerificationLink
@@ -38,7 +38,7 @@ const LinkExpiredPage = ({ curUser }) => [
           onBeforeHook={handleBefore}
           onServerErrorHook={handleServerError}
           onSuccessHook={() => {
-            // Extend btnProps.handleSuccess' default functionality
+            // Extend formProps.handleSuccess' default functionality
             handleSuccess(() => {
               // Display success message after action is completed
               setSuccessMessage('A new email has been sent to your inbox!');
@@ -63,7 +63,7 @@ const LinkExpiredPage = ({ curUser }) => [
         </AuthPageLayout>
       );
     }}
-  </BtnProps>,
+  </FormProps>,
 ];
 
 LinkExpiredPage.propTypes = {

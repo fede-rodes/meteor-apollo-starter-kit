@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import AuxFunctions from '../../../api/aux-functions';
 import SEO from '../../components/smart/seo';
-import AuthPageProps from '../../render-props/auth-page-props';
+import FormProps from '../../render-props/form-props';
 import AuthPageLayout from '../../layouts/auth-page';
 import { PasswordAuthViews } from '../../components/smart/auth';
 import Feedback from '../../components/dumb/feedback';
@@ -28,7 +28,7 @@ const ResetPasswordPage = ({ match }) => {
       description="A starting point for Meteor applications."
       contentType="product"
     />,
-    <AuthPageProps key="view">
+    <FormProps key="view">
       {({
         disabled,
         errorMsg,
@@ -65,7 +65,7 @@ const ResetPasswordPage = ({ match }) => {
           </p>
         </AuthPageLayout>
       )}
-    </AuthPageProps>,
+    </FormProps>,
   ];
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../../components/smart/seo';
-import AuthPageProps from '../../render-props/auth-page-props';
+import { FormProps, ServiceProps } from '../../render-props';
 import AuthPageLayout from '../../layouts/auth-page';
 import { PasswordAuthViews, FBAuthBtn } from '../../components/smart/auth';
 import Feedback from '../../components/dumb/feedback';
@@ -28,9 +28,8 @@ const LoginPage = () => [
     description="A starting point for Meteor applications."
     contentType="product"
   />,
-  <AuthPageProps key="view">
+  <FormProps key="view">
     {({
-      service,
       disabled,
       errorMsg,
       successMsg,
@@ -39,50 +38,62 @@ const LoginPage = () => [
       handleServerError,
       handleSuccess,
     }) => (
-      <AuthPageLayout
-        title="Log In"
-        subtitle="Don&apos;t have an account?&nbsp;"
-        link={<Link to="/signup">Sign Up</Link>}
-      >
-        <PasswordAuthViews
-          view="login"
-          btnLabel="Log In"
-          disabled={disabled}
-          onBeforeHook={() => handleBefore({ service: 'password' })}
-          onClientErrorHook={handleClientError}
-          onServerErrorHook={handleServerError}
-          onSuccessHook={handleSuccess}
-        />
-        {service === 'password' && (
-          <Feedback
-            loading={disabled}
-            errorMsg={errorMsg}
-            successMsg={successMsg}
-          />
+      <ServiceProps>
+        {({ service, setService }) => (
+          <AuthPageLayout
+            title="Log In"
+            subtitle="Don&apos;t have an account?&nbsp;"
+            link={<Link to="/signup">Sign Up</Link>}
+          >
+            <PasswordAuthViews
+              view="login"
+              btnLabel="Log In"
+              disabled={disabled}
+              onBeforeHook={() => {
+                // Keep track of the auth service being used
+                setService('password');
+                handleBefore();
+              }}
+              onClientErrorHook={handleClientError}
+              onServerErrorHook={handleServerError}
+              onSuccessHook={handleSuccess}
+            />
+            {service === 'password' && (
+              <Feedback
+                loading={disabled}
+                errorMsg={errorMsg}
+                successMsg={successMsg}
+              />
+            )}
+            <p className="center">
+              <Link to="/forgot-password">Forgot password?</Link>
+            </p>
+            <div className="center">
+              - OR -
+            </div>
+            <FBAuthBtn
+              btnLabel="Log In with Facebook"
+              disabled={disabled}
+              onBeforeHook={() => {
+                // Keep track of the auth service being used
+                setService('facebook');
+                handleBefore();
+              }}
+              onServerErrorHook={handleServerError}
+              onSuccessHook={handleSuccess}
+            />
+            {service === 'facebook' && (
+              <Feedback
+                loading={disabled}
+                errorMsg={errorMsg}
+                successMsg={successMsg}
+              />
+            )}
+          </AuthPageLayout>
         )}
-        <p className="center">
-          <Link to="/forgot-password">Forgot password?</Link>
-        </p>
-        <div className="center">
-          - OR -
-        </div>
-        <FBAuthBtn
-          btnLabel="Log In with Facebook"
-          disabled={disabled}
-          onBeforeHook={() => handleBefore({ service: 'facebook' })}
-          onServerErrorHook={handleServerError}
-          onSuccessHook={handleSuccess}
-        />
-        {service === 'facebook' && (
-          <Feedback
-            loading={disabled}
-            errorMsg={errorMsg}
-            successMsg={successMsg}
-          />
-        )}
-      </AuthPageLayout>
+      </ServiceProps>
     )}
-  </AuthPageProps>,
+  </FormProps>,
 ];
 
 export default LoginPage;

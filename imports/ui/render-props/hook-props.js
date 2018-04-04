@@ -5,7 +5,7 @@ import { disabledPropTypes, messagePropTypes } from './index';
 //------------------------------------------------------------------------------
 // PROPS PROVIDER:
 //------------------------------------------------------------------------------
-class SubmitProps extends React.PureComponent {
+class HookProps extends React.PureComponent {
   handleBefore = (cb) => {
     this.props.disabledProps.disableBtn();
     this.props.messageProps.clearMessages();
@@ -43,17 +43,17 @@ class SubmitProps extends React.PureComponent {
   }
 }
 
-SubmitProps.propTypes = {
+HookProps.propTypes = {
   disabledProps: PropTypes.shape(disabledPropTypes).isRequired,
   messageProps: PropTypes.shape(messagePropTypes).isRequired,
 };
 
-export default SubmitProps;
+export default HookProps;
 
 //------------------------------------------------------------------------------
 // PROPS:
 //------------------------------------------------------------------------------
-export const submitPropTypes = {
+export const hookPropTypes = {
   handleBefore: PropTypes.func.isRequired,
   handleClientError: PropTypes.func.isRequired,
   handleServerError: PropTypes.func.isRequired,

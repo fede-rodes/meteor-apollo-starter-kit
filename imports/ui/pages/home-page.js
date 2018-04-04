@@ -1,7 +1,7 @@
 import React from 'react';
 import { propType } from 'graphql-anywhere';
 import { userFragment } from '../apollo-client/user';
-import { PWABtnProps, BtnProps } from '../render-props';
+import { PWABtnProps, FormProps } from '../render-props';
 import SEO from '../components/smart/seo';
 import SubscribeBtn from '../components/smart/pwa/subscribe-btn';
 import UnsubscribeBtn from '../components/smart/pwa/unsubscribe-btn';
@@ -30,8 +30,8 @@ const HomePage = ({ curUser }) => [
       } = pwaBtnProps;
 
       return (
-        <BtnProps>
-          {(btnProps) => {
+        <FormProps>
+          {(formProps) => {
             const {
               disabled,
               errorMsg,
@@ -39,7 +39,7 @@ const HomePage = ({ curUser }) => [
               handleBefore,
               handleServerError,
               handleSuccess,
-            } = btnProps;
+            } = formProps;
 
             // Display loading indicator while checking for push support
             if (supported === 'loading') {
@@ -95,13 +95,13 @@ const HomePage = ({ curUser }) => [
                   errorMsg={errorMsg}
                   successMsg={successMsg}
                 />
-                <pre style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }} key="view2">
+                <pre style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>
                   {JSON.stringify(curUser, null, 2)}
                 </pre>
               </div>
             );
           }}
-        </BtnProps>
+        </FormProps>
       );
     }}
   </PWABtnProps>,
