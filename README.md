@@ -23,6 +23,7 @@ Lighthouse audit:
 - sanitize.css
 - basscss
 - basic admin functionality via alanning:roles
+- code splitting on startup and router level
 - Progressive Web App features:
   * service-worker;
   * caching;
@@ -205,9 +206,6 @@ In case you run lighthouse inside the /meteor-apollo-starter-kit app's folder, y
 - https://developers.google.com/web/tools/chrome-devtools/remote-debugging/?hl=en
 
 ### TODO LIST
-- fix facebook config
-
-- code-splitting
 - keep track of visited routes in order to send the user back to the last (not auth) visited page. Additionally, add last visited page to the account verification link in order to take the user
  back to the initial page after email account is verified.
 - setup apollo subscriptions
