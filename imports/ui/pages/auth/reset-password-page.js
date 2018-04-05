@@ -11,7 +11,7 @@ import Feedback from '../../components/dumb/feedback';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-// OBSERVATION: after authPageProps.handleSuccess is fired, the user
+// OBSERVATION: after formProps.handleSuccess is fired, the user
 // logged-in-state will change from 'logged out' to 'logged in'. This will
 // trigger the LoggedOutRoute component's logic (said component wraps the
 // LoginPage component) which will result in redirecting the user to home page
@@ -48,7 +48,7 @@ const ResetPasswordPage = ({ match }) => {
             onClientErrorHook={handleClientError}
             onServerErrorHook={handleServerError}
             onSuccessHook={() => {
-              // Extend authPageProps.handleSuccess' default functionality
+              // Extend formProps.handleSuccess' default functionality
               handleSuccess(() => {
                 // Display alert message after action is completed
                 AuxFunctions.delayedAlert('Password reset successfully!', 700);
