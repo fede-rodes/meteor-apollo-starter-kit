@@ -9,13 +9,13 @@ import Feedback from '../../components/dumb/feedback';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-// OBSERVATION: in case of facebook authentication, authPageProps.handleSuccess
+// OBSERVATION: in case of facebook authentication, formProps.handleSuccess
 // is only reachable when using 'popup' loginStyle at serviceConfiguration. On
 // the contrary, when loginStyle equals 'redirect', the page will be re-loaded
 // just after the response is coming back from facebook and therefore this hook
 // will never be fired.
 
-// On the other hand, after authPageProps.handleSuccess is fired, the user
+// On the other hand, after formProps.handleSuccess is fired, the user
 // logged-in-state will change from 'logged out' to 'logged in'. This will
 // trigger the LoggedOutRoute component's logic (said component wraps the
 // SignupPage component) which will result in redirecting the user to home page
