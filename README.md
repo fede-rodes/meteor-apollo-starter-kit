@@ -1,4 +1,4 @@
-# Meteor, Apollo, React, PWA, Styled-Components boilerplate
+# Meteor, Apollo, React, PWA, material-ui, Styled-Components boilerplate
 
 A simple kit to start experimenting with Apollo, Meteor, React, PWA and Styled Components.
 
@@ -18,6 +18,7 @@ Lighthouse audit:
 - Redux
 - Authentication: password & facebook (via meteor accounts)
 - ES6 syntax
+- material-ui
 - styled components
 - Storybook
 - sanitize.css
