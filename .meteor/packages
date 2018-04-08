@@ -22,6 +22,7 @@ static-html
 force-ssl@1.1.0
 browser-policy@1.1.0
 check@1.3.0
-orcprogramming:collection2-core-server   # server side only version of aldeed:collection2-core
 swydo:graphql
 alanning:roles
+orcprogramming:collection2-core-server   # server side only version of aldeed:collection2-core
+orcprogramming:accounts-passwordless

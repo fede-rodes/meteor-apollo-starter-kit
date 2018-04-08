@@ -45,6 +45,7 @@ html-tools@1.0.11
 htmljs@1.0.11
 http@1.4.0
 id-map@1.1.0
+jperl:match-ex@1.0.0
 livedata@1.0.18
 localstorage@1.2.0
 logging@1.1.20
@@ -62,6 +63,7 @@ npm-bcrypt@0.9.3
 npm-mongo@2.2.34
 oauth@1.2.3
 oauth2@1.2.0
+orcprogramming:accounts-passwordless@0.2.3
 orcprogramming:collection2-core-server@0.0.5
 ordered-dict@1.1.0
 promise@0.10.2

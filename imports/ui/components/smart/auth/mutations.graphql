@@ -1,5 +1,0 @@
-mutation {
-  sendVerificationEmail {
-    _id
-  }
-}

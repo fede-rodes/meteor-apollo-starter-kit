@@ -21,6 +21,11 @@ type Subscription {
   keys: Keys!
 }
 
+input HashedPasswordInput {
+  digest: String!
+  algorithm: String!
+}
+
 type User {
   _id: String!
   createdAt: Date!
@@ -45,7 +50,8 @@ type Query {
 }
 
 type Mutation {
-  sendVerificationEmail: User
+  userExists(email: String!): User
+  createUserWithoutPassword(email: String!): User
   saveSubscription(subscription: SubscriptionInput!): User
   deleteSubscription(endpoint: String!): User
   sendPushNotification: User

@@ -18,7 +18,6 @@ const LoggedInRoute = ({
   component,
   redirectTo,
   overlay,
-  emailNotVerifiedOverlay,
   ...rest
 }) => (
   <Route
@@ -33,15 +32,6 @@ const LoggedInRoute = ({
         return resolver;
       }
 
-      // TODO: use current loggedIn service instead of all available services
-      const isPasswordService = curUser.services.indexOf('password') !== -1;
-      const isEmailVerified = isPasswordService && curUser.emails[0].verified === true;
-
-      // If password service and email is NOT verified, resolve...
-      if (isPasswordService && !isEmailVerified) {
-        return React.createElement(emailNotVerifiedOverlay, { curUser, ...rest, ...ownProps });
-      }
-
       // ...Otherwise, render requested component
       return React.createElement(component, { curUser, ...rest, ...ownProps });
     }}
@@ -53,7 +43,6 @@ LoggedInRoute.propTypes = {
   component: PropTypes.func.isRequired,
   redirectTo: PropTypes.string,
   overlay: PropTypes.func,
-  emailNotVerifiedOverlay: PropTypes.func.isRequired,
 };
 
 LoggedInRoute.defaultProps = {

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import webPush from 'web-push';
 import map from 'lodash/map';
+import extend from 'lodash/extend';
 import flatten from 'lodash/flatten';
 import { Accounts } from 'meteor/accounts-base';
 import { GraphQLError } from 'graphql';
@@ -19,20 +20,49 @@ const Mutation = {};
 
 //------------------------------------------------------------------------------
 /**
-* @summary Send email account verification email to current logged in user.
+* @summary Check whether or not the user exists (has a record set) in our DB.
 */
-Mutation.sendVerificationEmail = (root, args, context) => {
-  console.log('About to send verification email...');
-  const { userId } = context;
+Mutation.userExists = (root, args) => {
+  const { email } = args;
 
-  Users.utils.checkLoggedInAndNotVerified(userId);
+  // Query user
+  const userExists = Users.collection.findOne({ 'emails.address': email });
 
+  // Make sure users exist
+  if (!userExists) {
+    throw new GraphQLError('User doesn\'t exist');
+  }
+
+  return { _id: userExists._id };
+};
+//------------------------------------------------------------------------------
+/**
+* @summary Create a user record without password.
+* @see {@link https://docs.meteor.com/api/passwords.html#Accounts-createUser}
+* @see {@link https://docs.meteor.com/api/passwords.html#Accounts-sendEnrollmentEmail}
+*/
+Mutation.createUserWithoutPassword = (root, args) => {
+  const { email } = args;
+  console.log(
+    '\n\ncreateUserWithoutPassword',
+    'email', email,
+  );
+
+  // Query user
+  const userExists = Users.collection.findOne({ 'emails.address': email });
+
+  // In case user already exists, return user id
+  if (userExists) {
+    return { _id: userExists._id };
+  }
+
+  // Otherwise, insert user an return user id
   try {
-    Accounts.sendVerificationEmail(userId);
-    console.log('Verification email sent!');
+    const user = { email };
+    const userId = Accounts.createUser(user);
     return { _id: userId };
   } catch (exc) {
-    throw new GraphQLError(`Verification email couldn't be delivered. Reason: ${exc.response}`);
+    throw new GraphQLError(`User couldn't be created. Reason: ${exc}`);
   }
 };
 //------------------------------------------------------------------------------
