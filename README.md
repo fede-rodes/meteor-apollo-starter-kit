@@ -31,6 +31,8 @@ Lighthouse audit:
   * push notifications;
   * app shell architecture;
 
+### Other flavors
+Checkout 'material' branch for a material-ui (https://material-ui-next.com) version of this boilerplate.
 
 ### Step by step guide to get started with this boilerplate
 
