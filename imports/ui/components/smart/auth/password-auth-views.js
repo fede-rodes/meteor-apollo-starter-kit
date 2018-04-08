@@ -3,12 +3,8 @@ import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import Form from '../../dumb/form';
-import Fieldset from '../../dumb/fieldset';
-import Label from '../../dumb/label';
-import Input from '../../dumb/input';
-import Message from '../../dumb/message';
-import Button from '../../dumb/button';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 import ErrorHandling from '../../../../api/error-handling';
 import sendVerificationEmailMutation from './mutations.graphql';
 
@@ -119,6 +115,7 @@ class PasswordAuthViews extends React.Component {
 
     // Validate fields
     const err1 = this.validateFields({ email, password });
+    console.log('err1', err1);
 
     // In case of errors, display on UI and return handler to parent component
     if (ErrorHandling.hasErrors(err1)) {
@@ -174,55 +171,57 @@ class PasswordAuthViews extends React.Component {
     const { btnLabel, disabled } = this.props;
 
     return (
-      <Form onSubmit={this.handleSubmit} className="my2">
+      <form
+        onSubmit={this.handleSubmit}
+        className="my2"
+        noValidate
+        autoComplete="off"
+      >
         {this.isActiveField('email') && (
-          <Fieldset className="mt2">
-            <Label htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={this.handleChange}
-            />
-            <Message
-              type="error"
-              content={ErrorHandling.getFieldErrors(errors, 'email')}
-            />
-          </Fieldset>
+          <TextField
+            id="email"
+            type="email"
+            label="Email"
+            value={email}
+            onChange={this.handleChange}
+            margin="normal"
+            fullWidth
+            error={ErrorHandling.getFieldErrors(errors, 'email').length > 0}
+            helperText={
+              ErrorHandling.getFieldErrors(errors, 'email').length > 0
+              ? ErrorHandling.getFieldErrors(errors, 'email')
+              : ''
+            }
+          />
         )}
         {this.isActiveField('password') && (
-          <Fieldset className="mt2">
-            <Label htmlFor="password">
-              Password
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            <Message
-              type="error"
-              content={ErrorHandling.getFieldErrors(errors, 'password')}
-            />
-          </Fieldset>
+          <TextField
+            id="password"
+            type="password"
+            label="Password"
+            value={password}
+            onChange={this.handleChange}
+            margin="normal"
+            fullWidth
+            error={ErrorHandling.getFieldErrors(errors, 'password').length > 0}
+            helperText={
+              ErrorHandling.getFieldErrors(errors, 'password').length > 0
+              ? ErrorHandling.getFieldErrors(errors, 'password')
+              : ''
+            }
+          />
         )}
-        <Fieldset className="mt3">
-          <Button
-            type="submit"
-            variant="primary"
-            disabled={disabled}
-            size="large"
-            expanded
-          >
-            {btnLabel}
-          </Button>
-        </Fieldset>
-      </Form>
+        <div className="mb2" />
+        <Button
+          type="submit"
+          variant="raised"
+          color="primary"
+          fullWidth
+          disabled={disabled}
+        >
+          {btnLabel}
+        </Button>
+      </form>
     );
   }
 }

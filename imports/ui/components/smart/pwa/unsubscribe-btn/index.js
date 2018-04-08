@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import Button from 'material-ui/Button';
 import { userQuery } from '../../../../apollo-client/user';
 import deleteSubscriptionMutation from './mutations.graphql';
-import Button from '../../../dumb/button';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -77,6 +77,8 @@ class UnsubscribeBtn extends React.PureComponent {
 
     return (
       <Button
+        variant="raised"
+        color="primary"
         disabled={disabled}
         onClick={this.handleClick}
       >

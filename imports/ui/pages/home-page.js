@@ -91,6 +91,7 @@ const HomePage = ({ curUser }) => [
                 )}
                 <div className="my1" />
                 <Feedback
+                  className="mb2"
                   loading={disabled}
                   errorMsg={errorMsg}
                   successMsg={successMsg}

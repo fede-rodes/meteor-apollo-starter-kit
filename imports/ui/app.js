@@ -5,6 +5,8 @@ import { createApolloClient } from 'meteor/apollo';
 import { ApolloProvider } from 'react-apollo';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import store from './redux/store.js';
 import theme from './theme';
 import GlobalDataProvider from './global-data-provider';
@@ -27,16 +29,20 @@ const client = createApolloClient({});
 // the same 'history' object will be shared among all three mentioned components.
 const history = createBrowserHistory();
 
+const muiTheme = createMuiTheme();
+
 const App = ({ component }) => (
   <ThemeProvider theme={theme}>
     <Router history={history}>
       <Provider store={store}>
         <ApolloProvider client={client}>
-          <GlobalDataProvider>
-            {globalDataProps => (
-              React.createElement(component, { ...globalDataProps })
-            )}
-          </GlobalDataProvider>
+          <MuiThemeProvider theme={muiTheme}>
+            <GlobalDataProvider>
+              {globalDataProps => (
+                React.createElement(component, { ...globalDataProps })
+              )}
+            </GlobalDataProvider>
+          </MuiThemeProvider>
         </ApolloProvider>
       </Provider>
     </Router>

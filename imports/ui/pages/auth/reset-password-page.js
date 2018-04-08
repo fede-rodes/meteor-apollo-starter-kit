@@ -56,6 +56,7 @@ const ResetPasswordPage = ({ match }) => {
             }}
           />
           <Feedback
+            className="mb2"
             loading={disabled}
             errorMsg={errorMsg}
             successMsg={successMsg}

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../dumb/button';
+import Button from 'material-ui/Button';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -40,11 +40,10 @@ class FBAuthBtn extends React.PureComponent {
 
     return (
       <Button
-        variant="primary"
+        variant="raised"
+        color="primary"
+        fullWidth
         disabled={disabled}
-        size="large"
-        expanded
-        className="my2"
         onClick={this.handleClick}
       >
         {btnLabel}

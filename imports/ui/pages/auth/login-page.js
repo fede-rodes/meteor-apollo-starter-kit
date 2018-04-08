@@ -60,6 +60,7 @@ const LoginPage = () => [
             />
             {service === 'password' && (
               <Feedback
+                className="mb2"
                 loading={disabled}
                 errorMsg={errorMsg}
                 successMsg={successMsg}
@@ -71,6 +72,7 @@ const LoginPage = () => [
             <div className="center">
               - OR -
             </div>
+            <div className="mb2" />
             <FBAuthBtn
               btnLabel="Log In with Facebook"
               disabled={disabled}
@@ -82,8 +84,10 @@ const LoginPage = () => [
               onServerErrorHook={handleServerError}
               onSuccessHook={handleSuccess}
             />
+            <div className="mb2" />
             {service === 'facebook' && (
               <Feedback
+                className="mb2"
                 loading={disabled}
                 errorMsg={errorMsg}
                 successMsg={successMsg}

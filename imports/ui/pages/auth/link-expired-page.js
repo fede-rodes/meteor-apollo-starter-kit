@@ -56,6 +56,7 @@ const LinkExpiredPage = ({ curUser }) => [
             }
           </p>
           <Feedback
+            className="mb2"
             loading={disabled}
             errorMsg={errorMsg}
             successMsg={successMsg}

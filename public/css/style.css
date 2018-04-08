@@ -68,6 +68,10 @@ header {
   transition: background-color 250ms linear;
 }
 
+form {
+  width: 100%;
+}
+
 .app__offline {
   background-color: #6b6b6b;
 }

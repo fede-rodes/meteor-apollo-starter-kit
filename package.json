@@ -28,6 +28,8 @@
     "install": "^0.10.1",
     "invariant": "^2.2.2",
     "lodash": "^4.17.4",
+    "material-ui": "^1.0.0-beta.41",
+    "material-ui-icons": "^1.0.0-beta.17",
     "merge-graphql-schemas": "^1.4.0",
     "meteor-node-stubs": "^0.2.11",
     "prop-types": "^15.6.0",

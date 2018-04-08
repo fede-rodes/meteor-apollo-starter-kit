@@ -53,6 +53,7 @@ const WelcomePage = () => [
             If you did not receive an email, click {resendLink} to resend the confirmation link.
           </p>
           <Feedback
+            className="mb2"
             loading={disabled}
             errorMsg={errorMsg}
             successMsg={successMsg}

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import Button from 'material-ui/Button';
 import sendPushNotificationMutation from './mutations.graphql';
-import Button from '../../../dumb/button';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -36,6 +36,8 @@ class PushBtn extends React.PureComponent {
 
     return (
       <Button
+        variant="raised"
+        color="primary"
         disabled={disabled}
         onClick={this.handleClick}
       >
