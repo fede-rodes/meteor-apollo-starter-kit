@@ -1,11 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql, compose } from 'react-apollo';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import ErrorHandling from '../../../../api/error-handling';
-import userExistsMutation from './mutations-user-exists.graphql';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -61,7 +59,6 @@ class LoginTokenAuthView extends React.Component {
     evt.preventDefault();
 
     const {
-      userExists,
       onBeforeHook,
       onClientErrorHook,
       onServerErrorHook,
@@ -91,20 +88,14 @@ class LoginTokenAuthView extends React.Component {
       return;
     }
 
-    // Make sure the user is authenticated / has a record set before sending the
-    // auth code
-    userExists({ variables: { email } })
-      .then(() => {
-        Meteor.sendVerificationCode(email, (err) => {
-          if (err) {
-            onServerErrorHook(err);
-          } else {
-            this.clearFields();
-            onSuccessHook({ email });
-          }
-        });
-      })
-      .catch((exc) => { onServerErrorHook(exc); });
+    Meteor.sendVerificationCode(email, (err) => {
+      if (err) {
+        onServerErrorHook(err);
+      } else {
+        this.clearFields();
+        onSuccessHook({ email });
+      }
+    });
   }
 
   render() {
@@ -148,7 +139,6 @@ class LoginTokenAuthView extends React.Component {
 }
 
 LoginTokenAuthView.propTypes = {
-  userExists: PropTypes.func.isRequired,
   btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
@@ -166,9 +156,4 @@ LoginTokenAuthView.defaultProps = {
   onSuccessHook: () => {},
 };
 
-// Apollo integration
-const enhance = compose(
-  graphql(userExistsMutation, { name: 'userExists' }),
-);
-
-export default enhance(LoginTokenAuthView);
+export default LoginTokenAuthView;

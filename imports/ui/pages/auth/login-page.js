@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import SEO from '../../components/smart/seo';
 import {
+  FBAuthBtn,
   LoginTokenAuthView,
   ResendVerificationCode,
   LoginAuthView,
 } from '../../components/smart/auth';
-import FormProps from '../../render-props/form-props';
+import { FormProps, ServiceProps } from '../../render-props';
 import AuthPageLayout from '../../layouts/auth-page';
 import Feedback from '../../components/dumb/feedback';
 
@@ -45,73 +45,109 @@ class LoginPage extends React.PureComponent {
           handleServerError,
           handleSuccess,
         }) => (
-          <AuthPageLayout
-            title={view === 'loginToken'
-              ? 'Login'
-              : 'Enter your access code below'
-            }
-            subtitle={view === 'loginToken'
-              ? ''
-              : 'Haven\'t received the verification code?'
-            }
-            link={view === 'loginToken'
-              ? null
-              : (
-                <ResendVerificationCode
-                  email={email}
-                  label="Resend it"
-                  disabled={disabled}
-                  onBeforeHook={handleBefore}
-                  onServerErrorHook={handleServerError}
-                  onSuccessHook={() => {
-                    // Extend formProps.handleSuccess' default functionality
-                    handleSuccess(() => {
-                      // Show success message after action is completed
-                      setSuccessMessage('A new email has been sent to your inbox!');
-                    });
-                  }}
-                />
-              )
-            }
-          >
-            {view === 'loginToken' && (
-              <LoginTokenAuthView
-                btnLabel="Send Access Code"
-                disabled={disabled}
-                onBeforeHook={handleBefore}
-                onClientErrorHook={handleClientError}
-                onServerErrorHook={handleServerError}
-                onSuccessHook={(obj) => {
-                  // Extend formProps.handleSuccess' default functionality
-                  handleSuccess(() => {
-                    if (obj && obj.email) {
-                      // Show success message after action is completed
-                      setSuccessMessage('A new email has been sent to your inbox!');
-                      // Switch to login view and store current user's email
-                      this.setState({ view: 'login', email: obj.email });
-                    }
-                  });
-                }}
-              />
+          <ServiceProps>
+            {({ service, setService }) => (
+              <AuthPageLayout
+                title={view === 'loginToken' ? 'Login' : 'Enter Pass Code'}
+                subtitle={view === 'login' ? 'Haven\'t received the pass code?' : ''}
+                link={view === 'login'
+                  ? (
+                    <ResendVerificationCode
+                      email={email}
+                      label="Resend it"
+                      disabled={disabled}
+                      onBeforeHook={() => {
+                        // Keep track of the service being used
+                        setService('passwordless');
+                        handleBefore();
+                      }}
+                      onServerErrorHook={handleServerError}
+                      onSuccessHook={() => {
+                        // Extend formProps.handleSuccess' default functionality
+                        handleSuccess(() => {
+                          // Show success message after action is completed
+                          setSuccessMessage('A new email has been sent to your inbox!');
+                        });
+                      }}
+                    />
+                  )
+                  : null
+                }
+              >
+                {view === 'loginToken' && [
+                  <FBAuthBtn
+                    key="facebook"
+                    btnLabel="Log In with Facebook"
+                    disabled={disabled}
+                    onBeforeHook={() => {
+                      // Keep track of the auth service being used
+                      setService('facebook');
+                      handleBefore();
+                    }}
+                    onServerErrorHook={handleServerError}
+                    onSuccessHook={handleSuccess}
+                  />,
+                  <div key="space" className="mb2" />,
+                  service === 'facebook' && (
+                    <Feedback
+                      key="feedback"
+                      className="mb2"
+                      loading={disabled}
+                      errorMsg={errorMsg}
+                      successMsg={successMsg}
+                    />
+                  ),
+                  <div key="divider" className="center">
+                    - OR -
+                  </div>,
+                  <LoginTokenAuthView
+                    key="passwordless"
+                    btnLabel="Send Pass Code"
+                    disabled={disabled}
+                    onBeforeHook={() => {
+                      // Keep track of the service being used
+                      setService('passwordless');
+                      handleBefore();
+                    }}
+                    onClientErrorHook={handleClientError}
+                    onServerErrorHook={handleServerError}
+                    onSuccessHook={(obj) => {
+                      // Extend formProps.handleSuccess' default functionality
+                      handleSuccess(() => {
+                        if (obj && obj.email) {
+                          // Show success message after action is completed
+                          setSuccessMessage('A new email has been sent to your inbox!');
+                          // Switch to login view and store current user's email
+                          this.setState({ view: 'login', email: obj.email });
+                        }
+                      });
+                    }}
+                  />,
+                ]}
+                {view === 'login' && (
+                  <LoginAuthView
+                    btnLabel="Enter"
+                    onBeforeHook={() => {
+                      // Keep track of the service being used
+                      setService('passwordless');
+                      handleBefore();
+                    }}
+                    onClientErrorHook={handleClientError}
+                    onServerErrorHook={handleServerError}
+                    onSuccessHook={handleSuccess}
+                  />
+                )}
+                <div className="mb2" />
+                {service === 'passwordless' && (
+                  <Feedback
+                    loading={disabled}
+                    errorMsg={errorMsg}
+                    successMsg={successMsg}
+                  />
+                )}
+              </AuthPageLayout>
             )}
-            {view === 'login' && (
-              <LoginAuthView
-                btnLabel="See Registration Details"
-                disabled={disabled}
-                onBeforeHook={handleBefore}
-                onClientErrorHook={handleClientError}
-                onServerErrorHook={handleServerError}
-                onSuccessHook={handleSuccess}
-              />
-            )}
-            <div className="mb2" />
-            <Feedback
-              className="mb2"
-              loading={disabled}
-              errorMsg={errorMsg}
-              successMsg={successMsg}
-            />
-          </AuthPageLayout>
+          </ServiceProps>
         )}
       </FormProps>,
     ];

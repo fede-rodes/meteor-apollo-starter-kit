@@ -1,5 +1,0 @@
-mutation userExists($email: String!) {
-  userExists(email: $email) {
-    _id
-  }
-}

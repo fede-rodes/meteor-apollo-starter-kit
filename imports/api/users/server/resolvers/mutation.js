@@ -20,23 +20,6 @@ const Mutation = {};
 
 //------------------------------------------------------------------------------
 /**
-* @summary Check whether or not the user exists (has a record set) in our DB.
-*/
-Mutation.userExists = (root, args) => {
-  const { email } = args;
-
-  // Query user
-  const userExists = Users.collection.findOne({ 'emails.address': email });
-
-  // Make sure users exist
-  if (!userExists) {
-    throw new GraphQLError('User doesn\'t exist');
-  }
-
-  return { _id: userExists._id };
-};
-//------------------------------------------------------------------------------
-/**
 * @summary Create a user record without password.
 * @see {@link https://docs.meteor.com/api/passwords.html#Accounts-createUser}
 * @see {@link https://docs.meteor.com/api/passwords.html#Accounts-sendEnrollmentEmail}

@@ -50,7 +50,6 @@ type Query {
 }
 
 type Mutation {
-  userExists(email: String!): User
   createUserWithoutPassword(email: String!): User
   saveSubscription(subscription: SubscriptionInput!): User
   deleteSubscription(endpoint: String!): User
