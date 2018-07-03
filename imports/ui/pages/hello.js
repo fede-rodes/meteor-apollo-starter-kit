@@ -1,3 +1,8 @@
-const hello = () => ('Hello');
+/* const hello = () => ('Hello');
 
-export default hello;
+export default hello; */
+
+function sum(a, b) {
+  return a + b;
+}
+module.exports = sum;
