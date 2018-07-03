@@ -19,7 +19,6 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^imports/(.*)': '<rootDir>/imports/',
-    'meteor/(.*)': '<rootDir>/tests/mocks/$1.js',
     '^(.*):(.*)$': '$1_$2',
   },
   unmockedModulePathPatterns: [
