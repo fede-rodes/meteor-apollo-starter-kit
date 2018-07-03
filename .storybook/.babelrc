@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-es2015",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "styled-components",
+    "module:babel-root-slash-import"
+  ]
+}
