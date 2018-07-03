@@ -11,6 +11,10 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-es2015": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
     "@babel/runtime": "^7.0.0-beta.36",
     "apollo-cache-inmemory": "^1.1.4",
     "apollo-client": "^2.0.4",
@@ -47,9 +51,6 @@
     "web-push": "^3.2.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/preset-es2015": "^7.0.0-beta.51",
-    "@babel/preset-react": "^7.0.0-beta.51",
     "@storybook/addon-actions": "^3.2.16",
     "@storybook/addon-links": "^3.2.16",
     "@storybook/react": "^3.2.16",
