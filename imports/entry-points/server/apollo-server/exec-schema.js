@@ -1,4 +1,4 @@
-import { makeExecutableSchema } from 'graphql-tools';
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import { mergeTypes } from 'merge-graphql-schemas';
 import merge from 'lodash/merge';
 import * as APIs from '../../../api';
@@ -28,5 +28,20 @@ const typeDefs = mergeTypes(allTypes);
 const resolvers = merge(...allResolvers);
 const logger = { log: e => console.error(e.stack) };
 const schema = makeExecutableSchema({ typeDefs, resolvers, logger });
+
+if (process.env.NODE_ENV === 'test') {
+  // Here you could customize the mocks.
+  // If you leave it empty, the default is used.
+  // You can read more about mocking here: http://bit.ly/2pOYqXF
+  // See:
+  // https://www.apollographql.com/docs/graphql-tools/mocking.html#Default-mock-example
+  // https://dev-blog.apollodata.com/mocking-your-server-with-just-one-line-of-code-692feda6e9cd
+  const mocks = {
+    Date: () => (new Date()),
+  };
+
+  // This function call adds the mocks to your schema!
+  addMockFunctionsToSchema({ schema, mocks, preserveResolvers: true });
+}
 
 export default schema;
