@@ -1,4 +1,4 @@
-// Export all your APIs, particularly those that have 'types' and 'resolvers',
+// Export all your APIs, particularly those that have 'schema' and 'resolvers',
 // so that they can be automatically catched and merged to create Apollo's
 // server executable schema.
 // see: /imports/entry-points/server/apollo-server/exec-schema.js

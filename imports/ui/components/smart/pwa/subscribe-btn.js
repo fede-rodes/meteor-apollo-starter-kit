@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import Button from 'material-ui/Button';
-import { userQuery } from '../../../../apollo-client/user';
-import saveSubscriptionMutation from './mutations.graphql';
+import userQuery from '../../../apollo-client/user/query/user';
+import saveSubscriptionMutation from '../../../apollo-client/user/mutation/save-subscription';
 
 const { publicKey: vapidPublicKey } = Meteor.settings.public.vapid;
 

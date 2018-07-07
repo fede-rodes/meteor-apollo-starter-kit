@@ -11,10 +11,10 @@ const Base = {};
 
 // Load server-only utilities
 if (Meteor.isServer) {
-  import types from './server/types.graphql';
+  import schema from './server/schema';
   import resolvers from './server/resolvers';
 
-  extend(Base, { types, resolvers });
+  extend(Base, { schema, resolvers });
 }
 
 export default Base;

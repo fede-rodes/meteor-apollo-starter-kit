@@ -1,5 +1,0 @@
-mutation {
-  sendPushNotification {
-    _id
-  }
-}

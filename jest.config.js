@@ -2,7 +2,6 @@
 module.exports = {
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
-    '^.+\\.graphql$': 'babel-jest',
   },
   setupFiles: [
     '<rootDir>/tests/setup.js',

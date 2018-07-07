@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import Button from 'material-ui/Button';
-import sendPushNotificationMutation from './mutations.graphql';
+import sendPushNotificationMutation from '../../../apollo-client/user/mutation/send-push-notification';
 
 //------------------------------------------------------------------------------
 // COMPONENT:

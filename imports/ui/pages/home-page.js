@@ -1,6 +1,6 @@
 import React from 'react';
 import { propType } from 'graphql-anywhere';
-import { userFragment } from '../apollo-client/user';
+import userFragment from '../apollo-client/user/fragment/user';
 import { PWABtnProps, FormProps } from '../render-props';
 import SEO from '../components/smart/seo';
 import SubscribeBtn from '../components/smart/pwa/subscribe-btn';

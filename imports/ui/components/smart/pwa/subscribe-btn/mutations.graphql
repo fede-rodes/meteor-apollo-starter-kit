@@ -1,5 +1,0 @@
-mutation saveSubscription($subscription: SubscriptionInput!) {
-  saveSubscription(subscription: $subscription) {
-    _id
-  }
-}

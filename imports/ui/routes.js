@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
-import { userFragment } from './apollo-client/user';
+import userFragment from './apollo-client/user/fragment/user';
 import {
   ScrollToTop,
   LoggedInRoute,

@@ -85,7 +85,6 @@ srp@1.0.10
 standard-minifier-css@1.4.1
 standard-minifier-js@2.3.2
 static-html@1.2.2
-swydo:graphql@0.4.0
 templating-tools@1.1.2
 tmeasday:check-npm-versions@0.3.2
 tracker@1.1.3
