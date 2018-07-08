@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 import { propType } from 'graphql-anywhere';
 import userFragment from '../../apollo-client/user/fragment/user';
 import Constants from '../../../api/constants';
@@ -14,11 +15,16 @@ const Menu = ({ curUser }) => {
     return null;
   }
 
-  // Display authenticated routes plus logout button
+  // Get list of routes to be displayed on the side-menu. Include admin route
+  // if and only if current user is admin
+  const routes = Constants.ROUTES
+    .filter(({ admin }) => (
+      (admin && Roles.userIsInRole(curUser._id, ['admin'])) || !admin
+    ));
+
+  // Display menu routes plus logout button
   return [
-    Constants.ROUTES
-    .filter(({ auth }) => auth)
-    .map(({ path, label }) => (
+    routes.map(({ path, label }) => (
       <li key={path}>
         <Link
           to={path}

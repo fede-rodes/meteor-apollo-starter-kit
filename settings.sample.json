@@ -23,5 +23,8 @@
     "vapid": {
       "publicKey": "WEB_PUSH_PUBLIC_KEY"
     }
-  }
+  },
+  "admins": [
+    { "email": "admin@admin.com", "roles": ["admin"] }
+  ]
 }

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
-import userFragment from '../../apollo-client/user/fragment/user';
-import Constants from '../../../api/constants';
+import userFragment from '../../../apollo-client/user/fragment/user';
+import getRouteLabel from './get-route-label';
 
 //------------------------------------------------------------------------------
 // AUX FUNCTIONS:
@@ -13,22 +13,6 @@ const showHideBurgerBtn = (curUser) => {
   const menuIconElement = document.querySelector('.header__burger');
   // Display burger button for logged in users only
   menuIconElement.classList[curUser ? 'add' : 'remove']('header__burger--show');
-};
-//------------------------------------------------------------------------------
-const getRouteLabel = (pathname) => {
-  const route = Constants.ROUTES
-    // Sort routes by longest route paths first. '/' will be the last route in
-    // the list
-    .sort((r1, r2) => (
-      r2.path.length - r1.path.length
-    ))
-    // Use regular expression to find current route based on path. '/' must be
-    // the last path we test, otherwise the test will always return true
-    .find(({ path }) => {
-      const reg = new RegExp(path);
-      return reg.test(pathname);
-    });
-  return route ? route.label : undefined;
 };
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -49,10 +33,22 @@ class Header extends React.Component {
     }
   }
 
+  get curRouteLabel() {
+    const { curUser, location } = this.props;
+
+    // Get label matching current route ('/' --> 'Home', '/b$^$%^$' --> undefined)
+    const curRouteLabel = getRouteLabel(location.pathname);
+
+    if (!curRouteLabel) {
+      return 'Not Found';
+    } else if (!curUser) {
+      return 'Login';
+    }
+    return curRouteLabel;
+  }
+
   render() {
-    const { location } = this.props;
-    const label = getRouteLabel(location.pathname);
-    return <span>{label || 'Not Found'}</span>;
+    return <span>{this.curRouteLabel}</span>;
   }
 }
 

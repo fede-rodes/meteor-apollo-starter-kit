@@ -5,8 +5,6 @@ import userFragment from './apollo-client/user/fragment/user';
 import {
   ScrollToTop,
   LoggedInRoute,
-  // LoggedOutRoute,
-  // RouteWithProps,
   AdminRoute,
 } from './components/smart/route-wrappers';
 import LoadableWrapper from './components/dumb/loadable-wrapper';
@@ -19,24 +17,24 @@ const LoginPage = LoadableWrapper({ loader: () => import('./pages/auth/login-pag
 const Routes = props => (
   <ScrollToTop>
     <Switch>
+      {/* HOME */}
       <LoggedInRoute
         exact
-        name="home"
         path="/"
         component={LoadableWrapper({ loader: () => import('./pages/home-page') })}
         overlay={LoginPage}
         {...props}
       />
+      {/* ADMIN */}
       <AdminRoute
         exact
-        name="admin"
         path="/admin"
         component={LoadableWrapper({ loader: () => import('./pages/admin/admin-page') })}
         overlay={LoginPage}
         {...props}
       />
+      {/* NOT FOUND */}
       <Route
-        name="notFound"
         component={LoadableWrapper({ loader: () => import('./pages/not-found-page') })}
       />
     </Switch>
