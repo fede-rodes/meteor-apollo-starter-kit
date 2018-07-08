@@ -34,6 +34,8 @@ Lighthouse audit:
 ### Other flavors
 Checkout 'material' branch for a material-ui version ([https://material-ui-next.com](https://material-ui-next.com)) of this boilerplate.
 
+Checkout 'auth-overlay' branch for a passwordless + facebook authentication options. It also uses   material-ui component's library and has jest-enzyme test libraries setup. (THIS BRANCH IS THE MOST UP TO DATE!) 
+
 ### Step by step guide to get started with this boilerplate
 
 #### 1. Clone the project and install NPM dependecies:
