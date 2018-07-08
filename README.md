@@ -21,6 +21,7 @@ Lighthouse audit:
 - material-ui
 - styled components
 - Storybook
+- jest-enzyme
 - sanitize.css
 - basscss
 - basic admin functionality via alanning:roles
