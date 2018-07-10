@@ -6,20 +6,23 @@ async function renderAsync() {
     React,
     { render },
     { default: App },
-    { default: Header },
+    { default: BurgerBtnController },
+    { default: HeaderTitle },
     { default: Routes },
     { default: Menu },
   ] = await Promise.all([
     import('react'),
     import('react-dom'),
     import('../../ui/app'),
-    import('../../ui/components/smart/header'),
+    import('../../ui/components/smart/header/burger-btn-controller'),
+    import('../../ui/components/smart/header/header-title'),
     import('../../ui/routes'),
     import('../../ui/components/smart/menu'),
   ]);
 
   // Inject react app components into App's Shell
-  render(<App component={Header} />, document.getElementById('header'));
+  render(<App component={BurgerBtnController} />, document.getElementById('burger-btn-controller'));
+  render(<App component={HeaderTitle} />, document.getElementById('header-title'));
   render(<App component={Menu} />, document.getElementById('menu'));
   render(<App component={Routes} />, document.getElementById('main'));
 }
