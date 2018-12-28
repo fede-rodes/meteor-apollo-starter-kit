@@ -1,5 +1,7 @@
 # Meteor, Apollo, React, PWA, Styled-Components boilerplate
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fede-rodes/meteor-apollo-starter-kit.svg)](https://greenkeeper.io/)
+
 A simple kit to start experimenting with Apollo, Meteor, React, PWA and Styled Components.
 
 Short video showing the app's capabilities:
